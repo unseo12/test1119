@@ -1,2168 +1,2214 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>KIMBAP HEAVEN | 오늘 뭐 먹지?</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-
-        /* =========================
-           기본 설정
-        ========================= */
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: #eeeae2;
-            color: #20242a;
-            font-family: "Pretendard", sans-serif;
-        }
-
-        button,
-        input {
-            font-family: inherit;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        /* =========================
-           전체 앱
-        ========================= */
-
-        .app {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            margin: 0 auto;
-            background: #fffdf8;
-        }
-
-        /* =========================
-           헤더
-        ========================= */
-
-        .header {
-            height: 72px;
-            padding: 0 22px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            background: #fffdf8;
-            border-bottom: 1px solid #eee8dd;
-
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            color: #17202a;
-            text-decoration: none;
-
-            font-size: 12px;
-            line-height: 1.05;
-            letter-spacing: 0.06em;
-        }
-
-        .logo-mark {
-            font-size: 30px;
-        }
-
-        .logo b {
-            font-size: 15px;
-            letter-spacing: 0.12em;
-        }
-
-        .cart-button {
-            width: 42px;
-            height: 42px;
-
-            border: none;
-            border-radius: 50%;
-
-            background: #17202a;
-            color: white;
-
-            font-size: 18px;
-
-            position: relative;
-        }
-
-        .cart-count {
-            position: absolute;
-
-            top: -4px;
-            right: -3px;
-
-            min-width: 18px;
-            height: 18px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 20px;
-
-            background: #d94b3d;
-            color: white;
-
-            font-size: 10px;
-            font-weight: 800;
-        }
-
-        /* =========================
-           페이지
-        ========================= */
-
-        .page {
-            display: none;
-            padding-bottom: 100px;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        /* =========================
-           홈 히어로
-        ========================= */
-
-        .hero {
-            margin: 18px;
-
-            padding: 32px 25px;
-
-            border-radius: 24px;
-
-            background: #17202a;
-            color: white;
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: "🍙";
-
-            position: absolute;
-
-            right: -10px;
-            bottom: -25px;
-
-            font-size: 130px;
-            opacity: 0.08;
-
-            transform: rotate(-12deg);
-        }
-
-        .eyebrow {
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.14em;
-            color: #d94b3d;
-        }
-
-        .hero .eyebrow {
-            color: #f4c542;
-        }
-
-        .hero h1 {
-            margin: 13px 0;
-
-            font-family: "Jua", sans-serif;
-            font-size: 34px;
-            font-weight: 400;
-            line-height: 1.25;
-        }
-
-        .hero h1 em {
-            color: #f4c542;
-            font-style: normal;
-        }
-
-        .hero p {
-            margin-bottom: 22px;
-
-            color: #d9dde0;
-
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* =========================
-           버튼
-        ========================= */
-
-        .primary-button {
-            border: none;
-            border-radius: 13px;
-
-            padding: 14px 19px;
-
-            background: #f4c542;
-            color: #17202a;
-
-            font-size: 14px;
-            font-weight: 800;
-
-            transition: 0.2s;
-        }
-
-        .primary-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .full-button {
-            width: 100%;
-        }
-
-        /* =========================
-           검색창
-        ========================= */
-
-        .search-box {
-            height: 52px;
-
-            margin: 18px;
-
-            padding: 0 16px;
-
-            display: flex;
-            align-items: center;
-            gap: 9px;
-
-            border: 1px solid #e7e0d5;
-            border-radius: 14px;
-
-            background: white;
-
-            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-        }
-
-        .search-icon {
-            font-size: 23px;
-            color: #888;
-        }
-
-        .search-box input {
-            width: 100%;
-
-            border: none;
-            outline: none;
-
-            background: transparent;
-
-            font-size: 14px;
-        }
-
-        /* =========================
-           섹션
-        ========================= */
-
-        .content-section {
-            padding: 0 18px;
-        }
-
-        .section-title {
-            margin-bottom: 13px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .section-title h2 {
-            font-size: 20px;
-        }
-
-        .more-button {
-            border: none;
-            background: none;
-
-            color: #888;
-
-            font-size: 12px;
-        }
-
-        /* =========================
-           카테고리
-        ========================= */
-
-        .category-list {
-            display: flex;
-            gap: 7px;
-
-            overflow-x: auto;
-
-            padding-bottom: 7px;
-
-            scrollbar-width: none;
-        }
-
-        .category-list::-webkit-scrollbar {
-            display: none;
-        }
-
-        .category {
-            flex-shrink: 0;
-
-            padding: 9px 14px;
-
-            border: 1px solid #e8e1d7;
-            border-radius: 20px;
-
-            background: white;
-
-            color: #666;
-
-            font-size: 12px;
-        }
-
-        .category.active {
-            background: #17202a;
-            color: white;
-            border-color: #17202a;
-        }
-
-        /* =========================
-           메뉴 카드
-        ========================= */
-
-        .menu-grid {
-            display: grid;
-
-            grid-template-columns: repeat(2, 1fr);
-
-            gap: 12px;
-
-            margin-top: 13px;
-        }
-
-        .menu-card {
-            overflow: hidden;
-
-            border: 1px solid #eee7dc;
-            border-radius: 17px;
-
-            background: white;
-
-            transition: 0.2s;
-        }
-
-        .menu-card:hover {
-            transform: translateY(-3px);
-
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .food-image {
-            height: 145px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: #fff0bd;
-
-            font-size: 70px;
-        }
-
-        .menu-card:nth-child(even) .food-image {
-            background: #fce0d9;
-        }
-
-        .menu-info {
-            padding: 13px;
-        }
-
-        .menu-info h3 {
-            margin-bottom: 5px;
-
-            font-size: 14px;
-        }
-
-        .menu-info p {
-            margin-bottom: 9px;
-
-            color: #999;
-
-            font-size: 10px;
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .price {
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        /* =========================
-           추천 카드
-        ========================= */
-
-        .recommend-card {
-            margin: 26px 18px;
-
-            padding: 22px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            border-radius: 20px;
-
-            background: #f4c542;
-        }
-
-        .recommend-card span {
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-        }
-
-        .recommend-card h3 {
-            margin: 8px 0 5px;
-
-            font-family: "Jua", sans-serif;
-            font-size: 21px;
-            font-weight: 400;
-        }
-
-        .recommend-card p {
-            color: #534a2c;
-
-            font-size: 11px;
-            line-height: 1.5;
-        }
-
-        .round-button {
-            width: 42px;
-            height: 42px;
-
-            border: none;
-            border-radius: 50%;
-
-            background: #17202a;
-            color: white;
-
-            font-size: 18px;
-        }
-
-        /* =========================
-           페이지 제목
-        ========================= */
-
-        .page-heading {
-            padding: 30px 20px 0;
-        }
-
-        .page-heading h1 {
-            margin: 10px 0 7px;
-
-            font-family: "Jua", sans-serif;
-            font-size: 38px;
-            font-weight: 400;
-        }
-
-        .page-heading p {
-            margin-bottom: 18px;
-
-            color: #888;
-
-            font-size: 13px;
-        }
-
-        /* =========================
-           뒤로가기
-        ========================= */
-
-        .back-button {
-            margin: 24px 20px 8px;
-
-            border: none;
-            background: none;
-
-            color: #777;
-
-            font-size: 13px;
-        }
-
-        /* =========================
-           메뉴 상세
-        ========================= */
-
-        .detail {
-            padding: 0 20px;
-        }
-
-        .detail-image {
-            height: 300px;
-
-            margin-top: 10px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 24px;
-
-            background: #fff0bd;
-
-            font-size: 130px;
-        }
-
-        .detail h1 {
-            margin: 24px 0 6px;
-
-            font-family: "Jua", sans-serif;
-            font-size: 34px;
-            font-weight: 400;
-        }
-
-        .detail-price {
-            font-size: 20px;
-            font-weight: 800;
-        }
-
-        .detail-description {
-            margin: 16px 0 22px;
-
-            color: #777;
-
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .detail-info {
-            padding: 18px 0;
-
-            margin-bottom: 22px;
-
-            border-top: 1px solid #eee5d9;
-            border-bottom: 1px solid #eee5d9;
-        }
-
-        .detail-info p {
-            margin: 7px 0;
-
-            color: #777;
-
-            font-size: 12px;
-        }
-
-        /* =========================
-           추천 페이지
-        ========================= */
-
-        .recommend-page {
-            padding: 28px 20px;
-        }
-
-        .recommend-page h1 {
-            margin: 13px 0 10px;
-
-            font-family: "Jua", sans-serif;
-            font-size: 32px;
-            font-weight: 400;
-            line-height: 1.25;
-        }
-
-        .recommend-page > p {
-            color: #888;
-
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .choice-list {
-            display: grid;
-            gap: 10px;
-
-            margin: 25px 0;
-        }
-
-        .choice {
-            padding: 16px;
-
-            display: grid;
-            grid-template-columns: 35px 1fr;
-
-            align-items: center;
-
-            border: 1px solid #e7e0d5;
-            border-radius: 16px;
-
-            background: white;
-
-            text-align: left;
-        }
-
-        .choice.selected {
-            border: 2px solid #17202a;
-            background: #fff9e6;
-        }
-
-        .choice b {
-            font-size: 14px;
-        }
-
-        .choice small {
-            grid-column: 2;
-
-            margin-top: 3px;
-
-            color: #999;
-        }
-
-        .result-card {
-            margin-top: 20px;
-
-            padding: 22px;
-
-            border-radius: 20px;
-
-            background: #17202a;
-            color: white;
-        }
-
-        .result-card .food-image {
-            height: 170px;
-
-            margin-bottom: 17px;
-
-            border-radius: 14px;
-        }
-
-        .result-card h2 {
-            margin: 10px 0 5px;
-
-            font-family: "Jua", sans-serif;
-            font-size: 27px;
-            font-weight: 400;
-        }
-
-        .result-card p {
-            margin-bottom: 10px;
-
-            color: #ccd0d4;
-
-            font-size: 12px;
-        }
-
-        /* =========================
-           장바구니
-        ========================= */
-
-        .cart-wrap {
-            padding: 0 20px;
-        }
-
-        .cart-item {
-            padding: 16px 0;
-
-            display: flex;
-            align-items: center;
-            gap: 13px;
-
-            border-bottom: 1px solid #eee7dd;
-        }
-
-        .cart-thumb {
-            width: 72px;
-            height: 72px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 13px;
-
-            background: #fff0c8;
-
-            font-size: 36px;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item h3 {
-            margin-bottom: 5px;
-
-            font-size: 14px;
-        }
-
-        .cart-item p {
-            color: #999;
-
-            font-size: 12px;
-        }
-
-        .quantity {
-            margin-top: 8px;
-
-            display: flex;
-            align-items: center;
-            gap: 9px;
-        }
-
-        .quantity button {
-            width: 24px;
-            height: 24px;
-
-            border: 1px solid #ddd;
-            border-radius: 50%;
-
-            background: white;
-        }
-
-        .empty-cart {
-            padding: 70px 20px;
-
-            text-align: center;
-
-            color: #999;
-        }
-
-        .empty-cart-icon {
-            margin-bottom: 15px;
-
-            font-size: 60px;
-        }
-
-        .total-box {
-            margin: 20px;
-
-            padding: 20px;
-
-            display: flex;
-            justify-content: space-between;
-
-            border-radius: 16px;
-
-            background: #f5f1e9;
-
-            font-size: 13px;
-        }
-
-        .total-box strong {
-            font-size: 20px;
-        }
-
-        /* =========================
-           하단 네비게이션
-        ========================= */
-
-        .bottom-nav {
-            position: fixed;
-
-            bottom: 0;
-            left: 50%;
-
-            transform: translateX(-50%);
-
-            width: 100%;
-            max-width: 480px;
-
-            height: 75px;
-
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-
-            padding: 7px 8px;
-
-            background: rgba(255,253,249,0.95);
-
-            backdrop-filter: blur(15px);
-
-            border-top: 1px solid #eee7dd;
-
-            z-index: 20;
-        }
-
-        .nav-item {
-            border: none;
-            background: none;
-
-            color: #999;
-
-            font-size: 10px;
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            gap: 5px;
-        }
-
-        .nav-item span {
-            font-size: 19px;
-        }
-
-        .nav-item.active {
-            color: #17202a;
-            font-weight: 800;
-        }
-
-        /* =========================
-           반응형
-        ========================= */
-
-        @media (min-width: 700px) {
-
-            body {
-                padding: 30px 0;
-            }
-
-            .app {
-                border-radius: 25px;
-                overflow: hidden;
-
-                box-shadow: 0 10px 50px rgba(0,0,0,0.12);
-            }
-
-            .bottom-nav {
-                position: relative;
-
-                left: auto;
-                transform: none;
-
-                width: 100%;
-            }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김밥천국 | KIMBAP CHEON GUK</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --cream:#fff8e8;
+    --cream2:#f7efd9;
+    --yellow:#f7bd2b;
+    --yellow2:#ffc83d;
+    --red:#e6422d;
+    --red-dark:#c93424;
+    --navy:#172734;
+    --black:#202b31;
+    --line:#d8ccb0;
+    --white:#fffdf7;
+    --shadow:0 8px 25px rgba(40,30,15,.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Noto Sans KR",sans-serif;
+    background:var(--cream);
+    color:var(--black);
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1400px,92%);
+    margin:auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    height:100px;
+    background:rgba(255,248,232,.96);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(10px);
+}
+
+.header-inner{
+    width:min(1400px,92%);
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:245px;
+}
+
+.logo-mark{
+    width:54px;
+    height:54px;
+    border-radius:50%;
+    background:var(--yellow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    border:2px solid var(--navy);
+}
+
+.logo-text small{
+    display:block;
+    font-size:9px;
+    letter-spacing:2px;
+    font-weight:800;
+    margin-bottom:1px;
+}
+
+.logo-text strong{
+    display:block;
+    font-family:"Jua",sans-serif;
+    font-size:31px;
+    color:var(--red);
+    line-height:1;
+}
+
+.logo-text span{
+    display:block;
+    font-size:9px;
+    letter-spacing:3px;
+    font-weight:800;
+    margin-top:5px;
+}
+
+nav{
+    display:flex;
+    gap:42px;
+    align-items:center;
+}
+
+nav a{
+    font-size:15px;
+    font-weight:700;
+    padding:38px 0 34px;
+    position:relative;
+}
+
+nav a:hover{
+    color:var(--red);
+}
+
+nav a.active{
+    color:var(--red);
+}
+
+nav a.active::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:22px;
+    transform:translateX(-50%);
+    width:30px;
+    height:3px;
+    background:var(--red);
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.search{
+    width:220px;
+    height:42px;
+    border:1px solid #cdbf9f;
+    border-radius:24px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    background:var(--white);
+}
+
+.search input{
+    border:0;
+    outline:0;
+    background:transparent;
+    width:100%;
+    font-size:12px;
+}
+
+.search button{
+    border:0;
+    background:none;
+    font-size:18px;
+}
+
+.cart-btn{
+    position:relative;
+    border:0;
+    background:none;
+    font-size:25px;
+}
+
+.cart-count{
+    position:absolute;
+    right:-7px;
+    top:-5px;
+    background:var(--red);
+    color:#fff;
+    width:19px;
+    height:19px;
+    border-radius:50%;
+    font-size:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:800;
+}
+
+.order-btn{
+    border:0;
+    background:var(--red);
+    color:#fff;
+    font-weight:800;
+    padding:13px 24px;
+    border-radius:25px;
+}
+
+.order-btn:hover{
+    background:var(--red-dark);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:550px;
+    padding:55px 0 20px;
+    overflow:hidden;
+}
+
+.hero-inner{
+    min-height:480px;
+    display:grid;
+    grid-template-columns:1fr 1.15fr .9fr;
+    gap:25px;
+    align-items:center;
+}
+
+.hero-copy{
+    position:relative;
+    z-index:2;
+}
+
+.hero-copy .eyebrow{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.hero-copy h1{
+    font-family:"Jua",sans-serif;
+    font-size:76px;
+    line-height:1.03;
+    letter-spacing:-3px;
+    color:var(--navy);
+}
+
+.hero-copy h1 span{
+    color:var(--red);
+}
+
+.hero-copy p{
+    margin-top:25px;
+    line-height:1.8;
+    font-size:15px;
+    font-weight:500;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:28px;
+}
+
+.btn-yellow,
+.btn-outline{
+    height:50px;
+    padding:0 25px;
+    border-radius:10px;
+    font-weight:800;
+    border:1px solid var(--navy);
+}
+
+.btn-yellow{
+    background:var(--yellow2);
+    border-color:var(--yellow2);
+}
+
+.btn-outline{
+    background:transparent;
+}
+
+.btn-yellow:hover{
+    transform:translateY(-2px);
+}
+
+.hero-food{
+    position:relative;
+    height:450px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-food img{
+    width:100%;
+    max-width:620px;
+    height:390px;
+    object-fit:cover;
+    border-radius:50% 45% 48% 42%;
+    transform:rotate(-4deg);
+    box-shadow:0 20px 45px rgba(60,40,15,.18);
+}
+
+.stamp{
+    position:absolute;
+    top:20px;
+    left:10px;
+    width:110px;
+    height:110px;
+    border:2px solid var(--red);
+    border-radius:50%;
+    color:var(--red);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transform:rotate(-12deg);
+    background:rgba(255,248,232,.75);
+}
+
+.stamp strong{
+    font-size:24px;
+}
+
+.stamp span{
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.sparkle{
+    position:absolute;
+    color:var(--yellow);
+    font-size:40px;
+}
+
+.s1{top:20px;right:30px}
+.s2{bottom:80px;left:0;font-size:25px}
+.s3{top:95px;right:15px;font-size:22px}
+
+.hero-side{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.mood-box{
+    background:var(--yellow2);
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.mood-box h3{
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+.mood-box p{
+    font-size:11px;
+    margin-bottom:18px;
+}
+
+.moods{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+}
+
+.mood{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+
+.mood-icon{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:25px;
+    border:1px solid rgba(0,0,0,.1);
+}
+
+.mood:nth-child(2) .mood-icon{
+    background:var(--red);
+}
+
+.mood:nth-child(4) .mood-icon{
+    background:var(--navy);
+    color:#fff;
+}
+
+.mood span{
+    font-size:11px;
+    font-weight:700;
+}
+
+.best-box{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px;
+}
+
+.best-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.best-title h3{
+    font-size:18px;
+}
+
+.best-title a{
+    font-size:11px;
+}
+
+.best-items{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.best-item img{
+    width:100%;
+    height:78px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.best-item strong{
+    display:block;
+    font-size:11px;
+    margin-top:5px;
+}
+
+.best-item span{
+    font-size:11px;
+}
+
+/* checkered decoration */
+
+.checker{
+    height:20px;
+    background:
+    linear-gradient(45deg,var(--red) 25%,transparent 25%,transparent 75%,var(--red) 75%),
+    linear-gradient(45deg,var(--red) 25%,transparent 25%,transparent 75%,var(--red) 75%);
+    background-position:0 0,10px 10px;
+    background-size:20px 20px;
+    opacity:.9;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    padding:100px 0;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title small{
+    color:var(--red);
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.section-title h2{
+    font-family:"Jua",sans-serif;
+    font-size:42px;
+    margin-top:5px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu-section{
+    background:#f5ecd5;
+}
+
+.menu-tools{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.menu-search{
+    flex:1;
+    max-width:400px;
+    height:48px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    padding:0 15px;
+}
+
+.menu-search input{
+    border:0;
+    outline:0;
+    flex:1;
+    font-size:13px;
+}
+
+.categories{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.category{
+    border:1px solid var(--line);
+    background:#fffaf0;
+    border-radius:20px;
+    padding:9px 17px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.category.active,
+.category:hover{
+    background:var(--red);
+    border-color:var(--red);
+    color:#fff;
+}
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.menu-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px;
+    position:relative;
+    transition:.25s;
+}
+
+.menu-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow);
+}
+
+.menu-image{
+    position:relative;
+}
+
+.menu-image img{
+    width:100%;
+    height:185px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.heart{
+    position:absolute;
+    top:8px;
+    right:8px;
+    width:32px;
+    height:32px;
+    border:0;
+    border-radius:50%;
+    background:#fff;
+    font-size:17px;
+}
+
+.heart.active{
+    color:var(--red);
+}
+
+.menu-info{
+    padding:12px 5px 5px;
+}
+
+.menu-info h3{
+    font-size:16px;
+}
+
+.menu-info p{
+    color:#777;
+    font-size:11px;
+    margin:4px 0 8px;
+}
+
+.price{
+    font-weight:900;
+    font-size:16px;
+}
+
+/* =========================
+   STORY
+========================= */
+
+.story{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.story-image img{
+    width:100%;
+    height:450px;
+    object-fit:cover;
+    border-radius:20px;
+}
+
+.story-copy small{
+    color:var(--red);
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.story-copy h2{
+    font-family:"Jua",sans-serif;
+    font-size:45px;
+    margin:12px 0 25px;
+    line-height:1.2;
+}
+
+.story-copy p{
+    color:#555;
+    line-height:2;
+    font-size:14px;
+}
+
+.story-points{
+    display:flex;
+    gap:25px;
+    margin-top:30px;
+}
+
+.point{
+    text-align:center;
+}
+
+.point-icon{
+    font-size:32px;
+    margin-bottom:7px;
+}
+
+.point strong{
+    display:block;
+    font-size:13px;
+}
+
+/* =========================
+   RECOMMEND
+========================= */
+
+.recommend{
+    background:var(--yellow);
+}
+
+.recommend-inner{
+    text-align:center;
+}
+
+.recommend h2{
+    font-family:"Jua",sans-serif;
+    font-size:43px;
+}
+
+.recommend p{
+    margin:8px 0 25px;
+    font-size:13px;
+}
+
+.recommend-buttons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.recommend-buttons button{
+    background:#fff;
+    border:0;
+    padding:13px 25px;
+    border-radius:25px;
+    font-weight:800;
+}
+
+.recommend-buttons button:hover{
+    background:var(--red);
+    color:#fff;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:var(--navy);
+    color:#fff;
+    padding:55px 0 35px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr 1fr 1fr 1.5fr;
+    gap:40px;
+}
+
+.footer-logo{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.footer-logo .logo-mark{
+    background:var(--yellow);
+    width:45px;
+    height:45px;
+}
+
+.footer-logo strong{
+    font-family:"Jua",sans-serif;
+    font-size:25px;
+}
+
+footer h4{
+    margin-bottom:14px;
+    font-size:14px;
+}
+
+footer p,
+footer a{
+    color:#ccd4d7;
+    font-size:11px;
+    line-height:2;
+}
+
+.newsletter{
+    display:flex;
+    height:40px;
+    margin-top:10px;
+}
+
+.newsletter input{
+    min-width:0;
+    flex:1;
+    border:0;
+    padding:0 10px;
+}
+
+.newsletter button{
+    width:80px;
+    border:0;
+    background:#fff;
+    font-weight:800;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.15);
+    margin-top:35px;
+    padding-top:20px;
+    text-align:right;
+    color:#9ca8ad;
+    font-size:10px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:500;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    background:var(--cream);
+    width:min(850px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:18px;
+    padding:25px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:15px;
+    border:0;
+    background:none;
+    font-size:27px;
+}
+
+.modal-content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    align-items:center;
+}
+
+.modal-content img{
+    width:100%;
+    height:330px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+.modal-content h2{
+    font-family:"Jua",sans-serif;
+    font-size:40px;
+}
+
+.modal-content .modal-price{
+    color:var(--red);
+    font-size:28px;
+    font-weight:900;
+    margin:15px 0;
+}
+
+.modal-content p{
+    color:#666;
+    line-height:1.8;
+    font-size:13px;
+}
+
+.add-cart{
+    margin-top:25px;
+    width:100%;
+    height:50px;
+    border:0;
+    background:var(--red);
+    color:#fff;
+    font-weight:900;
+    border-radius:8px;
+}
+
+/* =========================
+   CART
+========================= */
+
+.cart-panel{
+    position:fixed;
+    right:-430px;
+    top:0;
+    width:400px;
+    max-width:90%;
+    height:100vh;
+    background:var(--cream);
+    z-index:400;
+    padding:30px;
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    transition:.3s;
+    overflow:auto;
+}
+
+.cart-panel.show{
+    right:0;
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.cart-header h2{
+    font-family:"Jua",sans-serif;
+    font-size:30px;
+}
+
+.cart-close{
+    border:0;
+    background:none;
+    font-size:25px;
+}
+
+.cart-item{
+    display:flex;
+    gap:12px;
+    border-bottom:1px solid var(--line);
+    padding:15px 0;
+}
+
+.cart-item img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-info strong{
+    display:block;
+    font-size:14px;
+}
+
+.cart-item-info span{
+    font-size:12px;
+    color:#777;
+}
+
+.cart-total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:25px;
+    padding-top:20px;
+    border-top:2px solid var(--navy);
+    font-weight:900;
+}
+
+.checkout{
+    margin-top:20px;
+    width:100%;
+    height:50px;
+    background:var(--navy);
+    color:#fff;
+    border:0;
+    border-radius:8px;
+    font-weight:900;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+    transform:translate(-50%,20px);
+    background:var(--navy);
+    color:#fff;
+    padding:14px 22px;
+    border-radius:30px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:1000;
+    font-size:13px;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:1100px){
+
+    nav{
+        gap:20px;
+    }
+
+    .hero-inner{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .hero-side{
+        grid-column:1/-1;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+
+    .menu-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:800px){
+
+    header{
+        height:75px;
+    }
+
+    .header-inner{
+        gap:10px;
+    }
+
+    .logo{
+        min-width:auto;
+    }
+
+    .logo-mark{
+        width:42px;
+        height:42px;
+        font-size:22px;
+    }
+
+    .logo-text strong{
+        font-size:22px;
+    }
+
+    .logo-text small,
+    .logo-text span{
+        display:none;
+    }
+
+    nav,
+    .header-right .search,
+    .header-right .order-btn{
+        display:none;
+    }
+
+    .mobile-menu{
+        display:block;
+        border:0;
+        background:none;
+        font-size:25px;
+    }
+
+    .hero{
+        padding-top:35px;
+    }
+
+    .hero-inner{
+        grid-template-columns:1fr;
+    }
+
+    .hero-copy h1{
+        font-size:58px;
+    }
+
+    .hero-food{
+        height:330px;
+    }
+
+    .hero-food img{
+        height:300px;
+    }
+
+    .hero-side{
+        grid-template-columns:1fr;
+    }
+
+    .menu-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .menu-tools{
+        flex-direction:column;
+    }
+
+    .menu-search{
+        max-width:none;
+    }
+
+    .story{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .story-image img{
+        height:300px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .modal-content{
+        grid-template-columns:1fr;
+    }
+
+    .modal-content img{
+        height:250px;
+    }
+}
+
+@media(max-width:500px){
+
+    .container{
+        width:90%;
+    }
+
+    .hero-copy h1{
+        font-size:48px;
+    }
+
+    .menu-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .menu-image img{
+        height:130px;
+    }
+
+    .section{
+        padding:65px 0;
+    }
+
+    .section-title h2{
+        font-size:34px;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .moods{
+        gap:2px;
+    }
+
+    .mood-icon{
+        width:48px;
+        height:48px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-<div class="app">
+<!-- ================= HEADER ================= -->
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+<header>
+<div class="header-inner">
 
-    <header class="header">
+    <a href="#home" class="logo">
+        <div class="logo-mark">🍙</div>
+        <div class="logo-text">
+            <small>SINCE 1994</small>
+            <strong>김밥천국</strong>
+            <span>KIMBAP CHEON GUK</span>
+        </div>
+    </a>
 
-        <a href="#" class="logo" onclick="showPage('home')">
+    <nav>
+        <a href="#home" class="active">홈</a>
+        <a href="#menu">메뉴</a>
+        <a href="#recommend">추천</a>
+        <a href="#story">매장안내</a>
+        <a href="#event">이벤트</a>
+        <a href="#story">브랜드스토리</a>
+    </nav>
 
-            <span class="logo-mark">🍙</span>
+    <div class="header-right">
 
-            <span>
-                KIMBAP<br>
-                <b>HEAVEN</b>
-            </span>
+        <div class="search">
+            <input id="headerSearch" placeholder="메뉴를 검색해보세요!">
+            <button onclick="searchMenu()">⌕</button>
+        </div>
 
-        </a>
-
-        <button class="cart-button" onclick="showPage('cart')">
-
+        <button class="cart-btn" onclick="openCart()">
             🛒
-
-            <span class="cart-count" id="cartCount">
-                0
-            </span>
-
+            <span class="cart-count" id="cartCount">0</span>
         </button>
 
-    </header>
+        <button class="order-btn" onclick="openCart()">
+            주문하기
+        </button>
+
+        <button class="mobile-menu">☰</button>
+
+    </div>
+</div>
+</header>
 
 
-    <!-- =========================
-         HOME
-    ========================= -->
+<!-- ================= HERO ================= -->
 
-    <section class="page active" id="homePage">
+<section class="hero" id="home">
 
-        <div class="hero">
+<div class="container hero-inner">
 
-            <span class="eyebrow">
-                YOUR EVERYDAY KOREAN MEAL
-            </span>
+    <div class="hero-copy">
 
-            <h1>
-                오늘 뭐 먹지?<br>
-                <em>김밥천국에서 골라봐!</em>
-            </h1>
+        <div class="eyebrow">
+            익숙해서 더 맛있는 한 끼.
+        </div>
+
+        <h1>
+            오늘<br>
+            <span>뭐 먹지?</span>
+        </h1>
+
+        <p>
+            김밥천국의 다양한 메뉴를 쉽고 빠르게!<br>
+            원하는 메뉴를 찾아보세요.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn-yellow" onclick="document.querySelector('#menu').scrollIntoView()">
+                메뉴 보러가기 →
+            </button>
+
+            <button class="btn-outline" onclick="randomRecommend()">
+                💡 오늘 뭐 먹지?
+            </button>
+        </div>
+
+    </div>
+
+
+    <div class="hero-food">
+
+        <div class="stamp">
+            <span>KIMBAP HEAVEN</span>
+            <strong>SINCE</strong>
+            <strong>1994</strong>
+        </div>
+
+        <span class="sparkle s1">✧</span>
+        <span class="sparkle s2">✦</span>
+        <span class="sparkle s3">✧</span>
+
+        <img
+        src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=1000&q=85"
+        alt="김밥">
+    </div>
+
+
+    <div class="hero-side">
+
+        <div class="mood-box">
+
+            <h3>WHAT DO YOU WANT?</h3>
 
             <p>
-                익숙하지만 더 편리하게.<br>
-                지금 먹고 싶은 메뉴를 찾아보세요.
+                오늘의 취향을 골라 메뉴를 추천받아보세요!
             </p>
 
-            <button
-                class="primary-button"
-                onclick="showPage('recommend')">
+            <div class="moods">
 
-                ✨ 오늘 뭐 먹지?
+                <div class="mood" onclick="filterMood('든든하게')">
+                    <div class="mood-icon">🍚</div>
+                    <span>든든하게</span>
+                </div>
 
+                <div class="mood" onclick="filterMood('매콤하게')">
+                    <div class="mood-icon">🌶️</div>
+                    <span>매콤하게</span>
+                </div>
+
+                <div class="mood" onclick="filterMood('가볍게')">
+                    <div class="mood-icon">🌿</div>
+                    <span>가볍게</span>
+                </div>
+
+                <div class="mood" onclick="filterMood('저렴하게')">
+                    <div class="mood-icon">₩</div>
+                    <span>저렴하게</span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="best-box">
+
+            <div class="best-title">
+                <h3>BEST MENU</h3>
+                <a href="#menu">더보기 →</a>
+            </div>
+
+            <div class="best-items">
+
+                <div class="best-item">
+                    <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=500&q=80">
+                    <strong>참치김밥</strong>
+                    <span>4,500원</span>
+                </div>
+
+                <div class="best-item">
+                    <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=500&q=80">
+                    <strong>제육덮밥</strong>
+                    <span>6,500원</span>
+                </div>
+
+                <div class="best-item">
+                    <img src="https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=500&q=80">
+                    <strong>떡볶이</strong>
+                    <span>4,500원</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="checker"></div>
+
+</section>
+
+
+<!-- ================= MENU ================= -->
+
+<section class="section menu-section" id="menu">
+
+<div class="container">
+
+    <div class="section-title">
+        <small>MENU</small>
+        <h2>김밥천국 메뉴</h2>
+    </div>
+
+
+    <div class="menu-tools">
+
+        <div class="menu-search">
+            <input
+            id="menuSearch"
+            placeholder="메뉴를 검색해보세요!"
+            onkeyup="renderMenu()">
+
+            <span>⌕</span>
+        </div>
+
+        <div class="categories">
+
+            <button class="category active" onclick="setCategory('전체',this)">
+                전체
+            </button>
+
+            <button class="category" onclick="setCategory('김밥',this)">
+                김밥
+            </button>
+
+            <button class="category" onclick="setCategory('분식',this)">
+                분식
+            </button>
+
+            <button class="category" onclick="setCategory('식사',this)">
+                식사
+            </button>
+
+            <button class="category" onclick="setCategory('돈까스',this)">
+                돈까스
             </button>
 
         </div>
 
+    </div>
 
-        <!-- 검색 -->
 
-        <div class="search-box">
+    <div class="menu-grid" id="menuGrid"></div>
 
-            <span class="search-icon">
-                ⌕
-            </span>
+</div>
 
-            <input
-                type="search"
-                id="homeSearch"
-                placeholder="메뉴를 검색해보세요"
-                oninput="searchMenu(this.value)"
-            >
+</section>
+
+
+<!-- ================= RECOMMEND ================= -->
+
+<section class="section recommend" id="recommend">
+
+<div class="container recommend-inner">
+
+    <h2>오늘은 어떤 메뉴가 먹고 싶나요?</h2>
+
+    <p>
+        원하는 기분을 선택하면 메뉴를 추천해드릴게요!
+    </p>
+
+    <div class="recommend-buttons">
+
+        <button onclick="filterMood('든든하게')">
+            🍚 든든하게
+        </button>
+
+        <button onclick="filterMood('매콤하게')">
+            🌶️ 매콤하게
+        </button>
+
+        <button onclick="filterMood('가볍게')">
+            🌿 가볍게
+        </button>
+
+        <button onclick="filterMood('저렴하게')">
+            💰 저렴하게
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- ================= BRAND STORY ================= -->
+
+<section class="section" id="story">
+
+<div class="container story">
+
+    <div class="story-image">
+
+        <img
+        src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1000&q=85"
+        alt="김밥천국 브랜드 이미지">
+
+    </div>
+
+
+    <div class="story-copy">
+
+        <small>BRAND STORY</small>
+
+        <h2>
+            익숙한 맛,<br>
+            새로운 경험.
+        </h2>
+
+        <p>
+            김밥천국은 누구에게나 친숙한 한 끼를 제공합니다.
+            오랜 시간 사랑받아온 편안함은 유지하면서,
+            더 쉽고 편리하게 메뉴를 탐색할 수 있도록
+            새로운 디지털 경험으로 재해석했습니다.
+        </p>
+
+        <div class="story-points">
+
+            <div class="point">
+                <div class="point-icon">🌱</div>
+                <strong>정직한 재료</strong>
+            </div>
+
+            <div class="point">
+                <div class="point-icon">🍚</div>
+                <strong>푸짐한 한 끼</strong>
+            </div>
+
+            <div class="point">
+                <div class="point-icon">👌</div>
+                <strong>변함없는 맛</strong>
+            </div>
 
         </div>
 
+    </div>
 
-        <!-- 메뉴 -->
+</div>
 
-        <section class="content-section">
-
-            <div class="section-title">
-
-                <h2>
-                    오늘의 메뉴
-                </h2>
-
-                <button
-                    class="more-button"
-                    onclick="showPage('menu')">
-
-                    전체보기 →
-
-                </button>
-
-            </div>
+</section>
 
 
-            <div
-                class="category-list"
-                id="homeCategories">
+<!-- ================= FOOTER ================= -->
 
-                <button
-                    class="category active"
-                    onclick="filterHome('전체', this)">
+<footer id="event">
 
-                    전체
+<div class="container">
 
-                </button>
+<div class="footer-grid">
 
-                <button
-                    class="category"
-                    onclick="filterHome('김밥', this)">
+    <div>
 
-                    🍙 김밥
+        <div class="footer-logo">
 
-                </button>
-
-                <button
-                    class="category"
-                    onclick="filterHome('면', this)">
-
-                    🍜 면
-
-                </button>
-
-                <button
-                    class="category"
-                    onclick="filterHome('밥', this)">
-
-                    🍚 밥
-
-                </button>
-
-                <button
-                    class="category"
-                    onclick="filterHome('분식', this)">
-
-                    🥟 분식
-
-                </button>
-
-            </div>
-
-
-            <div
-                class="menu-grid"
-                id="homeMenu">
-
-            </div>
-
-        </section>
-
-
-        <!-- 추천 카드 -->
-
-        <div class="recommend-card">
+            <div class="logo-mark">🍙</div>
 
             <div>
-
-                <span>
-                    KIMBAP HEAVEN TIP
-                </span>
-
-                <h3>
-                    메뉴가 너무 많다면?
-                </h3>
-
-                <p>
-                    취향을 선택하고<br>
-                    오늘의 메뉴를 추천받아보세요.
-                </p>
-
+                <strong>김밥천국</strong>
+                <small>KIMBAP CHEON GUK</small>
             </div>
 
-            <button
-                class="round-button"
-                onclick="showPage('recommend')">
-
-                →
-
-            </button>
-
         </div>
 
-    </section>
+        <p>
+            1994년부터 변하지 않는 맛으로<br>
+            사랑받고 있는 김밥천국입니다.
+        </p>
+
+    </div>
 
 
-    <!-- =========================
-         MENU
-    ========================= -->
+    <div>
 
-    <section class="page" id="menuPage">
+        <h4>고객센터</h4>
 
-        <div class="page-heading">
+        <p>
+            02-123-4567<br>
+            평일 09:00 - 18:00<br>
+            (주말/공휴일 휴무)
+        </p>
 
-            <span class="eyebrow">
-                MENU
-            </span>
-
-            <h1>
-                메뉴
-            </h1>
-
-            <p>
-                먹고 싶은 메뉴를 빠르게 찾아보세요.
-            </p>
-
-        </div>
+    </div>
 
 
-        <div class="search-box">
+    <div>
 
-            <span class="search-icon">
-                ⌕
-            </span>
+        <h4>바로가기</h4>
+
+        <p>
+            <a href="#story">이용약관</a><br>
+            <a href="#story">개인정보처리방침</a><br>
+            <a href="#menu">FAQ</a>
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h4>SNS</h4>
+
+        <p style="font-size:25px;">
+            ◎　●　▶
+        </p>
+
+    </div>
+
+
+    <div>
+
+        <h4>이벤트 & 소식 받기</h4>
+
+        <p>
+            이메일을 입력하시면 다양한 소식을 받아보실 수 있어요!
+        </p>
+
+        <div class="newsletter">
 
             <input
-                type="search"
-                id="menuSearch"
-                placeholder="김밥, 라면, 떡볶이..."
-                oninput="renderMenuPage()"
-            >
+            type="email"
+            id="email"
+            placeholder="이메일을 입력해주세요">
 
-        </div>
-
-
-        <div
-            class="category-list"
-            id="menuCategories"
-            style="padding:0 18px 10px;">
-
-            <button
-                class="category active"
-                onclick="setCategory('전체', this)">
-
-                전체
-
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('김밥', this)">
-
-                🍙 김밥
-
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('면', this)">
-
-                🍜 면
-
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('밥', this)">
-
-                🍚 밥
-
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('분식', this)">
-
-                🥟 분식
-
+            <button onclick="subscribe()">
+                구독하기
             </button>
 
         </div>
 
-
-        <div
-            class="menu-grid"
-            id="allMenu"
-            style="padding:0 18px;">
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         DETAIL
-    ========================= -->
-
-    <section class="page" id="detailPage">
-
-        <button
-            class="back-button"
-            onclick="showPage('menu')">
-
-            ← 메뉴로 돌아가기
-
-        </button>
-
-
-        <div
-            class="detail"
-            id="detailContent">
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         RECOMMEND
-    ========================= -->
-
-    <section class="page" id="recommendPage">
-
-        <div class="recommend-page">
-
-            <span class="eyebrow">
-                TODAY'S PICK
-            </span>
-
-            <h1>
-                오늘은 어떤 메뉴가<br>
-                먹고 싶나요?
-            </h1>
-
-            <p>
-                하나만 골라도 딱 맞는 메뉴를<br>
-                찾아드릴게요.
-            </p>
-
-
-            <div class="choice-list">
-
-                <button
-                    class="choice"
-                    onclick="selectMood('든든하게', this)">
-
-                    🍚
-
-                    <b>
-                        든든하게
-                    </b>
-
-                    <small>
-                        배부르게 한 끼!
-                    </small>
-
-                </button>
-
-
-                <button
-                    class="choice"
-                    onclick="selectMood('매콤하게', this)">
-
-                    🌶️
-
-                    <b>
-                        매콤하게
-                    </b>
-
-                    <small>
-                        스트레스엔 매운맛!
-                    </small>
-
-                </button>
-
-
-                <button
-                    class="choice"
-                    onclick="selectMood('가볍게', this)">
-
-                    🥬
-
-                    <b>
-                        가볍게
-                    </b>
-
-                    <small>
-                        부담 없이 깔끔하게
-                    </small>
-
-                </button>
-
-
-                <button
-                    class="choice"
-                    onclick="selectMood('저렴하게', this)">
-
-                    💸
-
-                    <b>
-                        저렴하게
-                    </b>
-
-                    <small>
-                        5,000원 이하로!
-                    </small>
-
-                </button>
-
-            </div>
-
-
-            <button
-                class="primary-button full-button"
-                onclick="recommendMenu()">
-
-                메뉴 추천받기 →
-
-            </button>
-
-
-            <div id="recommendResult"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         CART
-    ========================= -->
-
-    <section class="page" id="cartPage">
-
-        <div class="page-heading">
-
-            <span class="eyebrow">
-                MY ORDER
-            </span>
-
-            <h1>
-                장바구니
-            </h1>
-
-            <p>
-                주문할 메뉴를 확인해주세요.
-            </p>
-
-        </div>
-
-
-        <div id="cartContent"></div>
-
-    </section>
-
-
-    <!-- =========================
-         BOTTOM NAV
-    ========================= -->
-
-    <nav class="bottom-nav">
-
-        <button
-            class="nav-item active"
-            onclick="showPage('home')">
-
-            <span>⌂</span>
-            홈
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showPage('menu')">
-
-            <span>🍙</span>
-            메뉴
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showPage('recommend')">
-
-            <span>✨</span>
-            추천
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="showPage('cart')">
-
-            <span>🛒</span>
-            장바구니
-
-        </button>
-
-    </nav>
+    </div>
 
 </div>
 
 
+<div class="copyright">
+    © 2026 KIMBAP CHEON GUK. ALL RIGHTS RESERVED.
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- ================= MENU MODAL ================= -->
+
+<div class="modal-bg" id="modal">
+
+<div class="modal">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <div class="modal-content">
+
+        <img id="modalImage">
+
+        <div>
+
+            <h2 id="modalName"></h2>
+
+            <div class="modal-price" id="modalPrice"></div>
+
+            <p id="modalDescription"></p>
+
+            <button class="add-cart" onclick="addCurrentToCart()">
+                🛒 장바구니 담기
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div class="cart-panel" id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>장바구니</h2>
+
+        <button class="cart-close" onclick="closeCart()">
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+
+        <span>총 주문금액</span>
+
+        <span id="cartTotal">0원</span>
+
+    </div>
+
+    <button class="checkout" onclick="checkout()">
+        주문하기 →
+    </button>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
 <script>
 
-    /* =========================
-       메뉴 데이터
-    ========================= */
+/* =========================
+   MENU DATA
+========================= */
 
-    const menus = [
+const menus = [
 
-        {
-            id: 1,
-            name: "원조김밥",
-            category: "김밥",
-            price: 3500,
-            emoji: "🍙",
-            description: "김밥천국의 기본이 되는 담백하고 친숙한 김밥",
-            moods: ["가볍게", "저렴하게"]
-        },
+{
+    id:1,
+    name:"원조김밥",
+    category:"김밥",
+    price:3500,
+    mood:["가볍게","저렴하게"],
+    description:"기본에 충실한 한 줄. 누구나 좋아하는 김밥천국의 대표 메뉴입니다.",
+    image:"https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 2,
-            name: "참치김밥",
-            category: "김밥",
-            price: 4500,
-            emoji: "🍙",
-            description: "참치와 고소한 마요네즈가 어우러진 인기 메뉴",
-            moods: ["든든하게", "저렴하게"]
-        },
+{
+    id:2,
+    name:"참치김밥",
+    category:"김밥",
+    price:4500,
+    mood:["든든하게","가볍게"],
+    description:"고소한 참치와 신선한 야채가 어우러진 인기 메뉴입니다.",
+    image:"https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 3,
-            name: "치즈김밥",
-            category: "김밥",
-            price: 4500,
-            emoji: "🧀",
-            description: "고소한 치즈가 들어간 부드러운 김밥",
-            moods: ["가볍게", "저렴하게"]
-        },
+{
+    id:3,
+    name:"치즈김밥",
+    category:"김밥",
+    price:4500,
+    mood:["가볍게"],
+    description:"부드러운 치즈와 김밥의 조화가 매력적인 메뉴입니다.",
+    image:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 4,
-            name: "라면",
-            category: "면",
-            price: 4000,
-            emoji: "🍜",
-            description: "따끈하고 얼큰한 국물의 대표 메뉴",
-            moods: ["매콤하게", "저렴하게"]
-        },
+{
+    id:4,
+    name:"라면",
+    category:"분식",
+    price:4000,
+    mood:["매콤하게","저렴하게"],
+    description:"뜨끈하고 얼큰한 국물이 생각날 때 가장 먼저 떠오르는 메뉴입니다.",
+    image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 5,
-            name: "떡볶이",
-            category: "분식",
-            price: 4500,
-            emoji: "🥘",
-            description: "달콤매콤한 양념에 쫄깃한 떡을 더한 분식",
-            moods: ["매콤하게", "저렴하게"]
-        },
+{
+    id:5,
+    name:"떡볶이",
+    category:"분식",
+    price:4500,
+    mood:["매콤하게","저렴하게"],
+    description:"매콤달콤한 소스와 쫀득한 떡으로 즐기는 국민 분식입니다.",
+    image:"https://images.unsplash.com/photo-1591814468924-caf88d1232e1?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 6,
-            name: "참치볶음밥",
-            category: "밥",
-            price: 6000,
-            emoji: "🍳",
-            description: "고소한 참치와 볶음밥의 든든한 한 끼",
-            moods: ["든든하게"]
-        },
+{
+    id:6,
+    name:"참치볶음밥",
+    category:"식사",
+    price:6000,
+    mood:["든든하게"],
+    description:"고소한 참치와 볶음밥의 풍미를 든든하게 즐길 수 있습니다.",
+    image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 7,
-            name: "제육덮밥",
-            category: "밥",
-            price: 6500,
-            emoji: "🍚",
-            description: "매콤달콤한 제육을 밥 위에 푸짐하게",
-            moods: ["든든하게", "매콤하게"]
-        },
+{
+    id:7,
+    name:"제육덮밥",
+    category:"식사",
+    price:6500,
+    mood:["든든하게","매콤하게"],
+    description:"매콤한 제육과 따뜻한 밥으로 든든하게 즐기는 한 끼입니다.",
+    image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=700&q=80"
+},
 
-        {
-            id: 8,
-            name: "돈까스",
-            category: "분식",
-            price: 7000,
-            emoji: "🍛",
-            description: "바삭하게 튀겨낸 든든한 돈까스",
-            moods: ["든든하게"]
-        }
+{
+    id:8,
+    name:"돈까스",
+    category:"돈까스",
+    price:7000,
+    mood:["든든하게"],
+    description:"바삭한 돈까스와 소스를 함께 즐기는 김밥천국의 인기 식사 메뉴입니다.",
+    image:"https://images.unsplash.com/photo-1606502973842-f64bc2785fe5?auto=format&fit=crop&w=700&q=80"
+}
 
-    ];
+];
 
-
-    /* =========================
-       상태
-    ========================= */
-
-    let cart = [];
-
-    let selectedCategory = "전체";
-
-    let selectedMood = "";
+let currentCategory="전체";
+let currentMenu=null;
+let cart=[];
 
 
-    /* =========================
-       가격 표시
-    ========================= */
+/* =========================
+   RENDER MENU
+========================= */
 
-    function money(price) {
+function renderMenu(){
 
-        return "₩" + price.toLocaleString("ko-KR");
+    const grid=document.getElementById("menuGrid");
+
+    const keyword=document
+        .getElementById("menuSearch")
+        .value
+        .toLowerCase();
+
+    let filtered=menus.filter(menu=>{
+
+        const categoryMatch=
+            currentCategory==="전체" ||
+            menu.category===currentCategory;
+
+        const searchMatch=
+            menu.name.toLowerCase().includes(keyword);
+
+        return categoryMatch && searchMatch;
+
+    });
+
+
+    grid.innerHTML="";
+
+    filtered.forEach(menu=>{
+
+        const card=document.createElement("div");
+
+        card.className="menu-card";
+
+        card.innerHTML=`
+
+            <div class="menu-image">
+
+                <img
+                src="${menu.image}"
+                alt="${menu.name}">
+
+                <button
+                class="heart"
+                onclick="toggleHeart(event,this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div
+            class="menu-info"
+            onclick="openModal(${menu.id})"
+            style="cursor:pointer">
+
+                <h3>${menu.name}</h3>
+
+                <p>${menu.description}</p>
+
+                <div class="price">
+                    ${menu.price.toLocaleString()}원
+                </div>
+
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================
+   CATEGORY
+========================= */
+
+function setCategory(category,button){
+
+    currentCategory=category;
+
+    document
+        .querySelectorAll(".category")
+        .forEach(btn=>btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderMenu();
+
+    document
+        .getElementById("menu")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchMenu(){
+
+    const value=
+        document.getElementById("headerSearch").value;
+
+    document.getElementById("menuSearch").value=value;
+
+    document
+        .getElementById("menu")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+    renderMenu();
+}
+
+
+/* =========================
+   HEART
+========================= */
+
+function toggleHeart(event,button){
+
+    event.stopPropagation();
+
+    button.classList.toggle("active");
+
+    button.textContent=
+        button.classList.contains("active")
+        ? "♥"
+        : "♡";
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openModal(id){
+
+    currentMenu=
+        menus.find(menu=>menu.id===id);
+
+    document.getElementById("modalImage").src=
+        currentMenu.image;
+
+    document.getElementById("modalName").textContent=
+        currentMenu.name;
+
+    document.getElementById("modalPrice").textContent=
+        currentMenu.price.toLocaleString()+"원";
+
+    document.getElementById("modalDescription").textContent=
+        currentMenu.description;
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================
+   CART
+========================= */
+
+function addCurrentToCart(){
+
+    if(!currentMenu) return;
+
+    addToCart(currentMenu);
+
+    closeModal();
+
+}
+
+
+function addToCart(menu){
+
+    const existing=
+        cart.find(item=>item.id===menu.id);
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+            ...menu,
+            qty:1
+        });
 
     }
 
+    updateCart();
 
-    /* =========================
-       메뉴 카드
-    ========================= */
+    showToast(menu.name+"이(가) 장바구니에 담겼어요!");
 
-    function menuCard(menu) {
+}
 
-        return `
 
-            <article
-                class="menu-card"
-                onclick="showDetail(${menu.id})">
+function updateCart(){
 
-                <div class="food-image">
-                    ${menu.emoji}
-                </div>
+    const count=
+        cart.reduce((sum,item)=>sum+item.qty,0);
 
-                <div class="menu-info">
+    document.getElementById("cartCount").textContent=count;
 
-                    <h3>
-                        ${menu.name}
-                    </h3>
 
-                    <p>
-                        ${menu.description}
-                    </p>
+    const container=
+        document.getElementById("cartItems");
 
-                    <span class="price">
-                        ${money(menu.price)}
+    if(cart.length===0){
+
+        container.innerHTML=`
+            <p style="text-align:center;color:#777;padding:50px 0;">
+                장바구니가 비어있어요 🍙
+            </p>
+        `;
+
+    }else{
+
+        container.innerHTML="";
+
+        cart.forEach(item=>{
+
+            const div=document.createElement("div");
+
+            div.className="cart-item";
+
+            div.innerHTML=`
+
+                <img src="${item.image}">
+
+                <div class="cart-item-info">
+
+                    <strong>${item.name}</strong>
+
+                    <span>
+                        ${item.price.toLocaleString()}원 × ${item.qty}
                     </span>
 
                 </div>
 
-            </article>
-
-        `;
-
-    }
-
-
-    /* =========================
-       홈 메뉴
-    ========================= */
-
-    function renderHomeMenu(list = menus.slice(0, 4)) {
-
-        document.getElementById("homeMenu").innerHTML =
-            list.map(menuCard).join("");
-
-    }
-
-
-    /* =========================
-       홈 카테고리
-    ========================= */
-
-    function filterHome(category, button) {
-
-        document
-            .querySelectorAll("#homeCategories .category")
-            .forEach(btn => btn.classList.remove("active"));
-
-        button.classList.add("active");
-
-        if (category === "전체") {
-
-            renderHomeMenu(menus.slice(0, 4));
-
-        } else {
-
-            renderHomeMenu(
-                menus.filter(menu => menu.category === category)
-            );
-
-        }
-
-    }
-
-
-    /* =========================
-       메뉴 페이지
-    ========================= */
-
-    function setCategory(category, button) {
-
-        selectedCategory = category;
-
-        document
-            .querySelectorAll("#menuCategories .category")
-            .forEach(btn => btn.classList.remove("active"));
-
-        button.classList.add("active");
-
-        renderMenuPage();
-
-    }
-
-
-    function renderMenuPage() {
-
-        const keyword =
-            document
-                .getElementById("menuSearch")
-                .value
-                .toLowerCase();
-
-
-        const result = menus.filter(menu => {
-
-            const categoryMatch =
-                selectedCategory === "전체" ||
-                menu.category === selectedCategory;
-
-            const searchMatch =
-                menu.name.toLowerCase().includes(keyword);
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-        const container =
-            document.getElementById("allMenu");
-
-
-        if (result.length === 0) {
-
-            container.innerHTML = `
-
-                <div
-                    class="empty-cart"
-                    style="grid-column:1/-1;">
-
-                    <div class="empty-cart-icon">
-                        🥲
-                    </div>
-
-                    <p>
-                        검색 결과가 없어요.
-                    </p>
-
-                </div>
+                <button
+                onclick="removeCart(${item.id})"
+                style="
+                border:0;
+                background:none;
+                color:#999;
+                font-size:20px;">
+                    ×
+                </button>
 
             `;
 
-            return;
-
-        }
-
-
-        container.innerHTML =
-            result.map(menuCard).join("");
-
-    }
-
-
-    /* =========================
-       검색
-    ========================= */
-
-    function searchMenu(keyword) {
-
-        showPage("menu");
-
-        document.getElementById("menuSearch").value =
-            keyword;
-
-        renderMenuPage();
-
-    }
-
-
-    /* =========================
-       상세 페이지
-    ========================= */
-
-    function showDetail(id) {
-
-        const menu =
-            menus.find(item => item.id === id);
-
-
-        document.getElementById("detailContent").innerHTML = `
-
-            <div class="detail">
-
-                <div class="detail-image">
-                    ${menu.emoji}
-                </div>
-
-
-                <h1>
-                    ${menu.name}
-                </h1>
-
-
-                <div class="detail-price">
-                    ${money(menu.price)}
-                </div>
-
-
-                <p class="detail-description">
-                    ${menu.description}.<br>
-                    누구나 편하게 즐길 수 있는
-                    김밥천국의 인기 메뉴입니다.
-                </p>
-
-
-                <div class="detail-info">
-
-                    <p>
-                        <b>카테고리</b>
-                        ${menu.category}
-                    </p>
-
-                    <p>
-                        <b>알레르기 정보</b>
-                        매장별 원재료 확인 필요
-                    </p>
-
-                </div>
-
-
-                <button
-                    class="primary-button full-button"
-                    onclick="addToCart(${menu.id})">
-
-                    🛒 장바구니 담기
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        showPage("detail");
-
-    }
-
-
-    /* =========================
-       장바구니 추가
-    ========================= */
-
-    function addToCart(id) {
-
-        const existing =
-            cart.find(item => item.id === id);
-
-
-        if (existing) {
-
-            existing.quantity++;
-
-        } else {
-
-            cart.push({
-                id: id,
-                quantity: 1
-            });
-
-        }
-
-
-        updateCart();
-
-
-        alert("장바구니에 담았어요! 🍙");
-
-    }
-
-
-    /* =========================
-       장바구니 업데이트
-    ========================= */
-
-    function updateCart() {
-
-        const count =
-            cart.reduce(
-                (sum, item) => sum + item.quantity,
-                0
-            );
-
-
-        document.getElementById("cartCount").textContent =
-            count;
-
-
-        renderCart();
-
-    }
-
-
-    /* =========================
-       수량 변경
-    ========================= */
-
-    function changeQuantity(id, amount) {
-
-        const item =
-            cart.find(item => item.id === id);
-
-
-        item.quantity += amount;
-
-
-        if (item.quantity <= 0) {
-
-            cart =
-                cart.filter(item => item.id !== id);
-
-        }
-
-
-        updateCart();
-
-    }
-
-
-    /* =========================
-       장바구니 화면
-    ========================= */
-
-    function renderCart() {
-
-        const container =
-            document.getElementById("cartContent");
-
-
-        if (cart.length === 0) {
-
-            container.innerHTML = `
-
-                <div class="empty-cart">
-
-                    <div class="empty-cart-icon">
-                        🛒
-                    </div>
-
-                    <h3>
-                        장바구니가 비어있어요
-                    </h3>
-
-                    <p style="margin:10px 0 20px;">
-                        마음에 드는 메뉴를 담아보세요.
-                    </p>
-
-                    <button
-                        class="primary-button"
-                        onclick="showPage('menu')">
-
-                        메뉴 보러가기
-
-                    </button>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        let total = 0;
-
-
-        let html = `
-
-            <div class="cart-wrap">
-
-        `;
-
-
-        cart.forEach(item => {
-
-            const menu =
-                menus.find(menu => menu.id === item.id);
-
-
-            const itemTotal =
-                menu.price * item.quantity;
-
-
-            total += itemTotal;
-
-
-            html += `
-
-                <div class="cart-item">
-
-                    <div class="cart-thumb">
-                        ${menu.emoji}
-                    </div>
-
-
-                    <div class="cart-item-info">
-
-                        <h3>
-                            ${menu.name}
-                        </h3>
-
-                        <p>
-                            ${money(menu.price)}
-                        </p>
-
-
-                        <div class="quantity">
-
-                            <button
-                                onclick="changeQuantity(${menu.id}, -1)">
-
-                                −
-
-                            </button>
-
-                            <span>
-                                ${item.quantity}
-                            </span>
-
-                            <button
-                                onclick="changeQuantity(${menu.id}, 1)">
-
-                                +
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <strong>
-                        ${money(itemTotal)}
-                    </strong>
-
-                </div>
-
-            `;
+            container.appendChild(div);
 
         });
 
-
-        html += `
-
-            </div>
-
-
-            <div class="total-box">
-
-                <span>
-                    총 금액
-                </span>
-
-                <strong>
-                    ${money(total)}
-                </strong>
-
-            </div>
-
-
-            <div style="padding:0 20px;">
-
-                <button
-                    class="primary-button full-button"
-                    onclick="orderComplete()">
-
-                    주문하기 →
-
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.innerHTML = html;
-
     }
 
 
-    /* =========================
-       추천 기능
-    ========================= */
-
-    function selectMood(mood, button) {
-
-        selectedMood = mood;
-
-
-        document
-            .querySelectorAll(".choice")
-            .forEach(item =>
-                item.classList.remove("selected")
-            );
-
-
-        button.classList.add("selected");
-
-    }
-
-
-    function recommendMenu() {
-
-        if (!selectedMood) {
-
-            alert("먼저 원하는 메뉴 스타일을 골라주세요! 🍙");
-
-            return;
-
-        }
-
-
-        const candidates =
-            menus.filter(menu =>
-                menu.moods.includes(selectedMood)
-            );
-
-
-        const menu =
-            candidates[
-                Math.floor(
-                    Math.random() * candidates.length
-                )
-            ];
-
-
-        document.getElementById(
-            "recommendResult"
-        ).innerHTML = `
-
-            <div class="result-card">
-
-                <div class="food-image">
-                    ${menu.emoji}
-                </div>
-
-                <span
-                    class="eyebrow"
-                    style="color:#f4c542;">
-
-                    TODAY'S PICK
-
-                </span>
-
-
-                <h2>
-                    ${menu.name}
-                </h2>
-
-
-                <p>
-                    ${menu.description}
-                </p>
-
-
-                <strong>
-                    ${money(menu.price)}
-                </strong>
-
-
-                <br><br>
-
-
-                <button
-                    class="primary-button"
-                    onclick="addToCart(${menu.id})">
-
-                    장바구니 담기
-
-                </button>
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* =========================
-       페이지 이동
-    ========================= */
-
-    function showPage(page) {
-
-        document
-            .querySelectorAll(".page")
-            .forEach(section =>
-                section.classList.remove("active")
-            );
-
-
-        document
-            .getElementById(page + "Page")
-            .classList.add("active");
-
-
-        document
-            .querySelectorAll(".nav-item")
-            .forEach(button =>
-                button.classList.remove("active")
-            );
-
-
-        const navButtons =
-            document.querySelectorAll(".nav-item");
-
-
-        if (page === "home")
-            navButtons[0].classList.add("active");
-
-        if (page === "menu")
-            navButtons[1].classList.add("active");
-
-        if (page === "recommend")
-            navButtons[2].classList.add("active");
-
-        if (page === "cart")
-            navButtons[3].classList.add("active");
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-
-        if (page === "menu") {
-
-            renderMenuPage();
-
-        }
-
-
-        if (page === "cart") {
-
-            renderCart();
-
-        }
-
-    }
-
-
-    /* =========================
-       주문 완료
-    ========================= */
-
-    function orderComplete() {
-
-        if (cart.length === 0) {
-
-            alert("장바구니가 비어있어요!");
-
-            return;
-
-        }
-
-
-        alert(
-            "주문이 완료되었습니다! 🍙\n\n맛있게 드세요!"
+    const total=
+        cart.reduce(
+            (sum,item)=>
+            sum+(item.price*item.qty),
+            0
         );
 
+    document.getElementById("cartTotal").textContent=
+        total.toLocaleString()+"원";
 
-        cart = [];
+}
 
 
-        updateCart();
+function removeCart(id){
+
+    cart=
+        cart.filter(item=>item.id!==id);
+
+    updateCart();
+
+}
 
 
-        showPage("home");
+function openCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.add("show");
+
+}
+
+function closeCart(){
+
+    document
+        .getElementById("cartPanel")
+        .classList.remove("show");
+
+}
+
+
+function checkout(){
+
+    if(cart.length===0){
+
+        showToast("장바구니가 비어있어요!");
+
+        return;
 
     }
 
+    showToast("주문 페이지로 이동합니다!");
 
-    /* =========================
-       초기 실행
-    ========================= */
+}
 
-    renderHomeMenu();
 
-    renderMenuPage();
+/* =========================
+   RECOMMEND
+========================= */
 
-    updateCart();
+function filterMood(mood){
+
+    const candidates=
+        menus.filter(menu=>
+            menu.mood.includes(mood)
+        );
+
+    if(candidates.length===0) return;
+
+    const random=
+        candidates[
+            Math.floor(
+                Math.random()*candidates.length
+            )
+        ];
+
+    openModal(random.id);
+
+}
+
+
+function randomRecommend(){
+
+    const random=
+        menus[
+            Math.floor(
+                Math.random()*menus.length
+            )
+        ];
+
+    openModal(random.id);
+
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast=
+        document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+    },2200);
+
+}
+
+
+/* =========================
+   EMAIL
+========================= */
+
+function subscribe(){
+
+    const email=
+        document.getElementById("email").value;
+
+    if(!email){
+
+        showToast("이메일을 입력해주세요!");
+
+        return;
+
+    }
+
+    showToast("이벤트 소식 신청이 완료되었습니다!");
+
+    document.getElementById("email").value="";
+
+}
+
+
+/* =========================
+   INIT
+========================= */
+
+renderMenu();
+
+updateCart();
+
+
+/* modal outside click */
+
+document
+.getElementById("modal")
+.addEventListener("click",function(e){
+
+    if(e.target===this){
+
+        closeModal();
+
+    }
+
+});
+
+
+/* ESC */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        closeModal();
+        closeCart();
+
+    }
+
+});
 
 </script>
 
