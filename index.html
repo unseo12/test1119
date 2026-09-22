@@ -279,11 +279,19 @@ a{
 ========================================================= */
 
 .hero{
-    min-height:calc(100vh - var(--header-height));
+    /* 헤더를 제외한 화면 한 장 */
+    height:calc(100vh - var(--header-height));
 
     display:flex;
     flex-direction:column;
+
+    position:relative;
+
+    overflow:hidden;
 }
+
+
+/* 메인 내용 */
 
 .hero-content{
     width:min(var(--content-width), calc(100% - 96px));
@@ -302,29 +310,43 @@ a{
 
     gap:95px;
 
-    padding:55px 0 45px;
+    /*
+       체크무늬가 올라온 만큼
+       콘텐츠도 전체적으로 자연스럽게 중앙 유지
+    */
+    padding:35px 0 90px;
 }
 
 
-/* HERO TEXT */
+/* =========================================================
+   HERO TEXT
+========================================================= */
 
 .hero-copy{
     padding-left:0;
 }
 
+
+/* 익숙해서 더 맛있는 한 끼 */
+
 .hero-small{
-    font-size:15px;
+    font-size:18px;
     font-weight:500;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
+
+    letter-spacing:-0.4px;
 }
 
+
+/* 오늘 뭐 먹지? */
+
 .hero-title{
-    font-size:64px;
+    font-size:70px;
 
     line-height:1;
 
-    letter-spacing:-4.5px;
+    letter-spacing:-5px;
 
     font-weight:800;
 }
@@ -333,27 +355,43 @@ a{
     color:var(--red);
 }
 
-.hero-description{
-    margin-top:27px;
 
-    font-size:13px;
+/* 설명 */
+
+.hero-description{
+    margin-top:30px;
+
+    font-size:15px;
     line-height:1.8;
 
     font-weight:500;
+
+    letter-spacing:-0.3px;
 }
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
 
 .hero-buttons{
     display:flex;
 
-    gap:10px;
+    gap:12px;
 
-    margin-top:25px;
+    margin-top:27px;
 }
 
-.hero-button{
-    height:43px;
 
-    padding:0 21px;
+/*
+   ★ 두 버튼 크기 완전히 동일
+*/
+
+.hero-button{
+    width:150px;
+    height:46px;
+
+    padding:0;
 
     border-radius:7px;
 
@@ -363,13 +401,108 @@ a{
 
     color:var(--text);
 
-    font-size:11px;
+    font-size:12px;
     font-weight:700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
 }
+
+
+/* 메뉴 보러가기 */
 
 .hero-button.primary{
     background:var(--yellow);
+
     border-color:var(--yellow);
+}
+
+
+/* 오늘 뭐 먹지 전구 아이콘 */
+
+.hero-button-icon{
+    width:18px;
+    height:18px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
+
+.hero-image{
+    width:100%;
+
+    aspect-ratio:1.47 / 1;
+
+    max-height:470px;
+
+    background:var(--gray);
+
+    border-radius:7px;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.hero-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   CHECKER PATTERN
+
+   ★ 화면 맨 아래에서 위로 올림
+========================================================= */
+
+.checker{
+    position:absolute;
+
+    left:0;
+
+    /*
+       숫자가 커질수록 체크무늬가 더 위로 올라감
+    */
+    bottom:45px;
+
+    width:100%;
+    height:18px;
+
+    background-color:var(--bg);
+
+    background-image:
+        linear-gradient(
+            45deg,
+            var(--red) 25%,
+            transparent 25%,
+            transparent 75%,
+            var(--red) 75%
+        ),
+        linear-gradient(
+            45deg,
+            var(--red) 25%,
+            transparent 25%,
+            transparent 75%,
+            var(--red) 75%
+        );
+
+    background-size:18px 18px;
+
+    background-position:
+        0 0,
+        9px 9px;
 }
 
 
@@ -1632,24 +1765,35 @@ a{
 
             <div class="hero-buttons">
 
+    <!-- 메뉴 보러가기 -->
 
-                <button
-                    class="hero-button primary"
-                    onclick="goToMenu()"
-                >
-                    메뉴 보러가기 →
-                </button>
-
-
-                <button
-                    class="hero-button"
-                    onclick="randomMenu()"
-                >
-                    오늘 뭐 먹지?
-                </button>
+    <button
+        class="hero-button primary"
+        onclick="goToMenu()"
+    >
+        메뉴 보러가기
+        <span>→</span>
+    </button>
 
 
-            </div>
+    <!-- 오늘 뭐 먹지? -->
+
+    <button
+        class="hero-button"
+        onclick="randomMenu()"
+    >
+
+        <img
+            class="hero-button-icon"
+            src="images/icons/lightbulb.png"
+            alt=""
+        >
+
+        오늘 뭐 먹지?
+
+    </button>
+
+</div>
 
 
         </div>
