@@ -1,3383 +1,833 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>김밥천국</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --bg:#fff6e5;
-    --paper:#fff9ee;
-    --red:#e64a2e;
-    --yellow:#ffc43d;
-    --navy:#263642;
-    --text:#202b32;
-    --line:#d8cbb4;
-    --placeholder:#d9d9d9;
-
-    /* 헤더 높이 */
-    --header-h:76px;
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-
-    /*
-      한 화면씩 자연스럽게 넘어가도록 설정
-    */
-    scroll-snap-type:y proximity;
-}
-
-body{
-    font-family:"Noto Sans KR",sans-serif;
-
-    background:var(--bg);
-    color:var(--text);
-
-    overflow-x:hidden;
-}
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-img{
-    display:block;
-    max-width:100%;
-}
-
-
-/* =========================
-   SECTION SNAP
-========================= */
-
-section,
-header{
-    scroll-snap-align:start;
-}
-
-
-/* =========================
-   COMMON
-========================= */
-
-.container{
-    width:min(1200px, calc(100% - 80px));
-    margin:0 auto;
-}
-
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header{
-
-    height:var(--header-h);
-
-    background:var(--bg);
-
-    border-bottom:1px solid #e1d5bf;
-
-    position:sticky;
-    top:0;
-
-    z-index:1000;
-}
-
-
-.header-inner{
-
-    width:min(1200px, calc(100% - 80px));
-
-    height:100%;
-
-    margin:auto;
-
-    display:flex;
-
-    align-items:center;
-}
-
-
-/* LOGO */
-
-.logo{
-
-    width:145px;
-
-    flex-shrink:0;
-}
-
-.logo img{
-
-    width:120px;
-
-    height:auto;
-
-    object-fit:contain;
-}
-
-
-/* NAV */
-
-.nav{
-
-    height:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:40px;
-
-    margin-left:125px;
-}
-
-.nav a{
-
-    height:100%;
-
-    display:flex;
-
-    align-items:center;
-
-    position:relative;
-
-    font-size:11px;
-
-    font-weight:600;
-
-    white-space:nowrap;
-}
-
-.nav a.active::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:18px;
-
-    transform:translateX(-50%);
-
-    width:21px;
-
-    height:2px;
-
-    background:var(--red);
-}
-
-
-/* HEADER RIGHT */
-
-.header-right{
-
-    margin-left:auto;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-}
-
-
-/* SEARCH */
-
-.header-search{
-
-    width:150px;
-
-    height:29px;
-
-    border:1px solid #d7cbb7;
-
-    border-radius:20px;
-
-    background:var(--paper);
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 8px 0 12px;
-}
-
-.header-search input{
-
-    width:100%;
-
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    font-size:8px;
-}
-
-.header-search input::placeholder{
-
-    color:#918b7f;
-}
-
-
-/* ICON */
-
-.icon{
-
-    width:15px;
-
-    height:15px;
-
-    object-fit:contain;
-
-    flex-shrink:0;
-}
-
-
-/* CART */
-
-.cart-button{
-
-    position:relative;
-
-    width:27px;
-
-    height:27px;
-
-    border:0;
-
-    background:transparent;
-
-    padding:4px;
-}
-
-.cart-button img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:contain;
-}
-
-.cart-count{
-
-    position:absolute;
-
-    right:-2px;
-
-    top:-3px;
-
-    width:14px;
-
-    height:14px;
-
-    border-radius:50%;
-
-    background:var(--red);
-
-    color:white;
-
-    display:grid;
-
-    place-items:center;
-
-    font-size:7px;
-
-    font-weight:800;
-}
-
-
-/* ORDER */
-
-.order-button{
-
-    height:30px;
-
-    padding:0 17px;
-
-    border:0;
-
-    border-radius:17px;
-
-    background:var(--red);
-
-    color:white;
-
-    font-size:9px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   HERO
-   ★ 화면 한 장
-========================================================= */
-
-.hero{
-
-    min-height:calc(100vh - var(--header-h));
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    padding:0;
-}
-
-
-.hero-inner{
-
-    width:min(1200px, calc(100% - 80px));
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:65px;
-
-    align-items:center;
-
-    flex:1;
-
-    min-height:0;
-}
-
-
-/* HERO TEXT */
-
-.hero-small{
-
-    font-size:12px;
-
-    font-weight:500;
-
-    margin-bottom:13px;
-}
-
-.hero-title{
-
-    font-size:clamp(43px,4.3vw,66px);
-
-    line-height:1;
-
-    letter-spacing:-4px;
-
-    font-weight:800;
-}
-
-.red{
-
-    color:var(--red);
-}
-
-.hero-description{
-
-    margin-top:22px;
-
-    font-size:10px;
-
-    line-height:1.8;
-}
-
-.hero-buttons{
-
-    display:flex;
-
-    gap:7px;
-
-    margin-top:17px;
-}
-
-.hero-button{
-
-    height:32px;
-
-    padding:0 14px;
-
-    border-radius:6px;
-
-    font-size:9px;
-
-    font-weight:700;
-
-    border:1px solid #d5c9b4;
-
-    background:var(--paper);
-
-    color:var(--text);
-}
-
-.hero-button.primary{
-
-    background:var(--yellow);
-
-    border-color:var(--yellow);
-}
-
-
-/* IMAGE BOX */
-
-.image-box{
-
-    background:var(--placeholder);
-
-    border-radius:6px;
-
-    overflow:hidden;
-
-    position:relative;
-}
-
-.image-box img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-}
-
-.image-placeholder{
-
-    position:absolute;
-
-    inset:0;
-
-    display:grid;
-
-    place-items:center;
-
-    color:#333;
-
-    font-size:14px;
-
-    pointer-events:none;
-}
-
-
-/* HERO IMAGE */
-
-.hero-image{
-
-    width:100%;
-
-    height:min(430px,55vh);
-}
-
-
-/* CHECKER */
-
-.checker{
-
-    height:13px;
-
-    width:100%;
-
-    flex-shrink:0;
-
-    background-color:var(--bg);
-
-    background-image:
-
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
-        ),
-
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
-        );
-
-    background-size:14px 14px;
-
-    background-position:0 0,7px 7px;
-}
-
-
-/* =========================================================
-   MENU
-   ★ 화면 한 장
-========================================================= */
-
-.menu-section{
-
-    min-height:calc(100vh - var(--header-h));
-
-    display:flex;
-
-    align-items:center;
-
-    padding:40px 0;
-}
-
-
-.menu-section > .container{
-
-    width:min(1200px, calc(100% - 80px));
-}
-
-
-/* TITLE */
-
-.menu-title{
-
-    font-size:26px;
-
-    font-weight:800;
-
-    margin-bottom:8px;
-}
-
-.menu-subtitle{
-
-    font-size:9px;
-
-    margin-bottom:18px;
-}
-
-
-/* SEARCH */
-
-.menu-search{
-
-    height:40px;
-
-    border:1px solid #d8ccb7;
-
-    border-radius:21px;
-
-    background:var(--paper);
-
-    display:flex;
-
-    align-items:center;
-
-    padding:0 13px;
-
-    margin-bottom:8px;
-}
-
-.menu-search input{
-
-    width:100%;
-
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    font-size:9px;
-}
-
-
-/* CATEGORY */
-
-.categories{
-
-    display:flex;
-
-    gap:5px;
-
-    margin-bottom:8px;
-
-    overflow-x:auto;
-
-    padding-bottom:2px;
-}
-
-.category{
-
-    height:25px;
-
-    padding:0 14px;
-
-    border:1px solid #d7cbb5;
-
-    border-radius:14px;
-
-    background:var(--paper);
-
-    font-size:8px;
-
-    white-space:nowrap;
-
-    color:var(--text);
-}
-
-.category.active{
-
-    background:var(--red);
-
-    border-color:var(--red);
-
-    color:white;
-}
-
-
-/* MENU GRID */
-
-.menu-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:3px;
-}
-
-
-.menu-card{
-
-    background:var(--paper);
-
-    border:1px solid #d7ccb8;
-
-    overflow:hidden;
-}
-
-
-/* MENU IMAGE */
-
-.menu-image{
-
-    height:clamp(100px,14vh,145px);
-
-    background:var(--placeholder);
-
-    position:relative;
-
-    overflow:hidden;
-
-    cursor:pointer;
-}
-
-.menu-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-}
-
-
-/* MENU INFO */
-
-.menu-info{
-
-    padding:10px 9px 11px;
-}
-
-.menu-name{
-
-    font-size:9px;
-
-    font-weight:600;
-
-    margin-bottom:4px;
-}
-
-.menu-price{
-
-    font-size:8px;
-}
-
-
-/* PAGINATION */
-
-.pagination{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:7px;
-
-    margin-top:20px;
-}
-
-.page{
-
-    width:17px;
-
-    height:17px;
-
-    border:0;
-
-    background:transparent;
-
-    font-size:7px;
-
-    border-radius:3px;
-
-    color:#777;
-}
-
-.page.active{
-
-    background:var(--red);
-
-    color:white;
-}
-
-
-/* =========================================================
-   RECOMMEND
-   ★ 화면 한 장
-========================================================= */
-
-.recommend-section{
-
-    min-height:calc(100vh - var(--header-h));
-
-    background:var(--yellow);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:50px 0;
-}
-
-
-.recommend-inner{
-
-    width:min(1200px, calc(100% - 80px));
-
-    margin:auto;
-
-    text-align:center;
-}
-
-
-.recommend-title{
-
-    font-size:clamp(24px,3vw,38px);
-
-    font-weight:800;
-
-    margin-bottom:10px;
-}
-
-.recommend-description{
-
-    font-size:9px;
-
-    color:#655b48;
-
-    margin-bottom:28px;
-}
-
-
-.recommend-buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:13px;
-
-    flex-wrap:wrap;
-}
-
-
-.recommend-button{
-
-    width:125px;
-
-    height:43px;
-
-    border:0;
-
-    border-radius:24px;
-
-    background:white;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    font-size:9px;
-
-    font-weight:700;
-
-    color:var(--text);
-}
-
-
-.recommend-icon{
-
-    width:23px;
-
-    height:23px;
-
-    object-fit:contain;
-}
-
-
-/* =========================================================
-   STORY
-   ★ 화면 한 장
-========================================================= */
-
-.story-section{
-
-    min-height:calc(100vh - var(--header-h));
-
-    display:flex;
-
-    align-items:center;
-
-    padding:60px 0;
-}
-
-
-.story-inner{
-
-    width:min(1200px, calc(100% - 80px));
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:1.08fr .92fr;
-
-    gap:70px;
-
-    align-items:center;
-}
-
-
-/* STORY IMAGE */
-
-.story-image{
-
-    width:100%;
-
-    height:min(430px,55vh);
-}
-
-
-/* STORY TEXT */
-
-.story-label{
-
-    color:var(--red);
-
-    font-size:9px;
-
-    font-weight:700;
-
-    margin-bottom:6px;
-}
-
-
-.story-title{
-
-    font-size:clamp(23px,2.4vw,36px);
-
-    line-height:1.4;
-
-    letter-spacing:-1px;
-
-    font-weight:800;
-
-    margin-bottom:12px;
-}
-
-
-.story-description{
-
-    font-size:9px;
-
-    line-height:1.8;
-
-    color:#5a554c;
-
-    margin-bottom:18px;
-}
-
-
-/* STORY ICONS */
-
-.story-points{
-
-    display:flex;
-
-    gap:19px;
-}
-
-
-.story-point{
-
-    text-align:center;
-}
-
-
-.story-icon{
-
-    width:48px;
-
-    height:48px;
-
-    border:1px solid #bbae97;
-
-    border-radius:50%;
-
-    display:grid;
-
-    place-items:center;
-}
-
-
-.story-icon img{
-
-    width:25px;
-
-    height:25px;
-
-    object-fit:contain;
-}
-
-
-.story-point span{
-
-    display:block;
-
-    margin-top:6px;
-
-    font-size:8px;
-
-    color:#756c5c;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-
-    background:var(--navy);
-
-    color:white;
-
-    padding:38px 0 23px;
-}
-
-
-.footer-inner{
-
-    width:min(1200px, calc(100% - 80px));
-
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-        1.25fr 1fr 1fr 1fr 1.45fr;
-
-    gap:35px;
-}
-
-
-.footer-title{
-
-    font-size:13px;
-
-    font-weight:800;
-
-    margin-bottom:7px;
-}
-
-
-.footer-description,
-.footer-text{
-
-    font-size:7px;
-
-    line-height:1.8;
-
-    color:#dce2e5;
-}
-
-
-.footer-heading{
-
-    font-size:9px;
-
-    font-weight:700;
-
-    margin-bottom:7px;
-}
-
-
-/* SOCIAL */
-
-.socials{
-
-    display:flex;
-
-    gap:5px;
-}
-
-
-.social{
-
-    width:20px;
-
-    height:20px;
-
-    border-radius:4px;
-
-    background:white;
-
-    overflow:hidden;
-}
-
-
-.social img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:contain;
-}
-
-
-/* NEWSLETTER */
-
-.newsletter{
-
-    width:100%;
-
-    height:25px;
-
-    display:flex;
-
-    border:1px solid rgba(255,255,255,.6);
-}
-
-
-.newsletter input{
-
-    flex:1;
-
-    min-width:0;
-
-    border:0;
-
-    outline:0;
-
-    background:transparent;
-
-    color:white;
-
-    padding:0 7px;
-
-    font-size:7px;
-}
-
-
-.newsletter input::placeholder{
-
-    color:#dce2e5;
-}
-
-
-.newsletter button{
-
-    width:48px;
-
-    border:0;
-
-    background:white;
-
-    color:var(--navy);
-
-    font-size:7px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-.cart-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.35);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.25s;
-
-    z-index:2000;
-}
-
-
-.cart-overlay.show{
-
-    opacity:1;
-
-    visibility:visible;
-}
-
-
-.cart-panel{
-
-    position:fixed;
-
-    top:0;
-
-    right:-430px;
-
-    width:400px;
-
-    max-width:90%;
-
-    height:100vh;
-
-    padding:28px;
-
-    background:var(--bg);
-
-    z-index:2001;
-
-    transition:.3s;
-
-    overflow-y:auto;
-}
-
-
-.cart-panel.show{
-
-    right:0;
-}
-
-
-.cart-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-}
-
-
-.cart-header h2{
-
-    font-size:23px;
-}
-
-
-.close-cart{
-
-    border:0;
-
-    background:transparent;
-
-    font-size:25px;
-}
-
-
-.cart-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:13px 0;
-
-    border-bottom:1px solid var(--line);
-}
-
-
-.cart-item-image{
-
-    width:60px;
-
-    height:60px;
-
-    background:var(--placeholder);
-
-    overflow:hidden;
-
-    border-radius:5px;
-
-    flex-shrink:0;
-}
-
-
-.cart-item-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-}
-
-
-.cart-item-info{
-
-    flex:1;
-}
-
-
-.cart-item-info strong{
-
-    display:block;
-
-    font-size:11px;
-
-    margin-bottom:5px;
-}
-
-
-.cart-item-info span{
-
-    font-size:9px;
-
-    color:#777;
-}
-
-
-.remove-item{
-
-    border:0;
-
-    background:transparent;
-
-    font-size:17px;
-
-    color:#888;
-}
-
-
-.cart-total{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding-top:20px;
-
-    margin-top:20px;
-
-    border-top:2px solid var(--navy);
-
-    font-size:12px;
-
-    font-weight:800;
-}
-
-
-.checkout-button{
-
-    width:100%;
-
-    height:45px;
-
-    margin-top:18px;
-
-    border:0;
-
-    border-radius:5px;
-
-    background:var(--navy);
-
-    color:white;
-
-    font-size:11px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.45);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    z-index:3000;
-
-    transition:.2s;
-}
-
-
-.modal-overlay.show{
-
-    opacity:1;
-
-    visibility:visible;
-}
-
-
-.modal{
-
-    width:700px;
-
-    max-width:100%;
-
-    padding:25px;
-
-    background:var(--bg);
-
-    border-radius:7px;
-
-    position:relative;
-}
-
-
-.modal-close{
-
-    position:absolute;
-
-    top:10px;
-
-    right:14px;
-
-    border:0;
-
-    background:transparent;
-
-    font-size:22px;
-}
-
-
-.modal-content{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:30px;
-
-    align-items:center;
-}
-
-
-.modal-image{
-
-    height:280px;
-}
-
-
-.modal-name{
-
-    font-size:25px;
-
-    font-weight:800;
-
-    margin-bottom:9px;
-}
-
-
-.modal-price{
-
-    color:var(--red);
-
-    font-size:19px;
-
-    font-weight:800;
-
-    margin-bottom:15px;
-}
-
-
-.modal-description{
-
-    font-size:9px;
-
-    line-height:1.8;
-
-    color:#5b554c;
-}
-
-
-.modal-add{
-
-    width:100%;
-
-    height:42px;
-
-    margin-top:22px;
-
-    border:0;
-
-    border-radius:5px;
-
-    background:var(--red);
-
-    color:white;
-
-    font-size:10px;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:30px;
-
-    transform:translate(-50%,20px);
-
-    background:var(--navy);
-
-    color:white;
-
-    padding:11px 20px;
-
-    border-radius:20px;
-
-    font-size:9px;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.25s;
-
-    z-index:5000;
-}
-
-
-.toast.show{
-
-    opacity:1;
-
-    transform:translate(-50%,0);
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media(max-width:900px){
-
-    .header-inner,
-    .container,
-    .hero-inner,
-    .recommend-inner,
-    .story-inner,
-    .footer-inner{
-
-        width:calc(100% - 40px);
-    }
-
-
-    .nav{
-
-        margin-left:30px;
-
-        gap:20px;
-    }
-
-
-    .header-search{
-
-        display:none;
-    }
-
-
-    .hero-inner{
-
-        grid-template-columns:1fr;
-
-        gap:30px;
-
-        padding:40px 0;
-    }
-
-
-    .hero{
-
-        min-height:auto;
-    }
-
-
-    .hero-image{
-
-        height:300px;
-    }
-
-
-    .menu-section{
-
-        min-height:auto;
-
-        padding:70px 0;
-    }
-
-
-    .menu-grid{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-
-    .story-section{
-
-        min-height:auto;
-
-        padding:80px 0;
-    }
-
-
-    .story-inner{
-
-        grid-template-columns:1fr;
-    }
-
-
-    .story-image{
-
-        height:300px;
-    }
-
-
-    .footer-inner{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px){
-
-    :root{
-
-        --header-h:64px;
-    }
-
-
-    .header-inner,
-    .container,
-    .hero-inner,
-    .recommend-inner,
-    .story-inner,
-    .footer-inner{
-
-        width:calc(100% - 28px);
-    }
-
-
-    .logo img{
-
-        width:100px;
-    }
-
-
-    .nav{
-
-        display:none;
-    }
-
-
-    .hero-inner{
-
-        grid-template-columns:1fr;
-
-        padding:30px 0;
-    }
-
-
-    .hero-title{
-
-        font-size:43px;
-
-        letter-spacing:-3px;
-    }
-
-
-    .hero-image{
-
-        height:220px;
-    }
-
-
-    .menu-grid{
-
-        grid-template-columns:repeat(2,1fr);
-    }
-
-
-    .recommend-buttons{
-
-        flex-wrap:wrap;
-    }
-
-
-    .story-inner{
-
-        grid-template-columns:1fr;
-    }
-
-
-    .footer-inner{
-
-        grid-template-columns:1fr 1fr;
-    }
-
-
-    .modal-content{
-
-        grid-template-columns:1fr;
-    }
-
-}
-
-</style>
-</head>
-
-
-<body>
-
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-
-        <!-- 로고 -->
-
-        <a href="#home" class="logo">
-
-            <img
-                src="images/logo.png"
-                alt="김밥천국"
-            >
-
-        </a>
-
-
-        <!-- 메뉴 -->
-
-        <nav class="nav">
-
-            <a href="#home" class="active">
-                홈
-            </a>
-
-            <a href="#menu">
-                메뉴
-            </a>
-
-            <a href="#recommend">
-                추천
-            </a>
-
-            <a href="#story">
-                매장안내
-            </a>
-
-            <a href="#event">
-                이벤트
-            </a>
-
-            <a href="#story">
-                브랜드스토리
-            </a>
-
-        </nav>
-
-
-        <!-- 오른쪽 -->
-
-        <div class="header-right">
-
-
-            <div class="header-search">
-
-                <input
-                    type="text"
-                    id="headerSearch"
-                    placeholder="메뉴를 검색해보세요!"
-                >
-
-                <img
-                    class="icon"
-                    src="images/icons/search.png"
-                    alt="검색"
-                >
-
-            </div>
-
-
-            <button
-                class="cart-button"
-                onclick="openCart()"
-            >
-
-                <img
-                    src="images/icons/cart.png"
-                    alt="장바구니"
-                >
-
-                <span
-                    class="cart-count"
-                    id="cartCount"
-                >
-                    0
-                </span>
-
-            </button>
-
-
-            <button
-                class="order-button"
-                onclick="openCart()"
-            >
-                주문하기
-            </button>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<!-- =========================================================
-     HERO
-     ★ 컴퓨터 화면 한 장
-========================================================= -->
-
-<section
-    class="hero"
-    id="home"
->
-
-
-    <div class="hero-inner">
-
-
-        <div class="hero-text">
-
-
-            <p class="hero-small">
-                익숙해서 더 맛있는 한 끼
-            </p>
-
-
-            <h1 class="hero-title">
-
-                오늘
-                <span class="red">
-                    뭐 먹지?
-                </span>
-
-            </h1>
-
-
-            <p class="hero-description">
-
-                김밥천국의 다양한 메뉴를 쉽고 빠르게!<br>
-                원하는 메뉴를 찾아보세요.
-
-            </p>
-
-
-            <div class="hero-buttons">
-
-
-                <button
-                    class="hero-button primary"
-                    onclick="goToMenu()"
-                >
-                    메뉴 보러가기 →
-                </button>
-
-
-                <button
-                    class="hero-button"
-                    onclick="randomMenu()"
-                >
-                    ✧ 오늘 뭐 먹지?
-                </button>
-
-
-            </div>
-
-
-        </div>
-
-
-        <!--
-            ★ 메인 이미지
-
-            images/hero.jpg
-        -->
-
-        <div class="image-box hero-image">
-
-
-            <img
-                src="images/hero.jpg"
-                alt="김밥천국 대표 이미지"
-                onerror="this.style.display='none'"
-            >
-
-
-            <div class="image-placeholder">
-                IMG
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-    <div class="checker"></div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     MENU
-     ★ 컴퓨터 화면 한 장
-========================================================= -->
-
-<section
-    class="menu-section"
-    id="menu"
->
-
-
-    <div class="container">
-
-
-        <h2 class="menu-title">
-            메뉴
-        </h2>
-
-
-        <p class="menu-subtitle">
-            다양한 메뉴를 카테고리별로 확인해보세요.
-        </p>
-
-
-        <!-- 검색 -->
-
-        <div class="menu-search">
-
-
-            <input
-                id="menuSearch"
-                type="text"
-                placeholder="메뉴를 검색해보세요"
-                oninput="renderMenu()"
-            >
-
-
-            <img
-                class="icon"
-                src="images/icons/search.png"
-                alt="검색"
-            >
-
-
-        </div>
-
-
-        <!-- 카테고리 -->
-
-        <div class="categories">
-
-
-            <button
-                class="category active"
-                onclick="setCategory('전체',this)"
-            >
-                전체
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('김밥',this)"
-            >
-                김밥
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('덮밥',this)"
-            >
-                덮밥
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('찌개',this)"
-            >
-                찌개
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('죽',this)"
-            >
-                죽
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('라면',this)"
-            >
-                라면
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('분식',this)"
-            >
-                분식
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('돈까스',this)"
-            >
-                돈까스
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('사이드',this)"
-            >
-                사이드
-            </button>
-
-
-            <button
-                class="category"
-                onclick="setCategory('음료',this)"
-            >
-                음료
-            </button>
-
-
-        </div>
-
-
-        <!-- 메뉴 카드 -->
-
-        <div
-            class="menu-grid"
-            id="menuGrid"
-        ></div>
-
-
-        <!-- 페이지 -->
-
-        <div class="pagination">
-
-
-            <button class="page">
-                ‹
-            </button>
-
-
-            <button class="page active">
-                1
-            </button>
-
-
-            <button class="page">
-                2
-            </button>
-
-
-            <button class="page">
-                3
-            </button>
-
-
-            <button class="page">
-                ›
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     RECOMMEND
-     ★ 컴퓨터 화면 한 장
-========================================================= -->
-
-<section
-    class="recommend-section"
-    id="recommend"
->
-
-
-    <div class="recommend-inner">
-
-
-        <h2 class="recommend-title">
-            오늘은 어떤 메뉴가 먹고 싶나요?
-        </h2>
-
-
-        <p class="recommend-description">
-            원하시는 기분을 선택하면 메뉴를 추천해드릴게요!
-        </p>
-
-
-        <div class="recommend-buttons">
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('든든하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-full.png"
-                    alt=""
-                >
-
-                든든하게
-
-            </button>
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('매콤하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-spicy.png"
-                    alt=""
-                >
-
-                매콤하게
-
-            </button>
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('간단하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-light.png"
-                    alt=""
-                >
-
-                간단하게
-
-            </button>
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('저렴하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-cheap.png"
-                    alt=""
-                >
-
-                저렴하게
-
-            </button>
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     BRAND STORY
-     ★ 컴퓨터 화면 한 장
-========================================================= -->
-
-<section
-    class="story-section"
-    id="story"
->
-
-
-    <div class="story-inner">
-
-
-        <!-- 이미지 -->
-
-        <div class="image-box story-image">
-
-
-            <img
-                src="images/brand.jpg"
-                alt="김밥천국 브랜드 이미지"
-                onerror="this.style.display='none'"
-            >
-
-
-            <div class="image-placeholder">
-                김밥2.jpg
-            </div>
-
-
-        </div>
-
-
-        <!-- 내용 -->
-
-        <div>
-
-
-            <p class="story-label">
-                김밥천국 이야기
-            </p>
-
-
-            <h2 class="story-title">
-
-                언제나 그 자리에,<br>
-                모두를 위한 맛있는 천국
-
-            </h2>
-
-
-            <p class="story-description">
-
-                바쁜 하루 속 허기진 마음까지 채워주는 곳.<br>
-                정성껏 맛을 담은 김밥 한 줄로 언제나 당신의 곁을 지킵니다.
-
-            </p>
-
-
-            <div class="story-points">
-
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-01.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        정직한 재료
-                    </span>
-
-                </div>
-
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-02.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        푸짐한 한 끼
-                    </span>
-
-                </div>
-
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-03.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        변함없는 맛
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer
-    class="footer"
-    id="event"
->
-
-
-    <div class="footer-inner">
-
-
-        <div>
-
-            <h3 class="footer-title">
-                김밥천국
-            </h3>
-
-            <p class="footer-description">
-
-                1994년부터 변하지 않는 맛으로<br>
-                사랑받고 있는 김밥천국입니다.
-
-            </p>
-
-        </div>
-
-
-        <div>
-
-            <h4 class="footer-heading">
-                고객센터
-            </h4>
-
-            <p class="footer-text">
-
-                02-888-8222<br>
-                평일 09:00-18:00<br>
-                (주말/공휴일 휴무)
-
-            </p>
-
-        </div>
-
-
-        <div>
-
-            <h4 class="footer-heading">
-                바로가기
-            </h4>
-
-            <p class="footer-text">
-
-                이용약관<br>
-                개인정보처리방침<br>
-                FAQ
-
-            </p>
-
-        </div>
-
-
-        <div>
-
-            <h4 class="footer-heading">
-                공식채널
-            </h4>
-
-
-            <div class="socials">
-
-
-                <div class="social">
-
-                    <img
-                        src="images/icons/instagram.png"
-                        alt="인스타그램"
-                    >
-
-                </div>
-
-
-                <div class="social">
-
-                    <img
-                        src="images/icons/facebook.png"
-                        alt="페이스북"
-                    >
-
-                </div>
-
-
-                <div class="social">
-
-                    <img
-                        src="images/icons/youtube.png"
-                        alt="유튜브"
-                    >
-
-                </div>
-
-
-            </div>
-
-
-        </div>
-
-
-        <div>
-
-            <h4 class="footer-heading">
-                이벤트
-            </h4>
-
-
-            <p class="footer-text">
-                다양한 소식을 받아보세요.
-            </p>
-
-
-            <div class="newsletter">
-
-
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="이메일을 입력해주세요"
-                >
-
-
-                <button onclick="subscribe()">
-                    구독하기
-                </button>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-</footer>
-
-
-
-<!-- =========================================================
-     CART
-========================================================= -->
-
-<div
-    class="cart-overlay"
-    id="cartOverlay"
-    onclick="closeCart()"
-></div>
-
-
-<aside
-    class="cart-panel"
-    id="cartPanel"
->
-
-
-    <div class="cart-header">
-
-        <h2>
-            장바구니
-        </h2>
-
-
-        <button
-            class="close-cart"
-            onclick="closeCart()"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div id="cartItems"></div>
-
-
-    <div class="cart-total">
-
-        <span>
-            총 주문금액
-        </span>
-
-        <span id="cartTotal">
-            0원
-        </span>
-
-    </div>
-
-
-    <button
-        class="checkout-button"
-        onclick="checkout()"
-    >
-        주문하기
-    </button>
-
-
-</aside>
-
-
-
-<!-- =========================================================
-     MENU MODAL
-========================================================= -->
-
-<div
-    class="modal-overlay"
-    id="modalOverlay"
-    onclick="closeModalOutside(event)"
->
-
-
-    <div class="modal">
-
-
-        <button
-            class="modal-close"
-            onclick="closeModal()"
-        >
-            ×
-        </button>
-
-
-        <div class="modal-content">
-
-
-            <div class="image-box modal-image">
-
-                <img
-                    id="modalImage"
-                    src=""
-                    alt=""
-                >
-
-            </div>
-
-
-            <div>
-
-
-                <h2
-                    class="modal-name"
-                    id="modalName"
-                ></h2>
-
-
-                <div
-                    class="modal-price"
-                    id="modalPrice"
-                ></div>
-
-
-                <p
-                    class="modal-description"
-                    id="modalDescription"
-                ></p>
-
-
-                <button
-                    class="modal-add"
-                    onclick="addCurrentMenu()"
-                >
-                    장바구니 담기
-                </button>
-
-
-            </div>
-
-
-        </div>
-
-
-    </div>
-
-
-</div>
-
-
-
-<!-- TOAST -->
-
-<div
-    class="toast"
-    id="toast"
-></div>
-
-
-
-<script>
-
-/* =========================================================
-   MENU DATA
-========================================================= */
-
-const menus = [
-
-    {
-        id:1,
-        name:"야채김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu01.jpg",
-        moods:["간단하게","저렴하게"],
-        description:"신선한 야채를 가득 넣은 담백한 김밥입니다."
-    },
-
-    {
-        id:2,
-        name:"치즈김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu02.jpg",
-        moods:["간단하게"],
-        description:"고소한 치즈와 다양한 재료가 어우러진 김밥입니다."
-    },
-
-    {
-        id:3,
-        name:"참치김밥",
-        category:"김밥",
-        price:4500,
-        image:"images/menu03.jpg",
-        moods:["든든하게","간단하게"],
-        description:"고소한 참치와 신선한 야채를 함께 즐길 수 있습니다."
-    },
-
-    {
-        id:4,
-        name:"새우김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu04.jpg",
-        moods:["든든하게"],
-        description:"탱글한 새우와 다양한 재료를 담은 김밥입니다."
-    },
-
-    {
-        id:5,
-        name:"참치볶음밥",
-        category:"덮밥",
-        price:6000,
-        image:"images/menu05.jpg",
-        moods:["든든하게"],
-        description:"고소한 참치와 볶음밥의 조화가 좋은 메뉴입니다."
-    },
-
-    {
-        id:6,
-        name:"떡볶이",
-        category:"분식",
-        price:4500,
-        image:"images/menu06.jpg",
-        moods:["매콤하게"],
-        description:"매콤달콤한 양념으로 즐기는 대표 분식 메뉴입니다."
-    },
-
-    {
-        id:7,
-        name:"돈까스",
-        category:"돈까스",
-        price:7000,
-        image:"images/menu07.jpg",
-        moods:["든든하게"],
-        description:"바삭한 튀김옷과 담백한 고기의 조화가 좋은 메뉴입니다."
-    },
-
-    {
-        id:8,
-        name:"제육덮밥",
-        category:"덮밥",
-        price:6500,
-        image:"images/menu08.jpg",
-        moods:["매콤하게","든든하게"],
-        description:"매콤한 제육과 따뜻한 밥을 함께 즐기는 메뉴입니다."
-    }
-
-];
-
-
-let currentCategory = "전체";
-
-let currentMenu = null;
-
-let cart = [];
-
-
-/* =========================================================
-   MENU RENDER
-========================================================= */
-
-function renderMenu(){
-
-    const grid =
-        document.getElementById("menuGrid");
-
-
-    const keyword =
-        document
-        .getElementById("menuSearch")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const filtered =
-        menus.filter(menu => {
-
-            const categoryMatch =
-                currentCategory === "전체" ||
-                menu.category === currentCategory;
-
-
-            const searchMatch =
-                menu.name
-                .toLowerCase()
-                .includes(keyword);
-
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-    grid.innerHTML = "";
-
-
-    filtered.forEach(menu => {
-
-
-        const card =
-            document.createElement("article");
-
-
-        card.className = "menu-card";
-
-
-        card.innerHTML = `
-
-            <div
-                class="menu-image"
-                onclick="openModal(${menu.id})"
-            >
-
-                <img
-                    src="${menu.image}"
-                    alt="${menu.name}"
-                    onerror="this.style.display='none'"
-                >
-
-                <div class="image-placeholder">
-                    IMG
-                </div>
-
-            </div>
-
-
-            <div class="menu-info">
-
-                <div class="menu-name">
-                    ${menu.name}
-                </div>
-
-
-                <div class="menu-price">
-                    ${menu.price.toLocaleString()}원
-                </div>
-
-            </div>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================================
-   CATEGORY
-========================================================= */
-
-function setCategory(category,button){
-
-    currentCategory = category;
-
-
-    document
-    .querySelectorAll(".category")
-    .forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    button.classList.add("active");
-
-
-    renderMenu();
-
-}
-
-
-/* =========================================================
-   HEADER SEARCH
-========================================================= */
-
-document
-.getElementById("headerSearch")
-.addEventListener("input",function(){
-
-    document
-    .getElementById("menuSearch")
-    .value = this.value;
-
-
-    currentCategory = "전체";
-
-
-    document
-    .querySelectorAll(".category")
-    .forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    document
-    .querySelector(".category")
-    .classList.add("active");
-
-
-    renderMenu();
-
-});
-
-
-/* =========================================================
-   MENU MOVE
-========================================================= */
-
-function goToMenu(){
-
-    document
-    .getElementById("menu")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   RANDOM MENU
-========================================================= */
-
-function randomMenu(){
-
-    const random =
-        menus[
-            Math.floor(
-                Math.random() * menus.length
-            )
-        ];
-
-
-    openModal(random.id);
-
-}
-
-
-/* =========================================================
-   RECOMMEND
-========================================================= */
-
-function recommendMood(mood){
-
-    const list =
-        menus.filter(menu =>
-            menu.moods.includes(mood)
-        );
-
-
-    if(!list.length){
-
-        showToast(
-            "추천 메뉴가 없습니다."
-        );
-
-        return;
-    }
-
-
-    const random =
-        list[
-            Math.floor(
-                Math.random() * list.length
-            )
-        ];
-
-
-    openModal(random.id);
-
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function openModal(id){
-
-    currentMenu =
-        menus.find(
-            menu => menu.id === id
-        );
-
-
-    if(!currentMenu) return;
-
-
-    document
-    .getElementById("modalImage")
-    .src = currentMenu.image;
-
-
-    document
-    .getElementById("modalName")
-    .textContent =
-        currentMenu.name;
-
-
-    document
-    .getElementById("modalPrice")
-    .textContent =
-        currentMenu.price.toLocaleString()
-        + "원";
-
-
-    document
-    .getElementById("modalDescription")
-    .textContent =
-        currentMenu.description;
-
-
-    document
-    .getElementById("modalOverlay")
-    .classList.add("show");
-
-}
-
-
-function closeModal(){
-
-    document
-    .getElementById("modalOverlay")
-    .classList.remove("show");
-
-}
-
-
-function closeModalOutside(event){
-
-    if(
-        event.target ===
-        event.currentTarget
-    ){
-
-        closeModal();
-
-    }
-
-}
-
-
-/* =========================================================
-   CART
-========================================================= */
-
-function addCurrentMenu(){
-
-    if(!currentMenu) return;
-
-
-    const item =
-        cart.find(
-            item =>
-            item.id === currentMenu.id
-        );
-
-
-    if(item){
-
-        item.quantity++;
-
-    }else{
-
-        cart.push({
-
-            ...currentMenu,
-
-            quantity:1
-
-        });
-
-    }
-
-
-    updateCart();
-
-
-    closeModal();
-
-
-    showToast(
-        currentMenu.name +
-        "이 장바구니에 담겼어요."
-    );
-
-}
-
-
-/* =========================================================
-   UPDATE CART
-========================================================= */
-
-function updateCart(){
-
-    const count =
-        cart.reduce(
-            (sum,item) =>
-            sum + item.quantity,
-            0
-        );
-
-
-    document
-    .getElementById("cartCount")
-    .textContent = count;
-
-
-    const box =
-        document.getElementById("cartItems");
-
-
-    if(!cart.length){
-
-        box.innerHTML = `
-
-            <p
-                style="
-                    text-align:center;
-                    padding:50px 0;
-                    color:#777;
-                    font-size:10px;
-                "
-            >
-                장바구니가 비어있어요.
-            </p>
-
-        `;
-
-    }else{
-
-        box.innerHTML = "";
-
-
-        cart.forEach(item => {
-
-
-            const element =
-                document.createElement("div");
-
-
-            element.className =
-                "cart-item";
-
-
-            element.innerHTML = `
-
-                <div class="cart-item-image">
-
-                    <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                    >
-
-                </div>
-
-
-                <div class="cart-item-info">
-
-                    <strong>
-                        ${item.name}
-                    </strong>
-
-
-                    <span>
-                        ${item.price.toLocaleString()}원
-                        ×
-                        ${item.quantity}
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${item.id})"
-                >
-                    ×
-                </button>
-
-            `;
-
-
-            box.appendChild(element);
-
-        });
-
-    }
-
-
-    const total =
-        cart.reduce(
-            (sum,item) =>
-            sum +
-            item.price *
-            item.quantity,
-            0
-        );
-
-
-    document
-    .getElementById("cartTotal")
-    .textContent =
-        total.toLocaleString() +
-        "원";
-
-}
-
-
-/* =========================================================
-   REMOVE CART
-========================================================= */
-
-function removeFromCart(id){
-
-    cart =
-        cart.filter(
-            item =>
-            item.id !== id
-        );
-
-
-    updateCart();
-
-}
-
-
-/* =========================================================
-   OPEN CART
-========================================================= */
-
-function openCart(){
-
-    document
-    .getElementById("cartPanel")
-    .classList.add("show");
-
-
-    document
-    .getElementById("cartOverlay")
-    .classList.add("show");
-
-}
-
-
-/* =========================================================
-   CLOSE CART
-========================================================= */
-
-function closeCart(){
-
-    document
-    .getElementById("cartPanel")
-    .classList.remove("show");
-
-
-    document
-    .getElementById("cartOverlay")
-    .classList.remove("show");
-
-}
-
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
-
-function checkout(){
-
-    if(!cart.length){
-
-        showToast(
-            "장바구니가 비어있어요."
-        );
-
-        return;
-    }
-
-
-    showToast(
-        "주문 페이지로 이동합니다."
-    );
-
-}
-
-
-/* =========================================================
-   NEWSLETTER
-========================================================= */
-
-function subscribe(){
-
-    const input =
-        document
-        .getElementById("email");
-
-
-    if(!input.value.trim()){
-
-        showToast(
-            "이메일을 입력해주세요."
-        );
-
-        return;
-    }
-
-
-    showToast(
-        "이벤트 소식 신청이 완료되었습니다."
-    );
-
-
-    input.value = "";
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(message){
-
-    const toast =
-        document
-        .getElementById("toast");
-
-
-    toast.textContent = message;
-
-
-    toast.classList.add("show");
-
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-    },2000);
-
-}
-
-
-/* =========================================================
-   ESC KEY
-========================================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(event.key === "Escape"){
-
-            closeModal();
-
-            closeCart();
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김밥천국 - 오늘 뭐 먹지?</title>
+    <!-- Font Awesome CDN (검색 및 카트 아이콘용) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== 기본 CSS 리셋 및 설정 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-    }
-);
+        body {
+            background-color: #FAF4EB; /* 전체 베이지 바탕색 */
+            color: #333333;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-/* =========================================================
-   INITIAL
-========================================================= */
+        /* ===== 섹션 공통 스타일 ===== */
+        .section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 80px 20px;
+        }
 
-renderMenu();
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-updateCart();
+        /* ===== 회색 이미지 박스 플레이스홀더 ===== */
+        .img-placeholder {
+            background-color: #DCDCDC;
+            color: #666666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            object-fit: cover;
+        }
 
-</script>
+        /* ===== 헤더 / 네비게이션 ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #FAF4EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 80px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo-placeholder {
+            background-color: #D2D2D2;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        nav ul li a:hover {
+            color: #E65100;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-bar-mini {
+            display: flex;
+            align-items: center;
+            background: #FFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+        }
+
+        .search-bar-mini input {
+            border: none;
+            outline: none;
+            background: transparent;
+            width: 120px;
+            padding-right: 5px;
+        }
+
+        .cart-btn {
+            position: relative;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -8px;
+            background-color: #E65100;
+            color: white;
+            font-size: 0.7rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-order-top {
+            background-color: #E65100;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ===== SECTION 1: 메인 히어로 섹션 ===== */
+        #section1 {
+            padding-top: 100px;
+        }
+
+        .hero-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .sub-tag {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .hero-title span {
+            color: #E65100;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: #E65100;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #333;
+            border: 1px solid #DDD;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .hero-img {
+            flex: 1;
+            height: 400px;
+            width: 100%;
+        }
+
+        /* 체커보드 패턴 띠 */
+        .checker-line {
+            width: 100%;
+            height: 16px;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #E65100 0,
+                #E65100 10px,
+                #FAF4EB 10px,
+                #FAF4EB 20px
+            );
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* ===== SECTION 2: 메뉴 리스트 섹션 ===== */
+        #section2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-header {
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .search-box-large {
+            position: relative;
+            max-width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .search-box-large input {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 30px;
+            border: 1px solid #E0E0E0;
+            outline: none;
+            font-size: 0.95rem;
+            background-color: #FFF;
+        }
+
+        .search-box-large i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #E0E0E0;
+            background-color: white;
+            font-size: 0.85rem;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: #E65100;
+            color: white;
+            border-color: #E65100;
+        }
+
+        /* 4개씩 2줄 카드 그리드 레이아웃 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .menu-card {
+            background-color: #FFF;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            border: 1px solid #EFEFEF;
+        }
+
+        .menu-card .img-placeholder {
+            width: 100%;
+            height: 160px;
+            border-radius: 0;
+        }
+
+        .menu-info {
+            padding: 15px;
+        }
+
+        .menu-info h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .menu-info .price {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* 페이지네이션 (Pagination) */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #CCC;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            width: 20px;
+            border-radius: 10px;
+            background-color: #E65100;
+        }
+
+        .page-arrow {
+            font-size: 0.8rem;
+            color: #888;
+            cursor: pointer;
+        }
+
+        /* ===== SECTION 3: 노란색 배너 섹션 ===== */
+        #section3 {
+            background-color: #F8B133; /* 시안 고유 노란색 */
+            text-align: center;
+        }
+
+        .banner-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .banner-subtitle {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        .icon-category-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .icon-category-item {
+            background-color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .icon-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #EFEFEF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* ===== SECTION 4: 브랜드 소개 섹션 ===== */
+        #section4 {
+            background-color: #FAF4EB;
+        }
+
+        .about-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .about-img {
+            flex: 1.2;
+            height: 380px;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-tag {
+            color: #E65100;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .about-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .about-desc {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .features-group {
+            display: flex;
+            gap: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .feature-icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #EAE3D9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #666;
+        }
+
+        .feature-item span {
+            font-size: 0.85rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* ===== 푸터 (FOOTER) ===== */
+        footer {
+            background-color: #1E2733; /* 시안 푸터 네이비/다크그레이 색상 */
+            color: #A0AAB5;
+            padding: 50px 80px;
+            font-size: 0.85rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1fr 1.5fr;
+            gap: 30px;
+        }
+
+        .footer-col h5 {
+            color: #FFF;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .footer-col p, .footer-col ul li {
+            line-height: 1.8;
+            margin-bottom: 5px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .social-box {
+            width: 24px;
+            height: 24px;
+            background-color: #FFF;
+            border-radius: 3px;
+        }
+
+        .newsletter-input {
+            display: flex;
+            background: #2C3848;
+            border-radius: 4px;
+            padding: 3px;
+            margin-top: 10px;
+        }
+
+        .newsletter-input input {
+            border: none;
+            background: transparent;
+            padding: 6px 10px;
+            color: white;
+            font-size: 0.8rem;
+            width: 100%;
+            outline: none;
+        }
+
+        .newsletter-input button {
+            background-color: #E65100;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 네비게이션 헤더 ===== -->
+    <header>
+        <div class="logo-placeholder">로고.png</div>
+        <nav>
+            <ul>
+                <li><a href="#section1">홈</a></li>
+                <li><a href="#section2">메뉴</a></li>
+                <li><a href="#">추천</a></li>
+                <li><a href="#">매장안내</a></li>
+                <li><a href="#">이벤트</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="search-bar-mini">
+                <input type="text" placeholder="메뉴를 검색해보세요">
+                <i class="fa-solid fa-magnifying-glass" style="color: #888;"></i>
+            </div>
+            <button class="cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge">0</span>
+            </button>
+            <button class="btn-order-top">주문하기</button>
+        </div>
+    </header>
+
+    <!-- ===== SECTION 1: 메인 히어로 섹션 ===== -->
+    <section id="section1" class="section">
+        <div class="container hero-wrapper">
+            <div class="hero-text">
+                <div class="sub-tag">익숙해서 더 맛있는 한 끼</div>
+                <h1 class="hero-title">오늘 뭐 먹지?</h1>
+                <p class="hero-desc">김밥천국의 다양한 메뉴를 쉽고 빠르게!<br>원하는 메뉴를 찾아보세요.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary">메뉴 보러가기 <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn-secondary"><i class="fa-regular fa-lightbulb"></i> 오늘 뭐 먹지?</button>
+                </div>
+            </div>
+            <!-- 메인 이미지 영역 (IMG) -->
+            <div class="hero-img img-placeholder">
+                IMG
+            </div>
+        </div>
+        <!-- 하단 빨간 체커 패턴 띠 -->
+        <div class="checker-line"></div>
+    </section>
+
+    <!-- ===== SECTION 2: 메뉴 검색 및 리스트 ===== -->
+    <section id="section2" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>메뉴</h2>
+                <p>다양한 메뉴를 카테고리별로 확인해보세요.</p>
+            </div>
+
+            <!-- 대형 검색창 -->
+            <div class="search-box-large">
+                <input type="text" placeholder="메뉴를 검색해보세요">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <!-- 카테고리 탭 -->
+            <div class="category-tabs">
+                <button class="tab active">전체</button>
+                <button class="tab">김밥</button>
+                <button class="tab">덮밥</button>
+                <button class="tab">찌개</button>
+                <button class="tab">죽</button>
+                <button class="tab">라면</button>
+                <button class="tab">분식</button>
+                <button class="tab">돈까스</button>
+                <button class="tab">사이드</button>
+                <button class="tab">음료</button>
+            </div>
+
+            <!-- 메뉴 카드 그리드 (4열 2행 = 8개) -->
+            <div class="card-grid">
+                <!-- 1행 -->
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>야채김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>치즈김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>참치김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>새우김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <!-- 2행 -->
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>야채김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>치즈김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>참치김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="img-placeholder"></div>
+                    <div class="menu-info">
+                        <h4>새우김밥</h4>
+                        <div class="price">3500원</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                <span class="page-arrow">&lt;</span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="page-arrow">&gt;</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: 오늘 어떤 메뉴가 먹고 싶나요? ===== -->
+    <section id="section3" class="section">
+        <div class="container">
+            <h2 class="banner-title">오늘은 어떤 메뉴가 먹고 싶나요?</h2>
+            <p class="banner-subtitle">원하시는 기분을 선택하시면 메뉴를 추천해드려요!</p>
+            
+            <div class="icon-category-group">
+                <div class="icon-category-item">
+                    <div class="icon-circle"><i class="fa-solid fa-bowl-rice"></i></div>
+                    <span>든든하게</span>
+                </div>
+                <div class="icon-category-item">
+                    <div class="icon-circle"><i class="fa-solid fa-fire"></i></div>
+                    <span>매콤하게</span>
+                </div>
+                <div class="icon-category-item">
+                    <div class="icon-circle"><i class="fa-solid fa-box"></i></div>
+                    <span>간단하게</span>
+                </div>
+                <div class="icon-category-item">
+                    <div class="icon-circle"><i class="fa-solid fa-face-smile"></i></div>
+                    <span>특별하게</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: 브랜드 스토리 섹션 ===== -->
+    <section id="section4" class="section">
+        <div class="container about-wrapper">
+            <!-- 김밥2.jpg 이미지 영역 -->
+            <div class="about-img img-placeholder">
+                김밥2.jpg
+            </div>
+            
+            <div class="about-content">
+                <div class="about-tag">김밥천국의 이야기</div>
+                <h2 class="about-title">언제나 그 자리에,<br>모두를 위한 맛있는 천국</h2>
+                <p class="desc">
+                    바쁜 일상 속 정성어린 마음으로 찾아오는 곳,<br>
+                    정성껏 말아낸 김밥 한 줄로 전하는 당신의 삶을 응원합니다.
+                </p>
+
+                <!-- 3가지 아이콘 특징 -->
+                <div class="features-group">
+                    <div class="feature-item">
+                        <div class="feature-icon-circle"><i class="fa-solid fa-leaf"></i></div>
+                        <span>신선한 재료</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-circle"><i class="fa-solid fa-utensils"></i></div>
+                        <span>푸짐한 한 끼</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon-circle"><i class="fa-solid fa-thumbs-up"></i></div>
+                        <span>변함없는 맛</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 푸터 (FOOTER) ===== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h5>김밥천국</h5>
+                <p>정성을 담아 든든한 한 끼를 전하는<br>가장 친근한 우리들의 공간입니다.</p>
+            </div>
+            <div class="footer-col">
+                <h5>고객센터</h5>
+                <p>02-000-0000<br>평일 09:00 - 18:00<br>(주말/공휴일 휴무)</p>
+            </div>
+            <div class="footer-col">
+                <h5>바로가기</h5>
+                <ul>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>공식채널</h5>
+                <div class="social-icons">
+                    <div class="social-box"></div>
+                    <div class="social-box"></div>
+                    <div class="social-box"></div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h5>이벤트</h5>
+                <p>소식을 받아보세요</p>
+                <div class="newsletter-input">
+                    <input type="text" placeholder="이메일 입력">
+                    <button>구독</button>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
