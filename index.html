@@ -13,7 +13,7 @@
 <style>
 
 /* =========================================================
-   기본 설정
+   00. BASIC
 ========================================================= */
 
 :root{
@@ -28,11 +28,6 @@
     --gray:#D9D9D9;
 
     --header-height:78px;
-
-    /*
-       피그마 시안에서 실제 콘텐츠가 차지하는 폭.
-       1440px 모니터 기준 양쪽 여백을 충분히 둠.
-    */
     --content-width:1240px;
 }
 
@@ -68,8 +63,8 @@ img{
 }
 
 a{
-    text-decoration:none;
     color:inherit;
+    text-decoration:none;
 }
 
 .container{
@@ -79,19 +74,19 @@ a{
 
 
 /* =========================================================
-   HEADER
+   01. HEADER
 ========================================================= */
 
 .header{
+    width:100%;
     height:var(--header-height);
-
-    background:var(--bg);
-
-    border-bottom:1px solid rgba(80,70,50,.12);
 
     position:sticky;
     top:0;
     z-index:1000;
+
+    background:var(--bg);
+    border-bottom:1px solid rgba(80,70,50,.12);
 }
 
 .header-inner{
@@ -115,22 +110,23 @@ a{
 .logo img{
     width:120px;
     height:45px;
+
     object-fit:contain;
     object-position:left center;
 }
 
 
-/* NAVIGATION */
+/* NAV */
 
 .nav{
+    height:100%;
+
     display:flex;
     align-items:center;
 
     gap:52px;
 
     margin-left:120px;
-
-    height:100%;
 }
 
 .nav a{
@@ -175,19 +171,22 @@ a{
     gap:12px;
 }
 
+
+/* HEADER SEARCH */
+
 .header-search{
     width:200px;
     height:34px;
+
+    padding:0 13px;
+
+    display:flex;
+    align-items:center;
 
     border:1px solid var(--line);
     border-radius:18px;
 
     background:var(--paper);
-
-    display:flex;
-    align-items:center;
-
-    padding:0 13px;
 }
 
 .header-search input{
@@ -208,6 +207,9 @@ a{
 .search-icon{
     width:16px;
     height:16px;
+
+    flex-shrink:0;
+
     object-fit:contain;
 }
 
@@ -218,28 +220,30 @@ a{
     width:32px;
     height:32px;
 
-    border:0;
-    background:transparent;
+    padding:4px;
 
     position:relative;
 
-    padding:4px;
+    border:0;
+
+    background:transparent;
 }
 
 .cart-button img{
     width:100%;
     height:100%;
+
     object-fit:contain;
 }
 
 .cart-count{
+    width:16px;
+    height:16px;
+
     position:absolute;
 
     top:-3px;
     right:-2px;
-
-    width:16px;
-    height:16px;
 
     display:flex;
     align-items:center;
@@ -255,7 +259,7 @@ a{
 }
 
 
-/* ORDER BUTTON */
+/* ORDER */
 
 .order-button{
     height:34px;
@@ -266,7 +270,6 @@ a{
     border-radius:18px;
 
     background:var(--red);
-
     color:white;
 
     font-size:11px;
@@ -275,30 +278,26 @@ a{
 
 
 /* =========================================================
-   01 HERO
+   02. HERO
 ========================================================= */
 
 .hero{
-    /* 헤더를 제외한 화면 한 장 */
-    height:calc(100vh - var(--header-height));
+    height:calc(100dvh - var(--header-height));
+
+    position:relative;
 
     display:flex;
     flex-direction:column;
 
-    position:relative;
-
     overflow:hidden;
 }
-
-
-/* 메인 내용 */
 
 .hero-content{
     width:min(var(--content-width), calc(100% - 96px));
 
-    margin:0 auto;
-
     flex:1;
+
+    margin:0 auto;
 
     display:grid;
 
@@ -311,39 +310,30 @@ a{
     gap:95px;
 
     /*
-       체크무늬가 올라온 만큼
-       콘텐츠도 전체적으로 자연스럽게 중앙 유지
+       체크무늬가 하단보다 조금 위에 위치하도록
+       아래쪽 공간 확보
     */
     padding:35px 0 90px;
 }
 
 
-/* =========================================================
-   HERO TEXT
-========================================================= */
+/* HERO TEXT */
 
 .hero-copy{
     padding-left:0;
 }
 
-
-/* 익숙해서 더 맛있는 한 끼 */
-
 .hero-small{
+    margin-bottom:20px;
+
     font-size:18px;
     font-weight:500;
 
-    margin-bottom:20px;
-
-    letter-spacing:-0.4px;
+    letter-spacing:-.4px;
 }
-
-
-/* 오늘 뭐 먹지? */
 
 .hero-title{
     font-size:70px;
-
     line-height:1;
 
     letter-spacing:-5px;
@@ -355,9 +345,6 @@ a{
     color:var(--red);
 }
 
-
-/* 설명 */
-
 .hero-description{
     margin-top:30px;
 
@@ -366,13 +353,11 @@ a{
 
     font-weight:500;
 
-    letter-spacing:-0.3px;
+    letter-spacing:-.3px;
 }
 
 
-/* =========================================================
-   HERO BUTTONS
-========================================================= */
+/* HERO BUTTON */
 
 .hero-buttons{
     display:flex;
@@ -382,20 +367,20 @@ a{
     margin-top:27px;
 }
 
-
-/*
-   ★ 두 버튼 크기 완전히 동일
-*/
-
 .hero-button{
     width:150px;
     height:46px;
 
     padding:0;
 
-    border-radius:7px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
 
     border:1px solid #CFC3AE;
+    border-radius:7px;
 
     background:var(--paper);
 
@@ -403,106 +388,20 @@ a{
 
     font-size:12px;
     font-weight:700;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
 }
-
-
-/* 메뉴 보러가기 */
 
 .hero-button.primary{
     background:var(--yellow);
-
     border-color:var(--yellow);
 }
-
-
-/* 오늘 뭐 먹지 전구 아이콘 */
 
 .hero-button-icon{
     width:18px;
     height:18px;
 
-    object-fit:contain;
-
     flex-shrink:0;
-}
 
-
-/* =========================================================
-   HERO IMAGE
-========================================================= */
-
-.hero-image{
-    width:100%;
-
-    aspect-ratio:1.47 / 1;
-
-    max-height:470px;
-
-    background:var(--gray);
-
-    border-radius:7px;
-
-    overflow:hidden;
-
-    position:relative;
-}
-
-.hero-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-
-/* =========================================================
-   CHECKER PATTERN
-
-   ★ 화면 맨 아래에서 위로 올림
-========================================================= */
-
-.checker{
-    position:absolute;
-
-    left:0;
-
-    /*
-       숫자가 커질수록 체크무늬가 더 위로 올라감
-    */
-    bottom:45px;
-
-    width:100%;
-    height:18px;
-
-    background-color:var(--bg);
-
-    background-image:
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
-        ),
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
-        );
-
-    background-size:18px 18px;
-
-    background-position:
-        0 0,
-        9px 9px;
+    object-fit:contain;
 }
 
 
@@ -515,21 +414,27 @@ a{
 
     max-height:470px;
 
-    background:var(--gray);
-
-    border-radius:7px;
+    position:relative;
 
     overflow:hidden;
 
-    position:relative;
+    border-radius:7px;
+
+    background:var(--gray);
 }
 
 .hero-image img{
     width:100%;
     height:100%;
 
+    position:relative;
+    z-index:1;
+
     object-fit:cover;
 }
+
+
+/* PLACEHOLDER */
 
 .placeholder{
     position:absolute;
@@ -552,7 +457,10 @@ a{
     width:100%;
     height:18px;
 
-    flex-shrink:0;
+    position:absolute;
+
+    left:0;
+    bottom:45px;
 
     background-color:var(--bg);
 
@@ -573,217 +481,75 @@ a{
         );
 
     background-size:18px 18px;
-    background-position:0 0,9px 9px;
+    background-position:0 0, 9px 9px;
 }
 
 
 /* =========================================================
-   02 MENU
+   03. MENU
 ========================================================= */
 
 .menu-section{
-    min-height:100vh;
+    height:calc(100dvh - var(--header-height));
+
+    padding:28px 0;
 
     display:flex;
     align-items:center;
-
-    padding:55px 0;
-}
-
-.menu-content{
-    width:min(var(--content-width), calc(100% - 96px));
-    margin:0 auto;
-}
-
-
-/* TITLE */
-
-.menu-title{
-    font-size:34px;
-    font-weight:800;
-
-    letter-spacing:-1.5px;
-
-    margin-bottom:7px;
-}
-
-.menu-subtitle{
-    font-size:11px;
-
-    color:#514D46;
-
-    margin-bottom:23px;
-}
-
-
-/* SEARCH */
-
-.menu-search{
-    width:100%;
-    height:44px;
-
-    border:1px solid var(--line);
-    border-radius:24px;
-
-    background:var(--paper);
-
-    display:flex;
-    align-items:center;
-
-    padding:0 18px;
-
-    margin-bottom:11px;
-}
-
-.menu-search input{
-    flex:1;
-
-    border:0;
-    outline:0;
-
-    background:transparent;
-
-    font-size:11px;
-}
-
-.menu-search input::placeholder{
-    color:#9C958A;
-}
-
-
-/* CATEGORY */
-
-.categories{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-
-    gap:7px;
-
-    margin-bottom:12px;
-}
-
-.category{
-    min-width:72px;
-    height:30px;
-
-    padding:0 17px;
-
-    border:1px solid #CFC4B1;
-    border-radius:18px;
-
-    background:var(--paper);
-
-    color:var(--text);
-
-    font-size:10px;
-}
-
-.category.active{
-    background:var(--red);
-    border-color:var(--red);
-
-    color:white;
-}
-
-
-/* =========================================================
-   02 MENU
-   한 화면 안에 미니멀하게 들어오도록 비율 조정
-========================================================= */
-
-.menu-section{
-    /*
-       헤더를 제외한 화면 높이 안에
-       메뉴 전체가 들어오도록 설정
-    */
-    height:calc(100vh - var(--header-height));
-
-    display:flex;
-    align-items:center;
-
-    /*
-       기존보다 상하 여백 축소
-    */
-    padding:25px 0;
 
     overflow:hidden;
 }
 
-
 .menu-content{
-    /*
-       좌우 폭도 살짝 줄여서
-       피그마 시안처럼 가운데 모이도록
-    */
     width:min(1160px, calc(100% - 110px));
 
     margin:0 auto;
 }
 
 
-/* =========================================================
-   MENU TITLE
-========================================================= */
+/* MENU TITLE */
 
 .menu-title{
+    margin-bottom:5px;
+
     font-size:30px;
+    line-height:1.2;
+
     font-weight:800;
 
     letter-spacing:-1.3px;
-
-    margin-bottom:5px;
 }
 
-
 .menu-subtitle{
-    font-size:11px;
+    margin-bottom:15px;
 
     color:#514D46;
 
-    /*
-       검색창과 제목 사이 간격 축소
-    */
-    margin-bottom:14px;
+    font-size:11px;
 }
 
 
-/* =========================================================
-   MENU SEARCH
-========================================================= */
+/* MENU SEARCH */
 
 .menu-search{
     width:100%;
+    height:40px;
 
-    /*
-       기존 44px → 38px
-    */
-    height:38px;
+    margin-bottom:10px;
 
-    border:1px solid var(--line);
-
-    border-radius:21px;
-
-    /*
-       ★ 흰색 제거
-       전체 배경색과 동일하게
-    */
-    background:var(--bg);
+    padding:0 16px;
 
     display:flex;
     align-items:center;
 
-    padding:0 16px;
+    border:1px solid var(--line);
+    border-radius:22px;
 
-    /*
-       검색창과 카테고리 사이 간격 축소
-    */
-    margin-bottom:8px;
+    background:var(--bg);
 }
 
-
 .menu-search input{
+    min-width:0;
     flex:1;
 
     border:0;
@@ -794,83 +560,57 @@ a{
     font-size:10px;
 }
 
-
 .menu-search input::placeholder{
     color:#8F887D;
 }
 
 
-/* 검색 아이콘 */
-
-.menu-search .search-icon{
-    width:16px;
-    height:16px;
-
-    object-fit:contain;
-}
-
-
 /* =========================================================
-   CATEGORY
+   MENU CATEGORY
+
+   검색창 왼쪽/오른쪽과 정확히 맞춤
 ========================================================= */
 
 .categories{
     width:100%;
 
-    display:flex;
-    align-items:center;
+    margin-bottom:14px;
 
-    gap:6px;
+    display:grid;
 
-    /*
-       카드와의 간격 축소
-    */
-    margin-bottom:9px;
+    grid-template-columns:repeat(10, minmax(0,1fr));
 
-    overflow-x:auto;
-
-    scrollbar-width:none;
+    gap:8px;
 }
-
-
-.categories::-webkit-scrollbar{
-    display:none;
-}
-
 
 .category{
-    min-width:65px;
+    width:100%;
+    min-width:0;
+    height:30px;
 
-    /*
-       기존보다 살짝 낮게
-    */
-    height:27px;
+    padding:0;
 
-    padding:0 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    border:1px solid #BEB29E;
-
+    border:1px solid var(--line);
     border-radius:16px;
 
-    /*
-       ★ 흰색 제거
-    */
     background:var(--bg);
 
     color:var(--text);
 
     font-size:9px;
+    font-weight:500;
 
     white-space:nowrap;
 }
 
-
-/* 선택된 카테고리 */
-
 .category.active{
-    background:var(--red);
-
     border-color:var(--red);
+
+    background:var(--red);
 
     color:white;
 }
@@ -881,101 +621,88 @@ a{
 ========================================================= */
 
 .menu-grid{
+    width:100%;
+
     display:grid;
 
-    grid-template-columns:
-        repeat(4, minmax(0,1fr));
+    grid-template-columns:repeat(4, minmax(0,1fr));
 
-    /*
-       카드 사이를 아주 살짝만 띄움
-    */
-    gap:3px;
+    gap:4px;
 }
 
 
-/* =========================================================
-   MENU CARD
-
-   ★ 흰색 배경 제거
-   ★ 외곽선만 보이게
-========================================================= */
+/* CARD */
 
 .menu-card{
-    /*
-       기존 paper 색상 제거
-    */
-    background:var(--bg);
-
-    /*
-       외곽선은 명확하게
-    */
-    border:1px solid #BFB39F;
+    width:100%;
 
     overflow:hidden;
+
+    border:1px solid var(--line);
+
+    background:var(--bg);
 }
 
 
-/* =========================================================
-   MENU IMAGE
-========================================================= */
+/*
+   사진보다 메뉴명/가격 부분이 너무 작아 보이지 않도록
+   시안 비율에 맞춰 조정
+*/
 
 .menu-image{
     width:100%;
-
-    /*
-       사진 높이를 살짝 압축해서
-       2줄 카드가 한 화면 안에 들어오도록 함
-    */
-    height:clamp(95px, 12.5vh, 130px);
-
-    background:var(--gray);
+    height:150px;
 
     position:relative;
 
     overflow:hidden;
 
+    background:var(--gray);
+
     cursor:pointer;
 }
-
 
 .menu-image img{
     width:100%;
     height:100%;
 
+    position:relative;
+    z-index:1;
+
     object-fit:cover;
 }
 
 
-/* =========================================================
-   MENU CARD TEXT
-========================================================= */
+/* CARD INFO */
 
 .menu-info{
-    /*
-       기존 70px보다 축소
-    */
-    height:55px;
+    height:72px;
 
-    padding:8px 10px;
+    padding:12px 14px;
 
-    /*
-       ★ 카드 정보 영역도 흰색 제거
-    */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
     background:var(--bg);
 }
 
-
 .menu-name{
-    font-size:10px;
+    margin-bottom:5px;
+
+    color:var(--text);
+
+    font-size:13px;
+    line-height:1.3;
 
     font-weight:600;
-
-    margin-bottom:3px;
 }
 
-
 .menu-price{
-    font-size:9px;
+    color:var(--text);
+
+    font-size:11px;
+    line-height:1;
 
     font-weight:400;
 }
@@ -986,151 +713,75 @@ a{
 ========================================================= */
 
 .pagination{
-    /*
-       카드와 번호 사이 공간도 축소
-    */
-    margin-top:14px;
+    margin-top:17px;
 
     display:flex;
-
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    gap:7px;
+    gap:8px;
 }
 
-
-/*
-   ★ 모든 페이지 버튼 외곽선이
-     확실히 보이도록 수정
-*/
-
 .page{
-    width:20px;
-    height:20px;
+    width:22px;
+    height:22px;
 
     padding:0;
-
-    border:1px solid #9E927E;
-
-    background:var(--bg);
-
-    color:#5F584E;
-
-    font-size:8px;
-    font-weight:600;
-
-    border-radius:3px;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
     border:1px solid var(--line);
+    border-radius:3px;
+
+    background:var(--bg);
+
+    color:#625D54;
+
+    font-size:9px;
+    line-height:1;
+
+    font-weight:500;
 }
-
-
-/* 선택된 번호 */
 
 .page.active{
+    border-color:var(--red);
+
     background:var(--red);
 
-    border-color:var(--red);
-
     color:white;
+
+    font-weight:700;
 }
 
-
-/* 마우스 올렸을 때 */
+.page:first-child,
+.page:last-child{
+    font-size:13px;
+    font-weight:500;
+}
 
 .page:hover{
+    border-color:var(--line);
+}
+
+.page.active:hover{
     border-color:var(--red);
 }
 
 
 /* =========================================================
-   화면 높이가 작은 노트북
-
-   13인치 노트북처럼 세로가 짧은 경우에만
-   메뉴를 한 번 더 살짝 압축
-========================================================= */
-
-@media (min-width:901px) and (max-height:760px){
-
-    .menu-section{
-        padding:18px 0;
-    }
-
-
-    .menu-title{
-        font-size:27px;
-
-        margin-bottom:3px;
-    }
-
-
-    .menu-subtitle{
-        margin-bottom:10px;
-    }
-
-
-    .menu-search{
-        height:34px;
-
-        margin-bottom:6px;
-    }
-
-
-    .categories{
-        margin-bottom:6px;
-    }
-
-
-    .category{
-        height:24px;
-    }
-
-
-    .menu-image{
-        height:105px;
-    }
-
-
-    .menu-info{
-        height:48px;
-
-        padding:6px 9px;
-    }
-
-
-    .pagination{
-        margin-top:9px;
-    }
-
-
-    .page{
-        width:18px;
-        height:18px;
-    }
-
-}
-
-
-/* =========================================================
-   03 RECOMMEND
+   04. RECOMMEND
 ========================================================= */
 
 .recommend-section{
-    /*
-       ★ 한 화면 전체를 노란색으로 사용
-    */
-    min-height:100vh;
-
-    background:var(--yellow);
+    height:calc(100dvh - var(--header-height));
 
     display:flex;
     align-items:center;
     justify-content:center;
+
+    background:var(--yellow);
 }
 
 .recommend-content{
@@ -1143,7 +794,6 @@ a{
 
 .recommend-title{
     font-size:36px;
-
     line-height:1.25;
 
     letter-spacing:-1.5px;
@@ -1154,36 +804,35 @@ a{
 .recommend-description{
     margin-top:12px;
 
-    font-size:10px;
-
     color:#695D46;
+
+    font-size:10px;
 }
 
 .recommend-buttons{
-    display:flex;
+    margin-top:31px;
 
+    display:flex;
     align-items:center;
     justify-content:center;
 
     gap:17px;
-
-    margin-top:31px;
 }
 
 .recommend-button{
     width:135px;
     height:46px;
 
-    border:0;
-    border-radius:25px;
-
-    background:white;
-
     display:flex;
     align-items:center;
     justify-content:center;
 
     gap:9px;
+
+    border:0;
+    border-radius:25px;
+
+    background:white;
 
     color:var(--text);
 
@@ -1200,16 +849,18 @@ a{
 
 
 /* =========================================================
-   04 STORY
+   05. STORY
 ========================================================= */
 
 .story-section{
-    min-height:100vh;
+    height:calc(100dvh - var(--header-height));
+
+    padding:55px 0;
 
     display:flex;
     align-items:center;
 
-    padding:70px 0;
+    overflow:hidden;
 }
 
 .story-content{
@@ -1227,25 +878,28 @@ a{
 }
 
 
-/* IMAGE */
+/* STORY IMAGE */
 
 .story-image{
     width:100%;
 
     aspect-ratio:1.45 / 1;
 
-    background:var(--gray);
-
-    border-radius:7px;
+    position:relative;
 
     overflow:hidden;
 
-    position:relative;
+    border-radius:7px;
+
+    background:var(--gray);
 }
 
 .story-image img{
     width:100%;
     height:100%;
+
+    position:relative;
+    z-index:1;
 
     object-fit:cover;
 }
@@ -1254,38 +908,36 @@ a{
 /* STORY COPY */
 
 .story-label{
+    margin-bottom:8px;
+
     color:var(--red);
 
     font-size:10px;
     font-weight:700;
-
-    margin-bottom:8px;
 }
 
 .story-title{
-    font-size:31px;
+    margin-bottom:17px;
 
+    font-size:31px;
     line-height:1.35;
 
     letter-spacing:-1.5px;
 
     font-weight:800;
-
-    margin-bottom:17px;
 }
 
 .story-description{
-    font-size:10px;
-
-    line-height:1.8;
+    margin-bottom:27px;
 
     color:#625D54;
 
-    margin-bottom:27px;
+    font-size:10px;
+    line-height:1.8;
 }
 
 
-/* ICONS */
+/* STORY POINTS */
 
 .story-points{
     display:flex;
@@ -1303,13 +955,12 @@ a{
     width:62px;
     height:62px;
 
-    border:1.5px solid #B5A88D;
-
-    border-radius:50%;
-
     display:flex;
     align-items:center;
     justify-content:center;
+
+    border:1.5px solid #B5A88D;
+    border-radius:50%;
 }
 
 .story-icon img{
@@ -1324,22 +975,22 @@ a{
 
     margin-top:8px;
 
-    font-size:8px;
-
     color:#716958;
+
+    font-size:8px;
 }
 
 
 /* =========================================================
-   FOOTER
+   06. FOOTER
 ========================================================= */
 
 .footer{
+    padding:48px 0 32px;
+
     background:var(--navy);
 
     color:white;
-
-    padding:48px 0 32px;
 }
 
 .footer-content{
@@ -1360,26 +1011,25 @@ a{
 }
 
 .footer-title{
+    margin-bottom:10px;
+
     font-size:17px;
     font-weight:800;
-
-    margin-bottom:10px;
 }
 
 .footer-heading{
+    margin-bottom:10px;
+
     font-size:12px;
     font-weight:700;
-
-    margin-bottom:10px;
 }
 
 .footer-description,
 .footer-text{
-    font-size:9px;
-
-    line-height:1.8;
-
     color:#E0E4E6;
+
+    font-size:9px;
+    line-height:1.8;
 }
 
 
@@ -1387,6 +1037,7 @@ a{
 
 .socials{
     display:flex;
+
     gap:7px;
 }
 
@@ -1405,11 +1056,10 @@ a{
 }
 
 
-/* EMAIL */
+/* NEWSLETTER */
 
 .newsletter{
     width:100%;
-
     height:30px;
 
     margin-top:8px;
@@ -1420,9 +1070,8 @@ a{
 }
 
 .newsletter input{
-    flex:1;
-
     min-width:0;
+    flex:1;
 
     padding:0 9px;
 
@@ -1446,13 +1095,12 @@ a{
     color:var(--navy);
 
     font-size:8px;
-
     font-weight:700;
 }
 
 
 /* =========================================================
-   CART
+   07. CART
 ========================================================= */
 
 .cart-overlay{
@@ -1460,39 +1108,38 @@ a{
 
     inset:0;
 
+    z-index:2000;
+
+    visibility:hidden;
+    opacity:0;
+
     background:rgba(0,0,0,.35);
 
-    opacity:0;
-    visibility:hidden;
-
     transition:.25s;
-
-    z-index:2000;
 }
 
 .cart-overlay.show{
-    opacity:1;
     visibility:visible;
+    opacity:1;
 }
 
 .cart-panel{
+    width:420px;
+    max-width:90%;
+    height:100dvh;
+
     position:fixed;
 
     top:0;
     right:-440px;
 
-    width:420px;
-    max-width:90%;
-
-    height:100vh;
-
-    background:var(--bg);
+    z-index:2001;
 
     padding:32px;
 
     overflow-y:auto;
 
-    z-index:2001;
+    background:var(--bg);
 
     transition:.3s;
 }
@@ -1502,12 +1149,11 @@ a{
 }
 
 .cart-header{
-    display:flex;
+    margin-bottom:25px;
 
+    display:flex;
     align-items:center;
     justify-content:space-between;
-
-    margin-bottom:25px;
 }
 
 .cart-header h2{
@@ -1516,19 +1162,19 @@ a{
 
 .close-cart{
     border:0;
+
     background:transparent;
 
     font-size:28px;
 }
 
 .cart-item{
-    display:flex;
+    padding:15px 0;
 
+    display:flex;
     align-items:center;
 
     gap:13px;
-
-    padding:15px 0;
 
     border-bottom:1px solid var(--line);
 }
@@ -1537,9 +1183,11 @@ a{
     width:65px;
     height:65px;
 
-    background:var(--gray);
+    flex-shrink:0;
 
     overflow:hidden;
+
+    background:var(--gray);
 }
 
 .cart-item-image img{
@@ -1556,18 +1204,20 @@ a{
 .cart-item-info strong{
     display:block;
 
-    font-size:12px;
-
     margin-bottom:5px;
+
+    font-size:12px;
 }
 
 .cart-item-info span{
-    font-size:10px;
     color:#777;
+
+    font-size:10px;
 }
 
 .remove-item{
     border:0;
+
     background:transparent;
 
     font-size:20px;
@@ -1578,11 +1228,10 @@ a{
 
     padding-top:20px;
 
-    border-top:2px solid var(--navy);
-
     display:flex;
-
     justify-content:space-between;
+
+    border-top:2px solid var(--navy);
 
     font-size:14px;
     font-weight:800;
@@ -1606,7 +1255,7 @@ a{
 
 
 /* =========================================================
-   MODAL
+   08. MODAL
 ========================================================= */
 
 .modal-overlay{
@@ -1614,38 +1263,36 @@ a{
 
     inset:0;
 
-    background:rgba(0,0,0,.45);
+    z-index:3000;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
-    opacity:0;
     visibility:hidden;
+    opacity:0;
 
-    z-index:3000;
+    background:rgba(0,0,0,.45);
 
     transition:.2s;
 }
 
 .modal-overlay.show{
-    opacity:1;
     visibility:visible;
+    opacity:1;
 }
 
 .modal{
     width:720px;
-
     max-width:calc(100% - 40px);
 
     padding:28px;
 
+    position:relative;
+
     border-radius:8px;
 
     background:var(--bg);
-
-    position:relative;
 }
 
 .modal-close{
@@ -1655,6 +1302,7 @@ a{
     top:10px;
 
     border:0;
+
     background:transparent;
 
     font-size:25px;
@@ -1685,19 +1333,19 @@ a{
 }
 
 .modal-name{
+    margin-bottom:10px;
+
     font-size:27px;
     font-weight:800;
-
-    margin-bottom:10px;
 }
 
 .modal-price{
+    margin-bottom:18px;
+
     color:var(--red);
 
     font-size:20px;
     font-weight:800;
-
-    margin-bottom:18px;
 }
 
 .modal-description{
@@ -1724,7 +1372,7 @@ a{
 
 
 /* =========================================================
-   TOAST
+   09. TOAST
 ========================================================= */
 
 .toast{
@@ -1733,9 +1381,13 @@ a{
     left:50%;
     bottom:30px;
 
-    transform:translate(-50%,20px);
+    z-index:5000;
 
     padding:12px 22px;
+
+    opacity:0;
+
+    transform:translate(-50%,20px);
 
     border-radius:30px;
 
@@ -1745,13 +1397,9 @@ a{
 
     font-size:10px;
 
-    opacity:0;
-
-    transition:.25s;
-
     pointer-events:none;
 
-    z-index:5000;
+    transition:.25s;
 }
 
 .toast.show{
@@ -1762,10 +1410,7 @@ a{
 
 
 /* =========================================================
-   작은 노트북 대응
-
-   ★ 1440 데스크톱 비율을 최대한 유지하면서
-     화면 높이가 낮은 노트북에서 잘리지 않게 축소
+   10. SMALL DESKTOP / LAPTOP
 ========================================================= */
 
 @media (min-width:901px) and (max-height:800px){
@@ -1774,59 +1419,134 @@ a{
         --header-height:68px;
     }
 
+
+    /* HERO */
+
     .hero-content{
-        padding:35px 0 30px;
+        padding:25px 0 70px;
+
+        gap:75px;
+    }
+
+    .hero-small{
+        margin-bottom:15px;
+
+        font-size:16px;
     }
 
     .hero-title{
         font-size:54px;
+
+        letter-spacing:-4px;
+    }
+
+    .hero-description{
+        margin-top:22px;
+
+        font-size:13px;
+    }
+
+    .hero-buttons{
+        margin-top:20px;
+    }
+
+    .hero-button{
+        height:42px;
     }
 
     .hero-image{
         max-height:370px;
     }
 
+    .checker{
+        bottom:35px;
+    }
+
+
+    /* MENU */
+
     .menu-section{
-        padding:35px 0;
+        padding:18px 0;
     }
 
     .menu-title{
-        font-size:29px;
+        font-size:27px;
+        margin-bottom:3px;
     }
 
     .menu-subtitle{
-        margin-bottom:14px;
+        margin-bottom:10px;
+    }
+
+    .menu-search{
+        height:35px;
+        margin-bottom:7px;
+    }
+
+    .categories{
+        margin-bottom:8px;
+        gap:7px;
+    }
+
+    .category{
+        height:26px;
     }
 
     .menu-image{
-        aspect-ratio:1.75 / 1;
+        height:120px;
     }
 
     .menu-info{
-        height:57px;
-        padding:9px 10px;
+        height:58px;
+
+        padding:8px 12px;
+    }
+
+    .menu-name{
+        margin-bottom:4px;
+
+        font-size:11px;
+    }
+
+    .menu-price{
+        font-size:9px;
     }
 
     .pagination{
-        margin-top:15px;
+        margin-top:10px;
     }
+
+    .page{
+        width:20px;
+        height:20px;
+    }
+
+
+    /* RECOMMEND */
 
     .recommend-title{
         font-size:32px;
     }
 
+
+    /* STORY */
+
+    .story-section{
+        padding:40px 0;
+    }
+
     .story-image{
-        max-height:380px;
+        max-height:360px;
     }
 
 }
 
 
 /* =========================================================
-   TABLET
+   11. TABLET
 ========================================================= */
 
-@media(max-width:900px){
+@media (max-width:900px){
 
     .container,
     .header-inner,
@@ -1838,8 +1558,12 @@ a{
         width:calc(100% - 40px);
     }
 
+
+    /* HEADER */
+
     .nav{
         margin-left:30px;
+
         gap:20px;
     }
 
@@ -1847,61 +1571,110 @@ a{
         display:none;
     }
 
+
+    /* HERO */
+
     .hero{
-        min-height:auto;
+        height:auto;
+        min-height:calc(100dvh - var(--header-height));
+
+        overflow:visible;
     }
 
     .hero-content{
+        padding:60px 0 100px;
+
         grid-template-columns:1fr;
 
         gap:35px;
-
-        padding:60px 0;
     }
 
     .hero-image{
         max-height:none;
     }
 
+
+    /* MENU */
+
     .menu-section{
-        min-height:auto;
+        height:auto;
 
-        padding:80px 0;
-    }
+        min-height:calc(100dvh - var(--header-height));
 
-    .menu-grid{
-        grid-template-columns:repeat(2,1fr);
+        padding:70px 0;
+
+        overflow:visible;
     }
 
     .categories{
+        display:flex;
+
         overflow-x:auto;
+
+        scrollbar-width:none;
     }
 
+    .categories::-webkit-scrollbar{
+        display:none;
+    }
+
+    .category{
+        min-width:78px;
+
+        padding:0 15px;
+    }
+
+    .menu-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .menu-image{
+        height:auto;
+
+        aspect-ratio:1.55 / 1;
+    }
+
+
+    /* RECOMMEND */
+
     .recommend-section{
+        height:auto;
+
         min-height:650px;
     }
 
+
+    /* STORY */
+
     .story-section{
+        height:auto;
+
         min-height:auto;
 
         padding:90px 0;
+
+        overflow:visible;
     }
 
     .story-content{
         grid-template-columns:1fr;
     }
 
+
+    /* FOOTER */
+
     .footer-content{
         grid-template-columns:repeat(2,1fr);
     }
+
 }
 
 
 /* =========================================================
-   MOBILE
+   12. MOBILE
 ========================================================= */
 
-@media(max-width:600px){
+@media (max-width:600px){
 
     :root{
         --header-height:64px;
@@ -1917,6 +1690,9 @@ a{
         width:calc(100% - 28px);
     }
 
+
+    /* HEADER */
+
     .nav{
         display:none;
     }
@@ -1925,797 +1701,120 @@ a{
         width:100px;
     }
 
+    .order-button{
+        padding:0 14px;
+    }
+
+
+    /* HERO */
+
+    .hero-content{
+        padding:45px 0 90px;
+    }
+
+    .hero-small{
+        font-size:14px;
+    }
+
     .hero-title{
         font-size:43px;
+
         letter-spacing:-3px;
     }
 
-    .hero-content{
-        padding:45px 0;
+    .hero-description{
+        font-size:12px;
+    }
+
+    .hero-buttons{
+        gap:8px;
+    }
+
+    .hero-button{
+        width:145px;
+        height:43px;
+    }
+
+    .checker{
+        bottom:30px;
+    }
+
+
+    /* MENU */
+
+    .menu-section{
+        padding:60px 0;
+    }
+
+    .menu-title{
+        font-size:28px;
     }
 
     .menu-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
     .menu-info{
-        height:62px;
+        height:65px;
+
+        padding:9px 10px;
     }
+
+    .menu-name{
+        font-size:11px;
+    }
+
+    .menu-price{
+        font-size:9px;
+    }
+
+
+    /* RECOMMEND */
 
     .recommend-section{
         min-height:600px;
+    }
+
+    .recommend-title{
+        font-size:28px;
     }
 
     .recommend-buttons{
         flex-wrap:wrap;
     }
 
+
+    /* STORY */
+
     .story-title{
         font-size:27px;
     }
 
+
+    /* FOOTER */
+
     .footer-content{
         grid-template-columns:1fr 1fr;
+
+        gap:35px 25px;
     }
+
+
+    /* MODAL */
 
     .modal-content{
         grid-template-columns:1fr;
     }
-}
 
-/* =========================================================
-   MENU SECTION 비율 재수정
-   ★ 현재 CSS 가장 아래에 그대로 추가
-========================================================= */
-
-
-/* 메뉴 전체 */
-
-.menu-section{
-    height:calc(100vh - var(--header-height));
-
-    display:flex;
-    align-items:center;
-
-    /* 너무 압축하지 않고 자연스럽게 */
-    padding:32px 0;
-
-    overflow:hidden;
-}
-
-
-/* 전체 콘텐츠 폭 */
-
-.menu-content{
-    width:min(1160px, calc(100% - 110px));
-
-    margin:0 auto;
-}
-
-
-/* =========================================================
-   메뉴 제목
-========================================================= */
-
-.menu-title{
-    font-size:30px;
-    font-weight:800;
-
-    letter-spacing:-1.3px;
-
-    margin-bottom:6px;
-}
-
-
-.menu-subtitle{
-    font-size:11px;
-
-    color:#514D46;
-
-    margin-bottom:16px;
-}
-
-
-/* =========================================================
-   검색창
-========================================================= */
-
-.menu-search{
-    width:100%;
-
-    height:40px;
-
-    border:1px solid var(--line);
-
-    border-radius:22px;
-
-    background:var(--bg);
-
-    display:flex;
-    align-items:center;
-
-    padding:0 16px;
-
-    margin-bottom:9px;
-}
-
-
-.menu-search input{
-    flex:1;
-
-    border:0;
-    outline:0;
-
-    background:transparent;
-
-    font-size:10px;
-}
-
-
-/* =========================================================
-   카테고리
-========================================================= */
-
-.categories{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-
-    gap:7px;
-
-    margin-bottom:10px;
-}
-
-
-.category{
-    min-width:65px;
-
-    height:28px;
-
-    padding:0 14px;
-
-    border:1px solid #CFC4B1;
-
-    border-radius:16px;
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    font-size:9px;
-}
-
-
-.category.active{
-    background:var(--red);
-
-    border-color:var(--red);
-
-    color:white;
-}
-
-
-/* =========================================================
-   메뉴 카드
-========================================================= */
-
-.menu-grid{
-    display:grid;
-
-    grid-template-columns:repeat(4, 1fr);
-
-    gap:4px;
-}
-
-
-.menu-card{
-    background:var(--bg);
-
-    border:1px solid #D1C5B2;
-
-    overflow:hidden;
-}
-
-
-/* =========================================================
-   ★ 카드 사진 비율 복구
-========================================================= */
-
-.menu-image{
-    width:100%;
-
-    /*
-       여기 중요!!
-       이전 height:105px / 130px 등을 없애고
-       처음 디자인처럼 비율로 계산
-    */
-
-    height:auto;
-
-    aspect-ratio:1.55 / 1;
-
-    background:var(--gray);
-
-    position:relative;
-
-    overflow:hidden;
-
-    cursor:pointer;
-}
-
-
-.menu-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-
-/* =========================================================
-   카드 텍스트
-========================================================= */
-
-.menu-info{
-    height:58px;
-
-    padding:9px 10px;
-
-    background:var(--bg);
-}
-
-
-.menu-name{
-    font-size:10px;
-
-    font-weight:600;
-
-    margin-bottom:3px;
-}
-
-
-.menu-price{
-    font-size:9px;
-
-    font-weight:400;
-}
-
-
-/* =========================================================
-   페이지 넘기는 번호
-========================================================= */
-
-.pagination{
-    margin-top:14px;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    gap:7px;
-}
-
-
-/*
-   ★ 검색창 테두리와 같은 느낌으로 변경
-*/
-
-.page{
-    width:20px;
-    height:20px;
-
-    padding:0;
-
-    /*
-       기존 진한 테두리 삭제
-       검색창과 동일한 --line 사용
-    */
-    border:1px solid var(--line);
-
-    background:var(--bg);
-
-    color:#625D54;
-
-    font-size:9px;
-    font-weight:500;
-
-    border-radius:3px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    line-height:1;
-}
-
-
-/* 현재 페이지 */
-
-.page.active{
-    background:var(--red);
-
-    border-color:var(--red);
-
-    color:white;
-
-    font-weight:700;
-}
-
-
-/* =========================================================
-   ★ < > 화살표 크기
-========================================================= */
-
-.page:first-child,
-.page:last-child{
-
-    /*
-       숫자와 시각적으로 거의 같은 크기로
-    */
-    font-size:13px;
-
-    font-weight:500;
-
-    line-height:1;
-}
-
-
-/* 마우스 올렸을 때도
-   갑자기 테두리가 진해지지 않게 */
-
-.page:hover{
-    border-color:var(--line);
-}
-
-
-.page.active:hover{
-    border-color:var(--red);
-}
-
-
-/* =========================================================
-   ★ 이전에 넣었던 작은 노트북용 CSS 무효화
-
-   이 부분 때문에 사진이 다시 찌그러지는 걸 방지
-========================================================= */
-
-@media (min-width:901px) and (max-height:760px){
-
-    .menu-section{
-        padding:24px 0;
-    }
-
-
-    .menu-title{
-        font-size:29px;
-
-        margin-bottom:5px;
-    }
-
-
-    .menu-subtitle{
-        margin-bottom:12px;
-    }
-
-
-    .menu-search{
-        height:38px;
-
-        margin-bottom:8px;
-    }
-
-
-    .categories{
-        margin-bottom:8px;
-    }
-
-
-    .category{
-        height:27px;
-    }
-
-
-    /*
-       ★ 높이 강제 지정하지 않음
-    */
-
-    .menu-image{
-        height:auto;
-
-        aspect-ratio:1.55 / 1;
-    }
-
-
-    .menu-info{
-        height:55px;
-
-        padding:8px 10px;
-    }
-
-
-    .pagination{
-        margin-top:11px;
-    }
-
-
-    .page{
-        width:20px;
-        height:20px;
-    }
-
-
-    .page:first-child,
-    .page:last-child{
-        font-size:13px;
-    }
-
-}
-
-/* =========================================================
-   ★ MENU 최종 비율 보정
-   첨부한 시안 기준
-   </style> 바로 위에 붙여넣기
-========================================================= */
-
-
-/* ---------------------------------------------------------
-   1. 메뉴 전체 폭
---------------------------------------------------------- */
-
-.menu-content{
-    width:min(1160px, calc(100% - 110px));
-    margin:0 auto;
-}
-
-
-/* ---------------------------------------------------------
-   2. 검색창
---------------------------------------------------------- */
-
-.menu-search{
-    width:100%;
-    height:40px;
-
-    margin-bottom:10px;
-
-    padding:0 16px;
-
-    border:1px solid var(--line);
-    border-radius:22px;
-
-    background:var(--bg);
-}
-
-
-/* ---------------------------------------------------------
-   3. 카테고리
-
-   ★ 검색창과 시작점 / 끝점 정확히 동일
-   ★ 10개 버튼이 한 줄 전체를 균등하게 사용
---------------------------------------------------------- */
-
-.categories{
-    width:100%;
-
-    display:grid;
-
-    /*
-       10개의 버튼이 정확하게 같은 공간을 사용
-    */
-    grid-template-columns:repeat(10, 1fr);
-
-    gap:8px;
-
-    margin-bottom:14px;
-
-    overflow:visible;
-}
-
-
-/* 각각의 카테고리 버튼 */
-
-.category{
-    /*
-       기존 min-width 때문에
-       전체 폭이 안 맞는 현상 제거
-    */
-    min-width:0;
-
-    width:100%;
-    height:30px;
-
-    padding:0;
-
-    border:1px solid var(--line);
-    border-radius:16px;
-
-    background:var(--bg);
-
-    color:var(--text);
-
-    font-size:9px;
-    font-weight:500;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    white-space:nowrap;
-}
-
-
-/* 선택된 전체 버튼 */
-
-.category.active{
-    background:var(--red);
-    border-color:var(--red);
-
-    color:white;
-}
-
-
-/* ---------------------------------------------------------
-   4. 메뉴 카드 그리드
---------------------------------------------------------- */
-
-.menu-grid{
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:repeat(4, 1fr);
-
-    /*
-       시안처럼 카드 사이 간격 아주 얇게
-    */
-    gap:4px;
-}
-
-
-/* ---------------------------------------------------------
-   5. 메뉴 카드 전체
---------------------------------------------------------- */
-
-.menu-card{
-    width:100%;
-
-    background:var(--bg);
-
-    border:1px solid var(--line);
-
-    overflow:hidden;
-}
-
-
-/* ---------------------------------------------------------
-   6. ★ 메뉴 사진 영역
-
-   이전처럼 aspect-ratio로 크게 만들지 않고
-   카드 폭에 비례해서 적당한 높이로 설정
-
-   사진이 카드 전체를 너무 많이 차지하지 않게 수정
---------------------------------------------------------- */
-
-.menu-image{
-    width:100%;
-
-    /*
-       기존 설정 제거
-    */
-    aspect-ratio:auto;
-
-    /*
-       ★ 시안 비율
-    */
-    height:150px;
-
-    background:var(--gray);
-
-    position:relative;
-
-    overflow:hidden;
-
-    cursor:pointer;
-}
-
-
-.menu-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-
-/* ---------------------------------------------------------
-   7. ★ 메뉴 이름 + 가격 영역
-
-   사진 영역보다 정보가 더 잘 보이도록 높이 확대
---------------------------------------------------------- */
-
-.menu-info{
-    height:78px;
-
-    padding:14px 14px;
-
-    background:var(--bg);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-}
-
-
-/* 메뉴 이름 */
-
-.menu-name{
-    font-size:13px;
-
-    line-height:1.3;
-
-    font-weight:600;
-
-    margin-bottom:7px;
-
-    color:var(--text);
-}
-
-
-/* 가격 */
-
-.menu-price{
-    font-size:11px;
-
-    line-height:1;
-
-    font-weight:400;
-
-    color:var(--text);
-}
-
-
-/* ---------------------------------------------------------
-   8. 페이지 번호
---------------------------------------------------------- */
-
-.pagination{
-    margin-top:22px;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    gap:8px;
-}
-
-
-.page{
-    width:22px;
-    height:22px;
-
-    padding:0;
-
-    border:1px solid var(--line);
-
-    border-radius:3px;
-
-    background:var(--bg);
-
-    color:#625D54;
-
-    font-size:9px;
-    font-weight:500;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    line-height:1;
-}
-
-
-/* 현재 페이지 */
-
-.page.active{
-    background:var(--red);
-
-    border-color:var(--red);
-
-    color:white;
-
-    font-weight:700;
-}
-
-
-/* < > */
-
-.page:first-child,
-.page:last-child{
-    font-size:12px;
-
-    font-weight:500;
-}
-
-
-/* hover에서도 테두리가 갑자기 진해지지 않음 */
-
-.page:hover{
-    border-color:var(--line);
-}
-
-.page.active:hover{
-    border-color:var(--red);
-}
-
-
-/* ---------------------------------------------------------
-   9. ★ 노트북 화면에서 기존 CSS가
-      카드 높이를 다시 바꾸지 못하도록 덮어쓰기
---------------------------------------------------------- */
-
-@media (min-width:901px) and (max-height:760px){
-
-    .categories{
-        display:grid;
-
-        grid-template-columns:repeat(10,1fr);
-
-        gap:8px;
-
-        margin-bottom:10px;
-    }
-
-
-    .category{
-        width:100%;
-        min-width:0;
-
-        height:28px;
-    }
-
-
-    .menu-image{
-        /*
-           절대 105px로 다시 줄이지 않기
-        */
-        height:135px;
-
-        aspect-ratio:auto;
-    }
-
-
-    .menu-info{
-        height:68px;
-
-        padding:10px 13px;
-    }
-
-
-    .menu-name{
-        font-size:12px;
-
-        margin-bottom:5px;
-    }
-
-
-    .menu-price{
-        font-size:10px;
-    }
-
-
-    .pagination{
-        margin-top:14px;
+    .modal-image{
+        height:220px;
     }
 
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -2727,7 +1826,6 @@ a{
 <header class="header">
 
     <div class="header-inner">
-
 
         <a class="logo" href="#home">
 
@@ -2758,7 +1856,6 @@ a{
 
         <div class="header-right">
 
-
             <div class="header-search">
 
                 <input
@@ -2779,6 +1876,7 @@ a{
             <button
                 class="cart-button"
                 onclick="openCart()"
+                aria-label="장바구니 열기"
             >
 
                 <img
@@ -2803,7 +1901,6 @@ a{
                 주문하기
             </button>
 
-
         </div>
 
     </div>
@@ -2817,12 +1914,9 @@ a{
 
 <section class="hero" id="home">
 
-
     <div class="hero-content">
 
-
         <div class="hero-copy">
-
 
             <p class="hero-small">
                 익숙해서 더 맛있는 한 끼
@@ -2847,42 +1941,40 @@ a{
 
             <div class="hero-buttons">
 
-    <!-- 메뉴 보러가기 -->
-
-    <button
-        class="hero-button primary"
-        onclick="goToMenu()"
-    >
-        메뉴 보러가기
-        <span>→</span>
-    </button>
+                <button
+                    class="hero-button primary"
+                    onclick="goToMenu()"
+                >
+                    메뉴 보러가기
+                    <span>→</span>
+                </button>
 
 
-    <!-- 오늘 뭐 먹지? -->
+                <button
+                    class="hero-button"
+                    onclick="randomMenu()"
+                >
 
-    <button
-        class="hero-button"
-        onclick="randomMenu()"
-    >
+                    <img
+                        class="hero-button-icon"
+                        src="images/icons/lightbulb.png"
+                        alt=""
+                    >
 
-        <img
-            class="hero-button-icon"
-            src="images/icons/lightbulb.png"
-            alt=""
-        >
+                    오늘 뭐 먹지?
 
-        오늘 뭐 먹지?
+                </button>
 
-    </button>
-
-</div>
-
+            </div>
 
         </div>
 
 
         <div class="hero-image">
 
+            <div class="placeholder">
+                IMG
+            </div>
 
             <img
                 src="images/hero.jpg"
@@ -2890,20 +1982,12 @@ a{
                 onerror="this.style.display='none'"
             >
 
-
-            <div class="placeholder">
-                IMG
-            </div>
-
-
         </div>
-
 
     </div>
 
 
     <div class="checker"></div>
-
 
 </section>
 
@@ -2914,9 +1998,7 @@ a{
 
 <section class="menu-section" id="menu">
 
-
     <div class="menu-content">
-
 
         <h2 class="menu-title">
             메뉴
@@ -2930,7 +2012,6 @@ a{
 
         <div class="menu-search">
 
-
             <input
                 id="menuSearch"
                 type="text"
@@ -2938,19 +2019,16 @@ a{
                 oninput="renderMenu()"
             >
 
-
             <img
                 class="search-icon"
                 src="images/icons/search.png"
                 alt="검색"
             >
 
-
         </div>
 
 
         <div class="categories">
-
 
             <button
                 class="category active"
@@ -2959,14 +2037,12 @@ a{
                 전체
             </button>
 
-
             <button
                 class="category"
                 onclick="setCategory('김밥',this)"
             >
                 김밥
             </button>
-
 
             <button
                 class="category"
@@ -2975,14 +2051,12 @@ a{
                 덮밥
             </button>
 
-
             <button
                 class="category"
                 onclick="setCategory('찌개',this)"
             >
                 찌개
             </button>
-
 
             <button
                 class="category"
@@ -2991,14 +2065,12 @@ a{
                 죽
             </button>
 
-
             <button
                 class="category"
                 onclick="setCategory('라면',this)"
             >
                 라면
             </button>
-
 
             <button
                 class="category"
@@ -3007,14 +2079,12 @@ a{
                 분식
             </button>
 
-
             <button
                 class="category"
                 onclick="setCategory('돈까스',this)"
             >
                 돈까스
             </button>
-
 
             <button
                 class="category"
@@ -3023,14 +2093,12 @@ a{
                 사이드
             </button>
 
-
             <button
                 class="category"
                 onclick="setCategory('음료',this)"
             >
                 음료
             </button>
-
 
         </div>
 
@@ -3043,21 +2111,29 @@ a{
 
         <div class="pagination">
 
-            <button class="page">‹</button>
+            <button class="page">
+                ‹
+            </button>
 
-            <button class="page active">1</button>
+            <button class="page active">
+                1
+            </button>
 
-            <button class="page">2</button>
+            <button class="page">
+                2
+            </button>
 
-            <button class="page">3</button>
+            <button class="page">
+                3
+            </button>
 
-            <button class="page">›</button>
+            <button class="page">
+                ›
+            </button>
 
         </div>
 
-
     </div>
-
 
 </section>
 
@@ -3071,9 +2147,7 @@ a{
     id="recommend"
 >
 
-
     <div class="recommend-content">
-
 
         <h2 class="recommend-title">
             오늘은 어떤 메뉴가 먹고 싶나요?
@@ -3086,7 +2160,6 @@ a{
 
 
         <div class="recommend-buttons">
-
 
             <button
                 class="recommend-button"
@@ -3151,12 +2224,9 @@ a{
 
             </button>
 
-
         </div>
 
-
     </div>
-
 
 </section>
 
@@ -3170,12 +2240,13 @@ a{
     id="story"
 >
 
-
     <div class="story-content">
-
 
         <div class="story-image">
 
+            <div class="placeholder">
+                김밥2.jpg
+            </div>
 
             <img
                 src="images/brand.jpg"
@@ -3183,17 +2254,10 @@ a{
                 onerror="this.style.display='none'"
             >
 
-
-            <div class="placeholder">
-                김밥2.jpg
-            </div>
-
-
         </div>
 
 
-        <div>
-
+        <div class="story-copy">
 
             <p class="story-label">
                 김밥천국 이야기
@@ -3217,7 +2281,6 @@ a{
 
 
             <div class="story-points">
-
 
                 <div class="story-point">
 
@@ -3272,15 +2335,11 @@ a{
 
                 </div>
 
-
             </div>
-
 
         </div>
 
-
     </div>
-
 
 </section>
 
@@ -3294,9 +2353,7 @@ a{
     id="event"
 >
 
-
     <div class="footer-content">
-
 
         <div>
 
@@ -3357,7 +2414,6 @@ a{
 
             <div class="socials">
 
-
                 <div class="social">
 
                     <img
@@ -3387,9 +2443,7 @@ a{
 
                 </div>
 
-
             </div>
-
 
         </div>
 
@@ -3400,7 +2454,6 @@ a{
                 이벤트
             </h4>
 
-
             <p class="footer-text">
                 다양한 소식을 받아보세요.
             </p>
@@ -3408,27 +2461,21 @@ a{
 
             <div class="newsletter">
 
-
                 <input
                     id="email"
                     type="email"
                     placeholder="이메일을 입력해주세요"
                 >
 
-
                 <button onclick="subscribe()">
                     구독하기
                 </button>
 
-
             </div>
-
 
         </div>
 
-
     </div>
-
 
 </footer>
 
@@ -3449,14 +2496,11 @@ a{
     id="cartPanel"
 >
 
-
     <div class="cart-header">
-
 
         <h2>
             장바구니
         </h2>
-
 
         <button
             class="close-cart"
@@ -3464,7 +2508,6 @@ a{
         >
             ×
         </button>
-
 
     </div>
 
@@ -3474,16 +2517,13 @@ a{
 
     <div class="cart-total">
 
-
         <span>
             총 주문금액
         </span>
 
-
         <span id="cartTotal">
             0원
         </span>
-
 
     </div>
 
@@ -3494,7 +2534,6 @@ a{
     >
         주문하기
     </button>
-
 
 </aside>
 
@@ -3509,9 +2548,7 @@ a{
     onclick="closeModalOutside(event)"
 >
 
-
     <div class="modal">
-
 
         <button
             class="modal-close"
@@ -3522,7 +2559,6 @@ a{
 
 
         <div class="modal-content">
-
 
             <div class="modal-image">
 
@@ -3536,7 +2572,6 @@ a{
 
 
             <div>
-
 
                 <h2
                     class="modal-name"
@@ -3563,15 +2598,11 @@ a{
                     장바구니 담기
                 </button>
 
-
             </div>
-
 
         </div>
 
-
     </div>
-
 
 </div>
 
@@ -3674,9 +2705,7 @@ const menus = [
 
 
 let currentCategory = "전체";
-
 let currentMenu = null;
-
 let cart = [];
 
 
@@ -3701,7 +2730,6 @@ function renderMenu(){
     const filtered =
         menus.filter(menu => {
 
-
             const categoryMatch =
                 currentCategory === "전체" ||
                 menu.category === currentCategory;
@@ -3723,7 +2751,6 @@ function renderMenu(){
 
     filtered.forEach(menu => {
 
-
         const card =
             document.createElement("article");
 
@@ -3739,31 +2766,28 @@ function renderMenu(){
                 onclick="openModal(${menu.id})"
             >
 
+                <div class="placeholder">
+                    IMG
+                </div>
+
                 <img
                     src="${menu.image}"
                     alt="${menu.name}"
                     onerror="this.style.display='none'"
                 >
 
-                <div class="placeholder">
-                    IMG
-                </div>
-
             </div>
 
 
             <div class="menu-info">
 
-
                 <div class="menu-name">
                     ${menu.name}
                 </div>
 
-
                 <div class="menu-price">
                     ${menu.price.toLocaleString()}원
                 </div>
-
 
             </div>
 
@@ -3783,8 +2807,7 @@ function renderMenu(){
 
 function setCategory(category,button){
 
-    currentCategory =
-        category;
+    currentCategory = category;
 
 
     document
@@ -3812,7 +2835,6 @@ document
 .getElementById("headerSearch")
 .addEventListener("input",function(){
 
-
     document
     .getElementById("menuSearch")
     .value =
@@ -3832,9 +2854,15 @@ document
     });
 
 
-    document
-    .querySelector(".category")
-    .classList.add("active");
+    const firstCategory =
+        document.querySelector(".category");
+
+
+    if(firstCategory){
+
+        firstCategory.classList.add("active");
+
+    }
 
 
     renderMenu();
@@ -3843,7 +2871,7 @@ document
 
 
 /* =========================================================
-   MENU MOVE
+   GO MENU
 ========================================================= */
 
 function goToMenu(){
@@ -3874,9 +2902,7 @@ function randomMenu(){
         ];
 
 
-    openModal(
-        random.id
-    );
+    openModal(random.id);
 
 }
 
@@ -3890,7 +2916,7 @@ function recommendMood(mood){
     const candidates =
         menus.filter(
             menu =>
-            menu.moods.includes(mood)
+                menu.moods.includes(mood)
         );
 
 
@@ -3914,9 +2940,7 @@ function recommendMood(mood){
         ];
 
 
-    openModal(
-        random.id
-    );
+    openModal(random.id);
 
 }
 
@@ -3930,7 +2954,7 @@ function openModal(id){
     currentMenu =
         menus.find(
             menu =>
-            menu.id === id
+                menu.id === id
         );
 
 
@@ -3939,10 +2963,16 @@ function openModal(id){
     }
 
 
-    document
-    .getElementById("modalImage")
-    .src =
+    const modalImage =
+        document.getElementById("modalImage");
+
+
+    modalImage.src =
         currentMenu.image;
+
+
+    modalImage.alt =
+        currentMenu.name;
 
 
     document
@@ -4008,8 +3038,8 @@ function addCurrentMenu(){
     const existing =
         cart.find(
             item =>
-            item.id ===
-            currentMenu.id
+                item.id ===
+                currentMenu.id
         );
 
 
@@ -4052,7 +3082,7 @@ function updateCart(){
     const count =
         cart.reduce(
             (sum,item) =>
-            sum + item.quantity,
+                sum + item.quantity,
             0
         );
 
@@ -4070,7 +3100,6 @@ function updateCart(){
 
     if(!cart.length){
 
-
         container.innerHTML = `
 
             <p
@@ -4086,16 +3115,12 @@ function updateCart(){
 
         `;
 
-
     }else{
 
-
-        container.innerHTML =
-            "";
+        container.innerHTML = "";
 
 
         cart.forEach(item => {
-
 
             const div =
                 document.createElement("div");
@@ -4144,9 +3169,7 @@ function updateCart(){
             `;
 
 
-            container.appendChild(
-                div
-            );
+            container.appendChild(div);
 
         });
 
@@ -4156,9 +3179,9 @@ function updateCart(){
     const total =
         cart.reduce(
             (sum,item) =>
-            sum +
-            item.price *
-            item.quantity,
+                sum +
+                item.price *
+                item.quantity,
             0
         );
 
@@ -4173,7 +3196,7 @@ function updateCart(){
 
 
 /* =========================================================
-   REMOVE
+   REMOVE CART ITEM
 ========================================================= */
 
 function removeFromCart(id){
@@ -4181,7 +3204,7 @@ function removeFromCart(id){
     cart =
         cart.filter(
             item =>
-            item.id !== id
+                item.id !== id
         );
 
 
@@ -4257,13 +3280,10 @@ function checkout(){
 function subscribe(){
 
     const email =
-        document
-        .getElementById("email");
+        document.getElementById("email");
 
 
-    if(
-        !email.value.trim()
-    ){
+    if(!email.value.trim()){
 
         showToast(
             "이메일을 입력해주세요."
@@ -4291,25 +3311,20 @@ function subscribe(){
 function showToast(message){
 
     const toast =
-        document
-        .getElementById("toast");
+        document.getElementById("toast");
 
 
     toast.textContent =
         message;
 
 
-    toast.classList.add(
-        "show"
-    );
+    toast.classList.add("show");
 
 
     setTimeout(
         () => {
 
-            toast.classList.remove(
-                "show"
-            );
+            toast.classList.remove("show");
 
         },
         2000
@@ -4326,13 +3341,9 @@ document.addEventListener(
     "keydown",
     event => {
 
-        if(
-            event.key ===
-            "Escape"
-        ){
+        if(event.key === "Escape"){
 
             closeModal();
-
             closeCart();
 
         }
@@ -4346,7 +3357,6 @@ document.addEventListener(
 ========================================================= */
 
 renderMenu();
-
 updateCart();
 
 </script>
