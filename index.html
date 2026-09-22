@@ -1025,6 +1025,8 @@ a{
     display:flex;
     align-items:center;
     justify-content:center;
+
+    border:1px solid var(--line);
 }
 
 
@@ -1959,6 +1961,396 @@ a{
     .modal-content{
         grid-template-columns:1fr;
     }
+}
+
+/* =========================================================
+   MENU SECTION 비율 재수정
+   ★ 현재 CSS 가장 아래에 그대로 추가
+========================================================= */
+
+
+/* 메뉴 전체 */
+
+.menu-section{
+    height:calc(100vh - var(--header-height));
+
+    display:flex;
+    align-items:center;
+
+    /* 너무 압축하지 않고 자연스럽게 */
+    padding:32px 0;
+
+    overflow:hidden;
+}
+
+
+/* 전체 콘텐츠 폭 */
+
+.menu-content{
+    width:min(1160px, calc(100% - 110px));
+
+    margin:0 auto;
+}
+
+
+/* =========================================================
+   메뉴 제목
+========================================================= */
+
+.menu-title{
+    font-size:30px;
+    font-weight:800;
+
+    letter-spacing:-1.3px;
+
+    margin-bottom:6px;
+}
+
+
+.menu-subtitle{
+    font-size:11px;
+
+    color:#514D46;
+
+    margin-bottom:16px;
+}
+
+
+/* =========================================================
+   검색창
+========================================================= */
+
+.menu-search{
+    width:100%;
+
+    height:40px;
+
+    border:1px solid var(--line);
+
+    border-radius:22px;
+
+    background:var(--bg);
+
+    display:flex;
+    align-items:center;
+
+    padding:0 16px;
+
+    margin-bottom:9px;
+}
+
+
+.menu-search input{
+    flex:1;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   카테고리
+========================================================= */
+
+.categories{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+
+    gap:7px;
+
+    margin-bottom:10px;
+}
+
+
+.category{
+    min-width:65px;
+
+    height:28px;
+
+    padding:0 14px;
+
+    border:1px solid #CFC4B1;
+
+    border-radius:16px;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-size:9px;
+}
+
+
+.category.active{
+    background:var(--red);
+
+    border-color:var(--red);
+
+    color:white;
+}
+
+
+/* =========================================================
+   메뉴 카드
+========================================================= */
+
+.menu-grid{
+    display:grid;
+
+    grid-template-columns:repeat(4, 1fr);
+
+    gap:4px;
+}
+
+
+.menu-card{
+    background:var(--bg);
+
+    border:1px solid #D1C5B2;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   ★ 카드 사진 비율 복구
+========================================================= */
+
+.menu-image{
+    width:100%;
+
+    /*
+       여기 중요!!
+       이전 height:105px / 130px 등을 없애고
+       처음 디자인처럼 비율로 계산
+    */
+
+    height:auto;
+
+    aspect-ratio:1.55 / 1;
+
+    background:var(--gray);
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+}
+
+
+.menu-image img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   카드 텍스트
+========================================================= */
+
+.menu-info{
+    height:58px;
+
+    padding:9px 10px;
+
+    background:var(--bg);
+}
+
+
+.menu-name{
+    font-size:10px;
+
+    font-weight:600;
+
+    margin-bottom:3px;
+}
+
+
+.menu-price{
+    font-size:9px;
+
+    font-weight:400;
+}
+
+
+/* =========================================================
+   페이지 넘기는 번호
+========================================================= */
+
+.pagination{
+    margin-top:14px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:7px;
+}
+
+
+/*
+   ★ 검색창 테두리와 같은 느낌으로 변경
+*/
+
+.page{
+    width:20px;
+    height:20px;
+
+    padding:0;
+
+    /*
+       기존 진한 테두리 삭제
+       검색창과 동일한 --line 사용
+    */
+    border:1px solid var(--line);
+
+    background:var(--bg);
+
+    color:#625D54;
+
+    font-size:9px;
+    font-weight:500;
+
+    border-radius:3px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    line-height:1;
+}
+
+
+/* 현재 페이지 */
+
+.page.active{
+    background:var(--red);
+
+    border-color:var(--red);
+
+    color:white;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   ★ < > 화살표 크기
+========================================================= */
+
+.page:first-child,
+.page:last-child{
+
+    /*
+       숫자와 시각적으로 거의 같은 크기로
+    */
+    font-size:13px;
+
+    font-weight:500;
+
+    line-height:1;
+}
+
+
+/* 마우스 올렸을 때도
+   갑자기 테두리가 진해지지 않게 */
+
+.page:hover{
+    border-color:var(--line);
+}
+
+
+.page.active:hover{
+    border-color:var(--red);
+}
+
+
+/* =========================================================
+   ★ 이전에 넣었던 작은 노트북용 CSS 무효화
+
+   이 부분 때문에 사진이 다시 찌그러지는 걸 방지
+========================================================= */
+
+@media (min-width:901px) and (max-height:760px){
+
+    .menu-section{
+        padding:24px 0;
+    }
+
+
+    .menu-title{
+        font-size:29px;
+
+        margin-bottom:5px;
+    }
+
+
+    .menu-subtitle{
+        margin-bottom:12px;
+    }
+
+
+    .menu-search{
+        height:38px;
+
+        margin-bottom:8px;
+    }
+
+
+    .categories{
+        margin-bottom:8px;
+    }
+
+
+    .category{
+        height:27px;
+    }
+
+
+    /*
+       ★ 높이 강제 지정하지 않음
+    */
+
+    .menu-image{
+        height:auto;
+
+        aspect-ratio:1.55 / 1;
+    }
+
+
+    .menu-info{
+        height:55px;
+
+        padding:8px 10px;
+    }
+
+
+    .pagination{
+        margin-top:11px;
+    }
+
+
+    .page{
+        width:20px;
+        height:20px;
+    }
+
+
+    .page:first-child,
+    .page:last-child{
+        font-size:13px;
+    }
+
 }
 
 </style>
