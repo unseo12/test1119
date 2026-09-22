@@ -12,79 +12,86 @@
 
 <style>
 
-/* =========================================================
+:root{
+    --bg:#fff6e5;
+    --paper:#fff9ee;
+    --red:#e64a2e;
+    --yellow:#ffc43d;
+    --navy:#263642;
+    --text:#202b32;
+    --line:#d8cbb4;
+    --placeholder:#d9d9d9;
+
+    /* 헤더 높이 */
+    --header-h:76px;
+}
+
+
+/* =========================
    RESET
-========================================================= */
+========================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
+
+    /*
+      한 화면씩 자연스럽게 넘어가도록 설정
+    */
+    scroll-snap-type:y proximity;
 }
 
-body {
-    background: #FFF6E5;
-    color: #202B32;
-    font-family: "Noto Sans KR", sans-serif;
+body{
+    font-family:"Noto Sans KR",sans-serif;
+
+    background:var(--bg);
+    color:var(--text);
+
+    overflow-x:hidden;
 }
 
 button,
-input {
-    font-family: inherit;
+input{
+    font:inherit;
 }
 
-button {
-    cursor: pointer;
+button{
+    cursor:pointer;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-}
-
-
-/* =========================================================
-   COLOR
-   → 네가 보낸 시안 기준으로 통일
-========================================================= */
-
-:root {
-    --background: #FFF6E5;
-    --background-light: #FFF9EE;
-
-    --red: #E64A2E;
-    --red-dark: #D83F25;
-
-    --yellow: #FFC43D;
-
-    --navy: #263642;
-
-    --text: #202B32;
-    --sub-text: #57534B;
-
-    --line: #D8CBB4;
-
-    --image-gray: #D9D9D9;
+img{
+    display:block;
+    max-width:100%;
 }
 
 
-/* =========================================================
+/* =========================
+   SECTION SNAP
+========================= */
+
+section,
+header{
+    scroll-snap-align:start;
+}
+
+
+/* =========================
    COMMON
-========================================================= */
+========================= */
 
-.container {
-    width: 1200px;
-    max-width: calc(100% - 80px);
-    margin: 0 auto;
+.container{
+    width:min(1200px, calc(100% - 80px));
+    margin:0 auto;
 }
 
 
@@ -92,361 +99,425 @@ img {
    HEADER
 ========================================================= */
 
-.header {
-    height: 76px;
+.header{
 
-    background: var(--background);
+    height:var(--header-h);
 
-    border-bottom: 1px solid #E1D5BF;
+    background:var(--bg);
 
-    position: sticky;
-    top: 0;
+    border-bottom:1px solid #e1d5bf;
 
-    z-index: 1000;
+    position:sticky;
+    top:0;
+
+    z-index:1000;
 }
 
-.header-inner {
-    width: 1200px;
-    max-width: calc(100% - 80px);
 
-    height: 100%;
+.header-inner{
 
-    margin: 0 auto;
+    width:min(1200px, calc(100% - 80px));
 
-    display: flex;
-    align-items: center;
+    height:100%;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
 }
 
 
 /* LOGO */
 
-.logo {
-    width: 145px;
+.logo{
 
-    display: flex;
-    align-items: center;
+    width:145px;
+
+    flex-shrink:0;
 }
 
-.logo img {
-    width: 120px;
-    height: auto;
+.logo img{
 
-    object-fit: contain;
+    width:120px;
+
+    height:auto;
+
+    object-fit:contain;
 }
 
 
 /* NAV */
 
-.nav {
-    display: flex;
+.nav{
 
-    align-items: center;
+    height:100%;
 
-    gap: 40px;
+    display:flex;
 
-    margin-left: 125px;
+    align-items:center;
 
-    height: 100%;
+    gap:40px;
+
+    margin-left:125px;
 }
 
-.nav a {
-    height: 100%;
+.nav a{
 
-    display: flex;
-    align-items: center;
+    height:100%;
 
-    position: relative;
+    display:flex;
 
-    font-size: 11px;
-    font-weight: 600;
+    align-items:center;
 
-    white-space: nowrap;
+    position:relative;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    white-space:nowrap;
 }
 
-.nav a.active::after {
-    content: "";
+.nav a.active::after{
 
-    position: absolute;
+    content:"";
 
-    left: 50%;
-    bottom: 18px;
+    position:absolute;
 
-    transform: translateX(-50%);
+    left:50%;
 
-    width: 21px;
-    height: 2px;
+    bottom:18px;
 
-    background: var(--red);
+    transform:translateX(-50%);
+
+    width:21px;
+
+    height:2px;
+
+    background:var(--red);
 }
 
 
 /* HEADER RIGHT */
 
-.header-right {
-    margin-left: auto;
+.header-right{
 
-    display: flex;
+    margin-left:auto;
 
-    align-items: center;
+    display:flex;
 
-    gap: 10px;
+    align-items:center;
+
+    gap:10px;
 }
 
 
 /* SEARCH */
 
-.header-search {
-    width: 150px;
-    height: 29px;
+.header-search{
 
-    border: 1px solid #D7CBB7;
+    width:150px;
 
-    border-radius: 20px;
+    height:29px;
 
-    display: flex;
-    align-items: center;
+    border:1px solid #d7cbb7;
 
-    padding: 0 8px 0 12px;
+    border-radius:20px;
 
-    background: #FFF9EE;
+    background:var(--paper);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 8px 0 12px;
 }
 
-.header-search input {
-    width: 100%;
+.header-search input{
 
-    border: 0;
-    outline: 0;
+    width:100%;
 
-    background: transparent;
+    border:0;
 
-    font-size: 8px;
+    outline:0;
 
-    color: var(--text);
+    background:transparent;
+
+    font-size:8px;
 }
 
-.header-search input::placeholder {
-    color: #918B7F;
+.header-search input::placeholder{
+
+    color:#918b7f;
 }
 
 
-/* SEARCH ICON */
+/* ICON */
 
-.icon-search {
-    width: 14px;
-    height: 14px;
+.icon{
 
-    object-fit: contain;
+    width:15px;
 
-    flex-shrink: 0;
+    height:15px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
 }
 
 
 /* CART */
 
-.cart-button {
-    width: 27px;
-    height: 27px;
+.cart-button{
 
-    position: relative;
+    position:relative;
 
-    border: 0;
-    background: transparent;
+    width:27px;
 
-    padding: 4px;
+    height:27px;
+
+    border:0;
+
+    background:transparent;
+
+    padding:4px;
 }
 
-.cart-button img {
-    width: 100%;
-    height: 100%;
+.cart-button img{
 
-    object-fit: contain;
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
 }
 
-.cart-count {
-    position: absolute;
+.cart-count{
 
-    right: -2px;
-    top: -3px;
+    position:absolute;
 
-    width: 14px;
-    height: 14px;
+    right:-2px;
 
-    border-radius: 50%;
+    top:-3px;
 
-    background: var(--red);
+    width:14px;
 
-    color: white;
+    height:14px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius:50%;
 
-    font-size: 7px;
-    font-weight: 800;
+    background:var(--red);
+
+    color:white;
+
+    display:grid;
+
+    place-items:center;
+
+    font-size:7px;
+
+    font-weight:800;
 }
 
 
-/* ORDER BUTTON */
+/* ORDER */
 
-.order-button {
-    height: 30px;
+.order-button{
 
-    padding: 0 17px;
+    height:30px;
 
-    border: 0;
-    border-radius: 17px;
+    padding:0 17px;
 
-    background: var(--red);
+    border:0;
 
-    color: white;
+    border-radius:17px;
 
-    font-size: 9px;
-    font-weight: 700;
+    background:var(--red);
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:700;
 }
 
 
 /* =========================================================
    HERO
+   ★ 화면 한 장
 ========================================================= */
 
-.hero {
-    padding-top: 51px;
-}
+.hero{
 
-.hero-inner {
-    display: grid;
+    min-height:calc(100vh - var(--header-h));
 
-    grid-template-columns: 1fr 1fr;
+    display:flex;
 
-    gap: 65px;
+    flex-direction:column;
 
-    align-items: center;
+    justify-content:center;
 
-    min-height: 330px;
+    padding:0;
 }
 
 
-/* LEFT */
+.hero-inner{
 
-.hero-text {
-    padding-left: 5px;
+    width:min(1200px, calc(100% - 80px));
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:65px;
+
+    align-items:center;
+
+    flex:1;
+
+    min-height:0;
 }
 
-.hero-small {
-    font-size: 12px;
 
-    font-weight: 500;
+/* HERO TEXT */
 
-    margin-bottom: 13px;
+.hero-small{
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-bottom:13px;
 }
 
-.hero-title {
-    font-size: 55px;
+.hero-title{
 
-    line-height: 1;
+    font-size:clamp(43px,4.3vw,66px);
 
-    letter-spacing: -4px;
+    line-height:1;
 
-    font-weight: 800;
+    letter-spacing:-4px;
+
+    font-weight:800;
 }
 
-.hero-title .red {
-    color: var(--red);
+.red{
+
+    color:var(--red);
 }
 
-.hero-description {
-    margin-top: 22px;
+.hero-description{
 
-    font-size: 10px;
+    margin-top:22px;
 
-    line-height: 1.8;
+    font-size:10px;
 
-    color: #34322E;
+    line-height:1.8;
 }
 
-.hero-buttons {
-    display: flex;
+.hero-buttons{
 
-    gap: 7px;
+    display:flex;
 
-    margin-top: 17px;
+    gap:7px;
+
+    margin-top:17px;
 }
 
-.hero-button {
-    height: 32px;
+.hero-button{
 
-    padding: 0 14px;
+    height:32px;
 
-    border-radius: 6px;
+    padding:0 14px;
 
-    font-size: 9px;
-    font-weight: 700;
+    border-radius:6px;
 
-    border: 1px solid #D5C9B4;
+    font-size:9px;
 
-    background: #FFF9ED;
+    font-weight:700;
 
-    color: var(--text);
+    border:1px solid #d5c9b4;
+
+    background:var(--paper);
+
+    color:var(--text);
 }
 
-.hero-button.primary {
-    background: var(--yellow);
+.hero-button.primary{
 
-    border-color: var(--yellow);
+    background:var(--yellow);
+
+    border-color:var(--yellow);
+}
+
+
+/* IMAGE BOX */
+
+.image-box{
+
+    background:var(--placeholder);
+
+    border-radius:6px;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.image-box img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+.image-placeholder{
+
+    position:absolute;
+
+    inset:0;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#333;
+
+    font-size:14px;
+
+    pointer-events:none;
 }
 
 
 /* HERO IMAGE */
 
-.hero-image {
-    width: 100%;
-    height: 240px;
+.hero-image{
 
-    background: var(--image-gray);
+    width:100%;
 
-    border-radius: 6px;
-
-    overflow: hidden;
-
-    position: relative;
-}
-
-.hero-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-.hero-image-placeholder {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 16px;
-
-    color: #222;
-
-    pointer-events: none;
+    height:min(430px,55vh);
 }
 
 
 /* CHECKER */
 
-.checker {
-    width: 100%;
+.checker{
 
-    height: 13px;
+    height:13px;
 
-    margin-top: 22px;
+    width:100%;
 
-    background-color: var(--background);
+    flex-shrink:0;
+
+    background-color:var(--bg);
 
     background-image:
+
         linear-gradient(
             45deg,
             var(--red) 25%,
@@ -454,6 +525,7 @@ img {
             transparent 75%,
             var(--red) 75%
         ),
+
         linear-gradient(
             45deg,
             var(--red) 25%,
@@ -462,437 +534,477 @@ img {
             var(--red) 75%
         );
 
-    background-size: 14px 14px;
+    background-size:14px 14px;
 
-    background-position: 0 0, 7px 7px;
+    background-position:0 0,7px 7px;
 }
 
 
 /* =========================================================
    MENU
+   ★ 화면 한 장
 ========================================================= */
 
-.menu-section {
-    padding: 76px 0 108px;
-}
+.menu-section{
 
-.menu-title {
-    font-size: 26px;
+    min-height:calc(100vh - var(--header-h));
 
-    font-weight: 800;
+    display:flex;
 
-    margin-bottom: 8px;
-}
+    align-items:center;
 
-.menu-subtitle {
-    font-size: 9px;
-
-    margin-bottom: 18px;
+    padding:40px 0;
 }
 
 
-/* MENU SEARCH */
+.menu-section > .container{
 
-.menu-search {
-    width: 100%;
-    height: 40px;
-
-    border: 1px solid #D8CCB7;
-
-    border-radius: 21px;
-
-    background: #FFF9EE;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 13px;
-
-    margin-bottom: 8px;
-}
-
-.menu-search input {
-    width: 100%;
-
-    border: 0;
-    outline: 0;
-
-    background: transparent;
-
-    font-size: 9px;
-}
-
-.menu-search-icon {
-    width: 15px;
-    height: 15px;
-
-    object-fit: contain;
+    width:min(1200px, calc(100% - 80px));
 }
 
 
-/* CATEGORIES */
+/* TITLE */
 
-.categories {
-    display: flex;
+.menu-title{
 
-    gap: 5px;
+    font-size:26px;
 
-    margin-bottom: 8px;
+    font-weight:800;
+
+    margin-bottom:8px;
 }
 
-.category {
-    height: 25px;
+.menu-subtitle{
 
-    padding: 0 14px;
+    font-size:9px;
 
-    border: 1px solid #D7CBB5;
-
-    border-radius: 14px;
-
-    background: #FFF9EE;
-
-    font-size: 8px;
-
-    color: var(--text);
-
-    white-space: nowrap;
+    margin-bottom:18px;
 }
 
-.category.active {
-    background: var(--red);
 
-    border-color: var(--red);
+/* SEARCH */
 
-    color: white;
+.menu-search{
+
+    height:40px;
+
+    border:1px solid #d8ccb7;
+
+    border-radius:21px;
+
+    background:var(--paper);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 13px;
+
+    margin-bottom:8px;
+}
+
+.menu-search input{
+
+    width:100%;
+
+    border:0;
+
+    outline:0;
+
+    background:transparent;
+
+    font-size:9px;
+}
+
+
+/* CATEGORY */
+
+.categories{
+
+    display:flex;
+
+    gap:5px;
+
+    margin-bottom:8px;
+
+    overflow-x:auto;
+
+    padding-bottom:2px;
+}
+
+.category{
+
+    height:25px;
+
+    padding:0 14px;
+
+    border:1px solid #d7cbb5;
+
+    border-radius:14px;
+
+    background:var(--paper);
+
+    font-size:8px;
+
+    white-space:nowrap;
+
+    color:var(--text);
+}
+
+.category.active{
+
+    background:var(--red);
+
+    border-color:var(--red);
+
+    color:white;
 }
 
 
 /* MENU GRID */
 
-.menu-grid {
-    display: grid;
+.menu-grid{
 
-    grid-template-columns: repeat(4, 1fr);
+    display:grid;
 
-    gap: 3px;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:3px;
 }
 
-.menu-card {
-    background: #FFF9EE;
 
-    border: 1px solid #D7CCB8;
+.menu-card{
 
-    overflow: hidden;
+    background:var(--paper);
+
+    border:1px solid #d7ccb8;
+
+    overflow:hidden;
 }
 
 
 /* MENU IMAGE */
 
-.menu-image {
-    width: 100%;
-    height: 108px;
+.menu-image{
 
-    background: var(--image-gray);
+    height:clamp(100px,14vh,145px);
 
-    position: relative;
+    background:var(--placeholder);
 
-    overflow: hidden;
+    position:relative;
 
-    cursor: pointer;
+    overflow:hidden;
+
+    cursor:pointer;
 }
 
-.menu-image img {
-    width: 100%;
-    height: 100%;
+.menu-image img{
 
-    object-fit: cover;
-}
+    width:100%;
 
-.menu-image-placeholder {
-    position: absolute;
+    height:100%;
 
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 12px;
-
-    color: #333;
-
-    pointer-events: none;
+    object-fit:cover;
 }
 
 
 /* MENU INFO */
 
-.menu-info {
-    padding: 10px 9px 11px;
+.menu-info{
+
+    padding:10px 9px 11px;
 }
 
-.menu-name {
-    font-size: 9px;
+.menu-name{
 
-    font-weight: 600;
+    font-size:9px;
 
-    margin-bottom: 4px;
+    font-weight:600;
+
+    margin-bottom:4px;
 }
 
-.menu-price {
-    font-size: 8px;
+.menu-price{
 
-    font-weight: 500;
+    font-size:8px;
 }
 
 
 /* PAGINATION */
 
-.pagination {
-    display: flex;
+.pagination{
 
-    justify-content: center;
-    align-items: center;
+    display:flex;
 
-    gap: 7px;
+    justify-content:center;
 
-    margin-top: 24px;
+    align-items:center;
+
+    gap:7px;
+
+    margin-top:20px;
 }
 
-.page {
-    width: 17px;
-    height: 17px;
+.page{
 
-    border: 0;
+    width:17px;
 
-    background: transparent;
+    height:17px;
 
-    font-size: 7px;
+    border:0;
 
-    border-radius: 3px;
+    background:transparent;
 
-    color: #777;
+    font-size:7px;
+
+    border-radius:3px;
+
+    color:#777;
 }
 
-.page.active {
-    background: var(--red);
+.page.active{
 
-    color: white;
+    background:var(--red);
+
+    color:white;
 }
 
 
 /* =========================================================
    RECOMMEND
+   ★ 화면 한 장
 ========================================================= */
 
-.recommend-section {
-    background: var(--yellow);
+.recommend-section{
 
-    padding: 58px 0 60px;
-}
+    min-height:calc(100vh - var(--header-h));
 
-.recommend-inner {
-    text-align: center;
-}
+    background:var(--yellow);
 
-.recommend-title {
-    font-size: 24px;
+    display:flex;
 
-    font-weight: 800;
+    align-items:center;
 
-    margin-bottom: 8px;
-}
+    justify-content:center;
 
-.recommend-description {
-    font-size: 8px;
-
-    color: #655B48;
-
-    margin-bottom: 21px;
-}
-
-.recommend-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 13px;
+    padding:50px 0;
 }
 
 
-/* BUTTON */
+.recommend-inner{
 
-.recommend-button {
-    width: 104px;
-    height: 37px;
+    width:min(1200px, calc(100% - 80px));
 
-    border: 0;
+    margin:auto;
 
-    border-radius: 20px;
-
-    background: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 6px;
-
-    font-size: 8px;
-
-    font-weight: 700;
-
-    color: var(--text);
+    text-align:center;
 }
 
 
-/*
-    ★ 중요 ★
+.recommend-title{
 
-    여기 아이콘은 이모지가 아니라
-    네가 가진 원본 아이콘 파일을 넣는 구조.
-*/
+    font-size:clamp(24px,3vw,38px);
 
-.recommend-icon {
-    width: 20px;
-    height: 20px;
+    font-weight:800;
 
-    object-fit: contain;
+    margin-bottom:10px;
+}
+
+.recommend-description{
+
+    font-size:9px;
+
+    color:#655b48;
+
+    margin-bottom:28px;
+}
+
+
+.recommend-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:13px;
+
+    flex-wrap:wrap;
+}
+
+
+.recommend-button{
+
+    width:125px;
+
+    height:43px;
+
+    border:0;
+
+    border-radius:24px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    font-size:9px;
+
+    font-weight:700;
+
+    color:var(--text);
+}
+
+
+.recommend-icon{
+
+    width:23px;
+
+    height:23px;
+
+    object-fit:contain;
 }
 
 
 /* =========================================================
-   BRAND STORY
+   STORY
+   ★ 화면 한 장
 ========================================================= */
 
-.story-section {
-    padding: 103px 0 100px;
+.story-section{
+
+    min-height:calc(100vh - var(--header-h));
+
+    display:flex;
+
+    align-items:center;
+
+    padding:60px 0;
 }
 
-.story-inner {
-    display: grid;
 
-    grid-template-columns: 1.08fr .92fr;
+.story-inner{
 
-    gap: 70px;
+    width:min(1200px, calc(100% - 80px));
 
-    align-items: center;
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1.08fr .92fr;
+
+    gap:70px;
+
+    align-items:center;
 }
 
 
 /* STORY IMAGE */
 
-.story-image {
-    height: 245px;
+.story-image{
 
-    background: var(--image-gray);
+    width:100%;
 
-    border-radius: 6px;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.story-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-.story-image-placeholder {
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 14px;
-
-    color: #333;
-
-    pointer-events: none;
+    height:min(430px,55vh);
 }
 
 
 /* STORY TEXT */
 
-.story-label {
-    color: var(--red);
+.story-label{
 
-    font-size: 8px;
+    color:var(--red);
 
-    font-weight: 700;
+    font-size:9px;
 
-    margin-bottom: 6px;
+    font-weight:700;
+
+    margin-bottom:6px;
 }
 
-.story-title {
-    font-size: 23px;
 
-    line-height: 1.4;
+.story-title{
 
-    letter-spacing: -1px;
+    font-size:clamp(23px,2.4vw,36px);
 
-    font-weight: 800;
+    line-height:1.4;
 
-    margin-bottom: 12px;
+    letter-spacing:-1px;
+
+    font-weight:800;
+
+    margin-bottom:12px;
 }
 
-.story-description {
-    font-size: 8px;
 
-    line-height: 1.8;
+.story-description{
 
-    color: #5A554C;
+    font-size:9px;
 
-    margin-bottom: 18px;
+    line-height:1.8;
+
+    color:#5a554c;
+
+    margin-bottom:18px;
 }
 
 
 /* STORY ICONS */
 
-.story-points {
-    display: flex;
+.story-points{
 
-    gap: 19px;
+    display:flex;
+
+    gap:19px;
 }
 
-.story-point {
-    text-align: center;
+
+.story-point{
+
+    text-align:center;
 }
 
-.story-icon {
-    width: 43px;
-    height: 43px;
 
-    border: 1px solid #BBAF97;
+.story-icon{
 
-    border-radius: 50%;
+    width:48px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height:48px;
+
+    border:1px solid #bbae97;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
 }
 
-.story-icon img {
-    width: 23px;
-    height: 23px;
 
-    object-fit: contain;
+.story-icon img{
+
+    width:25px;
+
+    height:25px;
+
+    object-fit:contain;
 }
 
-.story-point span {
-    display: block;
 
-    margin-top: 6px;
+.story-point span{
 
-    font-size: 7px;
+    display:block;
 
-    color: #756C5C;
+    margin-top:6px;
+
+    font-size:8px;
+
+    color:#756c5c;
 }
 
 
@@ -900,130 +1012,149 @@ img {
    FOOTER
 ========================================================= */
 
-.footer {
-    background: var(--navy);
+.footer{
 
-    color: white;
+    background:var(--navy);
 
-    padding: 38px 0 23px;
+    color:white;
+
+    padding:38px 0 23px;
 }
 
-.footer-inner {
-    display: grid;
 
-    grid-template-columns: 1.25fr 1fr 1fr 1fr 1.45fr;
+.footer-inner{
 
-    gap: 35px;
+    width:min(1200px, calc(100% - 80px));
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:
+        1.25fr 1fr 1fr 1fr 1.45fr;
+
+    gap:35px;
 }
 
-.footer-title {
-    font-size: 13px;
 
-    font-weight: 800;
+.footer-title{
 
-    margin-bottom: 7px;
+    font-size:13px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
 }
 
-.footer-description {
-    font-size: 7px;
 
-    line-height: 1.8;
+.footer-description,
+.footer-text{
 
-    color: #DCE2E5;
+    font-size:7px;
+
+    line-height:1.8;
+
+    color:#dce2e5;
 }
 
-.footer-heading {
-    font-size: 9px;
 
-    font-weight: 700;
+.footer-heading{
 
-    margin-bottom: 7px;
-}
+    font-size:9px;
 
-.footer-text {
-    font-size: 7px;
+    font-weight:700;
 
-    line-height: 1.8;
-
-    color: #D8DEE1;
+    margin-bottom:7px;
 }
 
 
 /* SOCIAL */
 
-.socials {
-    display: flex;
+.socials{
 
-    gap: 5px;
+    display:flex;
+
+    gap:5px;
 }
 
-.social {
-    width: 18px;
-    height: 18px;
 
-    border-radius: 4px;
+.social{
 
-    background: #fff;
+    width:20px;
 
-    overflow: hidden;
+    height:20px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius:4px;
+
+    background:white;
+
+    overflow:hidden;
 }
 
-.social img {
-    width: 100%;
-    height: 100%;
 
-    object-fit: contain;
+.social img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
 }
 
 
 /* NEWSLETTER */
 
-.newsletter {
-    width: 100%;
-    height: 23px;
+.newsletter{
 
-    display: flex;
+    width:100%;
 
-    border: 1px solid rgba(255,255,255,.6);
+    height:25px;
+
+    display:flex;
+
+    border:1px solid rgba(255,255,255,.6);
 }
 
-.newsletter input {
-    flex: 1;
 
-    min-width: 0;
+.newsletter input{
 
-    border: 0;
-    outline: 0;
+    flex:1;
 
-    background: transparent;
+    min-width:0;
 
-    color: white;
+    border:0;
 
-    padding: 0 7px;
+    outline:0;
 
-    font-size: 7px;
+    background:transparent;
+
+    color:white;
+
+    padding:0 7px;
+
+    font-size:7px;
 }
 
-.newsletter input::placeholder {
-    color: #DDE1E3;
+
+.newsletter input::placeholder{
+
+    color:#dce2e5;
 }
 
-.newsletter button {
-    width: 45px;
 
-    border: 0;
+.newsletter button{
 
-    background: white;
+    width:48px;
 
-    color: var(--navy);
+    border:0;
 
-    font-size: 7px;
+    background:white;
 
-    font-weight: 700;
+    color:var(--navy);
+
+    font-size:7px;
+
+    font-weight:700;
 }
 
 
@@ -1031,299 +1162,347 @@ img {
    CART
 ========================================================= */
 
-.cart-overlay {
-    position: fixed;
+.cart-overlay{
 
-    inset: 0;
+    position:fixed;
 
-    background: rgba(0,0,0,.35);
+    inset:0;
 
-    opacity: 0;
+    background:rgba(0,0,0,.35);
 
-    visibility: hidden;
+    opacity:0;
 
-    transition: .25s;
+    visibility:hidden;
 
-    z-index: 2000;
+    transition:.25s;
+
+    z-index:2000;
 }
 
-.cart-overlay.show {
-    opacity: 1;
 
-    visibility: visible;
+.cart-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
 }
 
-.cart-panel {
-    position: fixed;
 
-    top: 0;
-    right: -430px;
+.cart-panel{
 
-    width: 400px;
-    max-width: 90%;
+    position:fixed;
 
-    height: 100vh;
+    top:0;
 
-    padding: 28px;
+    right:-430px;
 
-    background: var(--background);
+    width:400px;
 
-    z-index: 2001;
+    max-width:90%;
 
-    transition: .3s;
+    height:100vh;
 
-    overflow-y: auto;
+    padding:28px;
+
+    background:var(--bg);
+
+    z-index:2001;
+
+    transition:.3s;
+
+    overflow-y:auto;
 }
 
-.cart-panel.show {
-    right: 0;
+
+.cart-panel.show{
+
+    right:0;
 }
 
-.cart-header {
-    display: flex;
 
-    justify-content: space-between;
-    align-items: center;
+.cart-header{
 
-    margin-bottom: 20px;
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
 }
 
-.cart-header h2 {
-    font-size: 23px;
+
+.cart-header h2{
+
+    font-size:23px;
 }
 
-.close-cart {
-    border: 0;
 
-    background: transparent;
+.close-cart{
 
-    font-size: 25px;
+    border:0;
+
+    background:transparent;
+
+    font-size:25px;
 }
 
-.cart-item {
-    display: flex;
 
-    align-items: center;
+.cart-item{
 
-    gap: 12px;
+    display:flex;
 
-    padding: 13px 0;
+    align-items:center;
 
-    border-bottom: 1px solid var(--line);
+    gap:12px;
+
+    padding:13px 0;
+
+    border-bottom:1px solid var(--line);
 }
 
-.cart-item-image {
-    width: 60px;
-    height: 60px;
 
-    background: var(--image-gray);
+.cart-item-image{
 
-    overflow: hidden;
+    width:60px;
 
-    border-radius: 5px;
+    height:60px;
+
+    background:var(--placeholder);
+
+    overflow:hidden;
+
+    border-radius:5px;
+
+    flex-shrink:0;
 }
 
-.cart-item-image img {
-    width: 100%;
-    height: 100%;
 
-    object-fit: cover;
+.cart-item-image img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
 }
 
-.cart-item-info {
-    flex: 1;
+
+.cart-item-info{
+
+    flex:1;
 }
 
-.cart-item-info strong {
-    display: block;
 
-    font-size: 11px;
+.cart-item-info strong{
 
-    margin-bottom: 5px;
+    display:block;
+
+    font-size:11px;
+
+    margin-bottom:5px;
 }
 
-.cart-item-info span {
-    font-size: 9px;
 
-    color: #777;
+.cart-item-info span{
+
+    font-size:9px;
+
+    color:#777;
 }
 
-.remove-item {
-    border: 0;
 
-    background: transparent;
+.remove-item{
 
-    font-size: 17px;
+    border:0;
 
-    color: #888;
+    background:transparent;
+
+    font-size:17px;
+
+    color:#888;
 }
 
-.cart-total {
-    display: flex;
 
-    justify-content: space-between;
+.cart-total{
 
-    padding-top: 20px;
+    display:flex;
 
-    margin-top: 20px;
+    justify-content:space-between;
 
-    border-top: 2px solid var(--navy);
+    padding-top:20px;
 
-    font-size: 12px;
+    margin-top:20px;
 
-    font-weight: 800;
+    border-top:2px solid var(--navy);
+
+    font-size:12px;
+
+    font-weight:800;
 }
 
-.checkout-button {
-    width: 100%;
 
-    height: 45px;
+.checkout-button{
 
-    margin-top: 18px;
+    width:100%;
 
-    border: 0;
+    height:45px;
 
-    border-radius: 5px;
+    margin-top:18px;
 
-    background: var(--navy);
+    border:0;
 
-    color: white;
+    border-radius:5px;
 
-    font-size: 11px;
+    background:var(--navy);
 
-    font-weight: 700;
+    color:white;
+
+    font-size:11px;
+
+    font-weight:700;
 }
 
 
 /* =========================================================
-   MENU MODAL
+   MODAL
 ========================================================= */
 
-.modal-overlay {
-    position: fixed;
+.modal-overlay{
 
-    inset: 0;
+    position:fixed;
 
-    background: rgba(0,0,0,.45);
+    inset:0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background:rgba(0,0,0,.45);
 
-    padding: 20px;
+    display:flex;
 
-    opacity: 0;
-    visibility: hidden;
+    align-items:center;
 
-    z-index: 3000;
+    justify-content:center;
 
-    transition: .2s;
+    padding:20px;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    z-index:3000;
+
+    transition:.2s;
 }
 
-.modal-overlay.show {
-    opacity: 1;
 
-    visibility: visible;
+.modal-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
 }
 
-.modal {
-    width: 700px;
-    max-width: 100%;
 
-    padding: 25px;
+.modal{
 
-    background: var(--background);
+    width:700px;
 
-    border-radius: 7px;
+    max-width:100%;
 
-    position: relative;
+    padding:25px;
+
+    background:var(--bg);
+
+    border-radius:7px;
+
+    position:relative;
 }
 
-.modal-close {
-    position: absolute;
 
-    top: 10px;
-    right: 14px;
+.modal-close{
 
-    border: 0;
+    position:absolute;
 
-    background: transparent;
+    top:10px;
 
-    font-size: 22px;
+    right:14px;
+
+    border:0;
+
+    background:transparent;
+
+    font-size:22px;
 }
 
-.modal-content {
-    display: grid;
 
-    grid-template-columns: 1fr 1fr;
+.modal-content{
 
-    gap: 30px;
+    display:grid;
 
-    align-items: center;
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+    align-items:center;
 }
 
-.modal-image {
-    width: 100%;
-    height: 280px;
 
-    background: var(--image-gray);
+.modal-image{
 
-    overflow: hidden;
-
-    border-radius: 5px;
+    height:280px;
 }
 
-.modal-image img {
-    width: 100%;
-    height: 100%;
 
-    object-fit: cover;
+.modal-name{
+
+    font-size:25px;
+
+    font-weight:800;
+
+    margin-bottom:9px;
 }
 
-.modal-name {
-    font-size: 25px;
 
-    font-weight: 800;
+.modal-price{
 
-    margin-bottom: 9px;
+    color:var(--red);
+
+    font-size:19px;
+
+    font-weight:800;
+
+    margin-bottom:15px;
 }
 
-.modal-price {
-    color: var(--red);
 
-    font-size: 19px;
+.modal-description{
 
-    font-weight: 800;
+    font-size:9px;
 
-    margin-bottom: 15px;
+    line-height:1.8;
+
+    color:#5b554c;
 }
 
-.modal-description {
-    font-size: 9px;
 
-    line-height: 1.8;
+.modal-add{
 
-    color: #5B554C;
-}
+    width:100%;
 
-.modal-add {
-    width: 100%;
+    height:42px;
 
-    height: 42px;
+    margin-top:22px;
 
-    margin-top: 22px;
+    border:0;
 
-    border: 0;
+    border-radius:5px;
 
-    border-radius: 5px;
+    background:var(--red);
 
-    background: var(--red);
+    color:white;
 
-    color: white;
+    font-size:10px;
 
-    font-size: 10px;
-
-    font-weight: 700;
+    font-weight:700;
 }
 
 
@@ -1331,37 +1510,136 @@ img {
    TOAST
 ========================================================= */
 
-.toast {
-    position: fixed;
+.toast{
 
-    left: 50%;
-    bottom: 30px;
+    position:fixed;
 
-    transform: translate(-50%, 20px);
+    left:50%;
 
-    background: var(--navy);
+    bottom:30px;
 
-    color: white;
+    transform:translate(-50%,20px);
 
-    padding: 11px 20px;
+    background:var(--navy);
 
-    border-radius: 20px;
+    color:white;
 
-    font-size: 9px;
+    padding:11px 20px;
 
-    opacity: 0;
+    border-radius:20px;
 
-    pointer-events: none;
+    font-size:9px;
 
-    transition: .25s;
+    opacity:0;
 
-    z-index: 5000;
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:5000;
 }
 
-.toast.show {
-    opacity: 1;
 
-    transform: translate(-50%, 0);
+.toast.show{
+
+    opacity:1;
+
+    transform:translate(-50%,0);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:900px){
+
+    .header-inner,
+    .container,
+    .hero-inner,
+    .recommend-inner,
+    .story-inner,
+    .footer-inner{
+
+        width:calc(100% - 40px);
+    }
+
+
+    .nav{
+
+        margin-left:30px;
+
+        gap:20px;
+    }
+
+
+    .header-search{
+
+        display:none;
+    }
+
+
+    .hero-inner{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+        padding:40px 0;
+    }
+
+
+    .hero{
+
+        min-height:auto;
+    }
+
+
+    .hero-image{
+
+        height:300px;
+    }
+
+
+    .menu-section{
+
+        min-height:auto;
+
+        padding:70px 0;
+    }
+
+
+    .menu-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+
+    .story-section{
+
+        min-height:auto;
+
+        padding:80px 0;
+    }
+
+
+    .story-inner{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .story-image{
+
+        height:300px;
+    }
+
+
+    .footer-inner{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
 }
 
 
@@ -1369,104 +1647,86 @@ img {
    MOBILE
 ========================================================= */
 
-@media(max-width: 900px) {
+@media(max-width:600px){
+
+    :root{
+
+        --header-h:64px;
+    }
+
 
     .header-inner,
-    .container {
-        max-width: calc(100% - 40px);
+    .container,
+    .hero-inner,
+    .recommend-inner,
+    .story-inner,
+    .footer-inner{
+
+        width:calc(100% - 28px);
     }
 
-    .nav {
-        margin-left: 30px;
-        gap: 20px;
+
+    .logo img{
+
+        width:100px;
     }
 
-    .header-search {
-        display: none;
+
+    .nav{
+
+        display:none;
     }
 
-    .hero-inner {
-        grid-template-columns: 1fr;
 
-        gap: 35px;
+    .hero-inner{
+
+        grid-template-columns:1fr;
+
+        padding:30px 0;
     }
 
-    .hero-image {
-        height: 280px;
+
+    .hero-title{
+
+        font-size:43px;
+
+        letter-spacing:-3px;
     }
 
-    .menu-grid {
-        grid-template-columns: repeat(2,1fr);
+
+    .hero-image{
+
+        height:220px;
     }
 
-    .story-inner {
-        grid-template-columns: 1fr;
+
+    .menu-grid{
+
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .footer-inner {
-        grid-template-columns: repeat(2,1fr);
+
+    .recommend-buttons{
+
+        flex-wrap:wrap;
     }
 
-}
 
+    .story-inner{
 
-@media(max-width: 600px) {
-
-    .header {
-        height: 64px;
+        grid-template-columns:1fr;
     }
 
-    .header-inner,
-    .container {
-        max-width: calc(100% - 28px);
+
+    .footer-inner{
+
+        grid-template-columns:1fr 1fr;
     }
 
-    .logo img {
-        width: 100px;
-    }
 
-    .nav {
-        display: none;
-    }
+    .modal-content{
 
-    .hero {
-        padding-top: 35px;
-    }
-
-    .hero-title {
-        font-size: 43px;
-
-        letter-spacing: -3px;
-    }
-
-    .hero-image {
-        height: 220px;
-    }
-
-    .categories {
-        overflow-x: auto;
-
-        padding-bottom: 4px;
-    }
-
-    .menu-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
-
-    .recommend-buttons {
-        flex-wrap: wrap;
-    }
-
-    .story-section {
-        padding: 70px 0;
-    }
-
-    .footer-inner {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .modal-content {
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
     }
 
 }
@@ -1478,19 +1738,16 @@ img {
 <body>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-===================================================== -->
+========================================================= -->
 
 <header class="header">
 
     <div class="header-inner">
 
 
-        <!-- LOGO
-             네 로고 파일:
-             images/logo.png
-        -->
+        <!-- 로고 -->
 
         <a href="#home" class="logo">
 
@@ -1502,7 +1759,7 @@ img {
         </a>
 
 
-        <!-- NAVIGATION -->
+        <!-- 메뉴 -->
 
         <nav class="nav">
 
@@ -1533,7 +1790,7 @@ img {
         </nav>
 
 
-        <!-- RIGHT -->
+        <!-- 오른쪽 -->
 
         <div class="header-right">
 
@@ -1547,7 +1804,7 @@ img {
                 >
 
                 <img
-                    class="icon-search"
+                    class="icon"
                     src="images/icons/search.png"
                     alt="검색"
                 >
@@ -1590,16 +1847,22 @@ img {
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-===================================================== -->
+     ★ 컴퓨터 화면 한 장
+========================================================= -->
 
-<section class="hero" id="home">
+<section
+    class="hero"
+    id="home"
+>
 
-    <div class="hero-inner container">
+
+    <div class="hero-inner">
 
 
         <div class="hero-text">
+
 
             <p class="hero-small">
                 익숙해서 더 맛있는 한 끼
@@ -1626,6 +1889,7 @@ img {
 
             <div class="hero-buttons">
 
+
                 <button
                     class="hero-button primary"
                     onclick="goToMenu()"
@@ -1641,16 +1905,21 @@ img {
                     ✧ 오늘 뭐 먹지?
                 </button>
 
+
             </div>
+
 
         </div>
 
 
-        <!-- HERO IMAGE
-             images/hero.jpg
+        <!--
+            ★ 메인 이미지
+
+            images/hero.jpg
         -->
 
-        <div class="hero-image">
+        <div class="image-box hero-image">
+
 
             <img
                 src="images/hero.jpg"
@@ -1658,26 +1927,35 @@ img {
                 onerror="this.style.display='none'"
             >
 
-            <div class="hero-image-placeholder">
+
+            <div class="image-placeholder">
                 IMG
             </div>
 
+
         </div>
+
 
     </div>
 
 
     <div class="checker"></div>
 
+
 </section>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      MENU
-===================================================== -->
+     ★ 컴퓨터 화면 한 장
+========================================================= -->
 
-<section class="menu-section" id="menu">
+<section
+    class="menu-section"
+    id="menu"
+>
+
 
     <div class="container">
 
@@ -1686,14 +1964,16 @@ img {
             메뉴
         </h2>
 
+
         <p class="menu-subtitle">
             다양한 메뉴를 카테고리별로 확인해보세요.
         </p>
 
 
-        <!-- SEARCH -->
+        <!-- 검색 -->
 
         <div class="menu-search">
+
 
             <input
                 id="menuSearch"
@@ -1702,18 +1982,21 @@ img {
                 oninput="renderMenu()"
             >
 
+
             <img
-                class="menu-search-icon"
+                class="icon"
                 src="images/icons/search.png"
                 alt="검색"
             >
 
+
         </div>
 
 
-        <!-- CATEGORY -->
+        <!-- 카테고리 -->
 
         <div class="categories">
+
 
             <button
                 class="category active"
@@ -1722,12 +2005,14 @@ img {
                 전체
             </button>
 
+
             <button
                 class="category"
                 onclick="setCategory('김밥',this)"
             >
                 김밥
             </button>
+
 
             <button
                 class="category"
@@ -1736,12 +2021,14 @@ img {
                 덮밥
             </button>
 
+
             <button
                 class="category"
                 onclick="setCategory('찌개',this)"
             >
                 찌개
             </button>
+
 
             <button
                 class="category"
@@ -1750,12 +2037,14 @@ img {
                 죽
             </button>
 
+
             <button
                 class="category"
                 onclick="setCategory('라면',this)"
             >
                 라면
             </button>
+
 
             <button
                 class="category"
@@ -1764,12 +2053,14 @@ img {
                 분식
             </button>
 
+
             <button
                 class="category"
                 onclick="setCategory('돈까스',this)"
             >
                 돈까스
             </button>
+
 
             <button
                 class="category"
@@ -1778,6 +2069,7 @@ img {
                 사이드
             </button>
 
+
             <button
                 class="category"
                 onclick="setCategory('음료',this)"
@@ -1785,10 +2077,11 @@ img {
                 음료
             </button>
 
+
         </div>
 
 
-        <!-- MENU -->
+        <!-- 메뉴 카드 -->
 
         <div
             class="menu-grid"
@@ -1796,48 +2089,58 @@ img {
         ></div>
 
 
-        <!-- PAGINATION -->
+        <!-- 페이지 -->
 
         <div class="pagination">
+
 
             <button class="page">
                 ‹
             </button>
 
+
             <button class="page active">
                 1
             </button>
+
 
             <button class="page">
                 2
             </button>
 
+
             <button class="page">
                 3
             </button>
+
 
             <button class="page">
                 ›
             </button>
 
+
         </div>
 
+
     </div>
+
 
 </section>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      RECOMMEND
-===================================================== -->
+     ★ 컴퓨터 화면 한 장
+========================================================= -->
 
 <section
     class="recommend-section"
     id="recommend"
 >
 
-    <div class="container recommend-inner">
+
+    <div class="recommend-inner">
 
 
         <h2 class="recommend-title">
@@ -1851,16 +2154,6 @@ img {
 
 
         <div class="recommend-buttons">
-
-
-            <!--
-                ★ 네 아이콘 넣는 부분
-
-                recommend-full.png
-                recommend-spicy.png
-                recommend-light.png
-                recommend-cheap.png
-            -->
 
 
             <button
@@ -1926,29 +2219,35 @@ img {
 
             </button>
 
+
         </div>
 
+
     </div>
+
 
 </section>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      BRAND STORY
-===================================================== -->
+     ★ 컴퓨터 화면 한 장
+========================================================= -->
 
 <section
     class="story-section"
     id="story"
 >
 
-    <div class="container story-inner">
+
+    <div class="story-inner">
 
 
-        <!-- IMAGE -->
+        <!-- 이미지 -->
 
-        <div class="story-image">
+        <div class="image-box story-image">
+
 
             <img
                 src="images/brand.jpg"
@@ -1956,14 +2255,16 @@ img {
                 onerror="this.style.display='none'"
             >
 
-            <div class="story-image-placeholder">
+
+            <div class="image-placeholder">
                 김밥2.jpg
             </div>
+
 
         </div>
 
 
-        <!-- TEXT -->
+        <!-- 내용 -->
 
         <div>
 
@@ -2048,24 +2349,28 @@ img {
 
             </div>
 
+
         </div>
 
+
     </div>
+
 
 </section>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-===================================================== -->
+========================================================= -->
 
 <footer
     class="footer"
     id="event"
 >
 
-    <div class="container footer-inner">
+
+    <div class="footer-inner">
 
 
         <div>
@@ -2127,6 +2432,7 @@ img {
 
             <div class="socials">
 
+
                 <div class="social">
 
                     <img
@@ -2156,7 +2462,9 @@ img {
 
                 </div>
 
+
             </div>
+
 
         </div>
 
@@ -2167,6 +2475,7 @@ img {
                 이벤트
             </h4>
 
+
             <p class="footer-text">
                 다양한 소식을 받아보세요.
             </p>
@@ -2174,29 +2483,35 @@ img {
 
             <div class="newsletter">
 
+
                 <input
                     id="email"
                     type="email"
                     placeholder="이메일을 입력해주세요"
                 >
 
+
                 <button onclick="subscribe()">
                     구독하기
                 </button>
 
+
             </div>
+
 
         </div>
 
+
     </div>
+
 
 </footer>
 
 
 
-<!-- =====================================================
+<!-- =========================================================
      CART
-===================================================== -->
+========================================================= -->
 
 <div
     class="cart-overlay"
@@ -2210,11 +2525,13 @@ img {
     id="cartPanel"
 >
 
+
     <div class="cart-header">
 
         <h2>
             장바구니
         </h2>
+
 
         <button
             class="close-cart"
@@ -2249,13 +2566,14 @@ img {
         주문하기
     </button>
 
+
 </aside>
 
 
 
-<!-- =====================================================
-     MENU DETAIL
-===================================================== -->
+<!-- =========================================================
+     MENU MODAL
+========================================================= -->
 
 <div
     class="modal-overlay"
@@ -2263,7 +2581,9 @@ img {
     onclick="closeModalOutside(event)"
 >
 
+
     <div class="modal">
+
 
         <button
             class="modal-close"
@@ -2276,7 +2596,7 @@ img {
         <div class="modal-content">
 
 
-            <div class="modal-image">
+            <div class="image-box modal-image">
 
                 <img
                     id="modalImage"
@@ -2288,6 +2608,7 @@ img {
 
 
             <div>
+
 
                 <h2
                     class="modal-name"
@@ -2314,11 +2635,15 @@ img {
                     장바구니 담기
                 </button>
 
+
             </div>
+
 
         </div>
 
+
     </div>
+
 
 </div>
 
@@ -2342,90 +2667,92 @@ img {
 const menus = [
 
     {
-        id: 1,
-        name: "야채김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu01.jpg",
-        moods: ["간단하게", "저렴하게"],
-        description: "신선한 야채를 가득 넣은 담백한 김밥입니다."
+        id:1,
+        name:"야채김밥",
+        category:"김밥",
+        price:3500,
+        image:"images/menu01.jpg",
+        moods:["간단하게","저렴하게"],
+        description:"신선한 야채를 가득 넣은 담백한 김밥입니다."
     },
 
     {
-        id: 2,
-        name: "치즈김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu02.jpg",
-        moods: ["간단하게"],
-        description: "고소한 치즈와 다양한 재료가 어우러진 김밥입니다."
+        id:2,
+        name:"치즈김밥",
+        category:"김밥",
+        price:3500,
+        image:"images/menu02.jpg",
+        moods:["간단하게"],
+        description:"고소한 치즈와 다양한 재료가 어우러진 김밥입니다."
     },
 
     {
-        id: 3,
-        name: "참치김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu03.jpg",
-        moods: ["든든하게", "간단하게"],
-        description: "고소한 참치와 신선한 야채를 함께 즐길 수 있습니다."
+        id:3,
+        name:"참치김밥",
+        category:"김밥",
+        price:4500,
+        image:"images/menu03.jpg",
+        moods:["든든하게","간단하게"],
+        description:"고소한 참치와 신선한 야채를 함께 즐길 수 있습니다."
     },
 
     {
-        id: 4,
-        name: "새우김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu04.jpg",
-        moods: ["든든하게"],
-        description: "탱글한 새우와 다양한 재료를 담은 김밥입니다."
+        id:4,
+        name:"새우김밥",
+        category:"김밥",
+        price:3500,
+        image:"images/menu04.jpg",
+        moods:["든든하게"],
+        description:"탱글한 새우와 다양한 재료를 담은 김밥입니다."
     },
 
     {
-        id: 5,
-        name: "야채김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu05.jpg",
-        moods: ["간단하게", "저렴하게"],
-        description: "가볍게 즐기기 좋은 야채김밥입니다."
+        id:5,
+        name:"참치볶음밥",
+        category:"덮밥",
+        price:6000,
+        image:"images/menu05.jpg",
+        moods:["든든하게"],
+        description:"고소한 참치와 볶음밥의 조화가 좋은 메뉴입니다."
     },
 
     {
-        id: 6,
-        name: "치즈김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu06.jpg",
-        moods: ["간단하게"],
-        description: "부드러운 치즈의 풍미를 담았습니다."
+        id:6,
+        name:"떡볶이",
+        category:"분식",
+        price:4500,
+        image:"images/menu06.jpg",
+        moods:["매콤하게"],
+        description:"매콤달콤한 양념으로 즐기는 대표 분식 메뉴입니다."
     },
 
     {
-        id: 7,
-        name: "참치김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu07.jpg",
-        moods: ["든든하게"],
-        description: "참치의 고소한 맛을 즐길 수 있는 메뉴입니다."
+        id:7,
+        name:"돈까스",
+        category:"돈까스",
+        price:7000,
+        image:"images/menu07.jpg",
+        moods:["든든하게"],
+        description:"바삭한 튀김옷과 담백한 고기의 조화가 좋은 메뉴입니다."
     },
 
     {
-        id: 8,
-        name: "새우김밥",
-        category: "김밥",
-        price: 3500,
-        image: "images/menu08.jpg",
-        moods: ["든든하게"],
-        description: "새우의 담백한 맛을 즐길 수 있습니다."
+        id:8,
+        name:"제육덮밥",
+        category:"덮밥",
+        price:6500,
+        image:"images/menu08.jpg",
+        moods:["매콤하게","든든하게"],
+        description:"매콤한 제육과 따뜻한 밥을 함께 즐기는 메뉴입니다."
     }
 
 ];
 
 
 let currentCategory = "전체";
+
 let currentMenu = null;
+
 let cart = [];
 
 
@@ -2433,9 +2760,11 @@ let cart = [];
    MENU RENDER
 ========================================================= */
 
-function renderMenu() {
+function renderMenu(){
 
-    const grid = document.getElementById("menuGrid");
+    const grid =
+        document.getElementById("menuGrid");
+
 
     const keyword =
         document
@@ -2445,20 +2774,23 @@ function renderMenu() {
         .toLowerCase();
 
 
-    const filtered = menus.filter(menu => {
+    const filtered =
+        menus.filter(menu => {
 
-        const categoryMatch =
-            currentCategory === "전체" ||
-            menu.category === currentCategory;
+            const categoryMatch =
+                currentCategory === "전체" ||
+                menu.category === currentCategory;
 
-        const searchMatch =
-            menu.name
-            .toLowerCase()
-            .includes(keyword);
 
-        return categoryMatch && searchMatch;
+            const searchMatch =
+                menu.name
+                .toLowerCase()
+                .includes(keyword);
 
-    });
+
+            return categoryMatch && searchMatch;
+
+        });
 
 
     grid.innerHTML = "";
@@ -2466,7 +2798,10 @@ function renderMenu() {
 
     filtered.forEach(menu => {
 
-        const card = document.createElement("article");
+
+        const card =
+            document.createElement("article");
+
 
         card.className = "menu-card";
 
@@ -2484,7 +2819,7 @@ function renderMenu() {
                     onerror="this.style.display='none'"
                 >
 
-                <div class="menu-image-placeholder">
+                <div class="image-placeholder">
                     IMG
                 </div>
 
@@ -2496,6 +2831,7 @@ function renderMenu() {
                 <div class="menu-name">
                     ${menu.name}
                 </div>
+
 
                 <div class="menu-price">
                     ${menu.price.toLocaleString()}원
@@ -2517,16 +2853,18 @@ function renderMenu() {
    CATEGORY
 ========================================================= */
 
-function setCategory(category, button) {
+function setCategory(category,button){
 
     currentCategory = category;
 
 
     document
-        .querySelectorAll(".category")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
+    .querySelectorAll(".category")
+    .forEach(btn => {
+
+        btn.classList.remove("active");
+
+    });
 
 
     button.classList.add("active");
@@ -2542,50 +2880,56 @@ function setCategory(category, button) {
 ========================================================= */
 
 document
-    .getElementById("headerSearch")
-    .addEventListener("input", function() {
+.getElementById("headerSearch")
+.addEventListener("input",function(){
 
-        document
-            .getElementById("menuSearch")
-            .value = this.value;
+    document
+    .getElementById("menuSearch")
+    .value = this.value;
 
-        currentCategory = "전체";
 
-        document
-            .querySelectorAll(".category")
-            .forEach(btn => {
-                btn.classList.remove("active");
-            });
+    currentCategory = "전체";
 
-        document
-            .querySelector(".category")
-            .classList.add("active");
 
-        renderMenu();
+    document
+    .querySelectorAll(".category")
+    .forEach(btn => {
+
+        btn.classList.remove("active");
 
     });
 
 
+    document
+    .querySelector(".category")
+    .classList.add("active");
+
+
+    renderMenu();
+
+});
+
+
 /* =========================================================
-   GO MENU
+   MENU MOVE
 ========================================================= */
 
-function goToMenu() {
+function goToMenu(){
 
     document
-        .getElementById("menu")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
+    .getElementById("menu")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
 
 }
 
 
 /* =========================================================
-   RANDOM
+   RANDOM MENU
 ========================================================= */
 
-function randomMenu() {
+function randomMenu(){
 
     const random =
         menus[
@@ -2593,6 +2937,7 @@ function randomMenu() {
                 Math.random() * menus.length
             )
         ];
+
 
     openModal(random.id);
 
@@ -2603,27 +2948,28 @@ function randomMenu() {
    RECOMMEND
 ========================================================= */
 
-function recommendMood(mood) {
+function recommendMood(mood){
 
-    const candidates =
+    const list =
         menus.filter(menu =>
             menu.moods.includes(mood)
         );
 
 
-    if (!candidates.length) {
+    if(!list.length){
 
-        showToast("추천 메뉴가 없습니다.");
+        showToast(
+            "추천 메뉴가 없습니다."
+        );
 
         return;
-
     }
 
 
     const random =
-        candidates[
+        list[
             Math.floor(
-                Math.random() * candidates.length
+                Math.random() * list.length
             )
         ];
 
@@ -2637,59 +2983,66 @@ function recommendMood(mood) {
    MODAL
 ========================================================= */
 
-function openModal(id) {
+function openModal(id){
 
     currentMenu =
-        menus.find(menu => menu.id === id);
+        menus.find(
+            menu => menu.id === id
+        );
 
 
-    if (!currentMenu) return;
-
-
-    document
-        .getElementById("modalImage")
-        .src = currentMenu.image;
+    if(!currentMenu) return;
 
 
     document
-        .getElementById("modalName")
-        .textContent = currentMenu.name;
+    .getElementById("modalImage")
+    .src = currentMenu.image;
 
 
     document
-        .getElementById("modalPrice")
-        .textContent =
-        currentMenu.price.toLocaleString() + "원";
+    .getElementById("modalName")
+    .textContent =
+        currentMenu.name;
 
 
     document
-        .getElementById("modalDescription")
-        .textContent =
+    .getElementById("modalPrice")
+    .textContent =
+        currentMenu.price.toLocaleString()
+        + "원";
+
+
+    document
+    .getElementById("modalDescription")
+    .textContent =
         currentMenu.description;
 
 
     document
-        .getElementById("modalOverlay")
-        .classList.add("show");
+    .getElementById("modalOverlay")
+    .classList.add("show");
 
 }
 
 
-function closeModal() {
+function closeModal(){
 
     document
-        .getElementById("modalOverlay")
-        .classList.remove("show");
+    .getElementById("modalOverlay")
+    .classList.remove("show");
 
 }
 
 
-function closeModalOutside(event) {
+function closeModalOutside(event){
 
-    if (
-        event.target === event.currentTarget
-    ) {
+    if(
+        event.target ===
+        event.currentTarget
+    ){
+
         closeModal();
+
     }
 
 }
@@ -2699,28 +3052,29 @@ function closeModalOutside(event) {
    CART
 ========================================================= */
 
-function addCurrentMenu() {
+function addCurrentMenu(){
 
-    if (!currentMenu) return;
+    if(!currentMenu) return;
 
 
-    const existing =
-        cart.find(item =>
+    const item =
+        cart.find(
+            item =>
             item.id === currentMenu.id
         );
 
 
-    if (existing) {
+    if(item){
 
-        existing.quantity++;
+        item.quantity++;
 
-    } else {
+    }else{
 
         cart.push({
 
             ...currentMenu,
 
-            quantity: 1
+            quantity:1
 
         });
 
@@ -2729,7 +3083,9 @@ function addCurrentMenu() {
 
     updateCart();
 
+
     closeModal();
+
 
     showToast(
         currentMenu.name +
@@ -2739,52 +3095,60 @@ function addCurrentMenu() {
 }
 
 
-function updateCart() {
+/* =========================================================
+   UPDATE CART
+========================================================= */
+
+function updateCart(){
 
     const count =
         cart.reduce(
-            (sum, item) =>
+            (sum,item) =>
             sum + item.quantity,
             0
         );
 
 
     document
-        .getElementById("cartCount")
-        .textContent = count;
+    .getElementById("cartCount")
+    .textContent = count;
 
 
-    const container =
+    const box =
         document.getElementById("cartItems");
 
 
-    if (!cart.length) {
+    if(!cart.length){
 
-        container.innerHTML = `
+        box.innerHTML = `
 
-            <p style="
-                text-align:center;
-                padding:50px 0;
-                color:#777;
-                font-size:10px;
-            ">
+            <p
+                style="
+                    text-align:center;
+                    padding:50px 0;
+                    color:#777;
+                    font-size:10px;
+                "
+            >
                 장바구니가 비어있어요.
             </p>
 
         `;
 
-    } else {
+    }else{
 
-        container.innerHTML = "";
+        box.innerHTML = "";
 
 
         cart.forEach(item => {
+
 
             const element =
                 document.createElement("div");
 
 
-            element.className = "cart-item";
+            element.className =
+                "cart-item";
 
 
             element.innerHTML = `
@@ -2805,9 +3169,11 @@ function updateCart() {
                         ${item.name}
                     </strong>
 
+
                     <span>
                         ${item.price.toLocaleString()}원
-                        × ${item.quantity}
+                        ×
+                        ${item.quantity}
                     </span>
 
                 </div>
@@ -2823,7 +3189,7 @@ function updateCart() {
             `;
 
 
-            container.appendChild(element);
+            box.appendChild(element);
 
         });
 
@@ -2832,57 +3198,73 @@ function updateCart() {
 
     const total =
         cart.reduce(
-            (sum, item) =>
+            (sum,item) =>
             sum +
-            item.price * item.quantity,
+            item.price *
+            item.quantity,
             0
         );
 
 
     document
-        .getElementById("cartTotal")
-        .textContent =
-        total.toLocaleString() + "원";
+    .getElementById("cartTotal")
+    .textContent =
+        total.toLocaleString() +
+        "원";
 
 }
 
 
-function removeFromCart(id) {
+/* =========================================================
+   REMOVE CART
+========================================================= */
+
+function removeFromCart(id){
 
     cart =
         cart.filter(
-            item => item.id !== id
+            item =>
+            item.id !== id
         );
+
 
     updateCart();
 
 }
 
 
-function openCart() {
+/* =========================================================
+   OPEN CART
+========================================================= */
+
+function openCart(){
 
     document
-        .getElementById("cartPanel")
-        .classList.add("show");
+    .getElementById("cartPanel")
+    .classList.add("show");
 
 
     document
-        .getElementById("cartOverlay")
-        .classList.add("show");
+    .getElementById("cartOverlay")
+    .classList.add("show");
 
 }
 
 
-function closeCart() {
+/* =========================================================
+   CLOSE CART
+========================================================= */
+
+function closeCart(){
 
     document
-        .getElementById("cartPanel")
-        .classList.remove("show");
+    .getElementById("cartPanel")
+    .classList.remove("show");
 
 
     document
-        .getElementById("cartOverlay")
-        .classList.remove("show");
+    .getElementById("cartOverlay")
+    .classList.remove("show");
 
 }
 
@@ -2891,16 +3273,15 @@ function closeCart() {
    CHECKOUT
 ========================================================= */
 
-function checkout() {
+function checkout(){
 
-    if (!cart.length) {
+    if(!cart.length){
 
         showToast(
             "장바구니가 비어있어요."
         );
 
         return;
-
     }
 
 
@@ -2915,23 +3296,20 @@ function checkout() {
    NEWSLETTER
 ========================================================= */
 
-function subscribe() {
+function subscribe(){
 
-    const email =
+    const input =
         document
-        .getElementById("email")
-        .value
-        .trim();
+        .getElementById("email");
 
 
-    if (!email) {
+    if(!input.value.trim()){
 
         showToast(
             "이메일을 입력해주세요."
         );
 
         return;
-
     }
 
 
@@ -2940,9 +3318,7 @@ function subscribe() {
     );
 
 
-    document
-        .getElementById("email")
-        .value = "";
+    input.value = "";
 
 }
 
@@ -2951,13 +3327,15 @@ function subscribe() {
    TOAST
 ========================================================= */
 
-function showToast(message) {
+function showToast(message){
 
     const toast =
-        document.getElementById("toast");
+        document
+        .getElementById("toast");
 
 
     toast.textContent = message;
+
 
     toast.classList.add("show");
 
@@ -2966,20 +3344,20 @@ function showToast(message) {
 
         toast.classList.remove("show");
 
-    }, 2000);
+    },2000);
 
 }
 
 
 /* =========================================================
-   ESC
+   ESC KEY
 ========================================================= */
 
 document.addEventListener(
     "keydown",
     event => {
 
-        if (event.key === "Escape") {
+        if(event.key === "Escape"){
 
             closeModal();
 
