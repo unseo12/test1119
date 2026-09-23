@@ -12,9 +12,6 @@
 
 <style>
 
-/* =========================================================
-   00. BASIC
-========================================================= */
 
 :root{
     --bg:#FFF6E5;
@@ -73,10 +70,6 @@ a{
 }
 
 
-/* =========================================================
-   01. HEADER
-========================================================= */
-
 .header{
     width:100%;
     height:var(--header-height);
@@ -100,7 +93,6 @@ a{
 }
 
 
-/* LOGO */
 
 .logo{
     width:145px;
@@ -116,7 +108,6 @@ a{
 }
 
 
-/* NAV */
 
 .nav{
     height:100%;
@@ -160,7 +151,6 @@ a{
 }
 
 
-/* HEADER RIGHT */
 
 .header-right{
     margin-left:auto;
@@ -172,7 +162,6 @@ a{
 }
 
 
-/* HEADER SEARCH */
 
 .header-search{
     width:200px;
@@ -214,7 +203,6 @@ a{
 }
 
 
-/* CART */
 
 .cart-button{
     width:32px;
@@ -259,8 +247,6 @@ a{
 }
 
 
-/* ORDER */
-
 .order-button{
     height:34px;
 
@@ -277,9 +263,6 @@ a{
 }
 
 
-/* =========================================================
-   02. HERO
-========================================================= */
 
 .hero{
     height:calc(100dvh - var(--header-height));
@@ -309,15 +292,9 @@ a{
 
     gap:95px;
 
-    /*
-       체크무늬가 하단보다 조금 위에 위치하도록
-       아래쪽 공간 확보
-    */
     padding:35px 0 90px;
 }
 
-
-/* HERO TEXT */
 
 .hero-copy{
     padding-left:0;
@@ -356,8 +333,6 @@ a{
     letter-spacing:-.3px;
 }
 
-
-/* HERO BUTTON */
 
 .hero-buttons{
     display:flex;
@@ -405,8 +380,6 @@ a{
 }
 
 
-/* HERO IMAGE */
-
 .hero-image{
     width:100%;
 
@@ -434,8 +407,6 @@ a{
 }
 
 
-/* PLACEHOLDER */
-
 .placeholder{
     position:absolute;
 
@@ -450,8 +421,6 @@ a{
     pointer-events:none;
 }
 
-
-/* CHECKER */
 
 .checker{
     width:100%;
@@ -485,10 +454,6 @@ a{
 }
 
 
-/* =========================================================
-   03. MENU
-========================================================= */
-
 .menu-section{
     height:calc(100dvh - var(--header-height));
 
@@ -508,9 +473,6 @@ a{
     margin:0 auto;
 }
 
-
-/* MENU TITLE */
-
 .menu-title{
     margin-bottom:5px;
 
@@ -529,9 +491,6 @@ a{
 
     font-size:11px;
 }
-
-
-/* MENU SEARCH */
 
 .menu-search{
     width:100%;
@@ -565,13 +524,6 @@ a{
 .menu-search input::placeholder{
     color:#8F887D;
 }
-
-
-/* =========================================================
-   MENU CATEGORY
-
-   검색창 왼쪽/오른쪽과 정확히 맞춤
-========================================================= */
 
 .categories{
     width:100%;
@@ -618,10 +570,6 @@ a{
 }
 
 
-/* =========================================================
-   MENU GRID
-========================================================= */
-
 .menu-grid{
     width:100%;
 
@@ -633,8 +581,6 @@ a{
 }
 
 
-/* CARD */
-
 .menu-card{
     width:100%;
 
@@ -645,11 +591,6 @@ a{
     background:var(--bg);
 }
 
-
-/*
-   사진보다 메뉴명/가격 부분이 너무 작아 보이지 않도록
-   시안 비율에 맞춰 조정
-*/
 
 .menu-image{
     width:100%;
@@ -674,8 +615,6 @@ a{
     object-fit:cover;
 }
 
-
-/* CARD INFO */
 
 .menu-info{
     height:72px;
@@ -709,10 +648,6 @@ a{
     font-weight:400;
 }
 
-
-/* =========================================================
-   PAGINATION
-========================================================= */
 
 .pagination{
     margin-top:17px;
@@ -771,10 +706,6 @@ a{
     border-color:var(--red);
 }
 
-
-/* =========================================================
-   04. RECOMMEND
-========================================================= */
 
 .recommend-section{
     min-height:calc(100dvh - var(--header-height));
@@ -860,11 +791,6 @@ a{
     object-fit:contain;
 }
 
-
-/* =========================================================
-   05. STORY
-========================================================= */
-
 .story-section{
     height:calc(100dvh - var(--header-height));
 
@@ -881,7 +807,6 @@ a{
 
     margin:0 auto;
 
-    /* 김밥천국 이야기 콘텐츠 전체를 살짝 위로 이동 */
     transform:translateY(-45px);
 
     display:grid;
@@ -892,9 +817,6 @@ a{
 
     align-items:center;
 }
-
-
-/* STORY IMAGE */
 
 .story-image{
     width:100%;
@@ -919,9 +841,6 @@ a{
 
     object-fit:cover;
 }
-
-
-/* STORY COPY */
 
 .story-label{
     margin-bottom:8px;
@@ -951,9 +870,6 @@ a{
     font-size:10px;
     line-height:1.8;
 }
-
-
-/* STORY POINTS */
 
 .story-points{
     display:flex;
@@ -995,11 +911,6 @@ a{
 
     font-size:8px;
 }
-
-
-/* =========================================================
-   06. FOOTER
-========================================================= */
 
 .footer{
     padding:48px 0 32px;
@@ -1048,9 +959,6 @@ a{
     line-height:1.8;
 }
 
-
-/* SOCIAL */
-
 .socials{
     display:flex;
 
@@ -1070,9 +978,6 @@ a{
 
     object-fit:contain;
 }
-
-
-/* NEWSLETTER */
 
 .newsletter{
     width:100%;
@@ -1113,11 +1018,6 @@ a{
     font-size:8px;
     font-weight:700;
 }
-
-
-/* =========================================================
-   07. CART
-========================================================= */
 
 .cart-overlay{
     position:fixed;
@@ -1269,11 +1169,6 @@ a{
     font-weight:700;
 }
 
-
-/* =========================================================
-   08. MODAL
-========================================================= */
-
 .modal-overlay{
     position:fixed;
 
@@ -1386,11 +1281,6 @@ a{
     font-weight:700;
 }
 
-
-/* =========================================================
-   09. TOAST
-========================================================= */
-
 .toast{
     position:fixed;
 
@@ -1423,11 +1313,6 @@ a{
 
     transform:translate(-50%,0);
 }
-
-
-/* =========================================================
-   10. SMALL DESKTOP / LAPTOP
-========================================================= */
 
 @media (min-width:901px) and (max-height:800px){
 
@@ -1478,8 +1363,6 @@ a{
         bottom:35px;
     }
 
-
-    /* MENU */
 
     .menu-section{
         padding:18px 0;
@@ -1538,14 +1421,9 @@ a{
     }
 
 
-    /* RECOMMEND */
-
     .recommend-title{
         font-size:32px;
     }
-
-
-    /* STORY */
 
     .story-section{
         padding:40px 0;
@@ -1556,11 +1434,6 @@ a{
     }
 
 }
-
-
-/* =========================================================
-   11. TABLET
-========================================================= */
 
 @media (max-width:900px){
 
@@ -1574,9 +1447,6 @@ a{
         width:calc(100% - 40px);
     }
 
-
-    /* HEADER */
-
     .nav{
         margin-left:30px;
 
@@ -1586,9 +1456,6 @@ a{
     .header-search{
         display:none;
     }
-
-
-    /* HERO */
 
     .hero{
         height:auto;
@@ -1608,9 +1475,6 @@ a{
     .hero-image{
         max-height:none;
     }
-
-
-    /* MENU */
 
     .menu-section{
         height:auto;
@@ -1650,9 +1514,6 @@ a{
         aspect-ratio:1.55 / 1;
     }
 
-
-    /* RECOMMEND */
-
     .recommend-section{
         min-height:auto;
         padding:70px 0;
@@ -1662,9 +1523,6 @@ a{
         min-height:360px;
         padding:60px 30px;
     }
-
-
-    /* STORY */
 
     .story-section{
         height:auto;
@@ -1682,18 +1540,12 @@ a{
     }
 
 
-    /* FOOTER */
-
     .footer-content{
         grid-template-columns:repeat(2,1fr);
     }
 
 }
 
-
-/* =========================================================
-   12. MOBILE
-========================================================= */
 
 @media (max-width:600px){
 
@@ -1712,8 +1564,6 @@ a{
     }
 
 
-    /* HEADER */
-
     .nav{
         display:none;
     }
@@ -1725,9 +1575,6 @@ a{
     .order-button{
         padding:0 14px;
     }
-
-
-    /* HERO */
 
     .hero-content{
         padding:45px 0 90px;
@@ -1761,8 +1608,6 @@ a{
     }
 
 
-    /* MENU */
-
     .menu-section{
         padding:60px 0;
     }
@@ -1790,8 +1635,6 @@ a{
     }
 
 
-    /* RECOMMEND */
-
     .recommend-section{
         min-height:auto;
         padding:55px 0;
@@ -1811,14 +1654,10 @@ a{
     }
 
 
-    /* STORY */
-
     .story-title{
         font-size:27px;
     }
 
-
-    /* FOOTER */
 
     .footer-content{
         grid-template-columns:1fr 1fr;
@@ -1826,8 +1665,6 @@ a{
         gap:35px 25px;
     }
 
-
-    /* MODAL */
 
     .modal-content{
         grid-template-columns:1fr;
@@ -1845,10 +1682,6 @@ a{
 
 <body>
 
-
-<!-- =========================================================
-     HEADER
-========================================================= -->
 
 <header class="header">
 
@@ -2017,10 +1850,6 @@ a{
 </section>
 
 
-<!-- =========================================================
-     MENU
-========================================================= -->
-
 <section class="menu-section" id="menu">
 
     <div class="menu-content">
@@ -2163,10 +1992,6 @@ a{
 </section>
 
 
-<!-- =========================================================
-     RECOMMEND
-========================================================= -->
-
 <section
     class="recommend-section"
     id="recommend"
@@ -2255,10 +2080,6 @@ a{
 
 </section>
 
-
-<!-- =========================================================
-     STORY
-========================================================= -->
 
 <section
     class="story-section"
@@ -2368,10 +2189,6 @@ a{
 
 </section>
 
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
 
 <footer
     class="footer"
@@ -2505,10 +2322,6 @@ a{
 </footer>
 
 
-<!-- =========================================================
-     CART
-========================================================= -->
-
 <div
     class="cart-overlay"
     id="cartOverlay"
@@ -2562,10 +2375,6 @@ a{
 
 </aside>
 
-
-<!-- =========================================================
-     MODAL
-========================================================= -->
 
 <div
     class="modal-overlay"
@@ -2640,9 +2449,6 @@ a{
 
 <script>
 
-/* =========================================================
-   MENU DATA
-========================================================= */
 
 const menus = [
 
@@ -2733,11 +2539,6 @@ let currentCategory = "전체";
 let currentMenu = null;
 let cart = [];
 
-
-/* =========================================================
-   MENU RENDER
-========================================================= */
-
 function renderMenu(){
 
     const grid =
@@ -2825,11 +2626,6 @@ function renderMenu(){
 
 }
 
-
-/* =========================================================
-   CATEGORY
-========================================================= */
-
 function setCategory(category,button){
 
     currentCategory = category;
@@ -2850,11 +2646,6 @@ function setCategory(category,button){
     renderMenu();
 
 }
-
-
-/* =========================================================
-   HEADER SEARCH
-========================================================= */
 
 document
 .getElementById("headerSearch")
@@ -2894,11 +2685,6 @@ document
 
 });
 
-
-/* =========================================================
-   GO MENU
-========================================================= */
-
 function goToMenu(){
 
     document
@@ -2911,10 +2697,6 @@ function goToMenu(){
 
 }
 
-
-/* =========================================================
-   RANDOM MENU
-========================================================= */
 
 function randomMenu(){
 
@@ -2931,10 +2713,6 @@ function randomMenu(){
 
 }
 
-
-/* =========================================================
-   RECOMMEND
-========================================================= */
 
 function recommendMood(mood){
 
@@ -2969,10 +2747,6 @@ function recommendMood(mood){
 
 }
 
-
-/* =========================================================
-   MODAL
-========================================================= */
 
 function openModal(id){
 
@@ -3049,10 +2823,6 @@ function closeModalOutside(event){
 }
 
 
-/* =========================================================
-   ADD CART
-========================================================= */
-
 function addCurrentMenu(){
 
     if(!currentMenu){
@@ -3097,10 +2867,6 @@ function addCurrentMenu(){
 
 }
 
-
-/* =========================================================
-   UPDATE CART
-========================================================= */
 
 function updateCart(){
 
@@ -3220,10 +2986,6 @@ function updateCart(){
 }
 
 
-/* =========================================================
-   REMOVE CART ITEM
-========================================================= */
-
 function removeFromCart(id){
 
     cart =
@@ -3236,11 +2998,6 @@ function removeFromCart(id){
     updateCart();
 
 }
-
-
-/* =========================================================
-   OPEN CART
-========================================================= */
 
 function openCart(){
 
@@ -3256,10 +3013,6 @@ function openCart(){
 }
 
 
-/* =========================================================
-   CLOSE CART
-========================================================= */
-
 function closeCart(){
 
     document
@@ -3273,10 +3026,6 @@ function closeCart(){
 
 }
 
-
-/* =========================================================
-   CHECKOUT
-========================================================= */
 
 function checkout(){
 
@@ -3297,10 +3046,6 @@ function checkout(){
 
 }
 
-
-/* =========================================================
-   SUBSCRIBE
-========================================================= */
 
 function subscribe(){
 
@@ -3329,10 +3074,6 @@ function subscribe(){
 }
 
 
-/* =========================================================
-   TOAST
-========================================================= */
-
 function showToast(message){
 
     const toast =
@@ -3358,10 +3099,6 @@ function showToast(message){
 }
 
 
-/* =========================================================
-   ESC
-========================================================= */
-
 document.addEventListener(
     "keydown",
     event => {
@@ -3376,10 +3113,6 @@ document.addEventListener(
     }
 );
 
-
-/* =========================================================
-   START
-========================================================= */
 
 renderMenu();
 updateCart();
