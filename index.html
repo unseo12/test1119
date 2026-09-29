@@ -23,717 +23,162 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Pretendard", sans-serif;
-      background: #080808;
-      color: #f5f5f0;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    ::selection {
-      background: #d8ff32;
-      color: #080808;
-    }
-
-
     /* ================================
-       MOUSE LIGHT
-    ================================= */
+   COLOR SYSTEM
+================================= */
 
-    .cursor-light {
-      position: fixed;
-      left: 0;
-      top: 0;
+:root {
+  --base: #1A1A1A;
+  --white: #F5F5F0;
+  --magenta: #B11883;
+  --teal: #009D9D;
+}
 
-      width: 520px;
-      height: 520px;
+body {
+  font-family: "Pretendard", sans-serif;
+  background: var(--base);
+  color: var(--white);
+  overflow-x: hidden;
+}
 
-      border-radius: 50%;
+::selection {
+  background: var(--magenta);
+  color: var(--white);
+}
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(216, 255, 50, 0.20) 0%,
-          rgba(216, 255, 50, 0.08) 30%,
-          rgba(216, 255, 50, 0.02) 55%,
-          transparent 72%
-        );
 
-      filter: blur(10px);
+/* ================================
+   MOUSE LIGHT
+================================= */
 
-      pointer-events: none;
-      z-index: 2;
+.cursor-light {
+  position: fixed;
+  left: 0;
+  top: 0;
 
-      transform: translate(-50%, -50%);
+  width: 550px;
+  height: 550px;
 
-      mix-blend-mode: screen;
-    }
+  border-radius: 50%;
 
+  background:
+    radial-gradient(
+      circle,
+      rgba(0, 157, 157, 0.30) 0%,
+      rgba(177, 24, 131, 0.15) 30%,
+      rgba(0, 157, 157, 0.05) 52%,
+      transparent 72%
+    );
 
-    /* ================================
-       HEADER
-    ================================= */
+  filter: blur(12px);
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
+  pointer-events: none;
+  z-index: 2;
 
-      width: 100%;
-      height: 84px;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
 
-      padding: 0 48px;
+/* HEADER */
 
-      border-bottom: 1px solid rgba(255,255,255,0.16);
+header {
+  background: rgba(26, 26, 26, 0.55);
+}
 
-      background: rgba(8,8,8,0.5);
-      backdrop-filter: blur(18px);
+nav a::after {
+  background: var(--magenta);
+}
 
-      z-index: 100;
-    }
 
-    .logo {
-      font-size: 17px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
+/* TICKET BUTTON */
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-    }
+.ticket-btn {
+  padding: 11px 18px;
 
-    nav a {
-      position: relative;
+  border: 1px solid var(--teal);
+  border-radius: 100px;
 
-      font-size: 13px;
-      font-weight: 600;
+  color: var(--teal);
 
-      letter-spacing: 0.04em;
-    }
+  transition: 0.3s;
+}
 
-    nav a::after {
-      content: "";
+.ticket-btn:hover {
+  background: var(--teal);
+  color: var(--white);
+}
 
-      position: absolute;
-      left: 0;
-      bottom: -8px;
 
-      width: 0;
-      height: 2px;
+/* HERO DATE */
 
-      background: #d8ff32;
+.hero-date strong {
+  color: var(--magenta);
+}
 
-      transition: 0.3s;
-    }
 
-    nav a:hover::after {
-      width: 100%;
-    }
+/* SCROLL LINE */
 
-    .ticket-btn {
-      padding: 11px 18px;
+.scroll-line {
+  background:
+    linear-gradient(
+      to bottom,
+      var(--teal),
+      transparent
+    );
+}
 
-      border: 1px solid #d8ff32;
-      border-radius: 100px;
 
-      color: #d8ff32;
+/* SECTION NUMBER */
 
-      transition: 0.3s;
-    }
+.section-number {
+  color: var(--magenta);
+}
 
-    .ticket-btn:hover {
-      background: #d8ff32;
-      color: #080808;
-    }
 
+/* LINE UP */
 
-    /* ================================
-       HERO
-    ================================= */
+.artist:hover {
+  padding-left: 20px;
 
-    .hero {
-      position: relative;
+  background: var(--magenta);
+  color: var(--white);
+}
 
-      width: 100%;
-      min-height: 100vh;
 
-      overflow: hidden;
+/* SCHEDULE */
 
-      display: flex;
-      align-items: flex-end;
+.schedule-grid {
+  background: rgba(255,255,255,0.2);
+}
 
-      padding: 0 48px 55px;
-    }
+.schedule-card {
+  background: var(--base);
+}
 
+.schedule-card:hover {
+  background: var(--teal);
+  color: var(--white);
+}
 
-    /* Background grid */
 
-    .hero::before {
-      content: "";
+/* TICKET */
 
-      position: absolute;
-      inset: 0;
+.ticket-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--magenta);
+}
 
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        );
+.ticket-type {
+  color: var(--teal);
+}
 
-      background-size: 80px 80px;
 
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 80%
-        );
+/* INFO */
 
-      pointer-events: none;
-    }
-
-
-    /* giant floating typography */
-
-    .floating-title {
-      position: absolute;
-
-      top: 12%;
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      width: 100%;
-
-      text-align: center;
-
-      font-size: clamp(105px, 15vw, 285px);
-
-      font-weight: 950;
-
-      line-height: 0.75;
-
-      letter-spacing: -0.085em;
-
-      white-space: nowrap;
-
-      color: #f5f5f0;
-
-      z-index: 4;
-
-      animation: floating 5s ease-in-out infinite;
-    }
-
-    .floating-title span {
-      display: inline-block;
-
-      color: transparent;
-
-      -webkit-text-stroke:
-        1.5px rgba(245,245,240,0.9);
-    }
-
-    @keyframes floating {
-
-      0% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
-
-      50% {
-        transform:
-          translateX(-50%)
-          translateY(-22px)
-          rotate(0.4deg);
-      }
-
-      100% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
-
-    }
-
-
-    /* blurred background typography */
-
-    .ghost-text {
-      position: absolute;
-
-      top: 39%;
-      left: -2%;
-
-      font-size: clamp(90px, 13vw, 250px);
-
-      font-weight: 900;
-
-      letter-spacing: -0.08em;
-
-      color: rgba(255,255,255,0.025);
-
-      white-space: nowrap;
-
-      transform: rotate(-4deg);
-
-      pointer-events: none;
-    }
-
-
-    /* HERO bottom */
-
-    .hero-bottom {
-      position: relative;
-
-      width: 100%;
-
-      display: grid;
-      grid-template-columns: 1fr 1.5fr 1fr;
-
-      align-items: end;
-
-      gap: 40px;
-
-      z-index: 5;
-    }
-
-    .hero-date {
-      font-size: 13px;
-      line-height: 1.7;
-
-      color: rgba(255,255,255,0.6);
-    }
-
-    .hero-date strong {
-      display: block;
-
-      margin-bottom: 7px;
-
-      font-size: 17px;
-
-      color: #d8ff32;
-    }
-
-    .hero-copy h1 {
-      max-width: 680px;
-
-      font-size: clamp(30px, 4vw, 65px);
-
-      line-height: 0.97;
-
-      letter-spacing: -0.055em;
-
-      font-weight: 800;
-    }
-
-    .hero-copy p {
-      max-width: 500px;
-
-      margin-top: 22px;
-
-      font-size: 14px;
-      line-height: 1.7;
-
-      color: rgba(255,255,255,0.55);
-    }
-
-    .scroll-guide {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
-      gap: 10px;
-
-      font-size: 11px;
-
-      color: rgba(255,255,255,0.45);
-    }
-
-    .scroll-line {
-      width: 1px;
-      height: 75px;
-
-      background:
-        linear-gradient(
-          to bottom,
-          #d8ff32,
-          transparent
-        );
-    }
-
-
-    /* ================================
-       SECTION COMMON
-    ================================= */
-
-    section.content {
-      position: relative;
-
-      min-height: 100vh;
-
-      padding: 130px 48px;
-
-      border-top:
-        1px solid rgba(255,255,255,0.12);
-
-      z-index: 5;
-    }
-
-    .section-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 70px;
-    }
-
-    .section-number {
-      font-size: 12px;
-      color: #d8ff32;
-    }
-
-    .section-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-    }
-
-    .section-title {
-      font-size: clamp(55px, 9vw, 150px);
-
-      line-height: 0.85;
-
-      letter-spacing: -0.075em;
-
-      font-weight: 900;
-    }
-
-
-    /* ================================
-       LINE UP
-    ================================= */
-
-    .lineup-list {
-      margin-top: 80px;
-
-      border-top:
-        1px solid rgba(255,255,255,0.2);
-    }
-
-    .artist {
-      display: grid;
-
-      grid-template-columns:
-        80px
-        1fr
-        180px;
-
-      align-items: center;
-
-      padding: 24px 0;
-
-      border-bottom:
-        1px solid rgba(255,255,255,0.2);
-
-      transition:
-        padding 0.3s,
-        background 0.3s;
-    }
-
-    .artist:hover {
-      padding-left: 20px;
-
-      background: #d8ff32;
-
-      color: #080808;
-    }
-
-    .artist-num {
-      font-size: 11px;
-      opacity: 0.5;
-    }
-
-    .artist-name {
-      font-size: clamp(28px, 4vw, 64px);
-
-      font-weight: 800;
-
-      letter-spacing: -0.05em;
-    }
-
-    .artist-info {
-      text-align: right;
-
-      font-size: 12px;
-
-      line-height: 1.6;
-    }
-
-
-    /* ================================
-       SCHEDULE
-    ================================= */
-
-    .schedule-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 1px;
-
-      margin-top: 70px;
-
-      background:
-        rgba(255,255,255,0.2);
-    }
-
-    .schedule-card {
-      min-height: 310px;
-
-      padding: 35px;
-
-      background: #080808;
-
-      transition: 0.35s;
-    }
-
-    .schedule-card:hover {
-      background: #d8ff32;
-      color: #080808;
-    }
-
-    .schedule-day {
-      margin-bottom: 60px;
-
-      font-size: 12px;
-    }
-
-    .schedule-time {
-      font-size:
-        clamp(45px, 6vw, 90px);
-
-      font-weight: 900;
-
-      letter-spacing: -0.06em;
-    }
-
-    .schedule-band {
-      margin-top: 12px;
-
-      font-size: 18px;
-      font-weight: 600;
-    }
-
-
-    /* ================================
-       TICKET
-    ================================= */
-
-    .ticket-area {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 20px;
-
-      margin-top: 70px;
-    }
-
-    .ticket-card {
-      min-height: 360px;
-
-      padding: 40px;
-
-      border:
-        1px solid rgba(255,255,255,0.25);
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      transition: 0.3s;
-    }
-
-    .ticket-card:hover {
-      transform: translateY(-8px);
-
-      border-color: #d8ff32;
-    }
-
-    .ticket-type {
-      font-size: 14px;
-      color: #d8ff32;
-    }
-
-    .ticket-price {
-      font-size:
-        clamp(50px, 7vw, 100px);
-
-      font-weight: 900;
-
-      letter-spacing: -0.07em;
-    }
-
-
-    /* ================================
-       INFO
-    ================================= */
-
-    .info-copy {
-      max-width: 1000px;
-
-      margin-top: 80px;
-
-      font-size:
-        clamp(35px, 5vw, 80px);
-
-      line-height: 1.05;
-
-      letter-spacing: -0.05em;
-
-      font-weight: 700;
-    }
-
-    .info-copy span {
-      color: #d8ff32;
-    }
-
-
-    /* ================================
-       FOOTER
-    ================================= */
-
-    footer {
-      padding: 45px 48px;
-
-      display: flex;
-      justify-content: space-between;
-
-      border-top:
-        1px solid rgba(255,255,255,0.15);
-
-      font-size: 11px;
-
-      color: rgba(255,255,255,0.4);
-    }
-
-
-    /* ================================
-       MOBILE
-    ================================= */
-
-    @media (max-width: 768px) {
-
-      header {
-        height: 70px;
-        padding: 0 20px;
-      }
-
-      nav a:not(.ticket-btn) {
-        display: none;
-      }
-
-      .hero {
-        padding:
-          0 20px
-          35px;
-      }
-
-      .floating-title {
-        top: 20%;
-
-        font-size: 25vw;
-
-        line-height: 0.78;
-
-        white-space: normal;
-      }
-
-      .floating-title span {
-        display: block;
-      }
-
-      .ghost-text {
-        top: 43%;
-      }
-
-      .hero-bottom {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .scroll-guide {
-        display: none;
-      }
-
-      section.content {
-        padding:
-          100px 20px;
-      }
-
-      .section-top {
-        margin-bottom: 45px;
-      }
-
-      .artist {
-        grid-template-columns:
-          40px 1fr;
-      }
-
-      .artist-info {
-        display: none;
-      }
-
-      .schedule-grid,
-      .ticket-area {
-        grid-template-columns: 1fr;
-      }
-
-      .schedule-card {
-        min-height: 230px;
-      }
-
-      footer {
-        padding: 35px 20px;
-
-        flex-direction: column;
-
-        gap: 10px;
-      }
-
-      .cursor-light {
-        display: none;
-      }
-
-    }
+.info-copy span {
+  color: var(--magenta);
+}
 
   </style>
 </head>
@@ -757,13 +202,11 @@
   </a>
 
   <nav>
+    <a href="#home">HOME</a>
     <a href="#lineup">LINE UP</a>
     <a href="#schedule">SCHEDULE</a>
+    <a href="#ticket">TICKET</a>
     <a href="#info">INFO</a>
-
-    <a href="#ticket" class="ticket-btn">
-      TICKET ↗
-    </a>
   </nav>
 
 </header>
