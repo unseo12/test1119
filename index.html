@@ -2,1603 +2,1989 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ROCK FESTIVAL</title>
+<title>ROCK FESTIVAL</title>
 
-  <!-- Pretendard -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-  >
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <style>
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+>
 
-    /* =====================================
-       RESET / COLOR
-    ===================================== */
+<style>
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* ========================================
+   RESET / COLOR SYSTEM
+======================================== */
 
-    :root {
-      --base: #1A1A1A;
-      --white: #F5F5F0;
-      --magenta: #B11883;
-      --teal: #009D9D;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+:root{
 
-    body {
-      font-family: "Pretendard", sans-serif;
-      background: var(--base);
-      color: var(--white);
-      overflow-x: hidden;
-    }
+  --base:#1A1A1A;
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+  --white:#F5F5F0;
 
-    ::selection {
-      background: var(--teal);
-      color: var(--white);
-    }
+  --magenta:#B11883;
 
+  --teal:#009D9D;
 
-    /* =====================================
-       CURSOR LIGHT
-    ===================================== */
+}
 
-    .cursor-light {
-      position: fixed;
+html{
+  scroll-behavior:smooth;
+}
 
-      left: 0;
-      top: 0;
+body{
 
-      width: 600px;
-      height: 600px;
+  font-family:"Pretendard",sans-serif;
 
-      border-radius: 50%;
+  background:var(--base);
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(0, 157, 157, 0.24) 0%,
-          rgba(0, 157, 157, 0.10) 30%,
-          rgba(0, 157, 157, 0.035) 52%,
-          transparent 72%
-        );
+  color:var(--white);
 
-      filter: blur(18px);
+  overflow-x:hidden;
 
-      transform: translate(-50%, -50%);
+}
 
-      pointer-events: none;
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-      mix-blend-mode: screen;
+::selection{
 
-      z-index: 2;
-    }
+  background:var(--magenta);
 
+  color:white;
 
-    /* =====================================
-       HEADER
-    ===================================== */
+}
 
-    header {
-      position: fixed;
 
-      top: 0;
-      left: 0;
 
-      width: 100%;
-      height: 82px;
+/* ========================================
+   CURSOR LIGHT
+======================================== */
 
-      padding: 0 48px;
+.cursor-light{
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  position:fixed;
 
-      background: rgba(26, 26, 26, 0.55);
+  left:0;
+  top:0;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+  width:600px;
+  height:600px;
 
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-radius:50%;
 
-      z-index: 100;
-    }
+  background:
 
+  radial-gradient(
 
-    /* LOGO */
+    circle,
 
-    .logo {
-      font-size: 17px;
-      font-weight: 900;
+    rgba(0,157,157,.30) 0%,
 
-      letter-spacing: -0.04em;
-    }
+    rgba(0,157,157,.13) 25%,
 
-    .logo span {
-      color: var(--teal);
-    }
+    rgba(177,24,131,.08) 45%,
 
+    transparent 72%
 
-    /* NAVIGATION */
+  );
 
-    nav {
-      display: flex;
-      align-items: center;
+  filter:blur(18px);
 
-      gap: 34px;
-    }
+  transform:translate(-50%,-50%);
 
-    nav a {
-      position: relative;
+  pointer-events:none;
 
-      font-size: 13px;
-      font-weight: 600;
+  mix-blend-mode:screen;
 
-      letter-spacing: 0.03em;
+  z-index:2;
 
-      color: rgba(245,245,240,0.78);
+}
 
-      transition: color 0.3s ease;
-    }
 
-    nav a:hover {
-      color: var(--white);
-    }
 
-    nav a::after {
-      content: "";
+/* ========================================
+   HEADER
+======================================== */
 
-      position: absolute;
+header{
 
-      left: 0;
-      bottom: -8px;
+  position:fixed;
 
-      width: 0;
-      height: 2px;
+  top:0;
+  left:0;
 
-      background: var(--teal);
+  width:100%;
+  height:82px;
 
-      transition: width 0.3s ease;
-    }
+  padding:0 48px;
 
-    nav a:hover::after {
-      width: 100%;
-    }
+  display:flex;
 
+  align-items:center;
 
-    /* =====================================
-       HERO
-    ===================================== */
+  justify-content:space-between;
 
-    .hero {
-      position: relative;
+  background:rgba(26,26,26,.58);
 
-      width: 100%;
-      min-height: 100vh;
+  backdrop-filter:blur(18px);
 
-      padding: 0 48px 55px;
+  -webkit-backdrop-filter:blur(18px);
 
-      display: flex;
-      align-items: flex-end;
+  border-bottom:
+  1px solid rgba(255,255,255,.12);
 
-      overflow: hidden;
-    }
+  z-index:100;
 
+}
 
-    /* GRID */
 
-    .hero::before {
-      content: "";
 
-      position: absolute;
-      inset: 0;
+/* LOGO */
 
-      background-image:
+.logo{
 
-        linear-gradient(
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        ),
+  font-size:17px;
 
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        );
+  font-weight:900;
 
-      background-size: 80px 80px;
+  letter-spacing:-.04em;
 
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 85%
-        );
+}
 
-      pointer-events: none;
-    }
+.logo span{
 
+  color:var(--magenta);
 
-    /* =====================================
-       FLOATING TYPOGRAPHY
-    ===================================== */
+}
 
-    .floating-title {
-      position: absolute;
 
-      top: 13%;
-      left: 50%;
 
-      width: 100%;
+/* NAV */
 
-      transform: translateX(-50%);
+nav{
 
-      text-align: center;
+  display:flex;
 
-      font-size: clamp(100px, 14vw, 270px);
+  align-items:center;
 
-      line-height: 0.76;
+  gap:34px;
 
-      font-weight: 950;
+}
 
-      letter-spacing: -0.085em;
+nav a{
 
-      white-space: nowrap;
+  position:relative;
 
-      color: var(--white);
+  font-size:13px;
 
-      cursor: pointer;
+  font-weight:600;
 
-      user-select: none;
+  letter-spacing:.03em;
 
-      z-index: 4;
+  color:rgba(245,245,240,.78);
 
-      animation:
-        floatTitle 5s ease-in-out infinite;
+  transition:
+  color .3s ease;
 
-      transition:
-        color 0.28s ease,
-        text-shadow 0.28s ease;
-    }
+}
 
+nav a:hover{
 
-    .floating-title span {
-      color: inherit;
+  color:var(--teal);
 
-      transition:
-        color 0.28s ease;
-    }
+}
 
+nav a::after{
 
-    /* CLICK */
+  content:"";
 
-    .floating-title.active {
-      color: var(--teal);
+  position:absolute;
 
-      text-shadow:
-        0 0 18px rgba(0,157,157,0.55),
-        0 0 45px rgba(0,157,157,0.28),
-        0 0 90px rgba(0,157,157,0.12);
-    }
+  left:0;
 
+  bottom:-8px;
 
-    @keyframes floatTitle {
+  width:0;
 
-      0% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
+  height:2px;
 
-      50% {
-        transform:
-          translateX(-50%)
-          translateY(-22px)
-          rotate(0.4deg);
-      }
+  background:var(--magenta);
 
-      100% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
+  transition:
+  width .3s ease;
 
-    }
+}
 
+nav a:hover::after{
 
-    /* =====================================
-       BACKGROUND TYPO
-    ===================================== */
+  width:100%;
 
-    .ghost-text {
-      position: absolute;
+}
 
-      top: 41%;
-      left: -2%;
 
-      font-size: clamp(90px, 13vw, 250px);
 
-      font-weight: 900;
+/* ========================================
+   HERO
+======================================== */
 
-      letter-spacing: -0.08em;
+.hero{
 
-      color: rgba(255,255,255,0.025);
+  position:relative;
 
-      white-space: nowrap;
+  width:100%;
 
-      transform: rotate(-4deg);
+  min-height:100vh;
 
-      pointer-events: none;
-    }
+  padding:
+  0 48px 55px;
 
+  display:flex;
 
-    /* =====================================
-       HERO BOTTOM
-    ===================================== */
+  align-items:flex-end;
 
-    .hero-bottom {
-      position: relative;
+  overflow:hidden;
 
-      width: 100%;
+}
 
-      display: grid;
 
-      grid-template-columns:
-        1fr 1.5fr 1fr;
 
-      gap: 40px;
+/* GRID */
 
-      align-items: end;
+.hero::before{
 
-      z-index: 5;
-    }
+  content:"";
 
+  position:absolute;
 
-    /* DATE */
+  inset:0;
 
-    .hero-date {
-      font-size: 13px;
+  background-image:
 
-      line-height: 1.7;
+  linear-gradient(
 
-      color: rgba(255,255,255,0.55);
-    }
+    rgba(255,255,255,.035) 1px,
 
-    .hero-date strong {
-      display: block;
+    transparent 1px
 
-      margin-bottom: 7px;
+  ),
 
-      color: var(--white);
+  linear-gradient(
 
-      font-size: 17px;
-    }
+    90deg,
 
+    rgba(255,255,255,.035) 1px,
 
-    /* COPY */
+    transparent 1px
 
-    .hero-copy h1 {
-      font-size:
-        clamp(35px, 4vw, 68px);
+  );
 
-      line-height: 0.95;
+  background-size:
+  80px 80px;
 
-      letter-spacing: -0.055em;
+  mask-image:
 
-      font-weight: 850;
-    }
+  linear-gradient(
 
-    .hero-copy p {
-      max-width: 500px;
+    to bottom,
 
-      margin-top: 22px;
+    black,
 
-      font-size: 14px;
+    transparent 85%
 
-      line-height: 1.7;
+  );
 
-      color: rgba(255,255,255,0.55);
-    }
+  pointer-events:none;
 
+}
 
-    /* SCROLL */
 
-    .scroll-guide {
-      display: flex;
 
-      flex-direction: column;
+/* ========================================
+   FLOATING TYPOGRAPHY
+======================================== */
 
-      align-items: flex-end;
+.floating-title{
 
-      gap: 10px;
+  position:absolute;
 
-      font-size: 11px;
+  top:13%;
 
-      color: rgba(255,255,255,0.42);
-    }
+  left:50%;
 
-    .scroll-line {
-      width: 1px;
-      height: 75px;
+  width:100%;
 
-      background:
-        linear-gradient(
-          to bottom,
-          var(--teal),
-          transparent
-        );
-    }
+  transform:
+  translateX(-50%);
 
+  text-align:center;
 
-    /* =====================================
-       COMMON SECTION
-    ===================================== */
+  font-size:
+  clamp(100px,14vw,270px);
 
-    .content {
-      position: relative;
+  line-height:.76;
 
-      min-height: 100vh;
+  font-weight:950;
 
-      padding: 130px 48px;
+  letter-spacing:-.085em;
 
-      border-top:
-        1px solid rgba(255,255,255,0.12);
+  white-space:nowrap;
 
-      z-index: 5;
-    }
+  color:var(--white);
 
-    .section-top {
-      display: flex;
+  cursor:pointer;
 
-      align-items: center;
-      justify-content: space-between;
+  user-select:none;
 
-      margin-bottom: 70px;
-    }
+  z-index:4;
 
-    .section-number {
-      font-size: 12px;
+  animation:
+  floatTitle
+  5s
+  ease-in-out
+  infinite;
 
-      color: var(--teal);
-    }
+}
 
-    .section-label {
-      font-size: 12px;
 
-      color: rgba(255,255,255,0.45);
-    }
 
-    .section-title {
-      font-size:
-        clamp(60px, 9vw, 150px);
+/* ROCK */
 
-      line-height: 0.84;
+.rock-word{
 
-      letter-spacing: -0.075em;
+  color:var(--white);
 
-      font-weight: 900;
-    }
+  transition:
 
+  color .28s ease,
 
-    /* =====================================
-       LINE UP
-    ===================================== */
+  text-shadow .28s ease;
 
-    .lineup-list {
-      margin-top: 80px;
+}
 
-      border-top:
-        1px solid rgba(255,255,255,0.2);
-    }
 
-    .artist {
-      display: grid;
 
-      grid-template-columns:
-        80px 1fr 180px;
+/* FESTIVAL
+   마젠타 외곽선
+*/
 
-      align-items: center;
+.festival-word{
 
-      padding: 24px 0;
+  color:transparent;
 
-      border-bottom:
-        1px solid rgba(255,255,255,0.2);
+  -webkit-text-stroke:
+  1.5px var(--magenta);
 
-      transition:
-        padding 0.35s ease,
-        background 0.35s ease,
-        color 0.35s ease;
-    }
+  transition:
+  -webkit-text-stroke .28s ease;
 
-    .artist:hover {
-      padding-left: 20px;
+}
 
-      background: var(--teal);
 
-      color: white;
-    }
 
-    .artist-num {
-      font-size: 11px;
+/* 클릭했을 때 ROCK만 TEAL */
 
-      opacity: 0.5;
-    }
+.floating-title.active
+.rock-word{
 
-    .artist-name {
-      font-size:
-        clamp(30px, 4vw, 65px);
+  color:var(--teal);
 
-      font-weight: 800;
+  text-shadow:
 
-      letter-spacing: -0.05em;
-    }
+  0 0 18px
+  rgba(0,157,157,.50),
 
-    .artist-info {
-      padding-right: 20px;
+  0 0 45px
+  rgba(0,157,157,.25),
 
-      text-align: right;
+  0 0 80px
+  rgba(0,157,157,.10);
 
-      font-size: 12px;
+}
 
-      line-height: 1.6;
-    }
 
 
-    /* =====================================
-       SCHEDULE
-    ===================================== */
+/* FESTIVAL 외곽선은
+   계속 MAGENTA 유지 */
 
-    .schedule-grid {
-      display: grid;
+.floating-title.active
+.festival-word{
 
-      grid-template-columns:
-        repeat(2, 1fr);
+  -webkit-text-stroke:
+  1.5px var(--magenta);
 
-      gap: 1px;
+}
 
-      margin-top: 70px;
 
-      background:
-        rgba(255,255,255,0.2);
-    }
 
-    .schedule-card {
-      min-height: 310px;
+/* FLOAT */
 
-      padding: 35px;
+@keyframes floatTitle{
 
-      display: flex;
+  0%{
 
-      flex-direction: column;
+    transform:
 
-      justify-content: space-between;
+    translateX(-50%)
 
-      background: var(--base);
+    translateY(0)
 
-      transition:
-        background 0.35s ease,
-        color 0.35s ease,
-        transform 0.35s ease;
-    }
+    rotate(-.4deg);
 
-    .schedule-card:hover {
-      background: var(--teal);
+  }
 
-      color: white;
+  50%{
 
-      transform: translateY(-3px);
-    }
+    transform:
 
-    .schedule-day {
-      font-size: 12px;
-    }
+    translateX(-50%)
 
-    .schedule-time {
-      font-size:
-        clamp(48px, 6vw, 90px);
+    translateY(-22px)
 
-      font-weight: 900;
+    rotate(.4deg);
 
-      letter-spacing: -0.06em;
-    }
+  }
 
-    .schedule-band {
-      margin-top: 12px;
+  100%{
 
-      font-size: 18px;
+    transform:
 
-      font-weight: 600;
-    }
+    translateX(-50%)
 
+    translateY(0)
 
-    /* =====================================
-       TICKET
-    ===================================== */
+    rotate(-.4deg);
 
-    .ticket-area {
-      display: grid;
+  }
 
-      grid-template-columns:
-        1fr 1fr;
+}
 
-      gap: 20px;
 
-      margin-top: 70px;
-    }
 
-    .ticket-card {
-      min-height: 360px;
+/* ========================================
+   GHOST TYPOGRAPHY
+======================================== */
 
-      padding: 40px;
+.ghost-text{
 
-      display: flex;
+  position:absolute;
 
-      flex-direction: column;
+  top:41%;
 
-      justify-content: space-between;
+  left:-2%;
 
-      border:
-        1px solid rgba(255,255,255,0.25);
+  font-size:
+  clamp(90px,13vw,250px);
 
-      transition:
-        transform 0.35s ease,
-        border-color 0.35s ease,
-        background 0.35s ease;
-    }
+  font-weight:900;
 
-    .ticket-card:hover {
-      transform: translateY(-8px);
+  letter-spacing:-.08em;
 
-      border-color: var(--teal);
+  color:
+  rgba(255,255,255,.025);
 
-      background:
-        rgba(0,157,157,0.06);
-    }
+  white-space:nowrap;
 
-    .ticket-type {
-      font-size: 14px;
+  transform:
+  rotate(-4deg);
 
-      color: rgba(255,255,255,0.65);
-    }
+  pointer-events:none;
 
-    .ticket-price {
-      font-size:
-        clamp(55px, 7vw, 100px);
+}
 
-      font-weight: 900;
 
-      letter-spacing: -0.07em;
-    }
 
+/* ========================================
+   HERO BOTTOM
+======================================== */
 
-    /* =====================================
-       INFO
-    ===================================== */
+.hero-bottom{
 
-    .info-copy {
-      max-width: 1000px;
+  position:relative;
 
-      margin-top: 80px;
+  width:100%;
 
-      font-size:
-        clamp(40px, 5vw, 80px);
+  display:grid;
 
-      line-height: 1.05;
+  grid-template-columns:
 
-      letter-spacing: -0.05em;
+  1fr
+  1.5fr
+  1fr;
 
-      font-weight: 700;
-    }
+  gap:40px;
 
-    .info-copy span {
-      color: var(--teal);
-    }
+  align-items:end;
 
+  z-index:5;
 
-    /* =====================================
-       FOOTER
-    ===================================== */
+}
 
-    footer {
-      padding: 45px 48px;
 
-      display: flex;
 
-      justify-content: space-between;
+/* DATE */
 
-      border-top:
-        1px solid rgba(255,255,255,0.15);
+.hero-date{
 
-      font-size: 11px;
+  font-size:13px;
 
-      color: rgba(255,255,255,0.4);
-    }
+  line-height:1.7;
 
+  color:
+  rgba(255,255,255,.55);
 
-    /* =====================================
-       MOBILE
-    ===================================== */
+}
 
-    @media (max-width: 768px) {
+.hero-date strong{
 
-      header {
-        height: 70px;
+  display:block;
 
-        padding: 0 20px;
-      }
+  margin-bottom:7px;
 
-      nav {
-        gap: 13px;
-      }
+  color:var(--magenta);
 
-      nav a {
-        font-size: 9px;
-      }
+  font-size:17px;
 
-      .hero {
-        padding:
-          0 20px
-          35px;
-      }
+}
 
-      .floating-title {
-        top: 19%;
 
-        font-size: 24vw;
 
-        line-height: 0.78;
+/* HERO COPY */
 
-        white-space: normal;
-      }
+.hero-copy h1{
 
-      .floating-title span {
-        display: block;
-      }
+  font-size:
+  clamp(35px,4vw,68px);
 
-      .ghost-text {
-        top: 43%;
-      }
+  line-height:.95;
 
-      .hero-bottom {
-        grid-template-columns: 1fr;
+  letter-spacing:-.055em;
 
-        gap: 25px;
-      }
+  font-weight:850;
 
-      .scroll-guide {
-        display: none;
-      }
+}
 
-      .content {
-        padding:
-          100px 20px;
-      }
+.hero-copy p{
 
-      .section-top {
-        margin-bottom: 45px;
-      }
+  max-width:500px;
 
-      .artist {
-        grid-template-columns:
-          40px 1fr;
-      }
+  margin-top:22px;
 
-      .artist-info {
-        display: none;
-      }
+  font-size:14px;
 
-      .schedule-grid,
-      .ticket-area {
-        grid-template-columns: 1fr;
-      }
+  line-height:1.7;
 
-      .schedule-card {
-        min-height: 230px;
-      }
+  color:
+  rgba(255,255,255,.55);
 
-      footer {
-        padding: 35px 20px;
+}
 
-        flex-direction: column;
 
-        gap: 10px;
-      }
 
-      .cursor-light {
-        display: none;
-      }
+/* SCROLL */
 
-    }
+.scroll-guide{
 
-  </style>
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:flex-end;
+
+  gap:10px;
+
+  font-size:11px;
+
+  color:
+  rgba(255,255,255,.42);
+
+}
+
+.scroll-line{
+
+  width:1px;
+
+  height:75px;
+
+  background:
+
+  linear-gradient(
+
+    to bottom,
+
+    var(--teal),
+
+    var(--magenta),
+
+    transparent
+
+  );
+
+}
+
+
+
+/* ========================================
+   COMMON SECTION
+======================================== */
+
+.content{
+
+  position:relative;
+
+  min-height:100vh;
+
+  padding:
+  130px 48px;
+
+  border-top:
+  1px solid
+  rgba(255,255,255,.12);
+
+  z-index:5;
+
+}
+
+.section-top{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  margin-bottom:70px;
+
+}
+
+.section-number{
+
+  font-size:12px;
+
+  color:var(--magenta);
+
+}
+
+.section-label{
+
+  font-size:12px;
+
+  color:
+  rgba(255,255,255,.45);
+
+}
+
+.section-title{
+
+  font-size:
+  clamp(60px,9vw,150px);
+
+  line-height:.84;
+
+  letter-spacing:-.075em;
+
+  font-weight:900;
+
+}
+
+
+
+/* ========================================
+   LINE UP
+======================================== */
+
+.lineup-list{
+
+  margin-top:80px;
+
+  border-top:
+
+  1px solid
+  rgba(255,255,255,.2);
+
+}
+
+.artist{
+
+  display:grid;
+
+  grid-template-columns:
+
+  80px
+  1fr
+  180px;
+
+  align-items:center;
+
+  padding:24px 0;
+
+  border-bottom:
+
+  1px solid
+  rgba(255,255,255,.2);
+
+  transition:
+
+  padding .35s ease,
+
+  background .35s ease,
+
+  color .35s ease;
+
+}
+
+.artist:hover{
+
+  padding-left:20px;
+
+  background:var(--magenta);
+
+  color:white;
+
+}
+
+.artist-num{
+
+  font-size:11px;
+
+  color:var(--teal);
+
+}
+
+.artist:hover
+.artist-num{
+
+  color:white;
+
+}
+
+.artist-name{
+
+  font-size:
+  clamp(30px,4vw,65px);
+
+  font-weight:800;
+
+  letter-spacing:-.05em;
+
+}
+
+.artist-info{
+
+  padding-right:20px;
+
+  text-align:right;
+
+  font-size:12px;
+
+  line-height:1.6;
+
+}
+
+
+
+/* ========================================
+   SCHEDULE
+======================================== */
+
+.schedule-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:1px;
+
+  margin-top:70px;
+
+  background:
+  rgba(255,255,255,.2);
+
+}
+
+.schedule-card{
+
+  min-height:310px;
+
+  padding:35px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  background:var(--base);
+
+  transition:
+
+  background .35s ease,
+
+  color .35s ease,
+
+  transform .35s ease;
+
+}
+
+.schedule-card:hover{
+
+  background:var(--teal);
+
+  color:white;
+
+  transform:
+  translateY(-3px);
+
+}
+
+.schedule-day{
+
+  font-size:12px;
+
+  color:var(--magenta);
+
+}
+
+.schedule-card:hover
+.schedule-day{
+
+  color:white;
+
+}
+
+.schedule-time{
+
+  font-size:
+  clamp(48px,6vw,90px);
+
+  font-weight:900;
+
+  letter-spacing:-.06em;
+
+}
+
+.schedule-band{
+
+  margin-top:12px;
+
+  font-size:18px;
+
+  font-weight:600;
+
+}
+
+
+
+/* ========================================
+   TICKET
+======================================== */
+
+.ticket-area{
+
+  display:grid;
+
+  grid-template-columns:
+  1fr 1fr;
+
+  gap:20px;
+
+  margin-top:70px;
+
+}
+
+.ticket-card{
+
+  position:relative;
+
+  min-height:360px;
+
+  padding:40px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  overflow:hidden;
+
+  border:
+
+  1px solid
+  rgba(255,255,255,.25);
+
+  transition:
+
+  transform .35s ease,
+
+  border-color .35s ease,
+
+  background .35s ease;
+
+}
+
+
+
+/* TEAL + MAGENTA 얇은 라인 */
+
+.ticket-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+
+  height:3px;
+
+  background:
+
+  linear-gradient(
+
+    90deg,
+
+    var(--magenta),
+
+    var(--teal)
+
+  );
+
+}
+
+.ticket-card:hover{
+
+  transform:
+  translateY(-8px);
+
+  border-color:
+  var(--teal);
+
+  background:
+  rgba(0,157,157,.055);
+
+}
+
+.ticket-type{
+
+  font-size:14px;
+
+  color:var(--magenta);
+
+}
+
+.ticket-price{
+
+  font-size:
+  clamp(55px,7vw,100px);
+
+  font-weight:900;
+
+  letter-spacing:-.07em;
+
+}
+
+
+
+/* ========================================
+   INFO
+======================================== */
+
+.info-copy{
+
+  max-width:1000px;
+
+  margin-top:80px;
+
+  font-size:
+  clamp(40px,5vw,80px);
+
+  line-height:1.05;
+
+  letter-spacing:-.05em;
+
+  font-weight:700;
+
+}
+
+.info-copy
+.magenta{
+
+  color:var(--magenta);
+
+}
+
+.info-copy
+.teal{
+
+  color:var(--teal);
+
+}
+
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer{
+
+  padding:
+  45px 48px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  border-top:
+
+  1px solid
+  rgba(255,255,255,.15);
+
+  font-size:11px;
+
+  color:
+  rgba(255,255,255,.4);
+
+}
+
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width:768px){
+
+  header{
+
+    height:70px;
+
+    padding:
+    0 20px;
+
+  }
+
+  nav{
+
+    gap:13px;
+
+  }
+
+  nav a{
+
+    font-size:9px;
+
+  }
+
+  .hero{
+
+    padding:
+
+    0 20px
+    35px;
+
+  }
+
+  .floating-title{
+
+    top:19%;
+
+    font-size:24vw;
+
+    line-height:.78;
+
+    white-space:normal;
+
+  }
+
+  .floating-title span{
+
+    display:block;
+
+  }
+
+  .ghost-text{
+
+    top:43%;
+
+  }
+
+  .hero-bottom{
+
+    grid-template-columns:1fr;
+
+    gap:25px;
+
+  }
+
+  .scroll-guide{
+
+    display:none;
+
+  }
+
+  .content{
+
+    padding:
+
+    100px 20px;
+
+  }
+
+  .section-top{
+
+    margin-bottom:45px;
+
+  }
+
+  .artist{
+
+    grid-template-columns:
+
+    40px
+    1fr;
+
+  }
+
+  .artist-info{
+
+    display:none;
+
+  }
+
+  .schedule-grid,
+  .ticket-area{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .schedule-card{
+
+    min-height:230px;
+
+  }
+
+  footer{
+
+    padding:
+    35px 20px;
+
+    flex-direction:column;
+
+    gap:10px;
+
+  }
+
+  .cursor-light{
+
+    display:none;
+
+  }
+
+}
+
+</style>
+
 </head>
 
 
 <body>
 
 
-  <!-- =====================================
-       CURSOR LIGHT
-  ====================================== -->
+<!-- CURSOR LIGHT -->
 
-  <div class="cursor-light"></div>
+<div class="cursor-light"></div>
 
 
 
-  <!-- =====================================
-       HEADER
-  ====================================== -->
+<!-- ========================================
+     HEADER
+======================================== -->
 
-  <header>
+<header>
 
-    <a href="#home" class="logo">
-      RF <span>/ 26</span>
-    </a>
 
+<a
+href="#home"
+class="logo"
+>
 
-    <nav>
+RF <span>/ 26</span>
 
-      <a href="#home">
-        HOME
-      </a>
+</a>
 
-      <a href="#lineup">
-        LINE UP
-      </a>
 
-      <a href="#schedule">
-        SCHEDULE
-      </a>
 
-      <a href="#ticket">
-        TICKET
-      </a>
+<nav>
 
-      <a href="#info">
-        INFO
-      </a>
+<a href="#home">
+HOME
+</a>
 
-    </nav>
+<a href="#lineup">
+LINE UP
+</a>
 
-  </header>
+<a href="#schedule">
+SCHEDULE
+</a>
 
+<a href="#ticket">
+TICKET
+</a>
 
+<a href="#info">
+INFO
+</a>
 
-  <main>
+</nav>
 
 
-    <!-- =====================================
-         HOME
-    ====================================== -->
+</header>
 
-    <section
-      class="hero"
-      id="home"
-    >
 
 
-      <!-- FLOATING TYPO -->
+<main>
 
-      <div class="floating-title">
 
-        ROCK
 
-        <span>
-          FESTIVAL
-        </span>
+<!-- ========================================
+     HOME
+======================================== -->
 
-      </div>
+<section
+class="hero"
+id="home"
+>
 
 
 
-      <!-- BACKGROUND TYPO -->
+<!-- FLOATING TYPO -->
 
-      <div class="ghost-text">
+<div class="floating-title">
 
-        LOUD / LIVE / ALIVE
+<span class="rock-word">
+ROCK
+</span>
 
-      </div>
+<span class="festival-word">
+FESTIVAL
+</span>
 
+</div>
 
 
-      <!-- HERO BOTTOM -->
 
-      <div class="hero-bottom">
+<!-- GHOST TYPO -->
 
+<div class="ghost-text">
 
-        <div class="hero-date">
+LOUD / LIVE / ALIVE
 
-          <strong>
-            OCT 10 — 11
-          </strong>
+</div>
 
-          2026<br>
 
-          SEOUL, KOREA
 
-        </div>
+<div class="hero-bottom">
 
 
 
-        <div class="hero-copy">
+<div class="hero-date">
 
-          <h1>
+<strong>
+OCT 10 — 11
+</strong>
 
-            TURN UP<br>
+2026<br>
 
-            THE NOISE.
+SEOUL, KOREA
 
-          </h1>
+</div>
 
 
-          <p>
 
-            음악과 관객의 에너지가 하나가 되는 순간.
+<div class="hero-copy">
 
-            이틀 동안 이어지는 라이브 공연과
+<h1>
 
-            강렬한 사운드를 경험하세요.
+TURN UP<br>
 
-          </p>
+THE NOISE.
 
-        </div>
+</h1>
 
 
+<p>
 
-        <div class="scroll-guide">
+음악과 관객의 에너지가 하나가 되는 순간.
 
-          SCROLL TO EXPLORE
+이틀 동안 이어지는 라이브 공연과
 
-          <div class="scroll-line"></div>
+강렬한 사운드를 경험하세요.
 
-        </div>
+</p>
 
+</div>
 
-      </div>
 
 
-    </section>
+<div class="scroll-guide">
 
+SCROLL TO EXPLORE
 
+<div class="scroll-line"></div>
 
-    <!-- =====================================
-         LINE UP
-    ====================================== -->
+</div>
 
-    <section
-      class="content"
-      id="lineup"
-    >
 
+</div>
 
-      <div class="section-top">
 
-        <span class="section-number">
-          01
-        </span>
+</section>
 
-        <span class="section-label">
-          ARTIST / LINE UP
-        </span>
 
-      </div>
 
+<!-- ========================================
+     LINE UP
+======================================== -->
 
+<section
+class="content"
+id="lineup"
+>
 
-      <h2 class="section-title">
 
-        LINE<br>
+<div class="section-top">
 
-        UP
+<span class="section-number">
+01
+</span>
 
-      </h2>
+<span class="section-label">
+ARTIST / LINE UP
+</span>
 
+</div>
 
 
-      <div class="lineup-list">
 
+<h2 class="section-title">
 
-        <div class="artist">
+LINE<br>
 
-          <span class="artist-num">
-            01
-          </span>
+UP
 
-          <span class="artist-name">
-            THE RIOT
-          </span>
+</h2>
 
-          <span class="artist-info">
 
-            DAY 01<br>
 
-            MAIN STAGE
+<div class="lineup-list">
 
-          </span>
 
-        </div>
 
+<div class="artist">
 
+<span class="artist-num">
+01
+</span>
 
-        <div class="artist">
+<span class="artist-name">
+THE RIOT
+</span>
 
-          <span class="artist-num">
-            02
-          </span>
+<span class="artist-info">
 
-          <span class="artist-name">
-            BLACK WAVE
-          </span>
+DAY 01<br>
 
-          <span class="artist-info">
+MAIN STAGE
 
-            DAY 01<br>
+</span>
 
-            MAIN STAGE
+</div>
 
-          </span>
 
-        </div>
 
+<div class="artist">
 
+<span class="artist-num">
+02
+</span>
 
-        <div class="artist">
+<span class="artist-name">
+BLACK WAVE
+</span>
 
-          <span class="artist-num">
-            03
-          </span>
+<span class="artist-info">
 
-          <span class="artist-name">
-            NO SIGNAL
-          </span>
+DAY 01<br>
 
-          <span class="artist-info">
+MAIN STAGE
 
-            DAY 01<br>
+</span>
 
-            SUB STAGE
+</div>
 
-          </span>
 
-        </div>
 
+<div class="artist">
 
+<span class="artist-num">
+03
+</span>
 
-        <div class="artist">
+<span class="artist-name">
+NO SIGNAL
+</span>
 
-          <span class="artist-num">
-            04
-          </span>
+<span class="artist-info">
 
-          <span class="artist-name">
-            AFTER NOISE
-          </span>
+DAY 01<br>
 
-          <span class="artist-info">
+SUB STAGE
 
-            DAY 02<br>
+</span>
 
-            MAIN STAGE
+</div>
 
-          </span>
 
-        </div>
 
+<div class="artist">
 
+<span class="artist-num">
+04
+</span>
 
-        <div class="artist">
+<span class="artist-name">
+AFTER NOISE
+</span>
 
-          <span class="artist-num">
-            05
-          </span>
+<span class="artist-info">
 
-          <span class="artist-name">
-            VOLTAGE
-          </span>
+DAY 02<br>
 
-          <span class="artist-info">
+MAIN STAGE
 
-            DAY 02<br>
+</span>
 
-            SUB STAGE
+</div>
 
-          </span>
 
-        </div>
 
+<div class="artist">
 
-      </div>
+<span class="artist-num">
+05
+</span>
 
+<span class="artist-name">
+VOLTAGE
+</span>
 
-    </section>
+<span class="artist-info">
 
+DAY 02<br>
 
+SUB STAGE
 
-    <!-- =====================================
-         SCHEDULE
-    ====================================== -->
+</span>
 
-    <section
-      class="content"
-      id="schedule"
-    >
+</div>
 
 
-      <div class="section-top">
+</div>
 
-        <span class="section-number">
-          02
-        </span>
 
-        <span class="section-label">
-          DAY / TIME / STAGE
-        </span>
+</section>
 
-      </div>
 
 
+<!-- ========================================
+     SCHEDULE
+======================================== -->
 
-      <h2 class="section-title">
+<section
+class="content"
+id="schedule"
+>
 
-        LIVE<br>
 
-        SCHEDULE
+<div class="section-top">
 
-      </h2>
+<span class="section-number">
+02
+</span>
 
+<span class="section-label">
+DAY / TIME / STAGE
+</span>
 
+</div>
 
-      <div class="schedule-grid">
 
 
-        <div class="schedule-card">
+<h2 class="section-title">
 
-          <div class="schedule-day">
+LIVE<br>
 
-            DAY 01 · MAIN STAGE
+SCHEDULE
 
-          </div>
+</h2>
 
 
-          <div>
 
-            <div class="schedule-time">
-              17:30
-            </div>
+<div class="schedule-grid">
 
-            <div class="schedule-band">
-              THE RIOT
-            </div>
 
-          </div>
 
-        </div>
+<div class="schedule-card">
 
+<div class="schedule-day">
 
+DAY 01 · MAIN STAGE
 
-        <div class="schedule-card">
+</div>
 
-          <div class="schedule-day">
+<div>
 
-            DAY 01 · SUB STAGE
+<div class="schedule-time">
+17:30
+</div>
 
-          </div>
+<div class="schedule-band">
+THE RIOT
+</div>
 
+</div>
 
-          <div>
+</div>
 
-            <div class="schedule-time">
-              19:00
-            </div>
 
-            <div class="schedule-band">
-              NO SIGNAL
-            </div>
 
-          </div>
+<div class="schedule-card">
 
-        </div>
+<div class="schedule-day">
 
+DAY 01 · SUB STAGE
 
+</div>
 
-        <div class="schedule-card">
+<div>
 
-          <div class="schedule-day">
+<div class="schedule-time">
+19:00
+</div>
 
-            DAY 02 · MAIN STAGE
+<div class="schedule-band">
+NO SIGNAL
+</div>
 
-          </div>
+</div>
 
+</div>
 
-          <div>
 
-            <div class="schedule-time">
-              18:20
-            </div>
 
-            <div class="schedule-band">
-              AFTER NOISE
-            </div>
+<div class="schedule-card">
 
-          </div>
+<div class="schedule-day">
 
-        </div>
+DAY 02 · MAIN STAGE
 
+</div>
 
+<div>
 
-        <div class="schedule-card">
+<div class="schedule-time">
+18:20
+</div>
 
-          <div class="schedule-day">
+<div class="schedule-band">
+AFTER NOISE
+</div>
 
-            DAY 02 · SUB STAGE
+</div>
 
-          </div>
+</div>
 
 
-          <div>
 
-            <div class="schedule-time">
-              20:10
-            </div>
+<div class="schedule-card">
 
-            <div class="schedule-band">
-              VOLTAGE
-            </div>
+<div class="schedule-day">
 
-          </div>
+DAY 02 · SUB STAGE
 
-        </div>
+</div>
 
+<div>
 
-      </div>
+<div class="schedule-time">
+20:10
+</div>
 
+<div class="schedule-band">
+VOLTAGE
+</div>
 
-    </section>
+</div>
 
+</div>
 
 
-    <!-- =====================================
-         TICKET
-    ====================================== -->
+</div>
 
-    <section
-      class="content"
-      id="ticket"
-    >
 
+</section>
 
-      <div class="section-top">
 
-        <span class="section-number">
-          03
-        </span>
 
-        <span class="section-label">
-          TICKET
-        </span>
+<!-- ========================================
+     TICKET
+======================================== -->
 
-      </div>
+<section
+class="content"
+id="ticket"
+>
 
 
+<div class="section-top">
 
-      <h2 class="section-title">
+<span class="section-number">
+03
+</span>
 
-        GET<br>
+<span class="section-label">
+TICKET
+</span>
 
-        LOUD
+</div>
 
-      </h2>
 
 
+<h2 class="section-title">
 
-      <div class="ticket-area">
+GET<br>
 
+LOUD
 
-        <div class="ticket-card">
+</h2>
 
-          <span class="ticket-type">
 
-            1 DAY PASS
 
-          </span>
+<div class="ticket-area">
 
 
-          <div class="ticket-price">
 
-            ₩88K
+<div class="ticket-card">
 
-          </div>
+<span class="ticket-type">
 
-        </div>
+1 DAY PASS
 
+</span>
 
+<div class="ticket-price">
 
-        <div class="ticket-card">
+₩88K
 
-          <span class="ticket-type">
+</div>
 
-            2 DAY PASS
+</div>
 
-          </span>
 
 
-          <div class="ticket-price">
+<div class="ticket-card">
 
-            ₩148K
+<span class="ticket-type">
 
-          </div>
+2 DAY PASS
 
-        </div>
+</span>
 
+<div class="ticket-price">
 
-      </div>
+₩148K
 
+</div>
 
-    </section>
+</div>
 
 
+</div>
 
-    <!-- =====================================
-         INFO
-    ====================================== -->
 
-    <section
-      class="content"
-      id="info"
-    >
+</section>
 
 
-      <div class="section-top">
 
-        <span class="section-number">
-          04
-        </span>
+<!-- ========================================
+     INFO
+======================================== -->
 
-        <span class="section-label">
+<section
+class="content"
+id="info"
+>
 
-          FESTIVAL INFORMATION
 
-        </span>
+<div class="section-top">
 
-      </div>
+<span class="section-number">
+04
+</span>
 
+<span class="section-label">
 
+FESTIVAL INFORMATION
 
-      <h2 class="section-title">
+</span>
 
-        INFO
+</div>
 
-      </h2>
 
 
+<h2 class="section-title">
 
-      <p class="info-copy">
+INFO
 
-        TWO DAYS.<br>
+</h2>
 
-        TWO STAGES.<br>
 
-        TEN BANDS.<br><br>
 
+<p class="info-copy">
 
-        ONE
+TWO DAYS.<br>
 
-        <span>
-          LOUD
-        </span>
+TWO STAGES.<br>
 
-        <br>
+TEN BANDS.<br><br>
 
-        EXPERIENCE.
 
-      </p>
+ONE
 
+<span class="magenta">
+LOUD
+</span>
 
-    </section>
+<br>
 
+<span class="teal">
+EXPERIENCE.
+</span>
 
-  </main>
+</p>
 
 
+</section>
 
-  <!-- =====================================
-       FOOTER
-  ====================================== -->
 
-  <footer>
+</main>
 
-    <span>
 
-      ROCK FESTIVAL © 2026
 
-    </span>
+<footer>
 
 
-    <span>
+<span>
 
-      CLEAR · INTUITIVE · VIBRANT
+ROCK FESTIVAL © 2026
 
-    </span>
+</span>
 
-  </footer>
 
+<span>
 
+CLEAR · INTUITIVE · VIBRANT
 
-  <script>
+</span>
 
-    /* =====================================
-       CURSOR LIGHT
-    ====================================== */
 
-    const light =
-      document.querySelector(
-        ".cursor-light"
-      );
+</footer>
 
 
-    let mouseX =
-      window.innerWidth / 2;
 
-    let mouseY =
-      window.innerHeight / 2;
+<script>
 
 
-    let lightX =
-      mouseX;
+/* ========================================
+   CURSOR LIGHT
+======================================== */
 
-    let lightY =
-      mouseY;
+const light =
+document.querySelector(
+".cursor-light"
+);
 
 
+let mouseX =
+window.innerWidth / 2;
 
-    window.addEventListener(
-      "mousemove",
-      (event) => {
+let mouseY =
+window.innerHeight / 2;
 
-        mouseX =
-          event.clientX;
 
-        mouseY =
-          event.clientY;
+let lightX =
+mouseX;
 
-      }
-    );
+let lightY =
+mouseY;
 
 
 
-    function moveLight() {
+window.addEventListener(
 
-      lightX +=
-        (mouseX - lightX) * 0.08;
+"mousemove",
 
-      lightY +=
-        (mouseY - lightY) * 0.08;
+(event)=>{
 
+mouseX =
+event.clientX;
 
-      light.style.left =
-        lightX + "px";
+mouseY =
+event.clientY;
 
-      light.style.top =
-        lightY + "px";
+}
 
+);
 
-      requestAnimationFrame(
-        moveLight
-      );
 
-    }
 
+function moveLight(){
 
-    moveLight();
+lightX +=
+(mouseX-lightX)*.08;
 
+lightY +=
+(mouseY-lightY)*.08;
 
 
-    /* =====================================
-       FLOATING TYPO MOUSE REACTION
-    ====================================== */
+light.style.left =
+lightX+"px";
 
-    const title =
-      document.querySelector(
-        ".floating-title"
-      );
+light.style.top =
+lightY+"px";
 
 
-    window.addEventListener(
-      "mousemove",
-      (event) => {
+requestAnimationFrame(
+moveLight
+);
 
-        const x =
-          event.clientX /
-          window.innerWidth - 0.5;
+}
 
 
-        const y =
-          event.clientY /
-          window.innerHeight - 0.5;
+moveLight();
 
 
-        title.style.marginLeft =
-          `${x * 14}px`;
 
+/* ========================================
+   TYPO MOUSE REACTION
+======================================== */
 
-        title.style.marginTop =
-          `${y * 9}px`;
+const title =
+document.querySelector(
+".floating-title"
+);
 
-      }
-    );
 
+window.addEventListener(
 
+"mousemove",
 
-    /* =====================================
-       CLICK COLOR EFFECT
-    ====================================== */
+(event)=>{
 
-    let colorTimer;
 
+const x =
 
-    title.addEventListener(
-      "click",
-      () => {
+event.clientX /
+window.innerWidth
+-.5;
 
 
-        /*
-          여러 번 빠르게 클릭해도
-          타이머가 꼬이지 않게 초기화
-        */
+const y =
 
-        clearTimeout(
-          colorTimer
-        );
+event.clientY /
+window.innerHeight
+-.5;
 
 
-        /*
-          #009D9D 컬러 활성화
-        */
+title.style.marginLeft =
+`${x*14}px`;
 
-        title.classList.add(
-          "active"
-        );
 
+title.style.marginTop =
+`${y*9}px`;
 
-        /*
-          0.7초 뒤 흰색으로 복귀
-        */
 
-        colorTimer =
-          setTimeout(
-            () => {
+}
 
-              title.classList.remove(
-                "active"
-              );
+);
 
-            },
-            700
-          );
 
-      }
-    );
 
+/* ========================================
+   CLICK EFFECT
+======================================== */
 
-  </script>
+let colorTimer;
+
+
+title.addEventListener(
+
+"click",
+
+()=>{
+
+
+clearTimeout(
+colorTimer
+);
+
+
+title.classList.add(
+"active"
+);
+
+
+colorTimer =
+setTimeout(
+
+()=>{
+
+title.classList.remove(
+"active"
+);
+
+},
+
+700
+
+);
+
+
+}
+
+);
+
+
+</script>
 
 
 </body>
