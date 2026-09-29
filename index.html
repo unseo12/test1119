@@ -1,3123 +1,1169 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>김밥천국</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<style>
-
-
-:root{
-    --bg:#FFF6E5;
-    --paper:#FFF9EE;
-    --red:#E64A2E;
-    --yellow:#FFC43D;
-    --navy:#263642;
-    --text:#202B32;
-    --sub:#625D54;
-    --line:#D7CBB5;
-    --gray:#D9D9D9;
-
-    --header-height:78px;
-    --content-width:1240px;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:"Noto Sans KR",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-}
-
-button,
-input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-img{
-    display:block;
-    max-width:100%;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-.container{
-    width:min(var(--content-width), calc(100% - 96px));
-    margin:0 auto;
-}
-
-
-.header{
-    width:100%;
-    height:var(--header-height);
-
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:var(--bg);
-    border-bottom:1px solid rgba(80,70,50,.12);
-}
-
-.header-inner{
-    width:min(var(--content-width), calc(100% - 96px));
-    height:100%;
-
-    margin:0 auto;
-
-    display:flex;
-    align-items:center;
-}
-
-
-
-.logo{
-    width:145px;
-    flex-shrink:0;
-}
-
-.logo img{
-    width:120px;
-    height:45px;
-
-    object-fit:contain;
-    object-position:left center;
-}
-
-
-
-.nav{
-    height:100%;
-
-    display:flex;
-    align-items:center;
-
-    gap:52px;
-
-    margin-left:120px;
-}
-
-.nav a{
-    height:100%;
-
-    display:flex;
-    align-items:center;
-
-    position:relative;
-
-    font-size:13px;
-    font-weight:600;
-
-    white-space:nowrap;
-}
-
-.nav a.active::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:18px;
-
-    transform:translateX(-50%);
-
-    width:28px;
-    height:2px;
-
-    background:var(--red);
-}
-
-
-
-.header-right{
-    margin-left:auto;
-
-    display:flex;
-    align-items:center;
-
-    gap:12px;
-}
-
-
-
-.header-search{
-    width:200px;
-    height:34px;
-
-    padding:0 13px;
-
-    display:flex;
-    align-items:center;
-
-    border:1px solid var(--line);
-    border-radius:18px;
-
-    background:var(--paper);
-}
-
-.header-search input{
-    width:100%;
-
-    border:0;
-    outline:0;
-
-    background:transparent;
-
-    font-size:10px;
-}
-
-.header-search input::placeholder{
-    color:#A19B91;
-}
-
-.search-icon{
-    width:16px;
-    height:16px;
-
-    flex-shrink:0;
-
-    object-fit:contain;
-}
-
-
-
-.cart-button{
-    width:32px;
-    height:32px;
-
-    padding:4px;
-
-    position:relative;
-
-    border:0;
-
-    background:transparent;
-}
-
-.cart-button img{
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-}
-
-.cart-count{
-    width:16px;
-    height:16px;
-
-    position:absolute;
-
-    top:-3px;
-    right:-2px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:var(--red);
-    color:white;
-
-    font-size:8px;
-    font-weight:800;
-}
-
-
-.order-button{
-    height:34px;
-
-    padding:0 20px;
-
-    border:0;
-    border-radius:18px;
-
-    background:var(--red);
-    color:white;
-
-    font-size:11px;
-    font-weight:700;
-}
-
-
-
-.hero{
-    height:calc(100dvh - var(--header-height));
-
-    position:relative;
-
-    display:flex;
-    flex-direction:column;
-
-    overflow:hidden;
-}
-
-.hero-content{
-    width:min(var(--content-width), calc(100% - 96px));
-
-    flex:1;
-
-    margin:0 auto;
-
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,.88fr)
-        minmax(0,1.12fr);
-
-    align-items:center;
-
-    gap:95px;
-
-    padding:35px 0 90px;
-}
-
-
-.hero-copy{
-    padding-left:0;
-}
-
-.hero-small{
-    margin-bottom:20px;
-
-    font-size:18px;
-    font-weight:500;
-
-    letter-spacing:-.4px;
-}
-
-.hero-title{
-    font-size:70px;
-    line-height:1;
-
-    letter-spacing:-5px;
-
-    font-weight:800;
-}
-
-.hero-title span{
-    color:var(--red);
-}
-
-.hero-description{
-    margin-top:30px;
-
-    font-size:15px;
-    line-height:1.8;
-
-    font-weight:500;
-
-    letter-spacing:-.3px;
-}
-
-
-.hero-buttons{
-    display:flex;
-
-    gap:12px;
-
-    margin-top:27px;
-}
-
-.hero-button{
-    width:150px;
-    height:46px;
-
-    padding:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:8px;
-
-    border:1px solid #CFC3AE;
-    border-radius:7px;
-
-    background:var(--paper);
-
-    color:var(--text);
-
-    font-size:12px;
-    font-weight:700;
-}
-
-.hero-button.primary{
-    background:var(--yellow);
-    border-color:var(--yellow);
-}
-
-.hero-button-icon{
-    width:18px;
-    height:18px;
-
-    flex-shrink:0;
-
-    object-fit:contain;
-}
-
-
-.hero-image{
-    width:100%;
-
-    aspect-ratio:1.47 / 1;
-
-    max-height:470px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:7px;
-
-    background:var(--gray);
-}
-
-.hero-image img{
-    width:100%;
-    height:100%;
-
-    position:relative;
-    z-index:1;
-
-    object-fit:cover;
-}
-
-
-.placeholder{
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-
-    pointer-events:none;
-}
-
-
-.checker{
-    width:100%;
-    height:18px;
-
-    position:absolute;
-
-    left:0;
-    bottom:45px;
-
-    background-color:var(--bg);
-
-    background-image:
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
-        ),
-        linear-gradient(
-            45deg,
-            var(--red) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--red) 75%
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ROCK FESTIVAL</title>
+
+  <!-- Pretendard -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+  >
+
+  <style>
+    /* ================================
+       RESET
+    ================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Pretendard", sans-serif;
+      background: #080808;
+      color: #f5f5f0;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    ::selection {
+      background: #d8ff32;
+      color: #080808;
+    }
+
+
+    /* ================================
+       MOUSE LIGHT
+    ================================= */
+
+    .cursor-light {
+      position: fixed;
+      left: 0;
+      top: 0;
+
+      width: 520px;
+      height: 520px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(216, 255, 50, 0.20) 0%,
+          rgba(216, 255, 50, 0.08) 30%,
+          rgba(216, 255, 50, 0.02) 55%,
+          transparent 72%
         );
 
-    background-size:18px 18px;
-    background-position:0 0, 9px 9px;
-}
+      filter: blur(10px);
 
+      pointer-events: none;
+      z-index: 2;
 
-.menu-section{
-    height:calc(100dvh - var(--header-height));
+      transform: translate(-50%, -50%);
 
-    padding:28px 0;
+      mix-blend-mode: screen;
+    }
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
 
-    overflow:hidden;
-}
+    /* ================================
+       HEADER
+    ================================= */
 
-.menu-content{
-    width:calc(100% - 96px);
-    max-width:1040px;
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
 
-    margin:0 auto;
-}
+      width: 100%;
+      height: 84px;
 
-.menu-title{
-    margin-bottom:5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    font-size:30px;
-    line-height:1.2;
+      padding: 0 48px;
 
-    font-weight:800;
+      border-bottom: 1px solid rgba(255,255,255,0.16);
 
-    letter-spacing:-1.3px;
-}
+      background: rgba(8,8,8,0.5);
+      backdrop-filter: blur(18px);
 
-.menu-subtitle{
-    margin-bottom:15px;
+      z-index: 100;
+    }
 
-    color:#514D46;
+    .logo {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
 
-    font-size:11px;
-}
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
 
-.menu-search{
-    width:100%;
-    height:40px;
+    nav a {
+      position: relative;
 
-    margin-bottom:10px;
+      font-size: 13px;
+      font-weight: 600;
 
-    padding:0 16px;
+      letter-spacing: 0.04em;
+    }
 
-    display:flex;
-    align-items:center;
+    nav a::after {
+      content: "";
 
-    border:1px solid var(--line);
-    border-radius:22px;
+      position: absolute;
+      left: 0;
+      bottom: -8px;
 
-    background:var(--bg);
-}
+      width: 0;
+      height: 2px;
 
-.menu-search input{
-    min-width:0;
-    flex:1;
+      background: #d8ff32;
 
-    border:0;
-    outline:0;
+      transition: 0.3s;
+    }
 
-    background:transparent;
+    nav a:hover::after {
+      width: 100%;
+    }
 
-    font-size:10px;
-}
+    .ticket-btn {
+      padding: 11px 18px;
 
-.menu-search input::placeholder{
-    color:#8F887D;
-}
+      border: 1px solid #d8ff32;
+      border-radius: 100px;
 
-.categories{
-    width:100%;
+      color: #d8ff32;
 
-    margin-bottom:14px;
+      transition: 0.3s;
+    }
 
-    display:grid;
+    .ticket-btn:hover {
+      background: #d8ff32;
+      color: #080808;
+    }
 
-    grid-template-columns:repeat(10, minmax(0,1fr));
 
-    gap:8px;
-}
+    /* ================================
+       HERO
+    ================================= */
 
-.category{
-    width:100%;
-    min-width:0;
-    height:30px;
+    .hero {
+      position: relative;
 
-    padding:0;
+      width: 100%;
+      min-height: 100vh;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+      overflow: hidden;
 
-    border:1px solid var(--line);
-    border-radius:16px;
+      display: flex;
+      align-items: flex-end;
 
-    background:var(--bg);
+      padding: 0 48px 55px;
+    }
 
-    color:var(--text);
 
-    font-size:9px;
-    font-weight:500;
+    /* Background grid */
 
-    white-space:nowrap;
-}
+    .hero::before {
+      content: "";
 
-.category.active{
-    border-color:var(--red);
+      position: absolute;
+      inset: 0;
 
-    background:var(--red);
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,0.035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.035) 1px,
+          transparent 1px
+        );
 
-    color:white;
-}
+      background-size: 80px 80px;
 
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 80%
+        );
 
-.menu-grid{
-    width:100%;
+      pointer-events: none;
+    }
 
-    display:grid;
 
-    grid-template-columns:repeat(4, minmax(0,1fr));
+    /* giant floating typography */
 
-    gap:4px;
-}
+    .floating-title {
+      position: absolute;
 
+      top: 12%;
+      left: 50%;
 
-.menu-card{
-    width:100%;
+      transform: translateX(-50%);
 
-    overflow:hidden;
+      width: 100%;
 
-    border:1px solid var(--line);
+      text-align: center;
 
-    background:var(--bg);
-}
+      font-size: clamp(105px, 15vw, 285px);
 
+      font-weight: 950;
 
-.menu-image{
-    width:100%;
-    height:150px;
+      line-height: 0.75;
 
-    position:relative;
+      letter-spacing: -0.085em;
 
-    overflow:hidden;
+      white-space: nowrap;
 
-    background:var(--gray);
+      color: #f5f5f0;
 
-    cursor:pointer;
-}
+      z-index: 4;
 
-.menu-image img{
-    width:100%;
-    height:100%;
+      animation: floating 5s ease-in-out infinite;
+    }
 
-    position:relative;
-    z-index:1;
+    .floating-title span {
+      display: inline-block;
 
-    object-fit:cover;
-}
+      color: transparent;
 
+      -webkit-text-stroke:
+        1.5px rgba(245,245,240,0.9);
+    }
 
-.menu-info{
-    height:72px;
+    @keyframes floating {
 
-    padding:12px 14px;
+      0% {
+        transform:
+          translateX(-50%)
+          translateY(0px)
+          rotate(-0.4deg);
+      }
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+      50% {
+        transform:
+          translateX(-50%)
+          translateY(-22px)
+          rotate(0.4deg);
+      }
 
-    background:var(--bg);
-}
+      100% {
+        transform:
+          translateX(-50%)
+          translateY(0px)
+          rotate(-0.4deg);
+      }
 
-.menu-name{
-    margin-bottom:5px;
+    }
 
-    color:var(--text);
 
-    font-size:13px;
-    line-height:1.3;
+    /* blurred background typography */
 
-    font-weight:600;
-}
+    .ghost-text {
+      position: absolute;
 
-.menu-price{
-    color:var(--text);
+      top: 39%;
+      left: -2%;
 
-    font-size:11px;
-    line-height:1;
+      font-size: clamp(90px, 13vw, 250px);
 
-    font-weight:400;
-}
+      font-weight: 900;
 
+      letter-spacing: -0.08em;
 
-.pagination{
-    margin-top:17px;
+      color: rgba(255,255,255,0.025);
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+      white-space: nowrap;
 
-    gap:8px;
-}
+      transform: rotate(-4deg);
 
-.page{
-    width:22px;
-    height:22px;
+      pointer-events: none;
+    }
 
-    padding:0;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    /* HERO bottom */
 
-    border:1px solid var(--line);
-    border-radius:3px;
+    .hero-bottom {
+      position: relative;
 
-    background:var(--bg);
+      width: 100%;
 
-    color:#625D54;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr;
 
-    font-size:9px;
-    line-height:1;
+      align-items: end;
 
-    font-weight:500;
-}
+      gap: 40px;
 
-.page.active{
-    border-color:var(--red);
+      z-index: 5;
+    }
 
-    background:var(--red);
+    .hero-date {
+      font-size: 13px;
+      line-height: 1.7;
 
-    color:white;
+      color: rgba(255,255,255,0.6);
+    }
 
-    font-weight:700;
-}
+    .hero-date strong {
+      display: block;
 
-.page:first-child,
-.page:last-child{
-    font-size:13px;
-    font-weight:500;
-}
+      margin-bottom: 7px;
 
-.page:hover{
-    border-color:var(--line);
-}
+      font-size: 17px;
 
-.page.active:hover{
-    border-color:var(--red);
-}
+      color: #d8ff32;
+    }
 
+    .hero-copy h1 {
+      max-width: 680px;
 
-.recommend-section{
-    min-height:calc(100dvh - var(--header-height));
+      font-size: clamp(30px, 4vw, 65px);
 
-    padding:92px 0;
+      line-height: 0.97;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+      letter-spacing: -0.055em;
 
-    background:var(--bg);
-}
+      font-weight: 800;
+    }
 
-.recommend-content{
-    width:100%;
-    min-height:390px;
+    .hero-copy p {
+      max-width: 500px;
 
-    margin:0;
-    padding:70px 48px;
+      margin-top: 22px;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+      font-size: 14px;
+      line-height: 1.7;
 
-    background:var(--yellow);
+      color: rgba(255,255,255,0.55);
+    }
 
-    text-align:center;
-}
+    .scroll-guide {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
 
-.recommend-title{
-    font-size:36px;
-    line-height:1.25;
+      gap: 10px;
 
-    letter-spacing:-1.5px;
+      font-size: 11px;
 
-    font-weight:800;
-}
+      color: rgba(255,255,255,0.45);
+    }
 
-.recommend-description{
-    margin-top:12px;
+    .scroll-line {
+      width: 1px;
+      height: 75px;
 
-    color:#695D46;
+      background:
+        linear-gradient(
+          to bottom,
+          #d8ff32,
+          transparent
+        );
+    }
 
-    font-size:10px;
-}
 
-.recommend-buttons{
-    margin-top:31px;
+    /* ================================
+       SECTION COMMON
+    ================================= */
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    section.content {
+      position: relative;
 
-    gap:17px;
-}
+      min-height: 100vh;
 
-.recommend-button{
-    width:135px;
-    height:46px;
+      padding: 130px 48px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+      border-top:
+        1px solid rgba(255,255,255,0.12);
 
-    gap:9px;
+      z-index: 5;
+    }
 
-    border:0;
-    border-radius:25px;
+    .section-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-    background:white;
+      margin-bottom: 70px;
+    }
 
-    color:var(--text);
+    .section-number {
+      font-size: 12px;
+      color: #d8ff32;
+    }
 
-    font-size:10px;
-    font-weight:700;
-}
+    .section-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+    }
 
-.recommend-icon{
-    width:25px;
-    height:25px;
+    .section-title {
+      font-size: clamp(55px, 9vw, 150px);
 
-    object-fit:contain;
-}
+      line-height: 0.85;
 
-.story-section{
-    height:calc(100dvh - var(--header-height));
+      letter-spacing: -0.075em;
 
-    padding:55px 0;
+      font-weight: 900;
+    }
 
-    display:flex;
-    align-items:center;
 
-    overflow:hidden;
-}
+    /* ================================
+       LINE UP
+    ================================= */
 
-.story-content{
-    width:min(1100px, calc(100% - 96px));
+    .lineup-list {
+      margin-top: 80px;
 
-    margin:0 auto;
+      border-top:
+        1px solid rgba(255,255,255,0.2);
+    }
 
-    transform:translateY(-45px);
+    .artist {
+      display: grid;
 
-    display:grid;
-
-    grid-template-columns:1.1fr .9fr;
-
-    gap:75px;
-
-    align-items:center;
-}
-
-.story-image{
-    width:100%;
-
-    aspect-ratio:1.45 / 1;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:7px;
-
-    background:var(--gray);
-}
-
-.story-image img{
-    width:100%;
-    height:100%;
-
-    position:relative;
-    z-index:1;
-
-    object-fit:cover;
-}
-
-.story-label{
-    margin-bottom:8px;
-
-    color:var(--red);
-
-    font-size:10px;
-    font-weight:700;
-}
-
-.story-title{
-    margin-bottom:17px;
-
-    font-size:31px;
-    line-height:1.35;
-
-    letter-spacing:-1.5px;
-
-    font-weight:800;
-}
-
-.story-description{
-    margin-bottom:27px;
-
-    color:#625D54;
-
-    font-size:10px;
-    line-height:1.8;
-}
-
-.story-points{
-    display:flex;
-
-    align-items:flex-start;
-
-    gap:24px;
-}
-
-.story-point{
-    text-align:center;
-}
-
-.story-icon{
-    width:62px;
-    height:62px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border:1.5px solid #B5A88D;
-    border-radius:50%;
-}
-
-.story-icon img{
-    width:33px;
-    height:33px;
-
-    object-fit:contain;
-}
-
-.story-point span{
-    display:block;
-
-    margin-top:8px;
-
-    color:#716958;
-
-    font-size:8px;
-}
-
-.footer{
-    padding:48px 0 32px;
-
-    background:var(--navy);
-
-    color:white;
-}
-
-.footer-content{
-    width:min(var(--content-width), calc(100% - 96px));
-
-    margin:0 auto;
-
-    display:grid;
-
-    grid-template-columns:
-        1.3fr
+      grid-template-columns:
+        80px
         1fr
-        1fr
-        1fr
-        1.5fr;
+        180px;
 
-    gap:55px;
-}
+      align-items: center;
 
-.footer-title{
-    margin-bottom:10px;
+      padding: 24px 0;
 
-    font-size:17px;
-    font-weight:800;
-}
+      border-bottom:
+        1px solid rgba(255,255,255,0.2);
 
-.footer-heading{
-    margin-bottom:10px;
-
-    font-size:12px;
-    font-weight:700;
-}
-
-.footer-description,
-.footer-text{
-    color:#E0E4E6;
-
-    font-size:9px;
-    line-height:1.8;
-}
-
-.socials{
-    display:flex;
-
-    gap:7px;
-}
-
-.social{
-    width:25px;
-    height:25px;
-
-    overflow:hidden;
-}
-
-.social img{
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-}
-
-.newsletter{
-    width:100%;
-    height:30px;
-
-    margin-top:8px;
-
-    display:flex;
-
-    border:1px solid rgba(255,255,255,.6);
-}
-
-.newsletter input{
-    min-width:0;
-    flex:1;
-
-    padding:0 9px;
-
-    border:0;
-    outline:0;
-
-    background:transparent;
-
-    color:white;
-
-    font-size:8px;
-}
-
-.newsletter button{
-    width:58px;
-
-    border:0;
-
-    background:white;
-
-    color:var(--navy);
-
-    font-size:8px;
-    font-weight:700;
-}
-
-.cart-overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:2000;
-
-    visibility:hidden;
-    opacity:0;
-
-    background:rgba(0,0,0,.35);
-
-    transition:.25s;
-}
-
-.cart-overlay.show{
-    visibility:visible;
-    opacity:1;
-}
-
-.cart-panel{
-    width:420px;
-    max-width:90%;
-    height:100dvh;
-
-    position:fixed;
-
-    top:0;
-    right:-440px;
-
-    z-index:2001;
-
-    padding:32px;
-
-    overflow-y:auto;
-
-    background:var(--bg);
-
-    transition:.3s;
-}
-
-.cart-panel.show{
-    right:0;
-}
-
-.cart-header{
-    margin-bottom:25px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.cart-header h2{
-    font-size:25px;
-}
-
-.close-cart{
-    border:0;
-
-    background:transparent;
-
-    font-size:28px;
-}
-
-.cart-item{
-    padding:15px 0;
-
-    display:flex;
-    align-items:center;
-
-    gap:13px;
-
-    border-bottom:1px solid var(--line);
-}
-
-.cart-item-image{
-    width:65px;
-    height:65px;
-
-    flex-shrink:0;
-
-    overflow:hidden;
-
-    background:var(--gray);
-}
-
-.cart-item-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.cart-item-info{
-    flex:1;
-}
-
-.cart-item-info strong{
-    display:block;
-
-    margin-bottom:5px;
-
-    font-size:12px;
-}
-
-.cart-item-info span{
-    color:#777;
-
-    font-size:10px;
-}
-
-.remove-item{
-    border:0;
-
-    background:transparent;
-
-    font-size:20px;
-}
-
-.cart-total{
-    margin-top:25px;
-
-    padding-top:20px;
-
-    display:flex;
-    justify-content:space-between;
-
-    border-top:2px solid var(--navy);
-
-    font-size:14px;
-    font-weight:800;
-}
-
-.checkout-button{
-    width:100%;
-    height:48px;
-
-    margin-top:20px;
-
-    border:0;
-    border-radius:5px;
-
-    background:var(--navy);
-
-    color:white;
-
-    font-weight:700;
-}
-
-.modal-overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:3000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    visibility:hidden;
-    opacity:0;
-
-    background:rgba(0,0,0,.45);
-
-    transition:.2s;
-}
-
-.modal-overlay.show{
-    visibility:visible;
-    opacity:1;
-}
-
-.modal{
-    width:720px;
-    max-width:calc(100% - 40px);
-
-    padding:28px;
-
-    position:relative;
-
-    border-radius:8px;
-
-    background:var(--bg);
-}
-
-.modal-close{
-    position:absolute;
-
-    right:15px;
-    top:10px;
-
-    border:0;
-
-    background:transparent;
-
-    font-size:25px;
-}
-
-.modal-content{
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:35px;
-
-    align-items:center;
-}
-
-.modal-image{
-    width:100%;
-    height:290px;
-
-    background:var(--gray);
-}
-
-.modal-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-}
-
-.modal-name{
-    margin-bottom:10px;
-
-    font-size:27px;
-    font-weight:800;
-}
-
-.modal-price{
-    margin-bottom:18px;
-
-    color:var(--red);
-
-    font-size:20px;
-    font-weight:800;
-}
-
-.modal-description{
-    font-size:11px;
-    line-height:1.8;
-}
-
-.modal-add{
-    width:100%;
-    height:45px;
-
-    margin-top:25px;
-
-    border:0;
-    border-radius:5px;
-
-    background:var(--red);
-
-    color:white;
-
-    font-size:11px;
-    font-weight:700;
-}
-
-.toast{
-    position:fixed;
-
-    left:50%;
-    bottom:30px;
-
-    z-index:5000;
-
-    padding:12px 22px;
-
-    opacity:0;
-
-    transform:translate(-50%,20px);
-
-    border-radius:30px;
-
-    background:var(--navy);
-
-    color:white;
-
-    font-size:10px;
-
-    pointer-events:none;
-
-    transition:.25s;
-}
-
-.toast.show{
-    opacity:1;
-
-    transform:translate(-50%,0);
-}
-
-@media (min-width:901px) and (max-height:800px){
-
-    :root{
-        --header-height:68px;
-    }
-
-
-    /* HERO */
-
-    .hero-content{
-        padding:25px 0 70px;
-
-        gap:75px;
-    }
-
-    .hero-small{
-        margin-bottom:15px;
-
-        font-size:16px;
+      transition:
+        padding 0.3s,
+        background 0.3s;
     }
-
-    .hero-title{
-        font-size:54px;
 
-        letter-spacing:-4px;
-    }
+    .artist:hover {
+      padding-left: 20px;
 
-    .hero-description{
-        margin-top:22px;
+      background: #d8ff32;
 
-        font-size:13px;
+      color: #080808;
     }
 
-    .hero-buttons{
-        margin-top:20px;
+    .artist-num {
+      font-size: 11px;
+      opacity: 0.5;
     }
 
-    .hero-button{
-        height:42px;
-    }
+    .artist-name {
+      font-size: clamp(28px, 4vw, 64px);
 
-    .hero-image{
-        max-height:370px;
-    }
+      font-weight: 800;
 
-    .checker{
-        bottom:35px;
+      letter-spacing: -0.05em;
     }
 
+    .artist-info {
+      text-align: right;
 
-    .menu-section{
-        padding:18px 0;
-    }
+      font-size: 12px;
 
-    .menu-title{
-        font-size:27px;
-        margin-bottom:3px;
+      line-height: 1.6;
     }
 
-    .menu-subtitle{
-        margin-bottom:10px;
-    }
 
-    .menu-search{
-        height:35px;
-        margin-bottom:7px;
-    }
+    /* ================================
+       SCHEDULE
+    ================================= */
 
-    .categories{
-        margin-bottom:8px;
-        gap:7px;
-    }
+    .schedule-grid {
+      display: grid;
 
-    .category{
-        height:26px;
-    }
+      grid-template-columns:
+        repeat(2, 1fr);
 
-    .menu-image{
-        height:120px;
-    }
+      gap: 1px;
 
-    .menu-info{
-        height:58px;
+      margin-top: 70px;
 
-        padding:8px 12px;
+      background:
+        rgba(255,255,255,0.2);
     }
 
-    .menu-name{
-        margin-bottom:4px;
+    .schedule-card {
+      min-height: 310px;
 
-        font-size:11px;
-    }
+      padding: 35px;
 
-    .menu-price{
-        font-size:9px;
-    }
+      background: #080808;
 
-    .pagination{
-        margin-top:10px;
+      transition: 0.35s;
     }
 
-    .page{
-        width:20px;
-        height:20px;
+    .schedule-card:hover {
+      background: #d8ff32;
+      color: #080808;
     }
 
+    .schedule-day {
+      margin-bottom: 60px;
 
-    .recommend-title{
-        font-size:32px;
+      font-size: 12px;
     }
 
-    .story-section{
-        padding:40px 0;
-    }
+    .schedule-time {
+      font-size:
+        clamp(45px, 6vw, 90px);
 
-    .story-image{
-        max-height:360px;
-    }
+      font-weight: 900;
 
-}
-
-@media (max-width:900px){
-
-    .container,
-    .header-inner,
-    .hero-content,
-    .menu-content,
-    .recommend-content,
-    .story-content,
-    .footer-content{
-        width:calc(100% - 40px);
+      letter-spacing: -0.06em;
     }
 
-    .nav{
-        margin-left:30px;
-
-        gap:20px;
-    }
+    .schedule-band {
+      margin-top: 12px;
 
-    .header-search{
-        display:none;
+      font-size: 18px;
+      font-weight: 600;
     }
 
-    .hero{
-        height:auto;
-        min-height:calc(100dvh - var(--header-height));
 
-        overflow:visible;
-    }
+    /* ================================
+       TICKET
+    ================================= */
 
-    .hero-content{
-        padding:60px 0 100px;
+    .ticket-area {
+      display: grid;
 
-        grid-template-columns:1fr;
+      grid-template-columns:
+        1fr 1fr;
 
-        gap:35px;
-    }
+      gap: 20px;
 
-    .hero-image{
-        max-height:none;
+      margin-top: 70px;
     }
-
-    .menu-section{
-        height:auto;
 
-        min-height:calc(100dvh - var(--header-height));
+    .ticket-card {
+      min-height: 360px;
 
-        padding:70px 0;
+      padding: 40px;
 
-        overflow:visible;
-    }
-
-    .categories{
-        display:flex;
-
-        overflow-x:auto;
+      border:
+        1px solid rgba(255,255,255,0.25);
 
-        scrollbar-width:none;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-    .categories::-webkit-scrollbar{
-        display:none;
+      transition: 0.3s;
     }
 
-    .category{
-        min-width:78px;
+    .ticket-card:hover {
+      transform: translateY(-8px);
 
-        padding:0 15px;
+      border-color: #d8ff32;
     }
 
-    .menu-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    .ticket-type {
+      font-size: 14px;
+      color: #d8ff32;
     }
 
-    .menu-image{
-        height:auto;
-
-        aspect-ratio:1.55 / 1;
-    }
+    .ticket-price {
+      font-size:
+        clamp(50px, 7vw, 100px);
 
-    .recommend-section{
-        min-height:auto;
-        padding:70px 0;
-    }
+      font-weight: 900;
 
-    .recommend-content{
-        min-height:360px;
-        padding:60px 30px;
+      letter-spacing: -0.07em;
     }
-
-    .story-section{
-        height:auto;
-
-        min-height:auto;
 
-        padding:90px 0;
 
-        overflow:visible;
-    }
-
-    .story-content{
-        grid-template-columns:1fr;
-        transform:translateY(-20px);
-    }
+    /* ================================
+       INFO
+    ================================= */
 
+    .info-copy {
+      max-width: 1000px;
 
-    .footer-content{
-        grid-template-columns:repeat(2,1fr);
-    }
+      margin-top: 80px;
 
-}
+      font-size:
+        clamp(35px, 5vw, 80px);
 
+      line-height: 1.05;
 
-@media (max-width:600px){
+      letter-spacing: -0.05em;
 
-    :root{
-        --header-height:64px;
+      font-weight: 700;
     }
 
-    .container,
-    .header-inner,
-    .hero-content,
-    .menu-content,
-    .recommend-content,
-    .story-content,
-    .footer-content{
-        width:calc(100% - 28px);
+    .info-copy span {
+      color: #d8ff32;
     }
 
-
-    .nav{
-        display:none;
-    }
 
-    .logo img{
-        width:100px;
-    }
+    /* ================================
+       FOOTER
+    ================================= */
 
-    .order-button{
-        padding:0 14px;
-    }
+    footer {
+      padding: 45px 48px;
 
-    .hero-content{
-        padding:45px 0 90px;
-    }
+      display: flex;
+      justify-content: space-between;
 
-    .hero-small{
-        font-size:14px;
-    }
+      border-top:
+        1px solid rgba(255,255,255,0.15);
 
-    .hero-title{
-        font-size:43px;
+      font-size: 11px;
 
-        letter-spacing:-3px;
+      color: rgba(255,255,255,0.4);
     }
 
-    .hero-description{
-        font-size:12px;
-    }
 
-    .hero-buttons{
-        gap:8px;
-    }
+    /* ================================
+       MOBILE
+    ================================= */
 
-    .hero-button{
-        width:145px;
-        height:43px;
-    }
+    @media (max-width: 768px) {
 
-    .checker{
-        bottom:30px;
-    }
+      header {
+        height: 70px;
+        padding: 0 20px;
+      }
 
+      nav a:not(.ticket-btn) {
+        display: none;
+      }
 
-    .menu-section{
-        padding:60px 0;
-    }
+      .hero {
+        padding:
+          0 20px
+          35px;
+      }
 
-    .menu-title{
-        font-size:28px;
-    }
+      .floating-title {
+        top: 20%;
 
-    .menu-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
+        font-size: 25vw;
 
-    .menu-info{
-        height:65px;
+        line-height: 0.78;
 
-        padding:9px 10px;
-    }
+        white-space: normal;
+      }
 
-    .menu-name{
-        font-size:11px;
-    }
+      .floating-title span {
+        display: block;
+      }
 
-    .menu-price{
-        font-size:9px;
-    }
+      .ghost-text {
+        top: 43%;
+      }
 
+      .hero-bottom {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
 
-    .recommend-section{
-        min-height:auto;
-        padding:55px 0;
-    }
+      .scroll-guide {
+        display: none;
+      }
 
-    .recommend-content{
-        min-height:340px;
-        padding:50px 20px;
-    }
+      section.content {
+        padding:
+          100px 20px;
+      }
 
-    .recommend-title{
-        font-size:28px;
-    }
+      .section-top {
+        margin-bottom: 45px;
+      }
 
-    .recommend-buttons{
-        flex-wrap:wrap;
-    }
+      .artist {
+        grid-template-columns:
+          40px 1fr;
+      }
 
+      .artist-info {
+        display: none;
+      }
 
-    .story-title{
-        font-size:27px;
-    }
+      .schedule-grid,
+      .ticket-area {
+        grid-template-columns: 1fr;
+      }
 
+      .schedule-card {
+        min-height: 230px;
+      }
 
-    .footer-content{
-        grid-template-columns:1fr 1fr;
+      footer {
+        padding: 35px 20px;
 
-        gap:35px 25px;
-    }
+        flex-direction: column;
 
+        gap: 10px;
+      }
 
-    .modal-content{
-        grid-template-columns:1fr;
-    }
+      .cursor-light {
+        display: none;
+      }
 
-    .modal-image{
-        height:220px;
     }
-
-}
 
-</style>
+  </style>
 </head>
 
 
 <body>
 
 
-<header class="header">
-
-    <div class="header-inner">
-
-        <a class="logo" href="#home">
-
-            <img
-                src="images/logo.png"
-                alt="김밥천국"
-            >
-
-        </a>
+<!-- 마우스를 따라 움직이는 빛 -->
+<div class="cursor-light"></div>
 
 
-        <nav class="nav">
+<!-- ================================
+     HEADER
+================================= -->
 
-            <a href="#home" class="active">홈</a>
+<header>
 
-            <a href="#menu">메뉴</a>
+  <a href="#home" class="logo">
+    RF / 26
+  </a>
 
-            <a href="#recommend">추천</a>
+  <nav>
+    <a href="#lineup">LINE UP</a>
+    <a href="#schedule">SCHEDULE</a>
+    <a href="#info">INFO</a>
 
-            <a href="#story">매장안내</a>
-
-            <a href="#event">이벤트</a>
-
-        </nav>
-
-
-        <div class="header-right">
-
-            <div class="header-search">
-
-                <input
-                    id="headerSearch"
-                    type="text"
-                    placeholder="메뉴를 검색해보세요!"
-                >
-
-                <img
-                    class="search-icon"
-                    src="images/icons/search.png"
-                    alt="검색"
-                >
-
-            </div>
-
-
-            <button
-                class="cart-button"
-                onclick="openCart()"
-                aria-label="장바구니 열기"
-            >
-
-                <img
-                    src="images/icons/cart.png"
-                    alt="장바구니"
-                >
-
-                <span
-                    class="cart-count"
-                    id="cartCount"
-                >
-                    0
-                </span>
-
-            </button>
-
-
-            <button
-                class="order-button"
-                onclick="openCart()"
-            >
-                주문하기
-            </button>
-
-        </div>
-
-    </div>
+    <a href="#ticket" class="ticket-btn">
+      TICKET ↗
+    </a>
+  </nav>
 
 </header>
 
 
-<!-- =========================================================
+<!-- ================================
      HERO
-========================================================= -->
+================================= -->
+
+<main>
 
 <section class="hero" id="home">
 
-    <div class="hero-content">
+  <div class="floating-title">
+    ROCK <span>FESTIVAL</span>
+  </div>
 
-        <div class="hero-copy">
-
-            <p class="hero-small">
-                익숙해서 더 맛있는 한 끼
-            </p>
-
-
-            <h1 class="hero-title">
-
-                오늘
-                <span>뭐 먹지?</span>
-
-            </h1>
+  <div class="ghost-text">
+    LOUD / LIVE / ALIVE
+  </div>
 
 
-            <p class="hero-description">
+  <div class="hero-bottom">
 
-                김밥천국의 다양한 메뉴를 쉽고 빠르게!<br>
-                원하는 메뉴를 찾아보세요.
+    <div class="hero-date">
+      <strong>OCT 10 — 11</strong>
 
-            </p>
-
-
-            <div class="hero-buttons">
-
-                <button
-                    class="hero-button primary"
-                    onclick="goToMenu()"
-                >
-                    메뉴 보러가기
-                    <span>→</span>
-                </button>
+      2026<br>
+      SEOUL, KOREA
+    </div>
 
 
-                <button
-                    class="hero-button"
-                    onclick="randomMenu()"
-                >
+    <div class="hero-copy">
 
-                    <img
-                        class="hero-button-icon"
-                        src="images/icons/lightbulb.png"
-                        alt=""
-                    >
+      <h1>
+        TURN UP<br>
+        THE NOISE.
+      </h1>
 
-                    오늘 뭐 먹지?
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="hero-image">
-
-            <div class="placeholder">
-                IMG
-            </div>
-
-            <img
-                src="images/hero.jpg"
-                alt="대표 메뉴"
-                onerror="this.style.display='none'"
-            >
-
-        </div>
+      <p>
+        음악과 관객의 에너지가 하나가 되는 순간.
+        이틀 동안 이어지는 라이브 공연과
+        강렬한 사운드를 경험하세요.
+      </p>
 
     </div>
 
 
-    <div class="checker"></div>
+    <div class="scroll-guide">
+      SCROLL TO EXPLORE
+      <div class="scroll-line"></div>
+    </div>
+
+  </div>
 
 </section>
 
 
-<section class="menu-section" id="menu">
 
-    <div class="menu-content">
+<!-- ================================
+     LINE UP
+================================= -->
 
-        <h2 class="menu-title">
-            메뉴
-        </h2>
+<section class="content" id="lineup">
 
-
-        <p class="menu-subtitle">
-            다양한 메뉴를 카테고리별로 확인해보세요.
-        </p>
-
-
-        <div class="menu-search">
-
-            <input
-                id="menuSearch"
-                type="text"
-                placeholder="메뉴를 검색해보세요"
-                oninput="renderMenu()"
-            >
-
-            <img
-                class="search-icon"
-                src="images/icons/search.png"
-                alt="검색"
-            >
-
-        </div>
+  <div class="section-top">
+    <span class="section-number">01</span>
+    <span class="section-label">ARTIST / LINE UP</span>
+  </div>
 
 
-        <div class="categories">
-
-            <button
-                class="category active"
-                onclick="setCategory('전체',this)"
-            >
-                전체
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('김밥',this)"
-            >
-                김밥
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('덮밥',this)"
-            >
-                덮밥
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('찌개',this)"
-            >
-                찌개
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('죽',this)"
-            >
-                죽
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('라면',this)"
-            >
-                라면
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('분식',this)"
-            >
-                분식
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('돈까스',this)"
-            >
-                돈까스
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('사이드',this)"
-            >
-                사이드
-            </button>
-
-            <button
-                class="category"
-                onclick="setCategory('음료',this)"
-            >
-                음료
-            </button>
-
-        </div>
+  <h2 class="section-title">
+    LINE<br>UP
+  </h2>
 
 
-        <div
-            class="menu-grid"
-            id="menuGrid"
-        ></div>
+  <div class="lineup-list">
 
-
-        <div class="pagination">
-
-            <button class="page">
-                ‹
-            </button>
-
-            <button class="page active">
-                1
-            </button>
-
-            <button class="page">
-                2
-            </button>
-
-            <button class="page">
-                3
-            </button>
-
-            <button class="page">
-                ›
-            </button>
-
-        </div>
-
+    <div class="artist">
+      <span class="artist-num">01</span>
+      <span class="artist-name">THE RIOT</span>
+      <span class="artist-info">
+        DAY 01<br>
+        MAIN STAGE
+      </span>
     </div>
+
+    <div class="artist">
+      <span class="artist-num">02</span>
+      <span class="artist-name">BLACK WAVE</span>
+      <span class="artist-info">
+        DAY 01<br>
+        MAIN STAGE
+      </span>
+    </div>
+
+    <div class="artist">
+      <span class="artist-num">03</span>
+      <span class="artist-name">NO SIGNAL</span>
+      <span class="artist-info">
+        DAY 01<br>
+        SUB STAGE
+      </span>
+    </div>
+
+    <div class="artist">
+      <span class="artist-num">04</span>
+      <span class="artist-name">AFTER NOISE</span>
+      <span class="artist-info">
+        DAY 02<br>
+        MAIN STAGE
+      </span>
+    </div>
+
+    <div class="artist">
+      <span class="artist-num">05</span>
+      <span class="artist-name">VOLTAGE</span>
+      <span class="artist-info">
+        DAY 02<br>
+        SUB STAGE
+      </span>
+    </div>
+
+  </div>
 
 </section>
 
 
-<section
-    class="recommend-section"
-    id="recommend"
->
 
-    <div class="recommend-content">
+<!-- ================================
+     SCHEDULE
+================================= -->
 
-        <h2 class="recommend-title">
-            오늘은 어떤 메뉴가 먹고 싶나요?
-        </h2>
+<section class="content" id="schedule">
 
-
-        <p class="recommend-description">
-            원하시는 기분을 선택하면 메뉴를 추천해드릴게요!
-        </p>
+  <div class="section-top">
+    <span class="section-number">02</span>
+    <span class="section-label">DAY / TIME / STAGE</span>
+  </div>
 
 
-        <div class="recommend-buttons">
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('든든하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-full.png"
-                    alt=""
-                >
-
-                든든하게
-
-            </button>
+  <h2 class="section-title">
+    LIVE<br>SCHEDULE
+  </h2>
 
 
-            <button
-                class="recommend-button"
-                onclick="recommendMood('매콤하게')"
-            >
+  <div class="schedule-grid">
 
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-spicy.png"
-                    alt=""
-                >
+    <div class="schedule-card">
 
-                매콤하게
+      <div class="schedule-day">
+        DAY 01 · MAIN STAGE
+      </div>
 
-            </button>
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('간단하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-light.png"
-                    alt=""
-                >
-
-                간단하게
-
-            </button>
-
-
-            <button
-                class="recommend-button"
-                onclick="recommendMood('저렴하게')"
-            >
-
-                <img
-                    class="recommend-icon"
-                    src="images/icons/recommend-cheap.png"
-                    alt=""
-                >
-
-                저렴하게
-
-            </button>
-
-        </div>
+      <div>
+        <div class="schedule-time">17:30</div>
+        <div class="schedule-band">THE RIOT</div>
+      </div>
 
     </div>
+
+
+    <div class="schedule-card">
+
+      <div class="schedule-day">
+        DAY 01 · SUB STAGE
+      </div>
+
+      <div>
+        <div class="schedule-time">19:00</div>
+        <div class="schedule-band">NO SIGNAL</div>
+      </div>
+
+    </div>
+
+
+    <div class="schedule-card">
+
+      <div class="schedule-day">
+        DAY 02 · MAIN STAGE
+      </div>
+
+      <div>
+        <div class="schedule-time">18:20</div>
+        <div class="schedule-band">AFTER NOISE</div>
+      </div>
+
+    </div>
+
+
+    <div class="schedule-card">
+
+      <div class="schedule-day">
+        DAY 02 · SUB STAGE
+      </div>
+
+      <div>
+        <div class="schedule-time">20:10</div>
+        <div class="schedule-band">VOLTAGE</div>
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<section
-    class="story-section"
-    id="story"
->
 
-    <div class="story-content">
+<!-- ================================
+     TICKET
+================================= -->
 
-        <div class="story-image">
+<section class="content" id="ticket">
 
-            <div class="placeholder">
-                김밥2.jpg
-            </div>
-
-            <img
-                src="images/brand.jpg"
-                alt="김밥천국 이야기"
-                onerror="this.style.display='none'"
-            >
-
-        </div>
+  <div class="section-top">
+    <span class="section-number">03</span>
+    <span class="section-label">TICKET</span>
+  </div>
 
 
-        <div class="story-copy">
-
-            <p class="story-label">
-                김밥천국 이야기
-            </p>
+  <h2 class="section-title">
+    GET<br>LOUD
+  </h2>
 
 
-            <h2 class="story-title">
+  <div class="ticket-area">
 
-                언제나 그 자리에,<br>
-                모두를 위한 맛있는 천국
+    <div class="ticket-card">
 
-            </h2>
+      <span class="ticket-type">
+        1 DAY PASS
+      </span>
 
-
-            <p class="story-description">
-
-                바쁜 하루 속 허기진 마음까지 채워주는 곳.<br>
-                정성껏 맛을 담은 김밥 한 줄로 언제나 당신의 곁을 지킵니다.
-
-            </p>
-
-
-            <div class="story-points">
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-01.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        정직한 재료
-                    </span>
-
-                </div>
-
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-02.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        푸짐한 한 끼
-                    </span>
-
-                </div>
-
-
-                <div class="story-point">
-
-                    <div class="story-icon">
-
-                        <img
-                            src="images/icons/story-03.png"
-                            alt=""
-                        >
-
-                    </div>
-
-                    <span>
-                        변함없는 맛
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
+      <div class="ticket-price">
+        ₩88K
+      </div>
 
     </div>
+
+
+    <div class="ticket-card">
+
+      <span class="ticket-type">
+        2 DAY PASS
+      </span>
+
+      <div class="ticket-price">
+        ₩148K
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
 
-<footer
-    class="footer"
-    id="event"
->
 
-    <div class="footer-content">
+<!-- ================================
+     INFO
+================================= -->
 
-        <div>
+<section class="content" id="info">
 
-            <h3 class="footer-title">
-                김밥천국
-            </h3>
-
-            <p class="footer-description">
-
-                1994년부터 변하지 않는 맛으로<br>
-                사랑받고 있는 김밥천국입니다.
-
-            </p>
-
-        </div>
+  <div class="section-top">
+    <span class="section-number">04</span>
+    <span class="section-label">FESTIVAL INFORMATION</span>
+  </div>
 
 
-        <div>
-
-            <h4 class="footer-heading">
-                고객센터
-            </h4>
-
-            <p class="footer-text">
-
-                02-888-8222<br>
-                평일 09:00-18:00<br>
-                (주말/공휴일 휴무)
-
-            </p>
-
-        </div>
+  <h2 class="section-title">
+    INFO
+  </h2>
 
 
-        <div>
+  <p class="info-copy">
 
-            <h4 class="footer-heading">
-                바로가기
-            </h4>
+    TWO DAYS.<br>
+    TWO STAGES.<br>
+    TEN BANDS.<br><br>
 
-            <p class="footer-text">
+    ONE <span>LOUD</span><br>
+    EXPERIENCE.
 
-                이용약관<br>
-                개인정보처리방침<br>
-                FAQ
+  </p>
 
-            </p>
-
-        </div>
+</section>
 
 
-        <div>
-
-            <h4 class="footer-heading">
-                공식채널
-            </h4>
+</main>
 
 
-            <div class="socials">
 
-                <div class="social">
+<footer>
 
-                    <img
-                        src="images/icons/instagram.png"
-                        alt="인스타그램"
-                    >
+  <span>
+    ROCK FESTIVAL © 2026
+  </span>
 
-                </div>
-
-
-                <div class="social">
-
-                    <img
-                        src="images/icons/facebook.png"
-                        alt="페이스북"
-                    >
-
-                </div>
-
-
-                <div class="social">
-
-                    <img
-                        src="images/icons/youtube.png"
-                        alt="유튜브"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div>
-
-            <h4 class="footer-heading">
-                이벤트
-            </h4>
-
-            <p class="footer-text">
-                다양한 소식을 받아보세요.
-            </p>
-
-
-            <div class="newsletter">
-
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="이메일을 입력해주세요"
-                >
-
-                <button onclick="subscribe()">
-                    구독하기
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
+  <span>
+    CLEAR · INTUITIVE · VIBRANT
+  </span>
 
 </footer>
 
 
-<div
-    class="cart-overlay"
-    id="cartOverlay"
-    onclick="closeCart()"
-></div>
-
-
-<aside
-    class="cart-panel"
-    id="cartPanel"
->
-
-    <div class="cart-header">
-
-        <h2>
-            장바구니
-        </h2>
-
-        <button
-            class="close-cart"
-            onclick="closeCart()"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div id="cartItems"></div>
-
-
-    <div class="cart-total">
-
-        <span>
-            총 주문금액
-        </span>
-
-        <span id="cartTotal">
-            0원
-        </span>
-
-    </div>
-
-
-    <button
-        class="checkout-button"
-        onclick="checkout()"
-    >
-        주문하기
-    </button>
-
-</aside>
-
-
-<div
-    class="modal-overlay"
-    id="modalOverlay"
-    onclick="closeModalOutside(event)"
->
-
-    <div class="modal">
-
-        <button
-            class="modal-close"
-            onclick="closeModal()"
-        >
-            ×
-        </button>
-
-
-        <div class="modal-content">
-
-            <div class="modal-image">
-
-                <img
-                    id="modalImage"
-                    src=""
-                    alt=""
-                >
-
-            </div>
-
-
-            <div>
-
-                <h2
-                    class="modal-name"
-                    id="modalName"
-                ></h2>
-
-
-                <div
-                    class="modal-price"
-                    id="modalPrice"
-                ></div>
-
-
-                <p
-                    class="modal-description"
-                    id="modalDescription"
-                ></p>
-
-
-                <button
-                    class="modal-add"
-                    onclick="addCurrentMenu()"
-                >
-                    장바구니 담기
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<div
-    class="toast"
-    id="toast"
-></div>
-
 
 <script>
 
+  /* ==================================
+     CURSOR LIGHT
+  ================================== */
 
-const menus = [
+  const light =
+    document.querySelector(".cursor-light");
 
-    {
-        id:1,
-        name:"야채김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu01.jpg",
-        moods:["간단하게","저렴하게"],
-        description:"신선한 야채를 가득 넣은 담백한 김밥입니다."
-    },
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
 
-    {
-        id:2,
-        name:"치즈김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu02.jpg",
-        moods:["간단하게"],
-        description:"고소한 치즈와 다양한 재료가 어우러진 김밥입니다."
-    },
+  let lightX = mouseX;
+  let lightY = mouseY;
 
-    {
-        id:3,
-        name:"참치김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu03.jpg",
-        moods:["든든하게","간단하게"],
-        description:"고소한 참치와 신선한 야채를 함께 즐길 수 있습니다."
-    },
 
-    {
-        id:4,
-        name:"새우김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu04.jpg",
-        moods:["든든하게"],
-        description:"탱글한 새우와 다양한 재료를 담은 김밥입니다."
-    },
+  window.addEventListener(
+    "mousemove",
+    (event) => {
 
-    {
-        id:5,
-        name:"야채김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu05.jpg",
-        moods:["간단하게","저렴하게"],
-        description:"신선한 재료를 담은 김밥입니다."
-    },
-
-    {
-        id:6,
-        name:"치즈김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu06.jpg",
-        moods:["간단하게"],
-        description:"부드러운 치즈를 담은 김밥입니다."
-    },
-
-    {
-        id:7,
-        name:"참치김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu07.jpg",
-        moods:["든든하게"],
-        description:"고소한 참치를 듬뿍 담았습니다."
-    },
-
-    {
-        id:8,
-        name:"새우김밥",
-        category:"김밥",
-        price:3500,
-        image:"images/menu08.jpg",
-        moods:["든든하게"],
-        description:"탱글한 새우가 들어간 김밥입니다."
-    }
-
-];
-
-
-let currentCategory = "전체";
-let currentMenu = null;
-let cart = [];
-
-function renderMenu(){
-
-    const grid =
-        document.getElementById("menuGrid");
-
-
-    const keyword =
-        document
-        .getElementById("menuSearch")
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    const filtered =
-        menus.filter(menu => {
-
-            const categoryMatch =
-                currentCategory === "전체" ||
-                menu.category === currentCategory;
-
-
-            const searchMatch =
-                menu.name
-                .toLowerCase()
-                .includes(keyword);
-
-
-            return categoryMatch && searchMatch;
-
-        });
-
-
-    grid.innerHTML = "";
-
-
-    filtered.forEach(menu => {
-
-        const card =
-            document.createElement("article");
-
-
-        card.className =
-            "menu-card";
-
-
-        card.innerHTML = `
-
-            <div
-                class="menu-image"
-                onclick="openModal(${menu.id})"
-            >
-
-                <div class="placeholder">
-                    IMG
-                </div>
-
-                <img
-                    src="${menu.image}"
-                    alt="${menu.name}"
-                    onerror="this.style.display='none'"
-                >
-
-            </div>
-
-
-            <div class="menu-info">
-
-                <div class="menu-name">
-                    ${menu.name}
-                </div>
-
-                <div class="menu-price">
-                    ${menu.price.toLocaleString()}원
-                </div>
-
-            </div>
-
-        `;
-
-
-        grid.appendChild(card);
-
-    });
-
-}
-
-function setCategory(category,button){
-
-    currentCategory = category;
-
-
-    document
-    .querySelectorAll(".category")
-    .forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    button.classList.add("active");
-
-
-    renderMenu();
-
-}
-
-document
-.getElementById("headerSearch")
-.addEventListener("input",function(){
-
-    document
-    .getElementById("menuSearch")
-    .value =
-        this.value;
-
-
-    currentCategory =
-        "전체";
-
-
-    document
-    .querySelectorAll(".category")
-    .forEach(btn => {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    const firstCategory =
-        document.querySelector(".category");
-
-
-    if(firstCategory){
-
-        firstCategory.classList.add("active");
+      mouseX = event.clientX;
+      mouseY = event.clientY;
 
     }
+  );
 
 
-    renderMenu();
+  function moveLight() {
 
-});
+    /*
+      마우스를 바로 따라오지 않고
+      살짝 늦게 따라오도록 설정
+    */
 
-function goToMenu(){
+    lightX +=
+      (mouseX - lightX) * 0.08;
 
-    document
-    .getElementById("menu")
-    .scrollIntoView({
-
-        behavior:"smooth"
-
-    });
-
-}
+    lightY +=
+      (mouseY - lightY) * 0.08;
 
 
-function randomMenu(){
+    light.style.left =
+      lightX + "px";
 
-    const random =
-        menus[
-            Math.floor(
-                Math.random() *
-                menus.length
-            )
-        ];
+    light.style.top =
+      lightY + "px";
 
 
-    openModal(random.id);
+    requestAnimationFrame(moveLight);
 
-}
+  }
 
-
-function recommendMood(mood){
-
-    const candidates =
-        menus.filter(
-            menu =>
-                menu.moods.includes(mood)
-        );
+  moveLight();
 
 
-    if(!candidates.length){
 
-        showToast(
-            "추천 메뉴가 없습니다."
-        );
+  /* ==================================
+     FLOATING TYPOGRAPHY + MOUSE
+  ================================== */
 
-        return;
-
-    }
+  const title =
+    document.querySelector(".floating-title");
 
 
-    const random =
-        candidates[
-            Math.floor(
-                Math.random() *
-                candidates.length
-            )
-        ];
+  window.addEventListener(
+    "mousemove",
+    (event) => {
+
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
 
 
-    openModal(random.id);
+      /*
+        CSS 기본 floating animation과
+        충돌하지 않도록 CSS 변수 사용
+        대신 rotate 효과만 살짝 적용
+      */
 
-}
+      title.style.marginLeft =
+        `${x * 12}px`;
 
-
-function openModal(id){
-
-    currentMenu =
-        menus.find(
-            menu =>
-                menu.id === id
-        );
-
-
-    if(!currentMenu){
-        return;
-    }
-
-
-    const modalImage =
-        document.getElementById("modalImage");
-
-
-    modalImage.src =
-        currentMenu.image;
-
-
-    modalImage.alt =
-        currentMenu.name;
-
-
-    document
-    .getElementById("modalName")
-    .textContent =
-        currentMenu.name;
-
-
-    document
-    .getElementById("modalPrice")
-    .textContent =
-        currentMenu.price.toLocaleString()
-        + "원";
-
-
-    document
-    .getElementById("modalDescription")
-    .textContent =
-        currentMenu.description;
-
-
-    document
-    .getElementById("modalOverlay")
-    .classList.add("show");
-
-}
-
-
-function closeModal(){
-
-    document
-    .getElementById("modalOverlay")
-    .classList.remove("show");
-
-}
-
-
-function closeModalOutside(event){
-
-    if(
-        event.target ===
-        event.currentTarget
-    ){
-
-        closeModal();
+      title.style.marginTop =
+        `${y * 8}px`;
 
     }
-
-}
-
-
-function addCurrentMenu(){
-
-    if(!currentMenu){
-        return;
-    }
-
-
-    const existing =
-        cart.find(
-            item =>
-                item.id ===
-                currentMenu.id
-        );
-
-
-    if(existing){
-
-        existing.quantity++;
-
-    }else{
-
-        cart.push({
-
-            ...currentMenu,
-
-            quantity:1
-
-        });
-
-    }
-
-
-    updateCart();
-
-    closeModal();
-
-
-    showToast(
-        currentMenu.name +
-        "이 장바구니에 담겼어요."
-    );
-
-}
-
-
-function updateCart(){
-
-    const count =
-        cart.reduce(
-            (sum,item) =>
-                sum + item.quantity,
-            0
-        );
-
-
-    document
-    .getElementById("cartCount")
-    .textContent =
-        count;
-
-
-    const container =
-        document
-        .getElementById("cartItems");
-
-
-    if(!cart.length){
-
-        container.innerHTML = `
-
-            <p
-                style="
-                    text-align:center;
-                    padding:60px 0;
-                    color:#777;
-                    font-size:11px;
-                "
-            >
-                장바구니가 비어있어요.
-            </p>
-
-        `;
-
-    }else{
-
-        container.innerHTML = "";
-
-
-        cart.forEach(item => {
-
-            const div =
-                document.createElement("div");
-
-
-            div.className =
-                "cart-item";
-
-
-            div.innerHTML = `
-
-                <div class="cart-item-image">
-
-                    <img
-                        src="${item.image}"
-                        alt="${item.name}"
-                    >
-
-                </div>
-
-
-                <div class="cart-item-info">
-
-                    <strong>
-                        ${item.name}
-                    </strong>
-
-                    <span>
-
-                        ${item.price.toLocaleString()}원
-                        ×
-                        ${item.quantity}
-
-                    </span>
-
-                </div>
-
-
-                <button
-                    class="remove-item"
-                    onclick="removeFromCart(${item.id})"
-                >
-                    ×
-                </button>
-
-            `;
-
-
-            container.appendChild(div);
-
-        });
-
-    }
-
-
-    const total =
-        cart.reduce(
-            (sum,item) =>
-                sum +
-                item.price *
-                item.quantity,
-            0
-        );
-
-
-    document
-    .getElementById("cartTotal")
-    .textContent =
-        total.toLocaleString()
-        + "원";
-
-}
-
-
-function removeFromCart(id){
-
-    cart =
-        cart.filter(
-            item =>
-                item.id !== id
-        );
-
-
-    updateCart();
-
-}
-
-function openCart(){
-
-    document
-    .getElementById("cartOverlay")
-    .classList.add("show");
-
-
-    document
-    .getElementById("cartPanel")
-    .classList.add("show");
-
-}
-
-
-function closeCart(){
-
-    document
-    .getElementById("cartOverlay")
-    .classList.remove("show");
-
-
-    document
-    .getElementById("cartPanel")
-    .classList.remove("show");
-
-}
-
-
-function checkout(){
-
-    if(!cart.length){
-
-        showToast(
-            "장바구니가 비어있어요."
-        );
-
-        return;
-
-    }
-
-
-    showToast(
-        "주문 페이지로 이동합니다."
-    );
-
-}
-
-
-function subscribe(){
-
-    const email =
-        document.getElementById("email");
-
-
-    if(!email.value.trim()){
-
-        showToast(
-            "이메일을 입력해주세요."
-        );
-
-        return;
-
-    }
-
-
-    showToast(
-        "이벤트 소식 신청이 완료되었습니다."
-    );
-
-
-    email.value = "";
-
-}
-
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add("show");
-
-
-    setTimeout(
-        () => {
-
-            toast.classList.remove("show");
-
-        },
-        2000
-    );
-
-}
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(event.key === "Escape"){
-
-            closeModal();
-            closeCart();
-
-        }
-
-    }
-);
-
-
-renderMenu();
-updateCart();
+  );
 
 </script>
+
 
 </body>
 </html>
