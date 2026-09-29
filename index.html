@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ROCK FESTIVAL</title>
+<title>2027 INCHEON PENTAPORT ROCK FESTIVAL</title>
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
-
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 
 <style>
 
-/* ========================================
-   RESET / COLOR SYSTEM
-======================================== */
+/* ==================================================
+   RESET / COLOR
+================================================== */
 
 *{
   margin:0;
@@ -27,15 +23,10 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
 }
 
 :root{
-
   --base:#1A1A1A;
-
   --white:#F5F5F0;
-
   --magenta:#B11883;
-
   --teal:#009D9D;
-
 }
 
 html{
@@ -43,15 +34,10 @@ html{
 }
 
 body{
-
   font-family:"Pretendard",sans-serif;
-
   background:var(--base);
-
   color:var(--white);
-
   overflow-x:hidden;
-
 }
 
 a{
@@ -60,48 +46,35 @@ a{
 }
 
 ::selection{
-
   background:var(--magenta);
-
   color:white;
-
 }
 
 
-
-/* ========================================
+/* ==================================================
    CURSOR LIGHT
-======================================== */
+================================================== */
 
 .cursor-light{
-
   position:fixed;
-
   left:0;
   top:0;
 
-  width:600px;
-  height:600px;
+  width:650px;
+  height:650px;
 
   border-radius:50%;
 
   background:
-
   radial-gradient(
-
     circle,
-
-    rgba(0,157,157,.30) 0%,
-
+    rgba(0,157,157,.27) 0%,
     rgba(0,157,157,.13) 25%,
-
     rgba(177,24,131,.08) 45%,
-
     transparent 72%
-
   );
 
-  filter:blur(18px);
+  filter:blur(20px);
 
   transform:translate(-50%,-50%);
 
@@ -110,17 +83,14 @@ a{
   mix-blend-mode:screen;
 
   z-index:2;
-
 }
 
 
-
-/* ========================================
+/* ==================================================
    HEADER
-======================================== */
+================================================== */
 
 header{
-
   position:fixed;
 
   top:0;
@@ -132,386 +102,376 @@ header{
   padding:0 48px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:space-between;
 
   background:rgba(26,26,26,.58);
 
   backdrop-filter:blur(18px);
-
   -webkit-backdrop-filter:blur(18px);
 
-  border-bottom:
-  1px solid rgba(255,255,255,.12);
+  border-bottom:1px solid rgba(255,255,255,.1);
 
   z-index:100;
-
 }
-
 
 
 /* LOGO */
 
 .logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
 
-  font-size:17px;
-
+  font-size:16px;
   font-weight:900;
 
   letter-spacing:-.04em;
-
 }
 
-.logo span{
+.logo-dot{
+  width:9px;
+  height:9px;
 
-  color:var(--magenta);
+  background:var(--magenta);
 
+  border-radius:50%;
 }
 
+.logo-year{
+  color:var(--teal);
+}
 
 
 /* NAV */
 
 nav{
-
   display:flex;
-
   align-items:center;
-
   gap:34px;
-
 }
 
 nav a{
-
   position:relative;
 
-  font-size:13px;
+  font-size:12px;
+  font-weight:650;
 
-  font-weight:600;
+  letter-spacing:.04em;
 
-  letter-spacing:.03em;
+  color:rgba(245,245,240,.72);
 
-  color:rgba(245,245,240,.78);
-
-  transition:
-  color .3s ease;
-
+  transition:.3s;
 }
 
 nav a:hover{
-
-  color:var(--teal);
-
+  color:var(--white);
 }
 
 nav a::after{
-
   content:"";
 
   position:absolute;
 
   left:0;
-
   bottom:-8px;
 
   width:0;
-
   height:2px;
 
-  background:var(--magenta);
+  background:
+  linear-gradient(
+    90deg,
+    var(--magenta),
+    var(--teal)
+  );
 
-  transition:
-  width .3s ease;
-
+  transition:.3s;
 }
 
 nav a:hover::after{
-
   width:100%;
-
 }
 
 
-
-/* ========================================
+/* ==================================================
    HERO
-======================================== */
+================================================== */
 
 .hero{
-
   position:relative;
 
   width:100%;
-
   min-height:100vh;
 
-  padding:
-  0 48px 55px;
+  padding:0 48px 48px;
 
   display:flex;
-
   align-items:flex-end;
 
   overflow:hidden;
-
 }
-
 
 
 /* GRID */
 
 .hero::before{
-
   content:"";
 
   position:absolute;
-
   inset:0;
 
   background-image:
 
   linear-gradient(
-
     rgba(255,255,255,.035) 1px,
-
     transparent 1px
-
   ),
 
   linear-gradient(
-
     90deg,
-
     rgba(255,255,255,.035) 1px,
-
     transparent 1px
-
   );
 
-  background-size:
-  80px 80px;
+  background-size:80px 80px;
 
   mask-image:
-
   linear-gradient(
-
     to bottom,
-
     black,
-
-    transparent 85%
-
+    transparent 88%
   );
 
   pointer-events:none;
-
 }
 
 
+/* MAGENTA DECORATION */
 
-/* ========================================
-   FLOATING TYPOGRAPHY
-======================================== */
+.hero-shape{
+  position:absolute;
 
-.floating-title{
+  width:380px;
+  height:380px;
+
+  right:-160px;
+  top:22%;
+
+  border:1px solid rgba(177,24,131,.6);
+
+  border-radius:50%;
+
+  opacity:.45;
+
+  animation:spin 18s linear infinite;
+}
+
+.hero-shape::after{
+  content:"";
 
   position:absolute;
 
-  top:13%;
+  width:260px;
+  height:260px;
 
+  top:59px;
+  left:59px;
+
+  border:1px solid rgba(0,157,157,.55);
+
+  border-radius:50%;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
+/* ==================================================
+   HERO TOP INFO
+================================================== */
+
+.hero-kicker{
+  position:absolute;
+
+  top:115px;
+  left:48px;
+
+  display:flex;
+  align-items:center;
+
+  gap:12px;
+
+  z-index:5;
+
+  font-size:11px;
+  font-weight:600;
+
+  letter-spacing:.13em;
+
+  color:rgba(255,255,255,.55);
+}
+
+.kicker-line{
+  width:45px;
+  height:1px;
+
+  background:var(--teal);
+}
+
+
+/* ==================================================
+   GIANT PENTAPORT TYPOGRAPHY
+================================================== */
+
+.penta-title{
+  position:absolute;
+
+  top:19%;
   left:50%;
 
   width:100%;
 
-  transform:
-  translateX(-50%);
+  transform:translateX(-50%);
 
   text-align:center;
 
-  font-size:
-  clamp(100px,14vw,270px);
+  white-space:nowrap;
 
-  line-height:.76;
+  font-size:clamp(100px,15.5vw,285px);
+
+  line-height:.73;
 
   font-weight:950;
 
-  letter-spacing:-.085em;
-
-  white-space:nowrap;
-
-  color:var(--white);
+  letter-spacing:-.095em;
 
   cursor:pointer;
-
   user-select:none;
 
   z-index:4;
 
   animation:
-  floatTitle
-  5s
-  ease-in-out
-  infinite;
-
+  floatTitle 5s ease-in-out infinite;
 }
 
 
+/* PENTA */
 
-/* ROCK */
-
-.rock-word{
-
+.penta-word{
   color:var(--white);
 
   transition:
-
-  color .28s ease,
-
-  text-shadow .28s ease;
-
+  color .3s ease,
+  text-shadow .3s ease;
 }
 
 
+/* PORT */
 
-/* FESTIVAL
-   마젠타 외곽선
-*/
-
-.festival-word{
-
+.port-word{
   color:transparent;
 
   -webkit-text-stroke:
-  1.5px var(--magenta);
-
-  transition:
-  -webkit-text-stroke .28s ease;
-
+  1.6px var(--magenta);
 }
 
 
+/* 2027 */
 
-/* 클릭했을 때 ROCK만 TEAL */
+.year-word{
+  position:absolute;
 
-.floating-title.active
-.rock-word{
+  right:7%;
+  top:100%;
+
+  font-size:clamp(30px,4vw,70px);
+
+  letter-spacing:-.06em;
+
+  line-height:1;
 
   color:var(--teal);
 
+  -webkit-text-stroke:0;
+}
+
+
+/* CLICK EFFECT */
+
+.penta-title.active .penta-word{
+  color:var(--teal);
+
   text-shadow:
-
-  0 0 18px
-  rgba(0,157,157,.50),
-
-  0 0 45px
-  rgba(0,157,157,.25),
-
-  0 0 80px
-  rgba(0,157,157,.10);
-
+  0 0 20px rgba(0,157,157,.55),
+  0 0 50px rgba(0,157,157,.24);
 }
 
-
-
-/* FESTIVAL 외곽선은
-   계속 MAGENTA 유지 */
-
-.floating-title.active
-.festival-word{
-
+.penta-title.active .port-word{
   -webkit-text-stroke:
-  1.5px var(--magenta);
-
+  1.6px var(--magenta);
 }
 
-
-
-/* FLOAT */
 
 @keyframes floatTitle{
 
   0%{
-
     transform:
-
     translateX(-50%)
-
     translateY(0)
-
-    rotate(-.4deg);
-
+    rotate(-.35deg);
   }
 
   50%{
-
     transform:
-
     translateX(-50%)
-
-    translateY(-22px)
-
-    rotate(.4deg);
-
+    translateY(-20px)
+    rotate(.35deg);
   }
 
   100%{
-
     transform:
-
     translateX(-50%)
-
     translateY(0)
-
-    rotate(-.4deg);
-
+    rotate(-.35deg);
   }
-
 }
 
 
-
-/* ========================================
-   GHOST TYPOGRAPHY
-======================================== */
+/* ==================================================
+   BACKGROUND TYPO
+================================================== */
 
 .ghost-text{
-
   position:absolute;
 
-  top:41%;
+  top:47%;
+  left:-1%;
 
-  left:-2%;
+  font-size:clamp(80px,12vw,220px);
 
-  font-size:
-  clamp(90px,13vw,250px);
-
-  font-weight:900;
+  font-weight:950;
 
   letter-spacing:-.08em;
 
-  color:
-  rgba(255,255,255,.025);
+  color:rgba(255,255,255,.023);
 
   white-space:nowrap;
 
-  transform:
-  rotate(-4deg);
+  transform:rotate(-3deg);
 
   pointer-events:none;
-
 }
 
 
-
-/* ========================================
+/* ==================================================
    HERO BOTTOM
-======================================== */
+================================================== */
 
 .hero-bottom{
-
   position:relative;
 
   width:100%;
@@ -519,84 +479,75 @@ nav a:hover::after{
   display:grid;
 
   grid-template-columns:
-
-  1fr
-  1.5fr
-  1fr;
-
-  gap:40px;
+  1fr 1.5fr 1fr;
 
   align-items:end;
 
+  gap:40px;
+
   z-index:5;
-
 }
-
 
 
 /* DATE */
 
 .hero-date{
-
   font-size:13px;
 
   line-height:1.7;
 
-  color:
-  rgba(255,255,255,.55);
-
+  color:rgba(255,255,255,.55);
 }
 
 .hero-date strong{
-
   display:block;
 
-  margin-bottom:7px;
+  margin-bottom:8px;
 
   color:var(--magenta);
 
-  font-size:17px;
+  font-size:20px;
+}
 
+.hero-location{
+  margin-top:13px;
+
+  color:rgba(255,255,255,.85);
 }
 
 
-
-/* HERO COPY */
+/* COPY */
 
 .hero-copy h1{
+  font-size:clamp(38px,4.2vw,72px);
 
-  font-size:
-  clamp(35px,4vw,68px);
+  line-height:.91;
 
-  line-height:.95;
+  letter-spacing:-.065em;
 
-  letter-spacing:-.055em;
+  font-weight:900;
+}
 
-  font-weight:850;
-
+.hero-copy h1 span{
+  color:var(--teal);
 }
 
 .hero-copy p{
+  max-width:510px;
 
-  max-width:500px;
-
-  margin-top:22px;
+  margin-top:23px;
 
   font-size:14px;
 
-  line-height:1.7;
+  line-height:1.75;
 
-  color:
-  rgba(255,255,255,.55);
-
+  color:rgba(255,255,255,.52);
 }
-
 
 
 /* SCROLL */
 
 .scroll-guide{
-
   display:flex;
 
   flex-direction:column;
@@ -605,202 +556,249 @@ nav a:hover::after{
 
   gap:10px;
 
-  font-size:11px;
+  font-size:10px;
 
-  color:
-  rgba(255,255,255,.42);
+  letter-spacing:.1em;
 
+  color:rgba(255,255,255,.4);
 }
 
 .scroll-line{
-
   width:1px;
-
-  height:75px;
+  height:78px;
 
   background:
-
   linear-gradient(
-
     to bottom,
-
-    var(--teal),
-
     var(--magenta),
-
+    var(--teal),
     transparent
-
   );
-
 }
 
 
-
-/* ========================================
+/* ==================================================
    COMMON SECTION
-======================================== */
+================================================== */
 
 .content{
-
   position:relative;
 
   min-height:100vh;
 
-  padding:
-  130px 48px;
+  padding:130px 48px;
 
   border-top:
-  1px solid
-  rgba(255,255,255,.12);
+  1px solid rgba(255,255,255,.11);
 
   z-index:5;
-
 }
 
 .section-top{
-
   display:flex;
 
+  justify-content:space-between;
   align-items:center;
 
-  justify-content:space-between;
-
   margin-bottom:70px;
-
 }
 
 .section-number{
-
-  font-size:12px;
-
   color:var(--magenta);
 
+  font-size:12px;
+  font-weight:700;
 }
 
 .section-label{
+  font-size:11px;
 
-  font-size:12px;
+  letter-spacing:.08em;
 
-  color:
-  rgba(255,255,255,.45);
-
+  color:rgba(255,255,255,.4);
 }
 
 .section-title{
+  font-size:clamp(65px,9vw,155px);
 
-  font-size:
-  clamp(60px,9vw,150px);
-
-  line-height:.84;
+  line-height:.82;
 
   letter-spacing:-.075em;
 
-  font-weight:900;
+  font-weight:950;
+}
 
+.section-title .outline{
+  color:transparent;
+
+  -webkit-text-stroke:
+  1.3px var(--magenta);
+}
+
+.section-title .teal{
+  color:var(--teal);
 }
 
 
-
-/* ========================================
+/* ==================================================
    LINE UP
-======================================== */
+================================================== */
+
+.lineup-intro{
+  display:flex;
+
+  justify-content:flex-end;
+
+  margin-top:-40px;
+  margin-bottom:60px;
+}
+
+.lineup-intro p{
+  width:360px;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  color:rgba(255,255,255,.5);
+}
 
 .lineup-list{
-
-  margin-top:80px;
-
   border-top:
-
-  1px solid
-  rgba(255,255,255,.2);
-
+  1px solid rgba(255,255,255,.2);
 }
 
+
+/* ARTIST */
+
 .artist{
+  position:relative;
 
   display:grid;
 
   grid-template-columns:
-
-  80px
-  1fr
-  180px;
+  70px 1fr 180px;
 
   align-items:center;
 
-  padding:24px 0;
+  padding:23px 0;
 
   border-bottom:
+  1px solid rgba(255,255,255,.2);
 
-  1px solid
-  rgba(255,255,255,.2);
+  overflow:hidden;
 
   transition:
-
   padding .35s ease,
+  background .35s ease;
+}
 
-  background .35s ease,
+.artist::before{
+  content:"";
 
-  color .35s ease;
+  position:absolute;
 
+  left:0;
+  top:0;
+
+  width:4px;
+  height:100%;
+
+  background:var(--teal);
+
+  transform:scaleY(0);
+
+  transition:.35s;
 }
 
 .artist:hover{
-
-  padding-left:20px;
+  padding-left:22px;
 
   background:var(--magenta);
+}
 
-  color:white;
-
+.artist:hover::before{
+  transform:scaleY(1);
 }
 
 .artist-num{
-
-  font-size:11px;
-
   color:var(--teal);
 
+  font-size:11px;
+  font-weight:700;
 }
 
-.artist:hover
-.artist-num{
-
+.artist:hover .artist-num{
   color:white;
-
 }
 
 .artist-name{
+  font-size:clamp(29px,4vw,64px);
 
-  font-size:
-  clamp(30px,4vw,65px);
-
-  font-weight:800;
+  font-weight:850;
 
   letter-spacing:-.05em;
-
 }
 
 .artist-info{
-
   padding-right:20px;
 
   text-align:right;
 
-  font-size:12px;
+  font-size:11px;
 
   line-height:1.6;
 
+  color:rgba(255,255,255,.6);
+}
+
+.artist:hover .artist-info{
+  color:white;
 }
 
 
-
-/* ========================================
+/* ==================================================
    SCHEDULE
-======================================== */
+================================================== */
+
+.schedule-tabs{
+  display:flex;
+
+  gap:8px;
+
+  margin-top:65px;
+  margin-bottom:20px;
+}
+
+.day-button{
+  border:1px solid rgba(255,255,255,.2);
+
+  background:transparent;
+
+  color:rgba(255,255,255,.6);
+
+  padding:12px 20px;
+
+  font-family:inherit;
+
+  font-size:11px;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.day-button:hover,
+.day-button.active{
+  background:var(--magenta);
+
+  border-color:var(--magenta);
+
+  color:white;
+}
+
 
 .schedule-grid{
-
   display:grid;
 
   grid-template-columns:
@@ -808,18 +806,14 @@ nav a:hover::after{
 
   gap:1px;
 
-  margin-top:70px;
-
   background:
-  rgba(255,255,255,.2);
-
+  rgba(255,255,255,.18);
 }
 
 .schedule-card{
+  min-height:280px;
 
-  min-height:310px;
-
-  padding:35px;
+  padding:32px;
 
   display:flex;
 
@@ -829,89 +823,78 @@ nav a:hover::after{
 
   background:var(--base);
 
-  transition:
-
-  background .35s ease,
-
-  color .35s ease,
-
-  transform .35s ease;
-
+  transition:.35s;
 }
 
 .schedule-card:hover{
-
   background:var(--teal);
 
-  color:white;
-
-  transform:
-  translateY(-3px);
-
+  transform:translateY(-3px);
 }
 
-.schedule-day{
+.schedule-stage{
+  display:flex;
 
-  font-size:12px;
+  justify-content:space-between;
+
+  font-size:11px;
 
   color:var(--magenta);
-
 }
 
-.schedule-card:hover
-.schedule-day{
-
+.schedule-card:hover .schedule-stage{
   color:white;
-
 }
 
 .schedule-time{
+  font-size:clamp(45px,6vw,90px);
 
-  font-size:
-  clamp(48px,6vw,90px);
+  font-weight:950;
 
-  font-weight:900;
-
-  letter-spacing:-.06em;
-
+  letter-spacing:-.07em;
 }
 
 .schedule-band{
-
-  margin-top:12px;
+  margin-top:8px;
 
   font-size:18px;
-
-  font-weight:600;
-
+  font-weight:700;
 }
 
 
-
-/* ========================================
+/* ==================================================
    TICKET
-======================================== */
+================================================== */
+
+.ticket-note{
+  max-width:420px;
+
+  margin-top:35px;
+
+  font-size:13px;
+
+  line-height:1.7;
+
+  color:rgba(255,255,255,.48);
+}
 
 .ticket-area{
-
   display:grid;
 
   grid-template-columns:
-  1fr 1fr;
+  repeat(3,1fr);
 
-  gap:20px;
+  gap:15px;
 
   margin-top:70px;
-
 }
 
 .ticket-card{
-
   position:relative;
 
-  min-height:360px;
+  min-height:380px;
 
-  padding:40px;
+  padding:35px;
 
   display:flex;
 
@@ -922,340 +905,408 @@ nav a:hover::after{
   overflow:hidden;
 
   border:
+  1px solid rgba(255,255,255,.22);
 
-  1px solid
-  rgba(255,255,255,.25);
-
-  transition:
-
-  transform .35s ease,
-
-  border-color .35s ease,
-
-  background .35s ease;
-
+  transition:.35s;
 }
 
-
-
-/* TEAL + MAGENTA 얇은 라인 */
-
 .ticket-card::before{
-
   content:"";
 
   position:absolute;
 
-  top:0;
   left:0;
+  top:0;
 
   width:100%;
-
-  height:3px;
+  height:4px;
 
   background:
-
   linear-gradient(
-
     90deg,
-
     var(--magenta),
-
     var(--teal)
-
   );
-
 }
 
 .ticket-card:hover{
+  transform:translateY(-8px);
 
-  transform:
-  translateY(-8px);
-
-  border-color:
-  var(--teal);
+  border-color:var(--teal);
 
   background:
-  rgba(0,157,157,.055);
+  rgba(0,157,157,.05);
+}
 
+.ticket-top{
+  display:flex;
+
+  justify-content:space-between;
+
+  font-size:11px;
 }
 
 .ticket-type{
-
-  font-size:14px;
-
   color:var(--magenta);
 
+  font-weight:700;
+}
+
+.ticket-day{
+  color:rgba(255,255,255,.4);
 }
 
 .ticket-price{
+  font-size:clamp(48px,5.5vw,85px);
 
-  font-size:
-  clamp(55px,7vw,100px);
-
-  font-weight:900;
+  font-weight:950;
 
   letter-spacing:-.07em;
+}
 
+.ticket-caption{
+  margin-top:10px;
+
+  font-size:11px;
+
+  color:rgba(255,255,255,.4);
 }
 
 
-
-/* ========================================
+/* ==================================================
    INFO
-======================================== */
+================================================== */
 
-.info-copy{
+.info-layout{
+  display:grid;
 
-  max-width:1000px;
+  grid-template-columns:
+  1.3fr 1fr;
+
+  gap:100px;
 
   margin-top:80px;
-
-  font-size:
-  clamp(40px,5vw,80px);
-
-  line-height:1.05;
-
-  letter-spacing:-.05em;
-
-  font-weight:700;
-
 }
 
-.info-copy
-.magenta{
+.info-big{
+  font-size:clamp(40px,5vw,78px);
 
+  line-height:1;
+
+  letter-spacing:-.055em;
+
+  font-weight:850;
+}
+
+.info-big .magenta{
   color:var(--magenta);
-
 }
 
-.info-copy
-.teal{
-
+.info-big .teal{
   color:var(--teal);
-
 }
 
 
+.info-list{
+  border-top:
+  1px solid rgba(255,255,255,.2);
+}
 
-/* ========================================
+.info-row{
+  display:grid;
+
+  grid-template-columns:
+  120px 1fr;
+
+  gap:30px;
+
+  padding:21px 0;
+
+  border-bottom:
+  1px solid rgba(255,255,255,.15);
+
+  font-size:12px;
+}
+
+.info-key{
+  color:var(--teal);
+}
+
+.info-value{
+  color:rgba(255,255,255,.65);
+
+  line-height:1.6;
+}
+
+
+/* ==================================================
+   CONCEPT NOTICE
+================================================== */
+
+.concept-notice{
+  padding:22px 48px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:30px;
+
+  background:var(--magenta);
+
+  font-size:11px;
+
+  line-height:1.5;
+}
+
+.concept-notice strong{
+  letter-spacing:.08em;
+}
+
+
+/* ==================================================
    FOOTER
-======================================== */
+================================================== */
 
 footer{
-
-  padding:
-  45px 48px;
+  padding:45px 48px;
 
   display:flex;
 
   justify-content:space-between;
 
   border-top:
+  1px solid rgba(255,255,255,.15);
 
-  1px solid
-  rgba(255,255,255,.15);
+  font-size:10px;
 
-  font-size:11px;
+  letter-spacing:.06em;
 
-  color:
-  rgba(255,255,255,.4);
-
+  color:rgba(255,255,255,.38);
 }
 
 
-
-/* ========================================
+/* ==================================================
    MOBILE
-======================================== */
+================================================== */
 
 @media(max-width:768px){
 
   header{
+    height:68px;
 
-    height:70px;
+    padding:0 20px;
+  }
 
-    padding:
-    0 20px;
-
+  .logo{
+    font-size:13px;
   }
 
   nav{
-
-    gap:13px;
-
+    gap:11px;
   }
 
   nav a{
-
-    font-size:9px;
-
+    font-size:8px;
   }
 
   .hero{
-
     padding:
-
-    0 20px
-    35px;
-
+    0 20px 32px;
   }
 
-  .floating-title{
+  .hero-kicker{
+    top:95px;
+    left:20px;
+  }
 
-    top:19%;
+  .penta-title{
+    top:20%;
 
-    font-size:24vw;
+    font-size:25vw;
 
-    line-height:.78;
+    line-height:.72;
 
     white-space:normal;
-
   }
 
-  .floating-title span{
+  .penta-word,
+  .port-word{
+    display:block;
+  }
+
+  .year-word{
+    position:relative;
 
     display:block;
 
+    right:auto;
+    top:auto;
+
+    margin-top:15px;
+
+    font-size:13vw;
+  }
+
+  .hero-shape{
+    width:250px;
+    height:250px;
+
+    right:-130px;
+  }
+
+  .hero-shape::after{
+    width:170px;
+    height:170px;
+
+    top:39px;
+    left:39px;
   }
 
   .ghost-text{
-
-    top:43%;
-
+    top:48%;
   }
 
   .hero-bottom{
-
     grid-template-columns:1fr;
 
-    gap:25px;
-
+    gap:22px;
   }
 
   .scroll-guide{
-
     display:none;
+  }
 
+  .hero-copy h1{
+    font-size:42px;
   }
 
   .content{
-
     padding:
-
-    100px 20px;
-
+    95px 20px;
   }
 
   .section-top{
-
     margin-bottom:45px;
+  }
 
+  .lineup-intro{
+    justify-content:flex-start;
+
+    margin-top:35px;
+  }
+
+  .lineup-intro p{
+    width:100%;
   }
 
   .artist{
-
     grid-template-columns:
-
-    40px
-    1fr;
-
+    40px 1fr;
   }
 
   .artist-info{
-
     display:none;
-
   }
 
-  .schedule-grid,
-  .ticket-area{
+  .schedule-tabs{
+    overflow-x:auto;
+  }
 
+  .schedule-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ticket-area{
+    grid-template-columns:1fr;
+  }
+
+  .ticket-card{
+    min-height:270px;
+  }
+
+  .info-layout{
     grid-template-columns:1fr;
 
+    gap:60px;
   }
 
-  .schedule-card{
-
-    min-height:230px;
-
-  }
-
-  footer{
-
-    padding:
-    35px 20px;
+  .concept-notice{
+    padding:20px;
 
     flex-direction:column;
 
-    gap:10px;
+    align-items:flex-start;
+  }
 
+  footer{
+    padding:35px 20px;
+
+    flex-direction:column;
+
+    gap:12px;
   }
 
   .cursor-light{
-
     display:none;
-
   }
-
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- CURSOR LIGHT -->
-
+<!-- 마우스 조명 -->
 <div class="cursor-light"></div>
 
 
-
-<!-- ========================================
+<!-- ==================================================
      HEADER
-======================================== -->
+================================================== -->
 
 <header>
 
+  <a href="#home" class="logo">
 
-<a
-href="#home"
-class="logo"
->
+    <span class="logo-dot"></span>
 
-RF <span>/ 26</span>
+    PENTAPORT
 
-</a>
+    <span class="logo-year">
+      2027
+    </span>
+
+  </a>
 
 
+  <nav>
 
-<nav>
+    <a href="#home">
+      HOME
+    </a>
 
-<a href="#home">
-HOME
-</a>
+    <a href="#lineup">
+      LINE UP
+    </a>
 
-<a href="#lineup">
-LINE UP
-</a>
+    <a href="#schedule">
+      SCHEDULE
+    </a>
 
-<a href="#schedule">
-SCHEDULE
-</a>
+    <a href="#ticket">
+      TICKET
+    </a>
 
-<a href="#ticket">
-TICKET
-</a>
+    <a href="#info">
+      INFO
+    </a>
 
-<a href="#info">
-INFO
-</a>
-
-</nav>
-
+  </nav>
 
 </header>
 
@@ -1264,533 +1315,679 @@ INFO
 <main>
 
 
-
-<!-- ========================================
+<!-- ==================================================
      HOME
-======================================== -->
+================================================== -->
 
-<section
-class="hero"
-id="home"
->
+<section class="hero" id="home">
 
 
+  <div class="hero-kicker">
 
-<!-- FLOATING TYPO -->
+    <span class="kicker-line"></span>
 
-<div class="floating-title">
+    INCHEON · SOUTH KOREA
 
-<span class="rock-word">
-ROCK
-</span>
-
-<span class="festival-word">
-FESTIVAL
-</span>
-
-</div>
+  </div>
 
 
-
-<!-- GHOST TYPO -->
-
-<div class="ghost-text">
-
-LOUD / LIVE / ALIVE
-
-</div>
+  <div class="hero-shape"></div>
 
 
+  <!-- MAIN TYPO -->
 
-<div class="hero-bottom">
+  <div class="penta-title">
 
+    <span class="penta-word">
+      PENTA
+    </span>
 
+    <span class="port-word">
+      PORT
+    </span>
 
-<div class="hero-date">
+    <span class="year-word">
+      2027
+    </span>
 
-<strong>
-OCT 10 — 11
-</strong>
-
-2026<br>
-
-SEOUL, KOREA
-
-</div>
-
-
-
-<div class="hero-copy">
-
-<h1>
-
-TURN UP<br>
-
-THE NOISE.
-
-</h1>
+  </div>
 
 
-<p>
+  <div class="ghost-text">
+    SOUND / PEOPLE / SUMMER
+  </div>
 
-음악과 관객의 에너지가 하나가 되는 순간.
 
-이틀 동안 이어지는 라이브 공연과
+  <div class="hero-bottom">
 
-강렬한 사운드를 경험하세요.
 
-</p>
+    <div class="hero-date">
 
-</div>
+      <strong>
+        JUL 30 — AUG 01
+      </strong>
+
+      FRI · SAT · SUN
+
+      <div class="hero-location">
+        SONGDO MOONLIGHT<br>
+        FESTIVAL PARK
+      </div>
+
+    </div>
 
 
 
-<div class="scroll-guide">
+    <div class="hero-copy">
 
-SCROLL TO EXPLORE
+      <h1>
 
-<div class="scroll-line"></div>
+        OPEN<br>
 
-</div>
+        THE <span>PORT.</span>
+
+      </h1>
+
+      <p>
+        한여름의 인천, 음악과 관객이 하나로 연결되는 3일.
+        다양한 아티스트의 라이브 무대와 강렬한 사운드를
+        PENTAPORT 2027에서 경험하세요.
+      </p>
+
+    </div>
 
 
-</div>
+
+    <div class="scroll-guide">
+
+      SCROLL TO EXPLORE
+
+      <div class="scroll-line"></div>
+
+    </div>
+
+
+  </div>
 
 
 </section>
 
 
 
-<!-- ========================================
+<!-- ==================================================
      LINE UP
-======================================== -->
+================================================== -->
 
-<section
-class="content"
-id="lineup"
->
+<section class="content" id="lineup">
 
 
-<div class="section-top">
+  <div class="section-top">
 
-<span class="section-number">
-01
-</span>
+    <span class="section-number">
+      01
+    </span>
 
-<span class="section-label">
-ARTIST / LINE UP
-</span>
+    <span class="section-label">
+      ARTISTS / 2027 CONCEPT LINE UP
+    </span>
 
-</div>
+  </div>
 
 
+  <h2 class="section-title">
 
-<h2 class="section-title">
+    LINE<br>
 
-LINE<br>
+    <span class="outline">
+      UP
+    </span>
 
-UP
+  </h2>
 
-</h2>
 
+  <div class="lineup-intro">
 
+    <p>
+      3일 동안 이어지는 다양한 라이브 무대.
+      원하는 아티스트의 공연 날짜와 스테이지를
+      한눈에 확인할 수 있습니다.
+    </p>
 
-<div class="lineup-list">
+  </div>
 
 
+  <div class="lineup-list">
 
-<div class="artist">
 
-<span class="artist-num">
-01
-</span>
+    <div class="artist">
 
-<span class="artist-name">
-THE RIOT
-</span>
+      <span class="artist-num">
+        01
+      </span>
 
-<span class="artist-info">
+      <span class="artist-name">
+        SILICA GEL
+      </span>
 
-DAY 01<br>
+      <span class="artist-info">
+        JUL 30<br>
+        PENTA STAGE
+      </span>
 
-MAIN STAGE
+    </div>
 
-</span>
 
-</div>
+    <div class="artist">
 
+      <span class="artist-num">
+        02
+      </span>
 
+      <span class="artist-name">
+        HYUKOH
+      </span>
 
-<div class="artist">
+      <span class="artist-info">
+        JUL 30<br>
+        DREAM STAGE
+      </span>
 
-<span class="artist-num">
-02
-</span>
+    </div>
 
-<span class="artist-name">
-BLACK WAVE
-</span>
 
-<span class="artist-info">
+    <div class="artist">
 
-DAY 01<br>
+      <span class="artist-num">
+        03
+      </span>
 
-MAIN STAGE
+      <span class="artist-name">
+        THE VOLUNTEERS
+      </span>
 
-</span>
+      <span class="artist-info">
+        JUL 31<br>
+        PENTA STAGE
+      </span>
 
-</div>
+    </div>
 
 
+    <div class="artist">
 
-<div class="artist">
+      <span class="artist-num">
+        04
+      </span>
 
-<span class="artist-num">
-03
-</span>
+      <span class="artist-name">
+        TOUCHED
+      </span>
 
-<span class="artist-name">
-NO SIGNAL
-</span>
+      <span class="artist-info">
+        JUL 31<br>
+        DREAM STAGE
+      </span>
 
-<span class="artist-info">
+    </div>
 
-DAY 01<br>
 
-SUB STAGE
+    <div class="artist">
 
-</span>
+      <span class="artist-num">
+        05
+      </span>
 
-</div>
+      <span class="artist-name">
+        XDINARY HEROES
+      </span>
 
+      <span class="artist-info">
+        AUG 01<br>
+        PENTA STAGE
+      </span>
 
+    </div>
 
-<div class="artist">
 
-<span class="artist-num">
-04
-</span>
+    <div class="artist">
 
-<span class="artist-name">
-AFTER NOISE
-</span>
+      <span class="artist-num">
+        06
+      </span>
 
-<span class="artist-info">
+      <span class="artist-name">
+        QWER
+      </span>
 
-DAY 02<br>
+      <span class="artist-info">
+        AUG 01<br>
+        DREAM STAGE
+      </span>
 
-MAIN STAGE
+    </div>
 
-</span>
 
-</div>
-
-
-
-<div class="artist">
-
-<span class="artist-num">
-05
-</span>
-
-<span class="artist-name">
-VOLTAGE
-</span>
-
-<span class="artist-info">
-
-DAY 02<br>
-
-SUB STAGE
-
-</span>
-
-</div>
-
-
-</div>
+  </div>
 
 
 </section>
 
 
 
-<!-- ========================================
+<!-- ==================================================
      SCHEDULE
-======================================== -->
+================================================== -->
 
-<section
-class="content"
-id="schedule"
->
+<section class="content" id="schedule">
 
 
-<div class="section-top">
+  <div class="section-top">
 
-<span class="section-number">
-02
-</span>
+    <span class="section-number">
+      02
+    </span>
 
-<span class="section-label">
-DAY / TIME / STAGE
-</span>
+    <span class="section-label">
+      DAY / TIME / STAGE
+    </span>
 
-</div>
-
-
-
-<h2 class="section-title">
-
-LIVE<br>
-
-SCHEDULE
-
-</h2>
+  </div>
 
 
+  <h2 class="section-title">
 
-<div class="schedule-grid">
+    LIVE<br>
 
+    <span class="teal">
+      SCHEDULE
+    </span>
 
-
-<div class="schedule-card">
-
-<div class="schedule-day">
-
-DAY 01 · MAIN STAGE
-
-</div>
-
-<div>
-
-<div class="schedule-time">
-17:30
-</div>
-
-<div class="schedule-band">
-THE RIOT
-</div>
-
-</div>
-
-</div>
+  </h2>
 
 
+  <div class="schedule-tabs">
 
-<div class="schedule-card">
+    <button class="day-button active">
+      JUL 30 · FRI
+    </button>
 
-<div class="schedule-day">
+    <button class="day-button">
+      JUL 31 · SAT
+    </button>
 
-DAY 01 · SUB STAGE
+    <button class="day-button">
+      AUG 01 · SUN
+    </button>
 
-</div>
-
-<div>
-
-<div class="schedule-time">
-19:00
-</div>
-
-<div class="schedule-band">
-NO SIGNAL
-</div>
-
-</div>
-
-</div>
+  </div>
 
 
-
-<div class="schedule-card">
-
-<div class="schedule-day">
-
-DAY 02 · MAIN STAGE
-
-</div>
-
-<div>
-
-<div class="schedule-time">
-18:20
-</div>
-
-<div class="schedule-band">
-AFTER NOISE
-</div>
-
-</div>
-
-</div>
+  <div class="schedule-grid">
 
 
+    <div class="schedule-card">
 
-<div class="schedule-card">
+      <div class="schedule-stage">
 
-<div class="schedule-day">
+        <span>
+          PENTA STAGE
+        </span>
 
-DAY 02 · SUB STAGE
+        <span>
+          DAY 01
+        </span>
 
-</div>
+      </div>
 
-<div>
+      <div>
 
-<div class="schedule-time">
-20:10
-</div>
+        <div class="schedule-time">
+          17:30
+        </div>
 
-<div class="schedule-band">
-VOLTAGE
-</div>
+        <div class="schedule-band">
+          SILICA GEL
+        </div>
 
-</div>
+      </div>
 
-</div>
+    </div>
 
 
-</div>
+    <div class="schedule-card">
+
+      <div class="schedule-stage">
+
+        <span>
+          DREAM STAGE
+        </span>
+
+        <span>
+          DAY 01
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="schedule-time">
+          19:00
+        </div>
+
+        <div class="schedule-band">
+          HYUKOH
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="schedule-card">
+
+      <div class="schedule-stage">
+
+        <span>
+          PENTA STAGE
+        </span>
+
+        <span>
+          DAY 01
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="schedule-time">
+          20:30
+        </div>
+
+        <div class="schedule-band">
+          SPECIAL HEADLINER
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="schedule-card">
+
+      <div class="schedule-stage">
+
+        <span>
+          DREAM STAGE
+        </span>
+
+        <span>
+          DAY 01
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="schedule-time">
+          21:40
+        </div>
+
+        <div class="schedule-band">
+          NIGHT SESSION
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 
 </section>
 
 
 
-<!-- ========================================
+<!-- ==================================================
      TICKET
-======================================== -->
+================================================== -->
 
-<section
-class="content"
-id="ticket"
->
+<section class="content" id="ticket">
 
 
-<div class="section-top">
+  <div class="section-top">
 
-<span class="section-number">
-03
-</span>
+    <span class="section-number">
+      03
+    </span>
 
-<span class="section-label">
-TICKET
-</span>
+    <span class="section-label">
+      2027 CONCEPT TICKET
+    </span>
 
-</div>
-
-
-
-<h2 class="section-title">
-
-GET<br>
-
-LOUD
-
-</h2>
+  </div>
 
 
+  <h2 class="section-title">
 
-<div class="ticket-area">
+    GET<br>
 
+    <span class="outline">
+      IN.
+    </span>
 
-
-<div class="ticket-card">
-
-<span class="ticket-type">
-
-1 DAY PASS
-
-</span>
-
-<div class="ticket-price">
-
-₩88K
-
-</div>
-
-</div>
+  </h2>
 
 
-
-<div class="ticket-card">
-
-<span class="ticket-type">
-
-2 DAY PASS
-
-</span>
-
-<div class="ticket-price">
-
-₩148K
-
-</div>
-
-</div>
+  <p class="ticket-note">
+    아래 티켓 구성과 가격은 2027 콘셉트 웹디자인을
+    위해 임의로 구성한 예시입니다.
+  </p>
 
 
-</div>
+  <div class="ticket-area">
+
+
+    <div class="ticket-card">
+
+      <div class="ticket-top">
+
+        <span class="ticket-type">
+          1 DAY PASS
+        </span>
+
+        <span class="ticket-day">
+          FRI / SAT / SUN
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="ticket-price">
+          ₩120K
+        </div>
+
+        <div class="ticket-caption">
+          SELECT ONE FESTIVAL DAY
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="ticket-card">
+
+      <div class="ticket-top">
+
+        <span class="ticket-type">
+          2 DAY PASS
+        </span>
+
+        <span class="ticket-day">
+          SELECT 2 DAYS
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="ticket-price">
+          ₩190K
+        </div>
+
+        <div class="ticket-caption">
+          TWO DAYS OF LIVE MUSIC
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="ticket-card">
+
+      <div class="ticket-top">
+
+        <span class="ticket-type">
+          3 DAY PASS
+        </span>
+
+        <span class="ticket-day">
+          FULL FESTIVAL
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="ticket-price">
+          ₩240K
+        </div>
+
+        <div class="ticket-caption">
+          JUL 30 — AUG 01
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
 
 
 </section>
 
 
 
-<!-- ========================================
+<!-- ==================================================
      INFO
-======================================== -->
+================================================== -->
 
-<section
-class="content"
-id="info"
->
+<section class="content" id="info">
 
 
-<div class="section-top">
+  <div class="section-top">
 
-<span class="section-number">
-04
-</span>
+    <span class="section-number">
+      04
+    </span>
 
-<span class="section-label">
+    <span class="section-label">
+      FESTIVAL INFORMATION
+    </span>
 
-FESTIVAL INFORMATION
-
-</span>
-
-</div>
+  </div>
 
 
-
-<h2 class="section-title">
-
-INFO
-
-</h2>
+  <h2 class="section-title">
+    INFO
+  </h2>
 
 
-
-<p class="info-copy">
-
-TWO DAYS.<br>
-
-TWO STAGES.<br>
-
-TEN BANDS.<br><br>
+  <div class="info-layout">
 
 
-ONE
+    <div class="info-big">
 
-<span class="magenta">
-LOUD
-</span>
+      THREE DAYS.<br>
 
-<br>
+      ONE <span class="magenta">PORT.</span><br>
 
-<span class="teal">
-EXPERIENCE.
-</span>
+      ENDLESS<br>
 
-</p>
+      <span class="teal">
+        SOUND.
+      </span>
+
+    </div>
+
+
+    <div class="info-list">
+
+
+      <div class="info-row">
+
+        <span class="info-key">
+          DATE
+        </span>
+
+        <span class="info-value">
+          2027.07.30 FRI<br>
+          — 08.01 SUN
+        </span>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span class="info-key">
+          VENUE
+        </span>
+
+        <span class="info-value">
+          송도달빛축제공원<br>
+          INCHEON, SOUTH KOREA
+        </span>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span class="info-key">
+          STAGE
+        </span>
+
+        <span class="info-value">
+          PENTA STAGE<br>
+          DREAM STAGE
+        </span>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span class="info-key">
+          GUIDE
+        </span>
+
+        <span class="info-value">
+          LINE UP · TIMETABLE<br>
+          TICKET · VENUE · NOTICE
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
 
 
 </section>
@@ -1800,22 +1997,38 @@ EXPERIENCE.
 
 
 
+<!-- ==================================================
+     CONCEPT NOTICE
+================================================== -->
+
+<div class="concept-notice">
+
+  <strong>
+    2027 PENTAPORT — CONCEPT PROJECT
+  </strong>
+
+  <span>
+    본 웹사이트는 2027 인천 펜타포트 락 페스티벌을
+    가정하여 제작한 개인 졸업작품용 콘셉트 디자인입니다.
+  </span>
+
+</div>
+
+
+
+<!-- ==================================================
+     FOOTER
+================================================== -->
+
 <footer>
 
+  <span>
+    2027 INCHEON PENTAPORT ROCK FESTIVAL
+  </span>
 
-<span>
-
-ROCK FESTIVAL © 2026
-
-</span>
-
-
-<span>
-
-CLEAR · INTUITIVE · VIBRANT
-
-</span>
-
+  <span>
+    CLEAR · INTUITIVE · VIBRANT
+  </span>
 
 </footer>
 
@@ -1823,16 +2036,12 @@ CLEAR · INTUITIVE · VIBRANT
 
 <script>
 
-
-/* ========================================
+/* ==================================================
    CURSOR LIGHT
-======================================== */
+================================================== */
 
 const light =
-document.querySelector(
-".cursor-light"
-);
-
+document.querySelector(".cursor-light");
 
 let mouseX =
 window.innerWidth / 2;
@@ -1840,53 +2049,39 @@ window.innerWidth / 2;
 let mouseY =
 window.innerHeight / 2;
 
-
-let lightX =
-mouseX;
-
-let lightY =
-mouseY;
-
+let lightX = mouseX;
+let lightY = mouseY;
 
 
 window.addEventListener(
-
 "mousemove",
-
 (event)=>{
 
-mouseX =
-event.clientX;
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 
-mouseY =
-event.clientY;
-
-}
-
-);
-
+});
 
 
 function moveLight(){
 
-lightX +=
-(mouseX-lightX)*.08;
+  lightX +=
+  (mouseX-lightX)*.08;
 
-lightY +=
-(mouseY-lightY)*.08;
-
-
-light.style.left =
-lightX+"px";
-
-light.style.top =
-lightY+"px";
+  lightY +=
+  (mouseY-lightY)*.08;
 
 
-requestAnimationFrame(
-moveLight
-);
+  light.style.left =
+  lightX+"px";
 
+  light.style.top =
+  lightY+"px";
+
+
+  requestAnimationFrame(
+  moveLight
+  );
 }
 
 
@@ -1894,99 +2089,114 @@ moveLight();
 
 
 
-/* ========================================
-   TYPO MOUSE REACTION
-======================================== */
+/* ==================================================
+   HERO TYPO MOUSE REACTION
+================================================== */
 
 const title =
-document.querySelector(
-".floating-title"
-);
+document.querySelector(".penta-title");
 
 
 window.addEventListener(
-
 "mousemove",
-
 (event)=>{
 
 
-const x =
-
-event.clientX /
-window.innerWidth
--.5;
+  const x =
+  event.clientX /
+  window.innerWidth -.5;
 
 
-const y =
-
-event.clientY /
-window.innerHeight
--.5;
+  const y =
+  event.clientY /
+  window.innerHeight -.5;
 
 
-title.style.marginLeft =
-`${x*14}px`;
+  title.style.marginLeft =
+  `${x*14}px`;
 
 
-title.style.marginTop =
-`${y*9}px`;
+  title.style.marginTop =
+  `${y*9}px`;
 
-
-}
-
-);
+});
 
 
 
-/* ========================================
-   CLICK EFFECT
-======================================== */
+/* ==================================================
+   HERO CLICK EFFECT
+================================================== */
 
 let colorTimer;
 
 
 title.addEventListener(
-
 "click",
-
 ()=>{
 
 
-clearTimeout(
-colorTimer
+  clearTimeout(colorTimer);
+
+
+  title.classList.add(
+  "active"
+  );
+
+
+  colorTimer =
+  setTimeout(
+  ()=>{
+
+    title.classList.remove(
+    "active"
+    );
+
+  },700);
+
+
+});
+
+
+
+/* ==================================================
+   SCHEDULE DAY BUTTON
+================================================== */
+
+const dayButtons =
+document.querySelectorAll(
+".day-button"
 );
 
 
-title.classList.add(
-"active"
-);
+dayButtons.forEach(
+(button)=>{
 
 
-colorTimer =
-setTimeout(
-
-()=>{
-
-title.classList.remove(
-"active"
-);
-
-},
-
-700
-
-);
+  button.addEventListener(
+  "click",
+  ()=>{
 
 
-}
+    dayButtons.forEach(
+    item=>
+    item.classList.remove(
+    "active"
+    )
+    );
 
-);
 
+    button.classList.add(
+    "active"
+    );
+
+
+  });
+
+
+});
 
 </script>
 
 
 </body>
-
 </html>
