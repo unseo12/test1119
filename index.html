@@ -1,785 +1,853 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ROCK FESTIVAL</title>
+<title>ROCK FESTIVAL</title>
 
-  <!-- Pretendard -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
-  >
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 
-  <style>
-    /* ================================
-       RESET
-    ================================= */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Pretendard", sans-serif;
-      background: #080808;
-      color: #f5f5f0;
-      overflow-x: hidden;
-    }
+<style>
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+/* =====================================
+   RESET
+===================================== */
 
-    button {
-      font: inherit;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    ::selection {
-      background: #d8ff32;
-      color: #080808;
-    }
+:root{
+  --base:#1A1A1A;
+  --white:#F5F5F0;
+  --magenta:#B11883;
+  --teal:#009D9D;
+}
 
+html{
+  scroll-behavior:smooth;
+}
 
-    /* ================================
-       MOUSE LIGHT
-    ================================= */
+body{
+  font-family:"Pretendard",sans-serif;
+  background:var(--base);
+  color:var(--white);
+  overflow-x:hidden;
+}
 
-    .cursor-light {
-      position: fixed;
-      left: 0;
-      top: 0;
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-      width: 520px;
-      height: 520px;
+::selection{
+  background:var(--magenta);
+  color:white;
+}
 
-      border-radius: 50%;
 
-      background:
-        radial-gradient(
-          circle,
-          rgba(216, 255, 50, 0.20) 0%,
-          rgba(216, 255, 50, 0.08) 30%,
-          rgba(216, 255, 50, 0.02) 55%,
-          transparent 72%
-        );
+/* =====================================
+   CURSOR LIGHT
+===================================== */
 
-      filter: blur(10px);
+.cursor-light{
+  position:fixed;
+  left:0;
+  top:0;
 
-      pointer-events: none;
-      z-index: 2;
+  width:600px;
+  height:600px;
 
-      transform: translate(-50%, -50%);
+  border-radius:50%;
 
-      mix-blend-mode: screen;
-    }
+  background:
+  radial-gradient(
+    circle,
+    rgba(0,157,157,.30) 0%,
+    rgba(177,24,131,.15) 30%,
+    rgba(0,157,157,.05) 52%,
+    transparent 72%
+  );
 
+  filter:blur(15px);
 
-    /* ================================
-       HEADER
-    ================================= */
+  transform:translate(-50%,-50%);
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
+  pointer-events:none;
+  mix-blend-mode:screen;
 
-      width: 100%;
-      height: 84px;
+  z-index:2;
+}
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
 
-      padding: 0 48px;
+/* =====================================
+   HEADER
+===================================== */
 
-      border-bottom: 1px solid rgba(255,255,255,0.16);
+header{
+  position:fixed;
 
-      background: rgba(8,8,8,0.5);
-      backdrop-filter: blur(18px);
+  top:0;
+  left:0;
 
-      z-index: 100;
-    }
+  width:100%;
+  height:82px;
 
-    .logo {
-      font-size: 17px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
+  padding:0 48px;
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 
-    nav a {
-      position: relative;
+  background:rgba(26,26,26,.55);
 
-      font-size: 13px;
-      font-weight: 600;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
-      letter-spacing: 0.04em;
-    }
+  border-bottom:1px solid rgba(255,255,255,.12);
 
-    nav a::after {
-      content: "";
+  z-index:100;
+}
 
-      position: absolute;
-      left: 0;
-      bottom: -8px;
+.logo{
+  font-size:17px;
+  font-weight:900;
 
-      width: 0;
-      height: 2px;
+  letter-spacing:-.04em;
+}
 
-      background: #d8ff32;
+.logo span{
+  color:var(--magenta);
+}
 
-      transition: 0.3s;
-    }
+nav{
+  display:flex;
+  align-items:center;
 
-    nav a:hover::after {
-      width: 100%;
-    }
+  gap:34px;
+}
 
-    .ticket-btn {
-      padding: 11px 18px;
+nav a{
+  position:relative;
 
-      border: 1px solid #d8ff32;
-      border-radius: 100px;
+  font-size:13px;
+  font-weight:600;
 
-      color: #d8ff32;
+  letter-spacing:.03em;
+}
 
-      transition: 0.3s;
-    }
+nav a::after{
+  content:"";
 
-    .ticket-btn:hover {
-      background: #d8ff32;
-      color: #080808;
-    }
+  position:absolute;
 
+  left:0;
+  bottom:-8px;
 
-    /* ================================
-       HERO
-    ================================= */
+  width:0;
+  height:2px;
 
-    .hero {
-      position: relative;
+  background:var(--magenta);
 
-      width: 100%;
-      min-height: 100vh;
+  transition:.3s;
+}
 
-      overflow: hidden;
+nav a:hover::after{
+  width:100%;
+}
 
-      display: flex;
-      align-items: flex-end;
 
-      padding: 0 48px 55px;
-    }
+/* =====================================
+   HERO
+===================================== */
 
+.hero{
+  position:relative;
 
-    /* Background grid */
+  width:100%;
+  min-height:100vh;
 
-    .hero::before {
-      content: "";
+  padding:0 48px 55px;
 
-      position: absolute;
-      inset: 0;
+  display:flex;
+  align-items:flex-end;
 
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,0.035) 1px,
-          transparent 1px
-        );
+  overflow:hidden;
+}
 
-      background-size: 80px 80px;
 
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 80%
-        );
+/* GRID BACKGROUND */
 
-      pointer-events: none;
-    }
+.hero::before{
+  content:"";
 
+  position:absolute;
+  inset:0;
 
-    /* giant floating typography */
+  background-image:
+  linear-gradient(
+    rgba(255,255,255,.035) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255,255,255,.035) 1px,
+    transparent 1px
+  );
 
-    .floating-title {
-      position: absolute;
+  background-size:80px 80px;
 
-      top: 12%;
-      left: 50%;
+  mask-image:
+  linear-gradient(
+    to bottom,
+    black,
+    transparent 85%
+  );
 
-      transform: translateX(-50%);
+  pointer-events:none;
+}
 
-      width: 100%;
 
-      text-align: center;
+/* =====================================
+   FLOATING ROCK FESTIVAL
+===================================== */
 
-      font-size: clamp(105px, 15vw, 285px);
+.floating-title{
+  position:absolute;
 
-      font-weight: 950;
+  top:13%;
+  left:50%;
 
-      line-height: 0.75;
+  width:100%;
 
-      letter-spacing: -0.085em;
+  transform:translateX(-50%);
 
-      white-space: nowrap;
+  text-align:center;
 
-      color: #f5f5f0;
+  font-size:clamp(100px,14vw,270px);
 
-      z-index: 4;
+  line-height:.76;
 
-      animation: floating 5s ease-in-out infinite;
-    }
+  font-weight:950;
 
-    .floating-title span {
-      display: inline-block;
+  letter-spacing:-.085em;
 
-      color: transparent;
+  white-space:nowrap;
 
-      -webkit-text-stroke:
-        1.5px rgba(245,245,240,0.9);
-    }
+  z-index:4;
 
-    @keyframes floating {
+  animation:floatTitle 5s ease-in-out infinite;
+}
 
-      0% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
+.floating-title span{
+  color:transparent;
 
-      50% {
-        transform:
-          translateX(-50%)
-          translateY(-22px)
-          rotate(0.4deg);
-      }
+  -webkit-text-stroke:
+  1.5px var(--magenta);
+}
 
-      100% {
-        transform:
-          translateX(-50%)
-          translateY(0px)
-          rotate(-0.4deg);
-      }
 
-    }
+@keyframes floatTitle{
 
+  0%{
+    transform:
+    translateX(-50%)
+    translateY(0)
+    rotate(-.4deg);
+  }
 
-    /* blurred background typography */
+  50%{
+    transform:
+    translateX(-50%)
+    translateY(-22px)
+    rotate(.4deg);
+  }
 
-    .ghost-text {
-      position: absolute;
+  100%{
+    transform:
+    translateX(-50%)
+    translateY(0)
+    rotate(-.4deg);
+  }
 
-      top: 39%;
-      left: -2%;
+}
 
-      font-size: clamp(90px, 13vw, 250px);
 
-      font-weight: 900;
+/* BACKGROUND TEXT */
 
-      letter-spacing: -0.08em;
+.ghost-text{
+  position:absolute;
 
-      color: rgba(255,255,255,0.025);
+  top:41%;
+  left:-2%;
 
-      white-space: nowrap;
+  font-size:clamp(90px,13vw,250px);
 
-      transform: rotate(-4deg);
+  font-weight:900;
 
-      pointer-events: none;
-    }
+  letter-spacing:-.08em;
 
+  color:rgba(255,255,255,.025);
 
-    /* HERO bottom */
+  white-space:nowrap;
 
-    .hero-bottom {
-      position: relative;
+  transform:rotate(-4deg);
 
-      width: 100%;
+  pointer-events:none;
+}
 
-      display: grid;
-      grid-template-columns: 1fr 1.5fr 1fr;
 
-      align-items: end;
+/* HERO CONTENT */
 
-      gap: 40px;
+.hero-bottom{
+  position:relative;
 
-      z-index: 5;
-    }
+  width:100%;
 
-    .hero-date {
-      font-size: 13px;
-      line-height: 1.7;
+  display:grid;
 
-      color: rgba(255,255,255,0.6);
-    }
+  grid-template-columns:
+  1fr 1.5fr 1fr;
 
-    .hero-date strong {
-      display: block;
+  gap:40px;
 
-      margin-bottom: 7px;
+  align-items:end;
 
-      font-size: 17px;
+  z-index:5;
+}
 
-      color: #d8ff32;
-    }
 
-    .hero-copy h1 {
-      max-width: 680px;
+.hero-date{
+  font-size:13px;
+  line-height:1.7;
 
-      font-size: clamp(30px, 4vw, 65px);
+  color:rgba(255,255,255,.6);
+}
 
-      line-height: 0.97;
+.hero-date strong{
+  display:block;
 
-      letter-spacing: -0.055em;
+  margin-bottom:7px;
 
-      font-weight: 800;
-    }
+  color:var(--magenta);
 
-    .hero-copy p {
-      max-width: 500px;
+  font-size:17px;
+}
 
-      margin-top: 22px;
 
-      font-size: 14px;
-      line-height: 1.7;
+.hero-copy h1{
+  font-size:clamp(35px,4vw,68px);
 
-      color: rgba(255,255,255,0.55);
-    }
+  line-height:.95;
 
-    .scroll-guide {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
+  letter-spacing:-.055em;
 
-      gap: 10px;
+  font-weight:850;
+}
 
-      font-size: 11px;
 
-      color: rgba(255,255,255,0.45);
-    }
+.hero-copy p{
+  max-width:500px;
 
-    .scroll-line {
-      width: 1px;
-      height: 75px;
+  margin-top:22px;
 
-      background:
-        linear-gradient(
-          to bottom,
-          #d8ff32,
-          transparent
-        );
-    }
+  font-size:14px;
+  line-height:1.7;
 
+  color:rgba(255,255,255,.55);
+}
 
-    /* ================================
-       SECTION COMMON
-    ================================= */
 
-    section.content {
-      position: relative;
+.scroll-guide{
+  display:flex;
 
-      min-height: 100vh;
+  flex-direction:column;
 
-      padding: 130px 48px;
+  align-items:flex-end;
 
-      border-top:
-        1px solid rgba(255,255,255,0.12);
+  gap:10px;
 
-      z-index: 5;
-    }
+  font-size:11px;
 
-    .section-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  color:rgba(255,255,255,.45);
+}
 
-      margin-bottom: 70px;
-    }
 
-    .section-number {
-      font-size: 12px;
-      color: #d8ff32;
-    }
+.scroll-line{
+  width:1px;
+  height:75px;
 
-    .section-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-    }
+  background:
+  linear-gradient(
+    to bottom,
+    var(--teal),
+    transparent
+  );
+}
 
-    .section-title {
-      font-size: clamp(55px, 9vw, 150px);
 
-      line-height: 0.85;
+/* =====================================
+   COMMON SECTION
+===================================== */
 
-      letter-spacing: -0.075em;
+.content{
+  position:relative;
 
-      font-weight: 900;
-    }
+  min-height:100vh;
 
+  padding:130px 48px;
 
-    /* ================================
-       LINE UP
-    ================================= */
+  border-top:
+  1px solid rgba(255,255,255,.12);
 
-    .lineup-list {
-      margin-top: 80px;
+  z-index:5;
+}
 
-      border-top:
-        1px solid rgba(255,255,255,0.2);
-    }
 
-    .artist {
-      display: grid;
+.section-top{
+  display:flex;
 
-      grid-template-columns:
-        80px
-        1fr
-        180px;
+  align-items:center;
+  justify-content:space-between;
 
-      align-items: center;
+  margin-bottom:70px;
+}
 
-      padding: 24px 0;
 
-      border-bottom:
-        1px solid rgba(255,255,255,0.2);
+.section-number{
+  font-size:12px;
 
-      transition:
-        padding 0.3s,
-        background 0.3s;
-    }
+  color:var(--magenta);
+}
 
-    .artist:hover {
-      padding-left: 20px;
 
-      background: #d8ff32;
+.section-label{
+  font-size:12px;
 
-      color: #080808;
-    }
+  color:rgba(255,255,255,.45);
+}
 
-    .artist-num {
-      font-size: 11px;
-      opacity: 0.5;
-    }
 
-    .artist-name {
-      font-size: clamp(28px, 4vw, 64px);
+.section-title{
+  font-size:clamp(60px,9vw,150px);
 
-      font-weight: 800;
+  line-height:.84;
 
-      letter-spacing: -0.05em;
-    }
+  letter-spacing:-.075em;
 
-    .artist-info {
-      text-align: right;
+  font-weight:900;
+}
 
-      font-size: 12px;
 
-      line-height: 1.6;
-    }
+/* =====================================
+   LINE UP
+===================================== */
 
+.lineup-list{
+  margin-top:80px;
 
-    /* ================================
-       SCHEDULE
-    ================================= */
+  border-top:
+  1px solid rgba(255,255,255,.2);
+}
 
-    .schedule-grid {
-      display: grid;
 
-      grid-template-columns:
-        repeat(2, 1fr);
+.artist{
+  display:grid;
 
-      gap: 1px;
+  grid-template-columns:
+  80px 1fr 180px;
 
-      margin-top: 70px;
+  align-items:center;
 
-      background:
-        rgba(255,255,255,0.2);
-    }
+  padding:24px 0;
 
-    .schedule-card {
-      min-height: 310px;
+  border-bottom:
+  1px solid rgba(255,255,255,.2);
 
-      padding: 35px;
+  transition:
+  padding .35s,
+  background .35s;
+}
 
-      background: #080808;
 
-      transition: 0.35s;
-    }
+.artist:hover{
+  padding-left:20px;
 
-    .schedule-card:hover {
-      background: #d8ff32;
-      color: #080808;
-    }
+  background:var(--magenta);
 
-    .schedule-day {
-      margin-bottom: 60px;
+  color:white;
+}
 
-      font-size: 12px;
-    }
 
-    .schedule-time {
-      font-size:
-        clamp(45px, 6vw, 90px);
+.artist-num{
+  font-size:11px;
 
-      font-weight: 900;
+  opacity:.5;
+}
 
-      letter-spacing: -0.06em;
-    }
 
-    .schedule-band {
-      margin-top: 12px;
+.artist-name{
+  font-size:clamp(30px,4vw,65px);
 
-      font-size: 18px;
-      font-weight: 600;
-    }
+  font-weight:800;
 
+  letter-spacing:-.05em;
+}
 
-    /* ================================
-       TICKET
-    ================================= */
 
-    .ticket-area {
-      display: grid;
+.artist-info{
+  padding-right:20px;
 
-      grid-template-columns:
-        1fr 1fr;
+  text-align:right;
 
-      gap: 20px;
+  font-size:12px;
 
-      margin-top: 70px;
-    }
+  line-height:1.6;
+}
 
-    .ticket-card {
-      min-height: 360px;
 
-      padding: 40px;
+/* =====================================
+   SCHEDULE
+===================================== */
 
-      border:
-        1px solid rgba(255,255,255,0.25);
+.schedule-grid{
+  display:grid;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+  grid-template-columns:
+  repeat(2,1fr);
 
-      transition: 0.3s;
-    }
+  gap:1px;
 
-    .ticket-card:hover {
-      transform: translateY(-8px);
+  margin-top:70px;
 
-      border-color: #d8ff32;
-    }
+  background:rgba(255,255,255,.2);
+}
 
-    .ticket-type {
-      font-size: 14px;
-      color: #d8ff32;
-    }
 
-    .ticket-price {
-      font-size:
-        clamp(50px, 7vw, 100px);
+.schedule-card{
+  min-height:310px;
 
-      font-weight: 900;
+  padding:35px;
 
-      letter-spacing: -0.07em;
-    }
+  display:flex;
 
+  flex-direction:column;
 
-    /* ================================
-       INFO
-    ================================= */
+  justify-content:space-between;
 
-    .info-copy {
-      max-width: 1000px;
+  background:var(--base);
 
-      margin-top: 80px;
+  transition:.35s;
+}
 
-      font-size:
-        clamp(35px, 5vw, 80px);
 
-      line-height: 1.05;
+.schedule-card:hover{
+  background:var(--teal);
 
-      letter-spacing: -0.05em;
+  color:white;
+}
 
-      font-weight: 700;
-    }
 
-    .info-copy span {
-      color: #d8ff32;
-    }
+.schedule-day{
+  font-size:12px;
+}
 
 
-    /* ================================
-       FOOTER
-    ================================= */
+.schedule-time{
+  font-size:clamp(48px,6vw,90px);
 
-    footer {
-      padding: 45px 48px;
+  font-weight:900;
 
-      display: flex;
-      justify-content: space-between;
+  letter-spacing:-.06em;
+}
 
-      border-top:
-        1px solid rgba(255,255,255,0.15);
 
-      font-size: 11px;
+.schedule-band{
+  margin-top:12px;
 
-      color: rgba(255,255,255,0.4);
-    }
+  font-size:18px;
 
+  font-weight:600;
+}
 
-    /* ================================
-       MOBILE
-    ================================= */
 
-    @media (max-width: 768px) {
+/* =====================================
+   TICKET
+===================================== */
 
-      header {
-        height: 70px;
-        padding: 0 20px;
-      }
+.ticket-area{
+  display:grid;
 
-      nav a:not(.ticket-btn) {
-        display: none;
-      }
+  grid-template-columns:
+  1fr 1fr;
 
-      .hero {
-        padding:
-          0 20px
-          35px;
-      }
+  gap:20px;
 
-      .floating-title {
-        top: 20%;
+  margin-top:70px;
+}
 
-        font-size: 25vw;
 
-        line-height: 0.78;
+.ticket-card{
+  min-height:360px;
 
-        white-space: normal;
-      }
+  padding:40px;
 
-      .floating-title span {
-        display: block;
-      }
+  display:flex;
 
-      .ghost-text {
-        top: 43%;
-      }
+  flex-direction:column;
 
-      .hero-bottom {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
+  justify-content:space-between;
 
-      .scroll-guide {
-        display: none;
-      }
+  border:
+  1px solid rgba(255,255,255,.25);
 
-      section.content {
-        padding:
-          100px 20px;
-      }
+  transition:.35s;
+}
 
-      .section-top {
-        margin-bottom: 45px;
-      }
 
-      .artist {
-        grid-template-columns:
-          40px 1fr;
-      }
+.ticket-card:hover{
+  transform:translateY(-8px);
 
-      .artist-info {
-        display: none;
-      }
+  border-color:var(--magenta);
+}
 
-      .schedule-grid,
-      .ticket-area {
-        grid-template-columns: 1fr;
-      }
 
-      .schedule-card {
-        min-height: 230px;
-      }
+.ticket-type{
+  font-size:14px;
 
-      footer {
-        padding: 35px 20px;
+  color:var(--teal);
+}
 
-        flex-direction: column;
 
-        gap: 10px;
-      }
+.ticket-price{
+  font-size:clamp(55px,7vw,100px);
 
-      .cursor-light {
-        display: none;
-      }
+  font-weight:900;
 
-    }
+  letter-spacing:-.07em;
+}
 
-  </style>
+
+/* =====================================
+   INFO
+===================================== */
+
+.info-copy{
+  max-width:1000px;
+
+  margin-top:80px;
+
+  font-size:clamp(40px,5vw,80px);
+
+  line-height:1.05;
+
+  letter-spacing:-.05em;
+
+  font-weight:700;
+}
+
+
+.info-copy span{
+  color:var(--magenta);
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer{
+  padding:45px 48px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  border-top:
+  1px solid rgba(255,255,255,.15);
+
+  font-size:11px;
+
+  color:rgba(255,255,255,.4);
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:768px){
+
+  header{
+    height:70px;
+
+    padding:0 20px;
+  }
+
+
+  nav{
+    gap:14px;
+  }
+
+
+  nav a{
+    font-size:10px;
+  }
+
+
+  .hero{
+    padding:
+    0 20px
+    35px;
+  }
+
+
+  .floating-title{
+    top:19%;
+
+    font-size:24vw;
+
+    line-height:.78;
+
+    white-space:normal;
+  }
+
+
+  .floating-title span{
+    display:block;
+  }
+
+
+  .ghost-text{
+    top:43%;
+  }
+
+
+  .hero-bottom{
+    grid-template-columns:1fr;
+
+    gap:25px;
+  }
+
+
+  .scroll-guide{
+    display:none;
+  }
+
+
+  .content{
+    padding:
+    100px 20px;
+  }
+
+
+  .section-top{
+    margin-bottom:45px;
+  }
+
+
+  .artist{
+    grid-template-columns:
+    40px 1fr;
+  }
+
+
+  .artist-info{
+    display:none;
+  }
+
+
+  .schedule-grid,
+  .ticket-area{
+    grid-template-columns:1fr;
+  }
+
+
+  .schedule-card{
+    min-height:230px;
+  }
+
+
+  footer{
+    padding:35px 20px;
+
+    flex-direction:column;
+
+    gap:10px;
+  }
+
+
+  .cursor-light{
+    display:none;
+  }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
 
-<!-- 마우스를 따라 움직이는 빛 -->
 <div class="cursor-light"></div>
 
 
-<!-- ================================
-     HEADER
-================================= -->
+<!-- HEADER -->
 
 <header>
 
   <a href="#home" class="logo">
-    RF / 26
+    RF <span>/ 26</span>
   </a>
 
   <nav>
-    <a href="#lineup">LINE UP</a>
-    <a href="#schedule">SCHEDULE</a>
-    <a href="#info">INFO</a>
 
-    <a href="#ticket" class="ticket-btn">
-      TICKET ↗
+    <a href="#home">
+      HOME
     </a>
+
+    <a href="#lineup">
+      LINE UP
+    </a>
+
+    <a href="#schedule">
+      SCHEDULE
+    </a>
+
+    <a href="#ticket">
+      TICKET
+    </a>
+
+    <a href="#info">
+      INFO
+    </a>
+
   </nav>
 
 </header>
 
 
-<!-- ================================
-     HERO
-================================= -->
 
 <main>
 
+
+<!-- =====================================
+     HOME
+===================================== -->
+
 <section class="hero" id="home">
+
 
   <div class="floating-title">
     ROCK <span>FESTIVAL</span>
   </div>
+
 
   <div class="ghost-text">
     LOUD / LIVE / ALIVE
@@ -788,11 +856,16 @@
 
   <div class="hero-bottom">
 
+
     <div class="hero-date">
-      <strong>OCT 10 — 11</strong>
+
+      <strong>
+        OCT 10 — 11
+      </strong>
 
       2026<br>
       SEOUL, KOREA
+
     </div>
 
 
@@ -813,9 +886,13 @@
 
 
     <div class="scroll-guide">
+
       SCROLL TO EXPLORE
+
       <div class="scroll-line"></div>
+
     </div>
+
 
   </div>
 
@@ -823,69 +900,124 @@
 
 
 
-<!-- ================================
+<!-- =====================================
      LINE UP
-================================= -->
+===================================== -->
 
 <section class="content" id="lineup">
 
+
   <div class="section-top">
-    <span class="section-number">01</span>
-    <span class="section-label">ARTIST / LINE UP</span>
+
+    <span class="section-number">
+      01
+    </span>
+
+    <span class="section-label">
+      ARTIST / LINE UP
+    </span>
+
   </div>
 
 
   <h2 class="section-title">
-    LINE<br>UP
+    LINE<br>
+    UP
   </h2>
 
 
   <div class="lineup-list">
 
+
     <div class="artist">
-      <span class="artist-num">01</span>
-      <span class="artist-name">THE RIOT</span>
+
+      <span class="artist-num">
+        01
+      </span>
+
+      <span class="artist-name">
+        THE RIOT
+      </span>
+
       <span class="artist-info">
         DAY 01<br>
         MAIN STAGE
       </span>
+
     </div>
 
+
     <div class="artist">
-      <span class="artist-num">02</span>
-      <span class="artist-name">BLACK WAVE</span>
+
+      <span class="artist-num">
+        02
+      </span>
+
+      <span class="artist-name">
+        BLACK WAVE
+      </span>
+
       <span class="artist-info">
         DAY 01<br>
         MAIN STAGE
       </span>
+
     </div>
 
+
     <div class="artist">
-      <span class="artist-num">03</span>
-      <span class="artist-name">NO SIGNAL</span>
+
+      <span class="artist-num">
+        03
+      </span>
+
+      <span class="artist-name">
+        NO SIGNAL
+      </span>
+
       <span class="artist-info">
         DAY 01<br>
         SUB STAGE
       </span>
+
     </div>
 
+
     <div class="artist">
-      <span class="artist-num">04</span>
-      <span class="artist-name">AFTER NOISE</span>
+
+      <span class="artist-num">
+        04
+      </span>
+
+      <span class="artist-name">
+        AFTER NOISE
+      </span>
+
       <span class="artist-info">
         DAY 02<br>
         MAIN STAGE
       </span>
+
     </div>
 
+
     <div class="artist">
-      <span class="artist-num">05</span>
-      <span class="artist-name">VOLTAGE</span>
+
+      <span class="artist-num">
+        05
+      </span>
+
+      <span class="artist-name">
+        VOLTAGE
+      </span>
+
       <span class="artist-info">
         DAY 02<br>
         SUB STAGE
       </span>
+
     </div>
+
 
   </div>
 
@@ -893,24 +1025,34 @@
 
 
 
-<!-- ================================
+<!-- =====================================
      SCHEDULE
-================================= -->
+===================================== -->
 
 <section class="content" id="schedule">
 
+
   <div class="section-top">
-    <span class="section-number">02</span>
-    <span class="section-label">DAY / TIME / STAGE</span>
+
+    <span class="section-number">
+      02
+    </span>
+
+    <span class="section-label">
+      DAY / TIME / STAGE
+    </span>
+
   </div>
 
 
   <h2 class="section-title">
-    LIVE<br>SCHEDULE
+    LIVE<br>
+    SCHEDULE
   </h2>
 
 
   <div class="schedule-grid">
+
 
     <div class="schedule-card">
 
@@ -919,8 +1061,15 @@
       </div>
 
       <div>
-        <div class="schedule-time">17:30</div>
-        <div class="schedule-band">THE RIOT</div>
+
+        <div class="schedule-time">
+          17:30
+        </div>
+
+        <div class="schedule-band">
+          THE RIOT
+        </div>
+
       </div>
 
     </div>
@@ -933,8 +1082,15 @@
       </div>
 
       <div>
-        <div class="schedule-time">19:00</div>
-        <div class="schedule-band">NO SIGNAL</div>
+
+        <div class="schedule-time">
+          19:00
+        </div>
+
+        <div class="schedule-band">
+          NO SIGNAL
+        </div>
+
       </div>
 
     </div>
@@ -947,8 +1103,15 @@
       </div>
 
       <div>
-        <div class="schedule-time">18:20</div>
-        <div class="schedule-band">AFTER NOISE</div>
+
+        <div class="schedule-time">
+          18:20
+        </div>
+
+        <div class="schedule-band">
+          AFTER NOISE
+        </div>
+
       </div>
 
     </div>
@@ -961,11 +1124,19 @@
       </div>
 
       <div>
-        <div class="schedule-time">20:10</div>
-        <div class="schedule-band">VOLTAGE</div>
+
+        <div class="schedule-time">
+          20:10
+        </div>
+
+        <div class="schedule-band">
+          VOLTAGE
+        </div>
+
       </div>
 
     </div>
+
 
   </div>
 
@@ -973,24 +1144,34 @@
 
 
 
-<!-- ================================
+<!-- =====================================
      TICKET
-================================= -->
+===================================== -->
 
 <section class="content" id="ticket">
 
+
   <div class="section-top">
-    <span class="section-number">03</span>
-    <span class="section-label">TICKET</span>
+
+    <span class="section-number">
+      03
+    </span>
+
+    <span class="section-label">
+      TICKET
+    </span>
+
   </div>
 
 
   <h2 class="section-title">
-    GET<br>LOUD
+    GET<br>
+    LOUD
   </h2>
 
 
   <div class="ticket-area">
+
 
     <div class="ticket-card">
 
@@ -1017,21 +1198,30 @@
 
     </div>
 
+
   </div>
 
 </section>
 
 
 
-<!-- ================================
+<!-- =====================================
      INFO
-================================= -->
+===================================== -->
 
 <section class="content" id="info">
 
+
   <div class="section-top">
-    <span class="section-number">04</span>
-    <span class="section-label">FESTIVAL INFORMATION</span>
+
+    <span class="section-number">
+      04
+    </span>
+
+    <span class="section-label">
+      FESTIVAL INFORMATION
+    </span>
+
   </div>
 
 
@@ -1050,6 +1240,7 @@
     EXPERIENCE.
 
   </p>
+
 
 </section>
 
@@ -1074,93 +1265,85 @@
 
 <script>
 
-  /* ==================================
-     CURSOR LIGHT
-  ================================== */
+/* =====================================
+   CURSOR LIGHT
+===================================== */
 
-  const light =
-    document.querySelector(".cursor-light");
+const light =
+document.querySelector(".cursor-light");
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+let mouseX =
+window.innerWidth / 2;
 
-  let lightX = mouseX;
-  let lightY = mouseY;
+let mouseY =
+window.innerHeight / 2;
 
-
-  window.addEventListener(
-    "mousemove",
-    (event) => {
-
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-
-    }
-  );
+let lightX = mouseX;
+let lightY = mouseY;
 
 
-  function moveLight() {
+window.addEventListener(
+"mousemove",
+(event)=>{
 
-    /*
-      마우스를 바로 따라오지 않고
-      살짝 늦게 따라오도록 설정
-    */
+  mouseX = event.clientX;
+  mouseY = event.clientY;
 
-    lightX +=
-      (mouseX - lightX) * 0.08;
-
-    lightY +=
-      (mouseY - lightY) * 0.08;
+});
 
 
-    light.style.left =
-      lightX + "px";
+function moveLight(){
 
-    light.style.top =
-      lightY + "px";
+  lightX +=
+  (mouseX - lightX) * .08;
+
+  lightY +=
+  (mouseY - lightY) * .08;
 
 
-    requestAnimationFrame(moveLight);
+  light.style.left =
+  lightX + "px";
 
-  }
+  light.style.top =
+  lightY + "px";
 
-  moveLight();
+
+  requestAnimationFrame(moveLight);
+}
+
+
+moveLight();
 
 
 
-  /* ==================================
-     FLOATING TYPOGRAPHY + MOUSE
-  ================================== */
+/* =====================================
+   TYPOGRAPHY MOUSE REACTION
+===================================== */
 
-  const title =
-    document.querySelector(".floating-title");
-
-
-  window.addEventListener(
-    "mousemove",
-    (event) => {
-
-      const x =
-        (event.clientX / window.innerWidth - 0.5);
-
-      const y =
-        (event.clientY / window.innerHeight - 0.5);
+const title =
+document.querySelector(".floating-title");
 
 
-      /*
-        CSS 기본 floating animation과
-        충돌하지 않도록 CSS 변수 사용
-        대신 rotate 효과만 살짝 적용
-      */
+window.addEventListener(
+"mousemove",
+(event)=>{
 
-      title.style.marginLeft =
-        `${x * 12}px`;
+  const x =
+  event.clientX /
+  window.innerWidth - .5;
 
-      title.style.marginTop =
-        `${y * 8}px`;
+  const y =
+  event.clientY /
+  window.innerHeight - .5;
 
-    }
-  );
+
+  title.style.marginLeft =
+  `${x * 14}px`;
+
+  title.style.marginTop =
+  `${y * 9}px`;
+
+});
 
 </script>
 
