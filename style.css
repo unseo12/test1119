@@ -357,13 +357,14 @@ nav a:hover::after{
   padding:
     0 48px 55px;
 
-  /* HOME BACKGROUND IMAGE */
-
   background:
     linear-gradient(
-  rgba(2,2,2,.68),
-  rgba(2,2,2,.82)
-),
+      to bottom,
+      rgba(2,2,2,.82) 0%,
+      rgba(2,2,2,.76) 30%,
+      rgba(2,2,2,.68) 55%,
+      rgba(2,2,2,.82) 100%
+    ),
     url("img/home-bg.jpeg");
 
   background-size:cover;
