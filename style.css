@@ -1,7 +1,7 @@
 :root{
   --base:#020202;
 
-  --point:#C73312;
+  --point:#D31F1F;
 
   --white:#F5F5F5;
 
@@ -104,13 +104,11 @@ button{
   background:
 
     radial-gradient(
-
       circle,
-      rgba(199,51,18,.26) 0%,
-      rgba(199,51,18,.12) 28%,
-      rgba(199,51,18,.04) 52%,
+      rgba(211,31,31,.26) 0%,
+      rgba(211,31,31,.12) 28%,
+      rgba(211,31,31,.04) 52%,
       transparent 72%
-
     );
 
 
