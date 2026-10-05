@@ -212,3 +212,32 @@ function animateCursor(){
 
 
 animateCursor();
+
+
+
+/* =====================================
+   CURSOR CLICK EFFECT
+===================================== */
+
+window.addEventListener(
+  "mousedown",
+  () => {
+
+    cursor.classList.add(
+      "is-clicking"
+    );
+
+  }
+);
+
+
+window.addEventListener(
+  "mouseup",
+  () => {
+
+    cursor.classList.remove(
+      "is-clicking"
+    );
+
+  }
+);
