@@ -441,20 +441,30 @@ background:
 
 .floating-title{
 
-    position:absolute;
+position:absolute;
 
-  left:48px;
-  right:48px;
+  top:11%;
 
-  width:auto;
+  left:0;
+  width:100%;
 
   display:flex;
+  justify-content:center;
   align-items:center;
+
+  font-size:
+    clamp(100px,15vw,290px);
+
+  line-height:.8;
+
+  letter-spacing:-.09em;
+
+  font-weight:900;
+
+  white-space:nowrap;
 
   z-index:4;
 
- font-size:clamp(90px, 11.7vw, 230px);
- 
 }
 
 
