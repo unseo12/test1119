@@ -361,9 +361,9 @@ nav a:hover::after{
 
   background:
     linear-gradient(
-      rgba(2,2,2,.38),
-      rgba(2,2,2,.62)
-    ),
+  rgba(2,2,2,.68),
+  rgba(2,2,2,.82)
+),
     url("img/home-bg.jpeg");
 
   background-size:cover;
