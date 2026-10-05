@@ -48,6 +48,8 @@ body{
 
   overflow-x:hidden;
 
+  cursor:none;
+
 }
 
 
@@ -68,6 +70,21 @@ button{
 
 }
 
+
+/* =====================================
+   CUSTOM CURSOR
+===================================== */
+
+@media (pointer:fine){
+
+  html,
+  body,
+  a,
+  button{
+    cursor:none;
+  }
+
+}
 
 
 ::selection{
