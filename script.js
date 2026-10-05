@@ -17,11 +17,11 @@ document.querySelector(".cursor-path");
    SETTINGS
 ===================================== */
 
-const POINT_COUNT = 22;
+const POINT_COUNT = 14;
 
-const FOLLOW_SPEED = 0.32;
+const FOLLOW_SPEED = 0.48;
 
-const TRAIL_SPEED = 0.34;
+const TRAIL_SPEED = 0.52;
 
 
 
