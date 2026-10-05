@@ -212,39 +212,3 @@ function animateCursor(){
 
 
 animateCursor();
-
-
-
-/* =====================================
-   TYPOGRAPHY MOUSE REACTION
-===================================== */
-
-const title =
-document.querySelector(
-  ".floating-title"
-);
-
-
-window.addEventListener(
-  "mousemove",
-  (event) => {
-
-    const x =
-      event.clientX /
-      window.innerWidth - .5;
-
-
-    const y =
-      event.clientY /
-      window.innerHeight - .5;
-
-
-    title.style.marginLeft =
-      `${x * 14}px`;
-
-
-    title.style.marginTop =
-      `${y * 9}px`;
-
-  }
-);

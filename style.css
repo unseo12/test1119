@@ -467,17 +467,6 @@ nav a:hover::after{
 
   z-index:4;
 
-
-  animation:
-
-    floating
-
-    5s
-
-    ease-in-out
-
-    infinite;
-
 }
 
 
@@ -497,54 +486,6 @@ nav a:hover::after{
     1.5px var(--point);
 
 }
-
-
-
-/* FLOATING ANIMATION */
-
-@keyframes floating{
-
-
-  0%{
-
-    transform:
-
-      translateX(-50%)
-
-      translateY(0)
-
-      rotate(-.4deg);
-
-  }
-
-
-  50%{
-
-    transform:
-
-      translateX(-50%)
-
-      translateY(-22px)
-
-      rotate(.4deg);
-
-  }
-
-
-  100%{
-
-    transform:
-
-      translateX(-50%)
-
-      translateY(0)
-
-      rotate(-.4deg);
-
-  }
-
-}
-
 
 
 /* =====================================
