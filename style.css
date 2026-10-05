@@ -128,7 +128,7 @@ button{
 
   opacity:1;
 
-  mix-blend-mode:difference;
+  transition:stroke .18s ease;
 }
 
 
@@ -147,11 +147,22 @@ button{
 
   background:#D31F1F;
 
-  mix-blend-mode:difference;
-
   transform:translate(-50%,-50%);
 
   will-change:transform;
+
+  transition:background .18s ease;
+}
+
+
+/* 빨간 영역 위에서는 흰색 */
+
+.cursor.is-inverted .cursor-path{
+  stroke:#F5F5F5;
+}
+
+.cursor.is-inverted .cursor-dot{
+  background:#F5F5F5;
 }
 
 

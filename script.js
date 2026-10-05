@@ -69,8 +69,39 @@ window.addEventListener(
   (event) => {
 
     mouse.x = event.clientX;
-
     mouse.y = event.clientY;
+
+
+    /* 현재 마우스 아래에 있는 요소 확인 */
+
+    const target =
+      document.elementFromPoint(
+        event.clientX,
+        event.clientY
+      );
+
+
+    /* 빨간색으로 변하는 영역인지 확인 */
+
+    const redArea =
+      target?.closest(
+        ".artist, .schedule-card"
+      );
+
+
+    if(redArea){
+
+      cursor.classList.add(
+        "is-inverted"
+      );
+
+    }else{
+
+      cursor.classList.remove(
+        "is-inverted"
+      );
+
+    }
 
   }
 );
