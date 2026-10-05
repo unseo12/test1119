@@ -81,53 +81,41 @@ button{
 
 
 /* =====================================
-   CURSOR LIGHT
+   CURSOR TRAIL
 ===================================== */
 
 .cursor-light{
+  position: fixed;
 
-  position:fixed;
+  left: 0;
+  top: 0;
 
-  left:0;
+  width: 18px;
+  height: 18px;
 
-  top:0;
+  background: #D31F1F;
 
+  border-radius: 999px;
 
-  width:520px;
+  pointer-events: none;
 
-  height:520px;
+  z-index: 9999;
 
+  transform-origin: 0% 50%;
 
-  border-radius:50%;
+  will-change:
+    left,
+    top,
+    width,
+    transform;
 
+  transition:
+    width 0.12s ease-out,
+    border-radius 0.12s ease-out;
 
-  background:
+  box-shadow: none;
 
-    radial-gradient(
-      circle,
-      rgba(211,31,31,.26) 0%,
-      rgba(211,31,31,.12) 28%,
-      rgba(211,31,31,.04) 52%,
-      transparent 72%
-    );
-
-
-  filter:blur(12px);
-
-
-  pointer-events:none;
-
-
-  transform:
-
-    translate(-50%,-50%);
-
-
-  mix-blend-mode:screen;
-
-
-  z-index:2;
-
+  mix-blend-mode: normal;
 }
 
 
