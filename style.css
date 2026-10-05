@@ -114,6 +114,8 @@ button{
 }
 
 
+/* 얇은 트레일 */
+
 .cursor-path{
   fill:none;
 
@@ -124,7 +126,9 @@ button{
   stroke-linecap:round;
   stroke-linejoin:round;
 
-  opacity:.95;
+  opacity:1;
+
+  mix-blend-mode:difference;
 }
 
 
@@ -143,20 +147,11 @@ button{
 
   background:#D31F1F;
 
+  mix-blend-mode:difference;
+
   transform:translate(-50%,-50%);
 
   will-change:transform;
-}
-
-
-/* 모바일에서는 제거 */
-
-@media(max-width:768px){
-
-  .cursor{
-    display:none;
-  }
-
 }
 
 
