@@ -1,37 +1,76 @@
 /* =====================================
-   DFY STYLE CURSOR TRAIL
+   SMOOTH CURSOR TRAIL
 ===================================== */
 
-const light =
-document.querySelector(".cursor-light");
+const cursor =
+document.querySelector(".cursor");
 
+const dot =
+document.querySelector(".cursor-dot");
 
-let mouseX =
-window.innerWidth / 2;
-
-let mouseY =
-window.innerHeight / 2;
-
-
-let cursorX = mouseX;
-let cursorY = mouseY;
-
-
-let previousX = mouseX;
-let previousY = mouseY;
+const path =
+document.querySelector(".cursor-path");
 
 
 
 /* =====================================
-   MOUSE POSITION
+   SETTINGS
+===================================== */
+
+const POINT_COUNT = 22;
+
+const FOLLOW_SPEED = 0.32;
+
+const TRAIL_SPEED = 0.34;
+
+
+
+/* =====================================
+   MOUSE
+===================================== */
+
+let mouse = {
+
+  x: window.innerWidth / 2,
+
+  y: window.innerHeight / 2
+
+};
+
+
+
+/* =====================================
+   TRAIL POINTS
+===================================== */
+
+const points = [];
+
+
+for(let i = 0; i < POINT_COUNT; i++){
+
+  points.push({
+
+    x: mouse.x,
+
+    y: mouse.y
+
+  });
+
+}
+
+
+
+/* =====================================
+   MOUSE MOVE
 ===================================== */
 
 window.addEventListener(
   "mousemove",
   (event) => {
 
-    mouseX = event.clientX;
-    mouseY = event.clientY;
+    mouse.x = event.clientX;
+
+    mouse.y = event.clientY;
 
   }
 );
@@ -39,85 +78,109 @@ window.addEventListener(
 
 
 /* =====================================
-   CURSOR ANIMATION
+   CREATE SMOOTH SVG PATH
 ===================================== */
 
-function moveLight(){
+function createPath(){
 
-  /* 마우스를 부드럽게 따라가기 */
-
-  cursorX +=
-    (mouseX - cursorX) * 0.22;
-
-  cursorY +=
-    (mouseY - cursorY) * 0.22;
+  if(points.length < 2) return "";
 
 
-
-  /* 이동 방향과 속도 */
-
-  const dx =
-    cursorX - previousX;
-
-  const dy =
-    cursorY - previousY;
+  let d =
+    `M ${points[0].x} ${points[0].y}`;
 
 
-  const speed =
-    Math.sqrt(
-      dx * dx +
-      dy * dy
-    );
+  for(let i = 1; i < points.length - 1; i++){
+
+    const current =
+      points[i];
+
+    const next =
+      points[i + 1];
 
 
-  const angle =
-    Math.atan2(dy, dx) *
-    180 / Math.PI;
+    const midX =
+      (current.x + next.x) / 2;
+
+    const midY =
+      (current.y + next.y) / 2;
 
 
+    d +=
+      ` Q ${current.x} ${current.y}
+      ${midX} ${midY}`;
 
-  /* 움직이는 속도에 따라 길이 변경 */
-
-  const length =
-    Math.min(
-      18 + speed * 8,
-      95
-    );
+  }
 
 
-
-  /* 위치 */
-
-  light.style.left =
-    cursorX + "px";
-
-  light.style.top =
-    cursorY + "px";
-
-
-
-  /* 원 → 선 */
-
-  light.style.width =
-    length + "px";
-
-
-  light.style.transform =
-    `translate(-9px, -50%) rotate(${angle}deg)`;
-
-
-
-  previousX = cursorX;
-  previousY = cursorY;
-
-
-  requestAnimationFrame(moveLight);
+  return d;
 
 }
 
 
 
-moveLight();
+/* =====================================
+   ANIMATION
+===================================== */
+
+function animateCursor(){
+
+
+  /* 첫 번째 점은 실제 마우스를 부드럽게 추적 */
+
+  points[0].x +=
+    (mouse.x - points[0].x) *
+    FOLLOW_SPEED;
+
+  points[0].y +=
+    (mouse.y - points[0].y) *
+    FOLLOW_SPEED;
+
+
+
+  /* 나머지 점은 앞의 점을 따라감 */
+
+  for(let i = 1; i < points.length; i++){
+
+    points[i].x +=
+      (points[i - 1].x - points[i].x) *
+      TRAIL_SPEED;
+
+    points[i].y +=
+      (points[i - 1].y - points[i].y) *
+      TRAIL_SPEED;
+
+  }
+
+
+
+  /* 원 위치 */
+
+  dot.style.transform =
+    `translate(
+      ${points[0].x - 5}px,
+      ${points[0].y - 5}px
+    )`;
+
+
+
+  /* 선 */
+
+  path.setAttribute(
+    "d",
+    createPath()
+  );
+
+
+  requestAnimationFrame(
+    animateCursor
+  );
+
+}
+
+
+
+animateCursor();
 
 
 
@@ -126,7 +189,9 @@ moveLight();
 ===================================== */
 
 const title =
-document.querySelector(".floating-title");
+document.querySelector(
+  ".floating-title"
+);
 
 
 window.addEventListener(
@@ -141,7 +206,6 @@ window.addEventListener(
     const y =
       event.clientY /
       window.innerHeight - .5;
-
 
 
     title.style.marginLeft =
