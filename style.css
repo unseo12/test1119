@@ -1307,7 +1307,7 @@ footer{
     top:20%;
 
 
-    font-size:25vw;
+    font-size: clamp(100px,13.5vw,290px);
 
 
     line-height:.78;
