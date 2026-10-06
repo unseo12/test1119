@@ -489,49 +489,6 @@ position:absolute;
 }
 
 
-/* =====================================
-   GHOST TYPOGRAPHY
-===================================== */
-
-.ghost-text{
-
-  position:absolute;
-
-
-  top:39%;
-
-  left:-2%;
-
-
-  font-size:
-
-    clamp(90px,13vw,250px);
-
-
-  font-weight:900;
-
-
-  letter-spacing:-.08em;
-
-
-  color:
-
-    rgba(255,255,255,.025);
-
-
-  white-space:nowrap;
-
-
-  transform:
-
-    rotate(-4deg);
-
-
-  pointer-events:none;
-
-}
-
-
 
 /* =====================================
    HERO BOTTOM
@@ -1325,14 +1282,6 @@ footer{
   .floating-title span{
 
     display:block;
-
-  }
-
-
-
-  .ghost-text{
-
-    top:43%;
 
   }
 
