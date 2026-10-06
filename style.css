@@ -246,32 +246,35 @@ header{
 .logo-wrap{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:14px;
+  flex-shrink:0;
 }
 
-/* SOUND WAVE */
 .sound-wave{
-  height:30px;
+  width:38px;
+  height:32px;
+
   display:flex;
   align-items:center;
+  justify-content:center;
   gap:3px;
+
+  flex-shrink:0;
 }
 
 .sound-wave span{
   display:block;
 
   width:3px;
-  height:10px;
 
-  background:#D31F1F;
+  background:var(--point);
   border-radius:10px;
 
   transform-origin:center;
 
-  animation:soundWave .85s ease-in-out infinite alternate;
+  animation:soundWave .65s ease-in-out infinite alternate;
 }
 
-/* 막대마다 움직이는 타이밍 다르게 */
 .sound-wave span:nth-child(1){
   height:8px;
   animation-delay:-.1s;
@@ -288,18 +291,18 @@ header{
 }
 
 .sound-wave span:nth-child(4){
-  height:30px;
+  height:32px;
   animation-delay:-.5s;
 }
 
 .sound-wave span:nth-child(5){
-  height:23px;
+  height:24px;
   animation-delay:-.3s;
 }
 
 .sound-wave span:nth-child(6){
   height:16px;
-  animation-delay:-.6s;
+  animation-delay:-.55s;
 }
 
 .sound-wave span:nth-child(7){
@@ -308,7 +311,6 @@ header{
 }
 
 @keyframes soundWave{
-
   0%{
     transform:scaleY(.35);
   }
@@ -320,7 +322,6 @@ header{
   100%{
     transform:scaleY(.55);
   }
-
 }
 
 /* LOGO */
