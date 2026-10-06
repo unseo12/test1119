@@ -453,7 +453,7 @@ position:absolute;
   align-items:center;
 
   font-size:
-    clamp(100px,15vw,290px);
+  clamp(100px,13.5vw,290px);
 
   line-height:.8;
 
@@ -1307,7 +1307,7 @@ footer{
     top:20%;
 
 
-    font-size: clamp(100px,13.5vw,290px);
+    font-size:25vw;
 
 
     line-height:.78;
