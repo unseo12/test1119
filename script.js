@@ -241,3 +241,168 @@ window.addEventListener(
 
   }
 );
+
+const soundBars = document.getElementById("soundBars");
+const soundArea = document.querySelector(".info-sound");
+
+if(soundBars && soundArea){
+
+  const BAR_COUNT = 72;
+
+  /* -------------------------
+     원형 막대 생성
+  ------------------------- */
+
+  for(let i = 0; i < BAR_COUNT; i++){
+
+    const bar = document.createElement("span");
+
+    bar.classList.add("sound-bar");
+
+    const angle = (360 / BAR_COUNT) * i;
+
+    bar.style.transform =
+      `translate(-50%, -100%) rotate(${angle}deg)`;
+
+    bar.dataset.angle = angle;
+
+    soundBars.appendChild(bar);
+
+  }
+
+
+  const bars =
+    soundBars.querySelectorAll(".sound-bar");
+
+
+  /* -------------------------
+     기본 사운드 움직임
+  ------------------------- */
+
+  let time = 0;
+
+  function animateSound(){
+
+    time += 0.045;
+
+    bars.forEach((bar, index) => {
+
+      const wave1 =
+        Math.sin(time * 2 + index * .35);
+
+      const wave2 =
+        Math.sin(time * 1.3 + index * .12);
+
+      const height =
+        22 +
+        ((wave1 + 1) * 9) +
+        ((wave2 + 1) * 5);
+
+      bar.style.height =
+        `${height}px`;
+
+    });
+
+    requestAnimationFrame(animateSound);
+
+  }
+
+  animateSound();
+
+
+  /* -------------------------
+     마우스 인터랙션
+  ------------------------- */
+
+  soundArea.addEventListener(
+    "mousemove",
+    (event) => {
+
+      const rect =
+        soundArea.getBoundingClientRect();
+
+      const x =
+        event.clientX -
+        rect.left -
+        rect.width / 2;
+
+      const y =
+        event.clientY -
+        rect.top -
+        rect.height / 2;
+
+      const rotateX =
+        y * -.015;
+
+      const rotateY =
+        x * .015;
+
+      soundBars.style.transform =
+        `
+        translate(-50%, -50%)
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        scale(1.04)
+        `;
+
+    }
+  );
+
+
+  soundArea.addEventListener(
+    "mouseleave",
+    () => {
+
+      soundBars.style.transform =
+        `
+        translate(-50%, -50%)
+        rotateX(0deg)
+        rotateY(0deg)
+        scale(1)
+        `;
+
+    }
+  );
+
+
+  /* -------------------------
+     클릭하면 강한 PULSE
+  ------------------------- */
+
+  soundArea.addEventListener(
+    "click",
+    () => {
+
+      bars.forEach((bar, index) => {
+
+        const random =
+          45 + Math.random() * 55;
+
+        bar.style.height =
+          `${random}px`;
+
+        if(index % 6 === 0){
+
+          bar.style.background =
+            "#D31F1F";
+
+        }
+
+      });
+
+
+      setTimeout(() => {
+
+        bars.forEach((bar) => {
+
+          bar.style.background =
+            "rgba(245,245,245,.65)";
+
+        });
+
+      }, 350);
+
+    }
+  );
+
+}
