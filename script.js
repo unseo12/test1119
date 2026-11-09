@@ -405,34 +405,140 @@
       reveal > 0.95 ? "false" : "true"
     );
 
-    /* --------------------------------------
-       STEP 05
-       하단 스크롤 진행 표시
-    -------------------------------------- */
+   
+/* ==========================================
+   05. YEAR JOURNEY V2
+   2006 → 2035 → ENTER THE ZERO
+========================================== */
 
-    progress.style.width =
-      `${t * 100}%`;
+(() => {
+  const section = document.querySelector(".year-journey");
+  if (!section) return;
+
+  const numberWrap = section.querySelector(".year-number-wrap");
+  const number = section.querySelector(".year-number");
+  const portal = section.querySelector(".year-portal");
+
+  const reduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduced) return;
+
+  const clamp = (v, min = 0, max = 1) =>
+    Math.min(max, Math.max(min, v));
+
+  const smooth = (v) => v * v * (3 - 2 * v);
+
+  let scheduled = false;
+
+  function update() {
+    scheduled = false;
+
+    const travel = Math.max(
+      1,
+      section.offsetHeight - window.innerHeight
+    );
+
+    const t = clamp(
+      -section.getBoundingClientRect().top / travel
+    );
+
+    /* 01 — 연도 변경 : 2006 → 2035 */
+
+    const yearProgress = clamp(t / .52);
+
+    const currentYear = 2006 + Math.min(
+      29,
+      Math.floor(yearProgress * 29 + .00001)
+    );
+
+    const digits = String(currentYear).split("");
+
+    const spans = number.querySelectorAll("span");
+
+    spans.forEach((span, i) => {
+      span.textContent = digits[i];
+    });
+
+    number.setAttribute("aria-label", String(currentYear));
+
+    /* 02 — 멀리서 가까이 접근 */
+
+    const approach = smooth(clamp(t / .70));
+
+    // 처음 12% 크기 → 화면을 채우는 크기
+    const baseScale = .12 + approach * .88;
+
+    /* 03 — 2035의 첫 번째 0으로 확대 */
+
+    const zoomProgress = smooth(
+      clamp((t - .70) / .20)
+    );
+
+    // 1배 → 35배
+    const zoomScale = 1 + zoomProgress * 34;
+
+    const zero = number.querySelector(".year-zero");
+
+    // 숫자 0의 중심 위치 계산
+    const stageRect = section
+      .querySelector(".year-stage")
+      .getBoundingClientRect();
+
+    const zeroRect = zero.getBoundingClientRect();
+
+    const zeroX =
+      zeroRect.left + zeroRect.width / 2;
+
+    const zeroY =
+      zeroRect.top + zeroRect.height / 2;
+
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    // 0의 위치가 화면 중앙으로 오도록 이동
+    const offsetX = centerX - zeroX;
+    const offsetY = centerY - zeroY;
+
+    numberWrap.style.transformOrigin =
+      `${centerX + (zeroX - centerX)}px ` +
+      `${centerY + (zeroY - centerY)}px`;
+
+    numberWrap.style.transform =
+      `translate(${offsetX * zoomProgress}px, ` +
+      `${offsetY * zoomProgress}px) ` +
+      `scale(${baseScale * zoomScale})`;
+
+    /* 04 — 0 안쪽 공간이 화면을 채움 */
+
+    const portalProgress = smooth(
+      clamp((t - .86) / .11)
+    );
+
+    const radius = portalProgress * 150;
+
+    // 포털은 0의 위치에서 열리기 시작
+    portal.style.clipPath =
+      `circle(${radius}% at 50% 50%)`;
+
+    numberWrap.style.opacity = String(
+      1 - clamp((t - .87) / .07)
+    );
   }
 
-  // 스크롤 최적화
   function requestUpdate() {
     if (!scheduled) {
       scheduled = true;
-      requestAnimationFrame(updateYearJourney);
+      requestAnimationFrame(update);
     }
   }
 
-  window.addEventListener(
-    "scroll",
-    requestUpdate,
-    { passive: true }
-  );
+  window.addEventListener("scroll", requestUpdate, {
+    passive: true
+  });
 
-  window.addEventListener(
-    "resize",
-    requestUpdate
-  );
+  window.addEventListener("resize", requestUpdate);
 
-  // 첫 화면 상태 적용
-  updateYearJourney();
+  update();
 })();

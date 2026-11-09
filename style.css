@@ -1372,3 +1372,149 @@ footer {
     transform:none !important;
   }
 }
+
+/* ==========================================
+   YEAR JOURNEY V2 — ANTON / ZERO PORTAL
+========================================== */
+
+.year-journey {
+  height: 520vh;
+  background: #020202;
+  border: 0;
+}
+
+.year-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #020202;
+  isolation: isolate;
+}
+
+.year-number-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  will-change: transform, opacity;
+  transform: scale(.12);
+  transform-origin: center center;
+}
+
+.year-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(140px, 29vw, 520px);
+  font-weight: 400;
+  letter-spacing: -.035em;
+  line-height: 1;
+  color: #F5F5F5;
+  white-space: nowrap;
+  transform: none;
+}
+
+.year-number span {
+  display: inline-block;
+}
+
+.year-zero {
+  position: relative;
+}
+
+/* 숫자 0 안쪽으로 들어갈 때 나타나는 공간 */
+.year-portal {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #D31F1F;
+  clip-path: circle(0% at 50% 50%);
+  pointer-events: none;
+  will-change: clip-path;
+}
+
+.year-portal .year-celebration {
+  position: relative;
+  inset: auto;
+  z-index: auto;
+  width: 100%;
+  min-height: 100vh;
+  padding: 100px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  text-align: center;
+}
+
+.year-portal .year-celebration h2 {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(65px, 11vw, 180px);
+  font-weight: 400;
+  line-height: .95;
+  letter-spacing: -.025em;
+  margin: 0 0 35px;
+  color: #F5F5F5;
+}
+
+.year-portal .year-celebration h2 em {
+  font-style: normal;
+  color: #020202;
+  -webkit-text-stroke: 0;
+}
+
+.year-portal .year-celebration p {
+  color: #F5F5F5;
+  font-size: clamp(12px, 1.4vw, 18px);
+  font-weight: 500;
+  letter-spacing: .08em;
+  line-height: 1.8;
+}
+
+/* 기존 작은 문구 제거 */
+.year-meta,
+.year-caption,
+.year-progress {
+  display: none !important;
+}
+
+@media (max-width: 650px) {
+  .year-number {
+    font-size: 29vw;
+  }
+
+  .year-portal .year-celebration h2 {
+    font-size: 15vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .year-journey {
+    height: 100vh;
+  }
+
+  .year-stage {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .year-number-wrap {
+    display: none;
+  }
+
+  .year-portal {
+    clip-path: none !important;
+  }
+}
