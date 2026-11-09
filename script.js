@@ -1,243 +1,222 @@
-/* =====================================
-   SMOOTH CURSOR TRAIL
-===================================== */
 
-const cursor =
-document.querySelector(".cursor");
+/* ========================================
+   PENTAPORT 2035
+   COMMON INTERACTIONS
+======================================== */
 
-const dot =
-document.querySelector(".cursor-dot");
+document.addEventListener('DOMContentLoaded', () => {
 
-const path =
-document.querySelector(".cursor-path");
+  /* ======================================
+     01. CUSTOM CURSOR
+  ====================================== */
 
+  const cursor = document.querySelector('.cursor');
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorPath = document.querySelector('.cursor-path');
+  const cursorSvg = document.querySelector('.cursor-trail');
 
+  const POINT_COUNT = 14;
+  const FOLLOW_SPEED = 0.48;
+  const TRAIL_SPEED = 0.52;
 
-/* =====================================
-   SETTINGS
-===================================== */
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
 
-const POINT_COUNT = 14;
+  const finePointer = window.matchMedia(
+    '(hover: hover) and (pointer: fine)'
+  ).matches;
 
-const FOLLOW_SPEED = 0.48;
+  if (
+    cursor &&
+    cursorDot &&
+    cursorPath &&
+    cursorSvg &&
+    finePointer &&
+    !reducedMotion
+  ) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
 
-const TRAIL_SPEED = 0.52;
+    let headX = mouseX;
+    let headY = mouseY;
 
+    let cursorVisible = false;
 
+    const points = Array.from(
+      { length: POINT_COUNT },
+      () => ({
+        x: mouseX,
+        y: mouseY
+      })
+    );
 
-/* =====================================
-   MOUSE
-===================================== */
+    cursor.style.opacity = '0';
 
-let mouse = {
+    document.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
 
-  x: window.innerWidth / 2,
+      mouseX = event.clientX;
+      mouseY = event.clientY;
 
-  y: window.innerHeight / 2
+      if (!cursorVisible) {
+        cursorVisible = true;
+        cursor.style.opacity = '1';
 
-};
+        headX = mouseX;
+        headY = mouseY;
 
+        points.forEach((point) => {
+          point.x = mouseX;
+          point.y = mouseY;
+        });
+      }
+    });
 
+    document.addEventListener('pointerout', (event) => {
+      if (!event.relatedTarget) {
+        cursor.style.opacity = '0';
+        cursorVisible = false;
+      }
+    });
 
-/* =====================================
-   TRAIL POINTS
-===================================== */
+    window.addEventListener('blur', () => {
+      cursor.style.opacity = '0';
+      cursorVisible = false;
+    });
 
-const points = [];
+    const hoverTargets = document.querySelectorAll(
+      'a, button, [role="button"]'
+    );
 
+    hoverTargets.forEach((element) => {
+      element.addEventListener('pointerenter', () => {
+        cursor.classList.add('is-hover');
+      });
 
-for(let i = 0; i < POINT_COUNT; i++){
+      element.addEventListener('pointerleave', () => {
+        cursor.classList.remove('is-hover');
+      });
+    });
 
-  points.push({
+    function createPath() {
+      if (points.length < 2) return '';
 
-    x: mouse.x,
+      let path = `M ${points[0].x} ${points[0].y}`;
 
-    y: mouse.y
+      for (let i = 1; i < points.length - 1; i++) {
+        const current = points[i];
+        const next = points[i + 1];
 
-  });
+        const midX = (current.x + next.x) / 2;
+        const midY = (current.y + next.y) / 2;
 
-}
+        path += ` Q ${current.x} ${current.y} ${midX} ${midY}`;
+      }
 
+      const last = points[points.length - 1];
 
+      path += ` L ${last.x} ${last.y}`;
 
-/* =====================================
-   MOUSE MOVE
-===================================== */
-
-window.addEventListener(
-  "mousemove",
-  (event) => {
-
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
-
-
-    /* 현재 마우스 아래에 있는 요소 확인 */
-
-    const target =
-      document.elementFromPoint(
-        event.clientX,
-        event.clientY
-      );
-
-
-    /* 빨간색으로 변하는 영역인지 확인 */
-
-    const redArea =
-      target?.closest(
-        ".artist, .schedule-card"
-      );
-
-
-    if(redArea){
-
-      cursor.classList.add(
-        "is-inverted"
-      );
-
-    }else{
-
-      cursor.classList.remove(
-        "is-inverted"
-      );
-
+      return path;
     }
 
-  }
-);
+    function animateCursor() {
+      headX += (mouseX - headX) * FOLLOW_SPEED;
+      headY += (mouseY - headY) * FOLLOW_SPEED;
 
+      points[0].x = headX;
+      points[0].y = headY;
 
+      for (let i = 1; i < points.length; i++) {
+        const previous = points[i - 1];
+        const current = points[i];
 
-/* =====================================
-   CREATE SMOOTH SVG PATH
-===================================== */
+        current.x += (previous.x - current.x) * TRAIL_SPEED;
+        current.y += (previous.y - current.y) * TRAIL_SPEED;
+      }
 
-function createPath(){
+      cursorDot.style.left = `${headX}px`;
+      cursorDot.style.top = `${headY}px`;
 
-  if(points.length < 2) return "";
+      cursorPath.setAttribute('d', createPath());
 
+      requestAnimationFrame(animateCursor);
+    }
 
-  let d =
-    `M ${points[0].x} ${points[0].y}`;
-
-
-  for(let i = 1; i < points.length - 1; i++){
-
-    const current =
-      points[i];
-
-    const next =
-      points[i + 1];
-
-
-    const midX =
-      (current.x + next.x) / 2;
-
-    const midY =
-      (current.y + next.y) / 2;
-
-
-    d +=
-      ` Q ${current.x} ${current.y}
-      ${midX} ${midY}`;
-
+    animateCursor();
   }
 
+  /* ======================================
+     02. SCROLL REVEAL
+  ====================================== */
 
-  return d;
+  const revealElements = document.querySelectorAll('.reveal');
 
-}
-
-
-
-/* =====================================
-   ANIMATION
-===================================== */
-
-function animateCursor(){
-
-
-  /* 첫 번째 점은 실제 마우스를 부드럽게 추적 */
-
-  points[0].x +=
-    (mouse.x - points[0].x) *
-    FOLLOW_SPEED;
-
-  points[0].y +=
-    (mouse.y - points[0].y) *
-    FOLLOW_SPEED;
-
-
-
-  /* 나머지 점은 앞의 점을 따라감 */
-
-  for(let i = 1; i < points.length; i++){
-
-    points[i].x +=
-      (points[i - 1].x - points[i].x) *
-      TRAIL_SPEED;
-
-    points[i].y +=
-      (points[i - 1].y - points[i].y) *
-      TRAIL_SPEED;
-
-  }
-
-
-
-  /* 원 위치 */
-
-  dot.style.transform =
-    `translate(
-      ${points[0].x - 5}px,
-      ${points[0].y - 5}px
-    )`;
-
-
-
-  /* 선 */
-
-  path.setAttribute(
-    "d",
-    createPath()
-  );
-
-
-  requestAnimationFrame(
-    animateCursor
-  );
-
-}
-
-
-
-animateCursor();
-
-
-
-/* =====================================
-   CURSOR CLICK EFFECT
-===================================== */
-
-window.addEventListener(
-  "mousedown",
-  () => {
-
-    cursor.classList.add(
-      "is-clicking"
+  if (
+    revealElements.length &&
+    'IntersectionObserver' in window &&
+    !reducedMotion
+  ) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+      }
     );
 
+    document.documentElement.classList.add('js-ready');
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add('visible');
+    });
   }
-);
 
+  /* ======================================
+     03. ACTIVE NAVIGATION
+  ====================================== */
 
-window.addEventListener(
-  "mouseup",
-  () => {
+  const currentPage = window.location.pathname
+    .split('/')
+    .pop() || 'index.html';
 
-    cursor.classList.remove(
-      "is-clicking"
-    );
+  const navLinks = document.querySelectorAll(
+    '.site-header nav a'
+  );
 
-  }
-);
+  navLinks.forEach((link) => {
+    const linkPage = link.getAttribute('href');
+
+    if (linkPage === currentPage) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+
+  /* ======================================
+     04. TICKET PLACEHOLDER
+  ====================================== */
+
+  const ticketLinks = document.querySelectorAll(
+    '.ticket-item[href="#"]'
+  );
+
+  ticketLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      alert('2035 페스티벌 콘셉트 페이지입니다. 실제 예매는 지원하지 않습니다.');
+    });
+  });
+
+});
